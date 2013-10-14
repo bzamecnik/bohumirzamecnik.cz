@@ -3,10 +3,10 @@
 
 
 /* TEAM */
-  <your title>: <your name>
-  Site: 
-  Twitter: 
-  Location: 
+  Dweller: Bohumir Zamecnik
+  Site: zamecnik.me
+  Twitter: @bzamecnik
+  Location: Prague, CZ
 
 /* THANKS */
   Names (& URL): 
