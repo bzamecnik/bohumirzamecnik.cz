@@ -1,0 +1,1200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Bohumír Zámečník]]></title>
+  <link href="http://zamecnik.me/atom.xml" rel="self"/>
+  <link href="http://zamecnik.me/"/>
+  <updated>2014-01-05T20:37:28+01:00</updated>
+  <id>http://zamecnik.me/</id>
+  <author>
+    <name><![CDATA[Bohumír Zámečník]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Week of Hustle - Day 6 and 7]]></title>
+    <link href="http://zamecnik.me/blog/2013/week-of-hustle-day-6-and-7/"/>
+    <updated>2013-12-07T16:10:00+01:00</updated>
+    <id>http://zamecnik.me/blog/2013/week-of-hustle-day-6-and-7</id>
+    <content type="html"><![CDATA[<p>The project is moving forwards! I&rsquo;ve managed to merge the music-processing and visualization code and to tune the visualization so that it looks almost as good as the original desktop version. What remains is a major optimization by using a more advanced processing algorithm. In a few days it might be ready for launching on Google Play.</p>
+
+<!--more-->
+
+
+
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/1XAOxyACpWw "></iframe></div>
+
+
+
+
+<!--
+<iframe frameborder="0" height="315" src="http://zamecnik.me//www.youtube.com/embed/1XAOxyACpWw" width="420"></iframe>
+&#8211;>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Week of Hustle - Day 5]]></title>
+    <link href="http://zamecnik.me/blog/2013/week-of-hustle-day-5/"/>
+    <updated>2013-12-05T19:09:23+01:00</updated>
+    <id>http://zamecnik.me/blog/2013/week-of-hustle-day-5</id>
+    <content type="html"><![CDATA[<p>Today&#8217;s productivity was very non-uniform. Almost whole day I had to work on another project and finally in the evening I could continue. I was thinging a lot about what would be the most suitable way of implementing the visualization via circular sectors. Finally I&#8217;ve managed to implement a viable prototype.</p>
+
+
+<!--more-->
+
+
+<p><img alt="image" src="http://media.tumblr.com/8bb541a50ca180acb2ff55bd7627c537/tumblr_inline_mxcypk7As31s2upa7.jpg" /></p>
+
+
+<p>After yesterday&#8217;s GLSL playground I&#8217;ve decided to get hand dirty with vertex buffers, triangles and transformation matrices. I&#8217;ll have to use it someday, so why to today. So the result is this simple application that given an array of values draws the properly sized circular segments (as triangles) and colors them simple from black to white. On the screenshot there is a plot of a function derived from cosine. What needs to be plotted is a sampled parametric plot in polar coordinates, but not just the line, but rather what is under the line.</p>
+
+
+<p>It isn&#8217;t visually most appealing, but it should be sufficient for a prototype to carry the necessary data. From now it can be only nicer :)</p>
+
+
+<p>Tomorrow&#8217;s task is to merge this visualization with the computation code and to make the plot less ugly. The original temperature-scale color function should be used and the borders and tone names are missing now.</p>
+
+
+<p></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Week of Hustle - Day 4]]></title>
+    <link href="http://zamecnik.me/blog/2013/week-of-hustle-day-4/"/>
+    <updated>2013-12-05T18:42:00+01:00</updated>
+    <id>http://zamecnik.me/blog/2013/week-of-hustle-day-4</id>
+    <content type="html"><![CDATA[<p>Since the music processing code is quite ready, now it&rsquo;s the time for the nice graphical UI &ndash; the visualization that gives sense to the numbers. The goal is clear &ndash; to port the existing visualization where each pitch class (a tone in an arbitrary octave) is represented by a circular sector. The intensity is represented by the sector&rsquo;s length and color. In fact each tone is divided into multiple bins for greater precision.</p>
+
+<!--more-->
+
+
+<p><img alt="image" src="http://media.tumblr.com/9118d2c603047808dc31a4bc4870b795/tumblr_inline_mxcwv4t26S1s2upa7.png" /></p>
+
+<p>The visualization should be done via OpenGL, since it&rsquo;s updated after each computation, ie. many times per second. Mobile devices such as Android or iOS phones support only OpenGL ES, a variant of OpenGL adjusted for this kind of devices. Compared to OpenGL it lack some legacy stuff, such as calls like <code>glBegin()</code>, &hellip;draw something.., <code>glEnd()</code>. This means that the desktop OpenGL drawing code must be rewritten.</p>
+
+<p>As for today, I had to familiarize a little bit with OpenGL ES, shaders etc. Well, I&rsquo;ve done this stuff on the university and a part of the thesis project was written in OpenGL with shaders, but that&rsquo;s at least two years ago :)</p>
+
+<p>Among other things, I&rsquo;ve found a nice tool to write and test fragment shaders on the fly &ndash; <a href="http://glsl.heroku.com/">glsl.heroku.com</a>. Just write the code and if it compiles well it automatically draws on the background. It runs via WebGL in your browser. The future is here! Nice :)</p>
+
+<p>Unfortunately, today I&rsquo;ve focused on doing everything in a shader, which probably wasn&rsquo;t the best idea. Drawing shapes like lines or parametric curves and drawing them with antialiasing isn&rsquo;t the easiest task to begin with when writing a fragment shader. Well, it isn&rsquo;t impossible, but it can be done more easily with geometry like triangles or lines. The only thing is to explore the vertex buffers and index buffers &ndash; a more recent way of producing geometry than just calling <code>glVertex()</code>. Well, it&rsquo;s not the most recent like geometry shaders, but let&rsquo;s KISS for now.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Week of Hustle - Day 3]]></title>
+    <link href="http://zamecnik.me/blog/2013/week-of-hustle-day-3/"/>
+    <updated>2013-12-03T16:25:00+01:00</updated>
+    <id>http://zamecnik.me/blog/2013/week-of-hustle-day-3</id>
+    <content type="html"><![CDATA[<p>Worries are gone, euphoria is back! After today&rsquo;s handful of hacking it finally works, albeit on a very rudimental level. I&rsquo;ve managed to get the audio input code working and ported the computation code to Android along with all the libraries. Thanks to the fact there&rsquo;s no native code, just Java, the transition was quite smooth. There&rsquo;s no fancy OpenGL graphical visualization yet, just a text output showing a bar graph of the intensisites of each tone bin in an octave. But when I sing or whistle to it, it shows the expected pattern.</p>
+
+<!--more-->
+
+
+<p><a href="https://twitter.com/bzamecnik/status/407922221277904896/photo/1" title="The original tweet"><img alt="image" src="http://media.tumblr.com/e1c0f6c4a9259a9d59214cb46a52b114/tumblr_inline_mx91zfxcjI1s2upa7.jpg" /></a></p>
+
+<p>Also I was affraid of memory and CPU consuption on a phone. Well, if the quality parameters are reduced, it is quite fast, but for parameters normal on desktop it needs optimization. On the other hand I&rsquo;m aware that the current algorithm is not the most memory efficient and there are several obvious optimizations. However, &ldquo;premature optimization is the root of all evil&rdquo;, so let&rsquo;s have a working product first.</p>
+
+<p>Here&rsquo;s a video showing the app in action:</p>
+
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/HoPOUV4EAeo "></iframe></div>
+
+
+<p>So let&rsquo;s look forward to the following days until HarmonEye for Andoid gets a nicer graphical look. It&rsquo;ll be fun porting the old OpenGL code to OpenGL ES.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Week of Hustle - Day 2]]></title>
+    <link href="http://zamecnik.me/blog/2013/week-of-hustle-day-2/"/>
+    <updated>2013-12-02T12:05:00+01:00</updated>
+    <id>http://zamecnik.me/blog/2013/week-of-hustle-day-2</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m a bit worried. Trying to work (with an IDE like Eclipse-based Android Development Tools) on a slow home computer is turning into a neverending painful waiting for the disk to stop rumbling&hellip; I was trying to work on porting the audio processing code, but with no tangible results. Today I&rsquo;m really not sure if I&rsquo;ll be able to get anywhere before the MacBook arrives or I move to another computer beforehand. :(</p>
+
+<p>On the other hand, a today&rsquo;s talk with my brother was far more productive. We&rsquo;ve came up with three product ideas! Two e-books with tutorials in his area of expertise and a web application to link people for demand and supply of some kind of useful information.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Week of Hustle - Day 1]]></title>
+    <link href="http://zamecnik.me/blog/2013/week-of-hustle-day-1/"/>
+    <updated>2013-12-01T16:41:00+01:00</updated>
+    <id>http://zamecnik.me/blog/2013/week-of-hustle-day-1</id>
+    <content type="html"><![CDATA[<p>Over the next week I&rsquo;ll be trying hard to port the <a href="http://harmoneye.com/">HarmonEye </a>application from desktop to Android. You&rsquo;ll be able to watch the progress and experiences in this blog. And hopefully in a week there will be a app with most basic features available for downloading to your mobile device.</p>
+
+<!--more-->
+
+
+<p>I&rsquo;ve been watching the communities of product bootstrapping, one of which is Justin Jackson&rsquo;s <a href="http://jfdi.bz/" title="Just F***ing Do It">JFDI</a>. Fortunately, new registration spots have been open recently, so I decided to join. Moreover, today has started the second round of so called <a href="http://justinjackson.ca/why-you-need-a-week-of-hustle/">Week of Hustle</a>, a nice way to get rid of distractions and let people motivate each other (read: &ldquo;kick oneself in the ass&rdquo;) to build and launch a project within a single week sprint.</p>
+
+<p>I&rsquo;ve already started porting it several months ago and got to a point of having basic audio input, very simple processing (just an average volume) and simple rendering (a moving graph). Since then I&rsquo;ve felt very tired and I waited for the day D.</p>
+
+<p>As I left the job I had to return the MacBook and I decided to buy a new 2013 Retina one. What a coincidence, on 29th November, the last day in the work, Apple held the Black Friday and the MacBook can be had for a decent price. The downside (compared to buying it earlier) is that it will be delivered by around 10th December.</p>
+
+<p>So there&rsquo;s a week and half to suffer from a painfully slow (albeit just a year-old) home computer in order to get to work done&hellip; At least it&rsquo;s a way to appreciate fast a SSD, 4x more RAM and a friendlier OS :) Anyway, what have we been using ever since? Are we just too spoilt or the system always sucked? Anyway, I have to prepare the development environment from scratch and on a different platform.</p>
+
+<p><strong>The goal features</strong></p>
+
+<ul>
+<li>capture the audio from microphone</li>
+<li>process it &ndash; compute the volume for each tone bin</li>
+<li>visualize it &ndash; in a circle (a bin for each tone)</li>
+<li>allow play/pause</li>
+</ul>
+
+
+<p><strong>Roadmap</strong></p>
+
+<ul>
+<li>prepare the development environment (including a testing phone)</li>
+<li>run the existing desktop application and basic Android port</li>
+<li>get to work rendering via OpenGL ES</li>
+<li>port the circle visualization into OpenGL ES (HarmonEye desktop uses some legacy functions not present in ES)</li>
+<li>port the buffering code</li>
+<li>get the FFT library working</li>
+<li>port the processing code (CQT and the auxilliary filters)</li>
+<li>implement single-octave CQT for better efficiency (both memory and CPU)</li>
+<li>implement the controls (play/pause)</li>
+<li>build the release package</li>
+<li>publish on Google Play</li>
+</ul>
+
+
+<p><strong>Today&rsquo;s summary</strong></p>
+
+<p>The environment is ready, as well as both existing applications. Both are running, however I&rsquo;m suspicious that the desktop one has some data format problems as the visualization results don&rsquo;t seem alright. I&rsquo;ll have to debug it a bit.</p>
+
+<p>For months the testing HTC Desire had a problem &ndash; an annoying pupup message with a stacktrace appeard about twice a minute. I wasn&rsquo;t able to fix it and since I&rsquo;m using an iPhone recently I&rsquo;ve almost gave up. What eventually helped was to remove all the sync accounts! So testing will hopefully be ok.</p>
+
+<p>Also as you can see the blog starts to be alive again. I&rsquo;ve written a motivation behind all this doing &ndash; <a href="http://zamecnik.me/blog/2013/refactoring-the-path-to-freedom/">Refactoring The Path To Freedom</a>.</p>
+
+<p>Last but not least if you find this interesting and would like to receive interesting information about music theory and visualization, feel free to <a href="http://eepurl.com/xX1M1" target="_blank">subscribe to my newsletter</a><span>.</span></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Refactoring the Path to Freedom]]></title>
+    <link href="http://zamecnik.me/blog/2013/refactoring-the-path-to-freedom/"/>
+    <updated>2013-12-01T12:14:00+01:00</updated>
+    <id>http://zamecnik.me/blog/2013/refactoring-the-path-to-freedom</id>
+    <content type="html"><![CDATA[<p>On Friday I&rsquo;ve finally quit my daily job in order to focus on building my dreams. Although leaving an actual dream job at a <a href="http://etnetera.cz">company</a>, almost a family, with great people and healthy atmosphere of freedom was not easy it is sometimes necessary to get outside your comfort zone in order to move forward. It is a first step to a broader lifestyle refactoring &ndash; a path to finding happiness and fulfillment in one&rsquo;s life.</p>
+
+<!--more-->
+
+
+<p>For years I&rsquo;ve been in love with music. Besides the most important, emotional, side of music, there is the other side, an intelectual one. Both sides drive the passion, each one differently. I started thinking about music theory (why some songs sound so interesting or strange?) and music processing (how to get various useful information from music automatically?).</p>
+
+<p>Unfortunately, I left music school after a year or two when I was around eight. After years during mid high school I joined a wonderful <a href="http://corale.cz/">choir</a> and fell in love with singing ever since. Still, I didn&rsquo;t give much time to classical training and reading sheet music is still slow for me. That&rsquo;s probably one of the reasons I learn new songs mainly by ear and why I prefer improvization over memorizing. I&rsquo;d guess I&rsquo;m not alone it this situation.</p>
+
+<p>Also several years ago I became fascinated by jazz, especially its freedom of expression and complicated harmony. I realized there are exciting connections between music theory and mathematics and there is a whole <a href="http://en.wikipedia.org/wiki/Set_theory_(music)">scientific field</a> dealing with it.</p>
+
+<p>Being a visually oriented person (and a photography enthusiast) it is natural to treat music visually. I believe that the majority of people around is trained much more in visual than acoustic perception. So the assumption is that a lot of people might be capable of recognizing patterns in music more efficiently by sight than by hearing.</p>
+
+<p>Also I&rsquo;ve realized that the classical musical theory and its education contains a lot of concepts and tools that bear unnecessary <a href="http://en.wikipedia.org/wiki/Accidental_complexity">complexity</a> and are less obvious than possible. If the unnecessary complexity is stripped, what remains is the essential complexity. Just like in software.</p>
+
+<p>It can be well understood where this accidental complexity comes from. Music went through millenia of development and the concepts were optimized for some purpose, yet for other purposes are not optimal. Eg. the symbolic sheet <a href="http://en.wikipedia.org/wiki/Musical_notation">music notation</a> is efficient at paper and ink usage but might become cryptic and slow to read for an untrained eye.</p>
+
+<p>Or the redundancy of <a href="http://en.wikipedia.org/wiki/Accidental_(music)">accidentals</a>, eg. (F# = Gb = E##), is a horrible example of brain torture. As most developers know (I hope) <a href="http://en.wikipedia.org/wiki/Code_refactoring">refactoring</a> is a good way to reduce unnecessary complexity and keep the brain sane.</p>
+
+<p>Another thing I&rsquo;ve noticed it that people make their own mental models to understand things. Personally, for example I feel a <a href="http://zamecnik.me/blog/2013/scale-based-pitch-class-circle">swinging motion</a> in some chords progressions (eg. Am-Dm-Am-E) and imagine it visually. It would be great to share such mental models.</p>
+
+<p>What I&rsquo;d like to eventually do is to help people like me to better understand the intelectual side of music by providing an educational course for theory and interactive <a href="http://harmoneye.com/">applications</a> for practice. The key would be uncluttered music theory concepts based on the solid foundation of the latest mathematical music theory and visualizations.</p>
+
+<p>It would be great if this would eventually help someone overcome the pitfals of music theory in order to better express the important &ndash; the emotions.</p>
+
+<p>A personal goal is to refactor my own lifestyle and eventually become <a href="http://en.wikipedia.org/wiki/Location_independence">location independent</a> and happier. Remember, the goal is the path.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Scale-based Pitch Class Circle]]></title>
+    <link href="http://zamecnik.me/blog/2013/scale-based-pitch-class-circle/"/>
+    <updated>2013-07-28T12:16:00+02:00</updated>
+    <id>http://zamecnik.me/blog/2013/scale-based-pitch-class-circle</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://static.harmoneye.com/music-theory/7scale-step2-4-cmaj7-chord.png" width="200"></p>
+
+<p>In this article I&rsquo;d like to introduce a new way visualizing chords generated from some particular scale. It is a generalization of the classic pitch class circle but in contrast it captures the chord progressions very clearly. It is a powerful tool able to visualize the natural feeling of distance between chords by their similarity and the two directions of motion. Besides the description there is a plenty of animated examples.</p></p>
+
+<!--more-->
+
+
+<h2>Linear vs. circular visualization</h2>
+
+<p>On the piano the pitches are represented by keys which are arranged linearly. The white keys are the pitches from the C diatonic (C major) scale are the black keys are their complement to the full chromatic scale. The patterns of keys are repeated for each octave. The pitches on the same position in the pattern but without regard to the octave sound similar and can be treated as equal thus creating a pitch class. In the common western music the octave consists of 12 pitch class.</p>
+
+
+
+
+<p><img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-c-diatonic-scale.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-c-diatonic-scale.png" /></p>
+
+
+<h3>The C diatonic scale visualized in linear and circular way.</h3>
+
+<p>The linear arrangement is quite illustrative (eg. compared to some wind instruments) but does not capture the fact that the pitch classes form a circular group. In simple words when a pitch class is transposed it wraps around. Thus when the octave is not important a circular visualizaiton for pitch classes is more illustrative than linear. Eg. when transpositions of a chord are visualized linearly they form several different patterns beacause the &#8220;wrapping&#8221; is not continuous. On the other hand transposing chords in a pitch class circle amounts just to a rotation with the &#8220;shape&#8221; being preserved.</p>
+
+
+
+
+<p class="slider"><img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-c-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-db-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-d-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-eb-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-e-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-f-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-gb-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-g-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-ab-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-a-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-bb-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-linear-step1-b-chord.png" /></p>
+
+
+
+
+<p><em>Transpositions of a major triad, 12-tone linear (an idealized part of a piano keyboard). It wraps around.</em></p>
+
+
+
+
+<p class="slider"><img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-c-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-db-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-d-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-eb-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-e-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-f-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-gb-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-g-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-ab-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-a-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-bb-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-b-chord.png" /></p>
+
+
+
+
+<p><em>Transpositions of a major triad, 12-tone circle. It rotates.</em></p>
+
+
+
+
+<p>If we take a scale and make some melody or chords, we use a subset of the whole set of 12 pitch classes. When we generate a set of chords from a scale, eg. by stepping over the scale degrees as described in the previous article <a href="http://zamecnik.me/blog/2012/generating-chords-the-math-behind/">Generating Chords - The Math Behind</a>, they are visualized by several, generally different, shapes. Then in a usual chord progression the subsequent chords often share some pitch classes, while the others are changed. The result is the visualization is still not as illustrative as it can be.</p>
+
+
+
+
+<p class="slider"><img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-c-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-dm-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-em-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-f-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-g-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-am-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/12scale-step1-3-bmb5-chord.png" /></p>
+
+
+
+
+<p><em>Diatonic triads, 12-tone circle</em></p>
+
+
+<h2>Scale-based circular visualization</h2>
+
+<p>What can we do with it? In case the song or its part is based just on some scale and does not contain alterations (using pitch classes outside the scale) what about restricting the visualization just to the pitch classes from that scale? Eg. for the diatonic scale we can make a circle of just 7 instead of 12 elements. The ordering can be preserved. Now the chords of the same size generated from the scale by making uniform steps over the scale degrees have all the same shape! That&#8217;s because we eliminated the pitch classes outside the scale.</p>
+
+
+
+
+<p class="slider"><img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-3-c-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-3-dm-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-3-em-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-3-f-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-3-g-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-3-am-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-3-bmb5-chord.png" /></p>
+
+
+
+
+<p><em>Diatonic triads, 7-tone circle, step 1</em></p>
+
+
+
+
+<p class="slider"><img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-4-cmaj7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-4-dm7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-4-em7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-4-fmaj7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-4-g7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-4-am7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step1-4-bm7b5-chord.png" /></p>
+
+
+
+
+<p><em>Diatonic tetrachords, 7-tone circle, step 1</em></p>
+
+
+<h2>Reordered scale-based circular visualization</h2>
+
+<p>Still, there is something to be improved. When you play music or listen to it you may notice that the chords move back and forth or follow a longer line. For sure you may distinguish whether the movement goes in one direction or the other. You may also feel whether two chords are close or further apart. However, in the present visualization we do not see these two aspects well.</p>
+
+
+
+
+<p>The solution is to follow the way the chords were generated. Eg. in the diatonic scale the common usable chords are generated with step 2 which means that we take every second scale degree. Thus we might reorder the pitch classes in the set the same way. Then the pitch classes making the chord get grouped together. A triad makes an arc of three pitch classes, a tetrachord makes an arc of size four and so on.</p>
+
+
+
+
+<p class="slider"><img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-c-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-dm-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-em-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-f-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-g-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-am-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-bmb5-chord.png" /></p>
+
+
+
+
+<p><em>Diatonic triads, 7-tone circle, step 2. Without &#8220;holes&#8221;. Subsequent chords share no tones.</em></p>
+
+
+
+
+<p class="slider"><img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-cmaj7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-dm7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-em7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-fmaj7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-g7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-am7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-bm7b5-chord.png" /></p>
+
+
+
+
+<p><em>Diatonic tetrachords, 7-tone circle, step 2. Subsequent chords share one tone.</em></p>
+
+
+<h2>Examples &ndash; common chord progressions</h2>
+
+<p>How the chords are far apart directly correlates with the number of pitch classes they share. Also there are two directions of movement on the perimeter of the circle. Just as we intuitively feel. A chord&#8217;s quality can be also expressed by the angle of its &#8220;center of gravity&#8221;. Note that it is different from the chord&#8217;s root.</p>
+
+
+<h3>I IV I V progression</h3>
+
+<p class="slider infinite"><img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-c-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-f-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-c-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-g-chord.png" /></p>
+
+
+
+
+<p><em>A common country or folk progression: C, F, C, G. Notice the back-and-forth movement.</em></p>
+
+
+
+
+<p class="slider infinite"><img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-am-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-dm-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-am-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-em-chord.png" /></p>
+
+
+
+
+<p><em>A similar progression using relative minor chords: Am, Dm, Am, Em. Rotated from the previous one by one step counter-clockwise.</em></p>
+
+
+<h3>II V I progression</h3>
+
+<p>In jazz the absolutely basic progression which is used in many variations is the II-V-I progression. Eg. in the C key it is Dm7 G7 Cmaj7. In fact there is just a movement by fifths upwards. Notice the symmetry on the diagram - the Cmaj7 and Dm7 share just one common tone, while G7 shares two common tones with the other chords.</p>
+
+
+
+
+<p class="slider infinite"><img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-dm7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-g7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-cmaj7-chord.png" /></p>
+
+
+
+
+<p><em>The II-V-I progression (Dm7 G7 Cmaj7)</em></p>
+
+
+
+
+<p>Again there is a commonly utilized minor variant of the II-V-I progression.</p>
+
+
+
+
+<p class="slider infinite"><img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-bm7b5-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-em7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-am7-chord.png" /></p>
+
+
+
+
+<p>In practice this progression gets altered a bit. Especially Em7 is altered to E7 to act as a dominant chord in the minor II-V-I progression Bm7b5 E7 Am7. The raised third, Ab, resolves to the A tone in Am7. The other point of view on this is that the chords are generated from the harmonic minor scale instead of the diatonic one.</p>
+
+
+<h3>Circular progression</h3>
+
+<p>In fact those two progressions are part of a more interesting progression that is also commonly used in practice - Cmaj7 Fmaj7 Bm7b5 Em7 (or altered to E7) Am7 Dm7 G7 Cmaj7. It can be very naturally visualized as an arc moving around in a single direction. Note that the progression ends with the II-V-I progression mentioned before. All subsequent chords share exactly two tones.</p>
+
+
+
+
+<p class="slider infinite"><img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-cmaj7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-fmaj7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-bm7b5-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-em7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-am7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-dm7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-g7-chord.png" /></p>
+
+
+
+
+<p><em>A common jazz progression with a circular movement.</em></p>
+
+
+<h2>Complements &ndash; upper structure</h2>
+
+<p>When we take a chord its complementary pitch classes make another chord with is farthest apart on the circle. We could take a tetrachord and combine with its complementary triad. What we obtain would be a 13 chord comprising of all the pitch classes in the scale. Such a triad is than called the upper structure.</p>
+
+
+
+
+<p>There&#8217;s no reason to use this visualization tool for any other scale than the diatonic one. This can be equally useful for chords generated from harmonic minor or even quartal chords generated from the chromatic scale. In fact the widely known circle of fifths is a special case of this for the chromatic scale and step size 7.</p>
+
+
+
+
+<p class="slider"><img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-4-cmaj7-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-3-dm-chord.png" /> <img alt="image" src="http://static.harmoneye.com/music-theory/7scale-step2-diatonic-scale.png" /></p>
+
+
+<h2>Caveats</h2>
+
+<p>Although this visualization is very suitable for chords generated from the same scale the circle is built upon it falls short with alterations, ie. pitch clases from the scale&#8217;s complement. There is not a straightforward way to add the pitch classes complementary to the selected scale since the pitch classes inside the scale are reordered by scale degrees.</p>
+
+
+<h2>Final notes</h2>
+
+<p>The illustrations have been created using the free interactive web application <a href="http://bzamecnik.github.io/music-theory-toolbox/">Music Theory Toolbox</a>, that I&#8217;m developing. Currently it only supports the 12-tone circle but I hope I&#8217;ll extend it soon to the described scale-basic circular visualization. Feel free to play with it and send me your oppinion how it could be improved.</p>
+
+
+
+
+<p>Also don&#8217;t forget to visit <a href="http://harmoneye.com/?utm_source=blog&amp;utm_campaign=scale_circle&amp;utm_medium=blog">HarmonEye</a>, the real-time tone and chords visualization apllication. <del>To appreciate that you read this sooo looong article to the end you might use the <code>SCALE-CIRCLE</code> discount coupon and get it for just $2. It works until the end of August 2013.</del> Thanks and enjoy!</p>
+
+
+
+
+<p><a href="http://harmoneye.com/?utm_source=blog&amp;utm_campaign=scale_circle&amp;utm_medium=blog"><img alt="image" src="http://harmoneye.com/img/harmoneye-e-major-7.png" width="300" /></a></p>
+
+
+<p><link href='http://zamecnik.me//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css' rel='stylesheet' type='text/css'>
+<link href="http://static.harmoneye.com/jquery-image-slider/slider.css" media="screen" rel="stylesheet" type="text/css" /></p>
+
+<script src="http://static.harmoneye.com/jquery-image-slider/slider.js" type="text/javascript"></script>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Pentatonics and Major Scale]]></title>
+    <link href="http://zamecnik.me/blog/2012/pentatonics-and-major-scale/"/>
+    <updated>2012-03-11T17:06:00+01:00</updated>
+    <id>http://zamecnik.me/blog/2012/pentatonics-and-major-scale</id>
+    <content type="html"><![CDATA[<p>In this post we will explore modes, the pentatonic scale and its modes, modes of the major scale, the relationships between pentatonic scale modes and the major scale modes and also with the dorian bebop and chromatic scale.</p>
+
+<!--more-->
+
+
+<h2>Pentatonic scales</h2>
+
+<p>Generally, a <a href="http://en.wikipedia.org/wiki/Pentatonic_scale">pentatonic scale</a> can be any scale of size five. In practice there are several scales with certain structure that are referred to as the pentatonic scales and which are heavily used in many genres. Two of them are the minor and major pentatonic scale. In the example we use the <a href="http://en.wikipedia.org/wiki/Pitch_class">pitch class</a> sequence notation.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>minor pentatonic: [0, 3, 5, 7, 10]
+</span><span class='line'>major pentatonic: [0, 2, 4, 7, 9]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The major pentatonic scale can be derived from the <a href="http://en.wikipedia.org/wiki/Major_scale">major scale</a> (the ionian mode) by taking away the third and seventh scale degrees.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ionian:           [0, 2, 4, 5, 7, 9, 11]
+</span><span class='line'>major pentatonic: [0, 2, 4,    7, 9    ]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Similarly the minor pentatonic scale can be derived from the natural <a href="http://en.wikipedia.org/wiki/Minor_scale">minor scale</a> (the aeolian mode) by taking the second and sixth scale degree.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>aeolian:          [0, 2, 3, 5, 7, 8, 10]
+</span><span class='line'>minor pentatonic: [0,    3, 5, 7,    10]</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Modes</h2>
+
+<p>The concept of modes of a scale is quite simple. Multiple scales can be derived from a single scale by changing the root note by cyclic rotation of the pitch class sequence. This can be seen as restricting the permutations of the underlying (unordered) pitch class set using the ordering of the original sequence.</p>
+
+<h3>Modes of the major scale</h3>
+
+<p>See below an example of modes of the major scale. Its modes have traditional names after some Greek tribes.</p>
+
+<p>Modes of the C major scale:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>1st mode - ionian:     [0, 2, 4, 5, 7, 9, 11]
+</span><span class='line'>2nd mode - dorian:        [2, 4, 5, 7, 9, 11, 0]
+</span><span class='line'>3rd mode - phrygian:         [4, 5, 7, 9, 11, 0, 2]
+</span><span class='line'>4th mode - lydian:              [5, 7, 9, 11, 0, 2, 4]
+</span><span class='line'>5th mode - mixolydian:             [7, 9, 11, 0, 2, 4, 5]
+</span><span class='line'>6th mode - aeolian:                   [9, 11, 0, 2, 4, 5, 7]
+</span><span class='line'>7th mode - locrian:                      [11, 0, 2, 4, 5, 7, 9]</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>The rotation operators</h3>
+
+<p>For clarity we can denote the operation of rotation by two operators: <code>&gt;&gt;</code> for right rotation and <code>&lt;&lt;</code> for left rotation.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>base_scale &lt;&lt; rotation_steps = derived_mode
+</span><span class='line'>                 ionian &lt;&lt; 1 = dorian
+</span><span class='line'> [0, 2, 4, 5, 7, 9, 11] &lt;&lt; 1 = [2, 4, 5, 7, 9, 11, 0]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that modes can be derived from any scale and also that the number of unique modes for that scale equals to the size of the scale.</p>
+
+<h3>Normalizing the modes</h3>
+
+<p>The reason for dealing with modes stems from the difference in the root note. In practice the root note is the home from which we travel around and where we return back to. Thus each mode sounds quite differently. The quality of each mode can be better seen if we normalize it, ie. transpose it so that the root pitch class is zero.</p>
+
+<p>The derived modes from a scale are indicated by the root note, so that C ionian, D dorian, or G mixylydian belong to the same scale. When we normalize the modes we get C ionian, C dorian, C mixolydian, each derived from a different scale, but having the same root note.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Normalized modes of the C major scale:
+</span><span class='line'>
+</span><span class='line'>C ionian:     [0, 2, 4, 5, 7, 9, 11]
+</span><span class='line'>C dorian:     [0, 2, 3, 5, 7, 9, 10]
+</span><span class='line'>C phrygian:   [0, 1, 3, 5, 7, 8, 10]
+</span><span class='line'>C lydian:     [0, 2, 4, 6, 7, 9, 11]
+</span><span class='line'>C mixolydian: [0, 2, 4, 5, 7, 9, 10]
+</span><span class='line'>C aeolian:    [0, 2, 3, 5, 7, 8, 10]
+</span><span class='line'>C locrian:    [0, 1, 3, 5, 6, 8, 10]</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Modes of the major pentatonic scale</h3>
+
+<p>It has been already said that modes can be derived from any scale. So why not to explore the modes of the pentatonic scale? Let us select the major pentatonic as the base scale. There are the modes in the normalized form:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Modes of the major pentatonic scale (normalized):
+</span><span class='line'>
+</span><span class='line'>1st mode [0, 2, 4, 7, 9 ] major pentatonic
+</span><span class='line'>2nd mode [0, 2, 5, 7, 10]
+</span><span class='line'>3rd mode [0, 3, 5, 8, 10]
+</span><span class='line'>4th mode [0, 2, 5, 7, 9 ]
+</span><span class='line'>5th mode [0, 3, 5, 7, 10] minor pentatonic
+</span><span class='line'>
+</span><span class='line'>major pent. | 0 |   | 2 |   | 4 |   |   | 7 |   | 9 |    |   |
+</span><span class='line'>2nd mode    | 0 |   | 2 |   |   | 5 |   | 7 |   |   | 10 |   |
+</span><span class='line'>3rd mode    | 0 |   |   | 3 |   | 5 |   |   | 8 |   | 10 |   |
+</span><span class='line'>4th mode    | 0 |   | 2 |   |   | 5 |   | 7 |   | 9 |    |   |
+</span><span class='line'>minor pent. | 0 |   |   | 3 |   | 5 |   | 7 |   |   | 10 |   |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The interesting thing here is that the minor pentatonic scale is just a mode of the major one. In other words they share the same structure and can be derived from each other just by rotation. Formally written <code>major pentatonic &lt;&lt; 4 = minor pentatonic</code>. The relation is also this: k-major pentatonic is related to <code>(k - 3 mod 12)</code>-minor penatonic, eg. the A minor pentatonic can be derived from the C major pentatonic.</p>
+
+<p>Another interesting thing is the number of notes that are common between the base scale and its normalized modes:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>1st mode | 0 |   | 2 |   | 4 |   |   | 7 |   | 9 |    |  | 5 common
+</span><span class='line'>4th mode | 0 |   | 2 |   |   | 5 |   | 7 |   | 9 |    |  | 4 common
+</span><span class='line'>2nd mode | 0 |   | 2 |   |   | 5 |   | 7 |   |   | 10 |  | 3 common
+</span><span class='line'>5th mode | 0 |   |   | 3 |   | 5 |   | 7 |   |   | 10 |  | 2 common
+</span><span class='line'>3rd mode | 0 |   |   | 3 |   | 5 |   |   | 8 |   | 10 |  | 1 common</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Pentatonic scales vs. major scale</h2>
+
+<p>Finally, equipped with the knowledge of modes and pentatonic scales we can explore the relation between the pentatonic scales and and the major scale and its modes.</p>
+
+<p>What happens when we stack two pentatonic scales with different roots, ie. if we make a union of their pitch class sequences (and maintain the order)? Say the offset is 2 half-tones. Let us put them into a diagram and see.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>C minor pent.    |_0_|   |   | 3 |   | 5 |   | 7 |   |   | 10 |   |
+</span><span class='line'>D minor pent.    | 0 |   |_2_|   |   | 5 |   | 7 |   | 9 |    |   |
+</span><span class='line'>C dorian         |_0_|   | 2 | 3 |   | 5 |   | 7 |   | 9 | 10 |   |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hey! We&rsquo;ve got C dorian! So that when you could play D dorian you can just restrict youself to C and D minor pentatonics and switch between them to make some contrast. Well, if we got the dorian, then we can also obtain the first mode, ie. the major scale itself. Indeed:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>D minor pent.  | 0 |   |_2_|   |   | 5 |   | 7 |   | 9 |   |    |
+</span><span class='line'>E minor pent.  |   |   | 2 |   |_4_|   |   | 7 |   | 9 |   | 11 |
+</span><span class='line'>C ionian       |_0_|   | 2 |   | 4 | 5 |   | 7 |   | 9 |   | 11 |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And what about switching between minor and major pentatonic of the same root? The bluesmen do this quite often with the blues scales (which are just pentatonics with a single additional note). Note that the C major pentatonic is a mode of to the A minor pentatonic, so that it is similar to the previous situation.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>C minor pent.    |_0_|   |   | 3 |   | 5 |   | 7 |   |   | 10 |   |
+</span><span class='line'>C major pent.    |_0_|   | 2 |   | 4 |   |   | 7 |   | 9 |    |   |
+</span><span class='line'>C bebop dorian   |_0_|   | 2 | 3 | 4 | 5 |   | 7 |   | 9 | 10 |   |
+</span><span class='line'>C dorian         | 0 |   | 2 | 3 |   | 5 |   | 7 |   | 9 | 10 |   |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We obtained the bebop dorian scale – a dorian scale with added major third. In other words if we switch between the minor and major pentatonic scale of the same root we are in fact still walking within the bebop dorian scale. And right the four-tone chromatic part can serve for some nicely sounding runs.</p>
+
+<h2>Ionian + pentatonic = chromatic</h2>
+
+<p>Another interesting thing is that the complement of the ionian scale form a major pentatonic. Eg. C ionian union Gb major pentatonic gives the chromatic scale (the sequence of all 12 pitch classes). This corresponds to the white and black keys on the piano.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>C ionian       |_0_|   | 2 |   | 4 | 5 |   | 7 |   | 9 |    | 11 |
+</span><span class='line'>Gb major pent. |   | 1 |   | 3 |   |   |_6_|   | 8 |   | 10 |    |
+</span><span class='line'>C chromatic    |_0_| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Generating Chords - the Math Behind]]></title>
+    <link href="http://zamecnik.me/blog/2012/generating-chords-the-math-behind/"/>
+    <updated>2012-03-10T19:17:00+01:00</updated>
+    <id>http://zamecnik.me/blog/2012/generating-chords-the-math-behind</id>
+    <content type="html"><![CDATA[<p>Musical chords might seem just as random groups of tones. What makes them sound “good” alone or together a in sequence? Are there any rules for creating chords or groups of chords that make harmony? Ever wondered why progressions like <code>IIm7</code> <code>V7</code> <code>Imaj7</code> <code>VIIm7b5</code> <code>III7alt</code> <code>VIm7</code> work so well and contain right those chords? In the following text we will explore the ways some of type simpler chord type can be generated from an ordinary scale and also quite a different approach for generating some familiar chords. We will also see some relation to mathematics.</p>
+
+<!--more-->
+
+
+<p>First, we will state the context and terms used throughout the text. We assume we are working with 12-tone <a href="http://en.wikipedia.org/wiki/Equal_temperament">equal temperament</a>, <a href="http://en.wikipedia.org/wiki/Enharmonic">enharmonic equivalence</a> and also <a href="http://en.wikipedia.org/wiki/Octave_equivalence">octave equivalence</a>. The main tool for us will be <em><a href="http://en.wikipedia.org/wiki/Pitch_class">pitch classes</a></em> and their <em>sets</em> (ordering does not matter) and sequences (ordering matters). Pitch class sets will be denoted by curly braces, eg. <code>{0, 5, 7, 2}</code>, while pitch class sequences by brackets, eg. <code>[0, 5, 7, 2]</code>.</p>
+
+<p>In practice this means that we are working with 12 half-tones denoted by numbers from 0 to 11. The zero pitch class can be assigned to an arbitrary half-tone and we will for simplicity assign it to C as people are most used to it. The pitch class numbers then correspond to the common notation as follows:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>| 0 | 1  | 2 | 3  | 4 | 5 | 6  | 7 | 8  | 9 | 10 | 11 |
+</span><span class='line'>| C | Db | D | Eb | E | F | Gb | G | Ab | A | Bb | B  |
+</span><span class='line'>| C | C# | D | D# | E | F | F# | G | G# | A | A# | B  |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The equivalence between sharp and flat tones is the enharmonic equivalence and is due to the assumption of equal temperament. When needing to express tone names in common notation we will use just the flat sign to make things clearer. Note that a single pitch class corresponds to pitches in all octaves. Also note that pitch classes are invariant to the tuning of the base frequency (we do not need it when analyzing the structure of chords).</p>
+
+<p>These assumptions and notation will be used also in the subsequent articles except where notes otherwise. So let us finally start with generating some chords!</p>
+
+<h2>Generating chords from a scale</h2>
+
+<p>A chord is nothing more difficult than a sequence of pitch classes. Sometimes when comparing chords the information about the order can be thrown away obtaining just pitch class sets. A trivial chord could just contain one or two pitch classes, eg. [6] or [2, 7]. In practice chords contain three or more pitch classes (in order to be musically interesting) which are played at the same. A scale is also a sequence of pitch classes which are in practice usually not played simultaneously. The notes in the scale are called scale
+degrees, eg. the third degree corresponds to the zero-based index 3 – 1 = 2.</p>
+
+<h3>An analysis of the simple II-V-I chord progression</h3>
+
+<p>Let us start with an example of three simple chords Dm7, G7, Cmaj7. Those three chords types played in a sequence form the most widely used chord progression in jazz and related genres. It is called the II-V-I progression. In the following diagram we first see the chords tones in common notation and then in the pitch class notation. The root notes (that are at the first place in the pitch class sequence) are marked with an underline.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Dm7   | C |   |_D_|   |   | F |   |   |   | A |    |    |
+</span><span class='line'>G7    |   |   | D |   |   | F |   |_G_|   |   |    | B  |
+</span><span class='line'>Cmaj7 |_C_|   |   |   | E |   |   | G |   |   |    | B  |
+</span><span class='line'>------+---+---+---+---+---+---+---+---+---+---+----+----+
+</span><span class='line'>IIm7  | 0 |   |_2_|   |   | 5 |   |   |   | 9 |    |    |
+</span><span class='line'>V7    |   |   | 2 |   |   | 5 |   |_7_|   |   |    | 11 |
+</span><span class='line'>Imaj7 |_0_|   |   |   | 4 |   |   | 7 |   |   |    | 11 |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What can be seen in the diagram? On the first sight we can see that the subsequent chord pairs share some notes while differing in others. However, on the second sight we can see probably a more important thing. What do we get when taking all the notes occurring there? Pitch classes <code>[0, 2, 4, 5, 7, 9, 11]</code>, or in other words notes <code>[C, D, E, F, G, A, B]</code>, make up a scale called the C <em><a href="http://en.wikipedia.org/wiki/Major_scale">major scale</a></em> or the C <em>ionian scale</em>. There are 12 major scales (each starting at a different pitch class) and also the major scale is the most widely used scale type in western music. Note that the scale has 7 elements which is a prime number.</p>
+
+<p>What else can be seen from the diagram? If we look carefully eg. on the Cmaj7 chord we can see it contains pitch classes <code>[0, 4, 7, 11]</code> and the complement to the C major scale is <code>[2, 5, 9]</code>. If we index the scale instead of the set of all pitch classes we get indexes <code>[0, 2, 4, 6]</code> and <code>[1, 3, 5]</code>. In terms of notes it is <code>[C, E, G, B]</code> and <code>[D, F, A]</code>. Similarly for Dm7 the indexes are <code>[1, 3, 5, 0]</code> and <code>[2, 4, 6]</code>, while for G7 it is <code>[5, 7, 2, 4]</code> and <code>[6, 1, 3]</code>. Can you see it already?</p>
+
+<h3>Generating the chords</h3>
+
+<p>If we start traversing the scale (circularly) at a given root note and skip each second element we get the known chords! Formally said, we get chords of length k from a scale <code>S</code> by using the following formula, where <code>|S|</code> is the length of the scale S and <code>mod</code> is the <a href="http://en.wikipedia.org/wiki/Modulo_operation">modular division operation</a>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> | s in {0, ..., |S|-1}}</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Triads</h4>
+
+<p>Here is an example of taking just three elements from the scale. We get so called triads. For clearness there are only columns of the scale elements, not all the pitch classes.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>C  |_C_|   | E |   | G |   |   |
+</span><span class='line'>Dm |   |_D_|   | F |   | A |   |
+</span><span class='line'>Em |   |   |_E_|   | G |   | B |
+</span><span class='line'>F  | C |   |   |_F_|   | A |   |
+</span><span class='line'>G  |   | D |   |   |_G_|   | B |
+</span><span class='line'>Am | C |   | E |   |   |_A_|   |
+</span><span class='line'>Bm |   | D |   | F |   |   |_B_|</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Tetrachords</h4>
+
+<p>By taking four-element chords from the scale we get tetrachords (we have already seen them in the example at the beginning of the section).</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Cmaj7 |_C_|   | E |   | G |   | B |
+</span><span class='line'>Dm7   | C |_D_|   | F |   | A |   |
+</span><span class='line'>Em7   |   | D |_E_|   | G |   | B |
+</span><span class='line'>Fmaj7 | C |   | E |_F_|   | A |   |
+</span><span class='line'>G7    |   | D |   | F |_G_|   | B |
+</span><span class='line'>Am7   | C |   | E |   | G |_A_|   |
+</span><span class='line'>Bm7b5 |   | D |   | F |   | A |_B_|</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Quality of the generated chords</h3>
+
+<p>Let us look at the quality of the tetrachords. Now there are columns for all pitch classes and each row starts at the particular chord’s root note. The first row represents the basic C major scale from which we derived the chords. The second row represents what is the common notation for chords notes – the index to the scale based on the chord’s root note (not the base scale), optionally shifted a half-tone down. The further rows contain pitch classes of each chord arranged so that they start at the root note.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scale   | 0  |   | 2 |   | 4  | 5 |   | 7  |   | 9 |   | 11 |
+</span><span class='line'>indexes | 1  |b2 | 2 |b3 | 3  | 4 |b5 | 5  |b6 | 6 |b7 | 7  |
+</span><span class='line'>--------+----+---+---+---+----+---+---+----+---+---+---+----+
+</span><span class='line'>Cmaj7   | 0  |   |   |   | 4  |   |   | 7  |   |   |   | 11 |
+</span><span class='line'>Dm7     | 2  |   |   | 5 |    |   |   | 9  |   |   | 0 |    |
+</span><span class='line'>Em7     | 4  |   |   | 7 |    |   |   | 11 |   |   | 2 |    |
+</span><span class='line'>Fmaj7   | 5  |   |   |   | 9  |   |   | 0  |   |   |   | 4  |
+</span><span class='line'>G7      | 7  |   |   |   | 11 |   |   | 2  |   |   | 5 |    |
+</span><span class='line'>Am7     | 9  |   |   | 0 |    |   |   | 4  |   |   | 7 |    |
+</span><span class='line'>Bm7b5   | 11 |   |   | 2 |    |   | 5 |    |   |   | 9 |    |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can clearly see a lot of things. For chords generated from the major scale the second degree is either a major or minor third (index 3 or b3), ie. 3 or 4 half-tones apart from the root note. The third notes in the chord are either fifth or flat fifth (7 or 6 half-tones from the root). The fourth notes in the chords areeither seventh or flat seventh (11 or 10 half-tones from the root). To clearly see the chord quality we can transpose the pitch class sequence of a chord down by the value of the root pitch class. The ~ relation denotes equivalence of the pitch class sequences up to a transposition by a constant.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>    chord notes       chord types
+</span><span class='line'>Cmaj7 [0,  4,  7,  11] ~ [0, 4, 7, 11]
+</span><span class='line'>Dm7   [2,  5,  9,  0 ] ~ [0, 3, 7, 10]
+</span><span class='line'>Em7   [4,  7,  11, 2 ] ~ [0, 3, 7, 10]
+</span><span class='line'>Fmaj7 [5,  9,  0,  4 ] ~ [0, 4, 7, 11]
+</span><span class='line'>G7    [7,  11, 2,  5 ] ~ [0, 4, 7, 10]
+</span><span class='line'>Am7   [9,  0,  4,  7 ] ~ [0, 3, 7, 10]
+</span><span class='line'>Bm7b5 [11, 2,  5,  9 ] ~ [0, 3, 6, 10]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can divide the chords generated from the major scale into several categories based on the quality of the various chords:</p>
+
+<p>When taking only the second chord notes into consideration the perfect third leads to major chords, while flat third to minor chord types – <code>{0, 3}</code> vs. <code>{0, 4}</code>.</p>
+
+<p>When taking the second and third chord notes we obtain major, minor and diminished chord types – <code>{0, 4, 7}</code>, <code>{0, 3, 7}</code>, <code>{0, 3, 6}</code>.</p>
+
+<p>When taking the second to fourth chord notes we obtain maj7, m7, dominant 7 and half-diminished m7b5 chord types –<code>{0, 4, 7, 11}</code>, <code>{0, 3, 7, 10}</code>, <code>{0, 4, 7, 10}</code>, <code>{0, 3, 6, 10}</code>.</p>
+
+<h4>Beyond tetrachords</h4>
+
+<p>So far we have only considered chords generated from a scale that contained three or four notes. It is clearly possible to add more notes the same way, we are only limited by the total number of notes in the scale (for the major scale it is seven). Note that all the heptachords are practically equivalent since they contain all the scale notes.</p>
+
+<h4>Pentachords</h4>
+
+<p>Only ninths or flat ninths are added. The chords are denoted in the common notation (without modulo 12).</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scale   | 0  |   | 2 |   | 4  | 5 |   | 7  |   | 9 |   | 11 |
+</span><span class='line'>indexes | 1  |b2 | 2 |b3 | 3  | 4 |b5 | 5  |b6 | 6 |b7 | 7  |
+</span><span class='line'>--------+----+---+---+---+----+---+---+----+---+---+---+----+
+</span><span class='line'>Cmaj9   | 0  |   | 2 |   | 4  |   |   | 7  |   |   |   | 11 |
+</span><span class='line'>Dm9     | 2  |   | 4 | 5 |    |   |   | 9  |   |   | 0 |    |
+</span><span class='line'>Em b9   | 4  | 5 |   | 7 |    |   |   | 11 |   |   | 2 |    |
+</span><span class='line'>Fmaj9   | 5  |   | 7 |   | 9  |   |   | 0  |   |   |   | 4  |
+</span><span class='line'>G9      | 7  |   | 9 |   | 11 |   |   | 2  |   |   | 5 |    |
+</span><span class='line'>Am9     | 9  |   |11 | 0 |    |   |   | 4  |   |   | 7 |    |
+</span><span class='line'>Bm b9 b5| 11 | 0 |   | 2 |    |   | 5 |    |   |   | 9 |    |</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Hexachords</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scale   | 0  |   | 2 |   | 4  | 5 |   | 7  |   | 9 |   | 11 |
+</span><span class='line'>indexes | 1  |b2 | 2 |b3 | 3  | 4 |b5 | 5  |b6 | 6 |b7 | 7  |
+</span><span class='line'>--------+----+---+---+---+----+---+---+----+---+---+---+----+
+</span><span class='line'>Cmaj11  | 0  |   | 2 |   | 4  | 5 |   | 7  |   |   |   | 11 |
+</span><span class='line'>Dm11    | 2  |   | 4 | 5 |    | 7 |   | 9  |   |   | 0 |    |
+</span><span class='line'>Em11    | 4  | 5 |   | 7 |    | 9 |   | 11 |   |   | 2 |    |
+</span><span class='line'>Fmaj#11 | 5  |   | 7 |   | 9  |   |11 | 0  |   |   |   | 4  |
+</span><span class='line'>G11     | 7  |   | 9 |   | 11 | 0 |   | 2  |   |   | 5 |    |
+</span><span class='line'>Am11    | 9  |   |11 | 0 |    | 2 |   | 4  |   |   | 7 |    |
+</span><span class='line'>Bm11b5  | 11 | 0 |   | 2 |    | 4 | 5 |    |   |   | 9 |    |</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Heptachords</h4>
+
+<p>Note that all the heptachords generated from the scale of length seven contain exactly the same notes. They only only differ in their interpretation based on the root note. Also note that a heptachord can be viewed as being composed of a tetrachord and a triad on top of it. This is called the <a href="http://en.wikipedia.org/wiki/Upper_structure_triad">upper structure triad</a>. Eg. the third row from bottom depicts the G13 consisting of a G7 tetrachord and Am triad.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>scale   | 0  |   | 2 |   | 4  | 5 |   | 7  |   | 9 |   | 11 |
+</span><span class='line'>indexes | 1  |b2 | 2 |b3 | 3  | 4 |b5 | 5  |b6 | 6 |b7 | 7  |
+</span><span class='line'>--------+----+---+---+---+----+---+---+----+---+---+---+----+
+</span><span class='line'>Cmaj13  | 0  |   | 2 |   | 4  | 5 |   | 7  |   | 9 |   | 11 |
+</span><span class='line'>Dm13    | 2  |   | 4 | 5 |    | 7 |   | 9  |   |11 | 0 |    |
+</span><span class='line'>Em b13  | 4  | 5 |   | 7 |    | 9 |   | 11 | 0 |   | 2 |    |
+</span><span class='line'>Fmaj13  | 5  |   | 7 |   | 9  |   |11 | 0  |   | 2 |   | 4  |
+</span><span class='line'>G13     | 7  |   | 9 |   | 11 | 0 |   | 2  |   | 4 | 5 |    |
+</span><span class='line'>Am b13  | 9  |   |11 | 0 |    | 2 |   | 4  | 5 |   | 7 |    |
+</span><span class='line'>Bm b13b5| 11 | 0 |   | 2 |    | 4 | 5 |    | 7 |   | 9 |    |</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Notes for the major scale</h4>
+
+<p><strong>Important insight</strong>: In literature [1] the triad is defined as a three-note chord obtained by stacking third or various types. This is true, specifically for the major scale. Nevertheless it is rather a consequence of the stated method for generating chords from a scale, not the method itself!</p>
+
+<h3>Generalization of the method</h3>
+
+<p>So far we skipped the scale indexes by a step of size two. In general we can choose an arbitrary step size t (from 0 to |S| – 1) which lead to a generalized formula for chord generation:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> | s in {0, ..., |S|-1}}</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Considering of the scale size</h4>
+
+<p>The scale size plays quite an important role together with the step size. The major scale has seven elements with is a <a href="http://en.wikipedia.org/wiki/Prime_number">prime number</a> which implies that no matter what step size we select the notes within a chord will not repeat until the chord size is less then equal than the scale size! 7 is comprime with 12.
+As an example let us generate a hexachord with step six. From the C major scale we obtain the pitch class sequence <code>[0, 7, 2, 9, 4, 11]</code>. If we add a pitch class 6 (Gb) to the scale to increase its size to eight, we obtain the chord <code>[0, 6, 0, 6, 0, 6]</code> ~ <code>{0, 6}</code>!</p>
+
+<p>Thus to be able to generate quite non-trivial chords the scale size should be prime. For the 12-tone equal temperament pitch classes the choices are: <code>2, 3, 5, 7, 11</code>. Nevertheless, the properties of non-prime-sized scale are also utilized in music and octatonic or hexatonic scales can be seen in practice.</p>
+
+<h3>Generating from other scales than the major scale</h3>
+
+<p>We already known that is is possible to generate chords from scales other than the major scale. As for the modes of the major scale (including the aeolian minor scale) they are structurally equivalent to the major scale and thus we get the same chords only in different order. In order to convince the reader that such a method of generating chords is alright as an example we will generate chords from the two more widely used scales, the harmonic and melodic minor.</p>
+
+<h4>Melodic minor scale</h4>
+
+<p>The C melodic minor scale differs from the C major only by the lowered third degree and can be represented by the pitch class sequence <code>[0, 2, 3, 5, 7, 9, 11]</code>. The tetrachords generated with step equal to <code>2</code> are the following.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>       chord notes        chord types
+</span><span class='line'>CmMaj7    [0,  3,  7,  11] ~ [0, 3, 7, 11]
+</span><span class='line'>Dm7       [2,  5,  9,  0 ] ~ [0, 3, 7, 10]
+</span><span class='line'>Eb maj7#5 [3,  7,  11, 2 ] ~ [0, 4, 8, 11]
+</span><span class='line'>F7        [5,  9,  0,  3 ] ~ [0, 4, 7, 10]
+</span><span class='line'>G7        [7,  11, 2,  5 ] ~ [0, 4, 7, 10]
+</span><span class='line'>Am7b5     [9,  0,  3,  7 ] ~ [0, 3, 6, 10]
+</span><span class='line'>Bm7b5     [11, 2,  5,  9 ] ~ [0, 3, 6, 10]</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>Pentachords</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>         chord notes            chord types
+</span><span class='line'>CmMaj9      [0,  3,  7,  11, 2 ] ~ [0, 3, 7, 11, 2]
+</span><span class='line'>Dm7 b9      [2,  5,  9,  0,  3 ] ~ [0, 3, 7, 10, 1]
+</span><span class='line'>Eb maj7#5 9 [3,  7,  11, 2,  5 ] ~ [0, 4, 8, 11, 2]
+</span><span class='line'>F9          [5,  9,  0,  3,  7 ] ~ [0, 4, 7, 10, 2]
+</span><span class='line'>G9          [7,  11, 2,  5,  9 ] ~ [0, 4, 7, 10, 2]
+</span><span class='line'>Am7b5 b9    [9,  0,  3,  7,  11] ~ [0, 3, 6, 10, 2]
+</span><span class='line'>Bm7b5 b9    [11, 2,  5,  9,  0 ] ~ [0, 3, 6, 10, 1]</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Harmonic minor scale</h4>
+
+<p>The C harmonic minor scale differs from the C melodic minor by the lowered sixth degree and can be represented by the pitch class sequence <code>[0, 2, 3, 5, 7, 8, 11]</code>. The tetrachords generated with step equal to <code>2</code> are the following.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>       chord notes        chord types
+</span><span class='line'>CmMaj7    [0,  3,  7,  11] ~ [0, 3, 7, 11]
+</span><span class='line'>Dm7b5     [2,  5,  8,  0 ] ~ [0, 3, 6, 10]
+</span><span class='line'>Eb maj7#5 [3,  7,  11, 2 ] ~ [0, 4, 8, 11]
+</span><span class='line'>Fm7       [5,  8,  0,  3 ] ~ [0, 3, 7, 10]
+</span><span class='line'>G7        [7,  11, 2,  5 ] ~ [0, 4, 7, 10]
+</span><span class='line'>Ab maj7   [8,  0,  3,  7 ] ~ [0, 4, 7, 11]
+</span><span class='line'>Bdim      [11, 2,  5,  8 ] ~ [0, 3, 6, 9 ]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This corresponds well to the results in the article <a href="TODO">Harmonic minor scale in action</a>.</p>
+
+<h5>Pentachods</h5>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>        chord notes            chord types
+</span><span class='line'>CmMaj9     [0,  3,  7,  11, 2 ] ~ [0, 3, 7, 11, 2]
+</span><span class='line'>Dm7b5 b9   [2,  5,  8,  0,  3 ] ~ [0, 3, 6, 10, 1]
+</span><span class='line'>Eb maj9#5  [3,  7,  11, 2,  5 ] ~ [0, 4, 8, 11, 2]
+</span><span class='line'>Fm9        [5,  8,  0,  3,  7 ] ~ [0, 3, 7, 10, 2]
+</span><span class='line'>G7 b9      [7,  11, 2,  5,  8 ] ~ [0, 4, 7, 10, 1]
+</span><span class='line'>Ab maj7 #9 [8,  0,  3,  7,  11] ~ [0, 4, 7, 11, 3]
+</span><span class='line'>Bdim b9    [11, 2,  5,  8,  0 ] ~ [0, 3, 6, 9,  1]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here we have an altered dominant chords G7 b9!</p>
+
+<h4>Double harmonic scale</h4>
+
+<p>The C <a href="http://en.wikipedia.org/wiki/Hungarian_minor_scale">double harmonic scale</a> differs from the C harmonic minor by the raised fourth degree andcan be represented by the pitch class sequence <code>[0, 2, 3, 6, 7, 8, 11]</code>. The tetrachords generated with step equal to <code>2</code> are the following.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>         chord notes         chord types
+</span><span class='line'>CmMaj7       [0,  3,  7,  11] ~ [0, 3, 7, 11]
+</span><span class='line'>D7b5         [2,  6,  8,  0 ] ~ [0, 4, 6, 10]
+</span><span class='line'>Eb maj7#5    [3,  7,  11, 2 ] ~ [0, 4, 8, 11]
+</span><span class='line'>Gb sus2 b5 6 [6,  8,  0,  3 ] ~ [0, 2, 6, 9 ]
+</span><span class='line'>Gmaj7        [7,  11, 2,  6 ] ~ [0, 4, 7, 11]
+</span><span class='line'>Ab maj7      [8,  0,  3,  7 ] ~ [0, 4, 7, 11]
+</span><span class='line'>Bm6          [11, 2,  6,  8 ] ~ [0, 3, 7, 9 ]</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Generating chords with homogeneous intervals</h2>
+
+<p>There can be quite an amount of different chords and also many equivalent ones, depending of the exact definitions. We have seen a way of generating some commonly used chords from scales by skipping the scale degrees. Now we will present a conceptually similar approach. Instead of skipping the scale degrees to generate chord notes we will skip pitch classes themselves. For the chromatic scale, ie. a scale consisting of an ordered sequence of all 12 pitch classes, there is a one-to-one correspondence between pitch classes and scale degrees. Thus this approach might be seen as an application of the former approach to the chromatic scale.</p>
+
+<p>Having a scale of size 12 the skipping step can be from the range 0 to 11. The chord-generating formula can be simplified a bit. Remember the parameters are: <em>t</em> – the skipping step size, <em>k</em> – the chord size.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>{s + t*i mod 12 | i in {0, ..., k-1}} | s in {0, ..., 11}}
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At first, let us generate a chords of size 13 from a single root with different step size:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>t  | generated chords
+</span><span class='line'>0  | 0 |_0_| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+</span><span class='line'>1  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11|_0_|
+</span><span class='line'>2  | 0 | 2 | 4 | 6 | 8 | 10|_0_| 2 | 4 | 6 | 8 | 10| 0 |
+</span><span class='line'>3  | 0 | 3 | 6 | 9 |_0_| 3 | 6 | 9 | 0 | 3 | 6 | 9 | 0 |
+</span><span class='line'>4  | 0 | 4 | 8 |_0_| 4 | 8 | 0 | 4 | 8 | 0 | 4 | 8 | 0 |
+</span><span class='line'>5  | 0 | 5 | 10| 3 | 8 | 1 | 6 | 11| 4 | 9 | 2 | 7 |_0_|
+</span><span class='line'>6  | 0 | 6 |_0_| 6 | 0 | 6 | 0 | 6 | 0 | 6 | 0 | 6 | 0 |
+</span><span class='line'>7  | 0 | 7 | 2 | 9 | 4 | 11| 6 | 1 | 8 | 3 | 10| 5 |_0_|
+</span><span class='line'>8  | 0 | 8 | 4 |_0_| 8 | 4 | 0 | 8 | 4 | 0 | 8 | 4 | 0 |
+</span><span class='line'>9  | 0 | 9 | 6 | 3 |_0_| 9 | 6 | 3 | 0 | 9 | 6 | 3 | 0 |
+</span><span class='line'>10 | 0 | 10| 8 | 6 | 4 | 2 |_0_| 10| 8 | 6 | 4 | 2 | 0 |
+</span><span class='line'>11 | 0 | 11| 10| 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 |_0_|
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The returns back to the root tone are denoted by underline. Only with steps sizes 1, 5, 7 and 11 all pitch classes are visited. For the others some notes repeat more or less earlier.</p>
+
+<p>It might be quite surprising! Well, in fact, not that much if you know a little about algebra. The structure behind pitch classes is a group isomorphic to Z12, the group of integers modulo 12. Just the elements 1, 5, 7, 11 are its generators. The connection between music theory and mathematics is treated in detail by the <a href="http://en.wikipedia.org/wiki/Set_theory_(music">musical set theory</a>).</p>
+
+<p>So let us explore what kind of chords can be generated with homogeneous intervals – from the trivial ones to the more interesting. For steps 1 or 12 (= 12 – 1) we obtain <a href="http://en.wikipedia.org/wiki/Tone_cluster">tone clusters</a> of size at most 12. For step 6 we get just tritone dyads as the cycle length is 12 / 6 = 2.</p>
+
+<p>Steps 3 or 9 (= 12 – 3) give rise to diminished chords of 4 (= 12 / 3) unique elements. Since the intervals between chord notes are homogeneous there are only 3 different pitch class sets corresponding to different diminished chord types. Steps 4 or 8 lead us to augmented chords of just 3 (= 12 / 4) elements. There are 4 types of them.</p>
+
+<p>For steps 2 or 10 are generated chords based on the symmetric hexatonic scale, the <a href="http://en.wikipedia.org/wiki/Secundal">secundal chords</a>. They have at most 6 unique elements and there are 2 different such hexachords.</p>
+
+<h3>Quartal chords</h3>
+
+<p>Finally, steps 5 and 7 lead to very interesting <a href="http://en.wikipedia.org/wiki/Quartal_and_quintal_harmony">quartal and quintal chords</a>. Since the pitch classes 5 and 7 generate the whole chromatic scale there are 12 unique quartal and quintal types of chords of at most 12 elements. Quartal chords have utilization in various genres of music including jazz and rock. We will provide an example of quartal chords of size four derived from the C chromatic scale:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>[0,  5,  10, 3 ]
+</span><span class='line'>[1,  6,  11, 4 ]
+</span><span class='line'>[2,  7,  0,  5 ]
+</span><span class='line'>[3,  8,  1,  6 ]
+</span><span class='line'>[4,  9,  2,  7 ]
+</span><span class='line'>[5,  10, 3,  8 ]
+</span><span class='line'>[6,  11, 4,  9 ]
+</span><span class='line'>[7,  0,  5,  10]
+</span><span class='line'>[8,  1,  6,  11]
+</span><span class='line'>[9,  2,  7,  0 ]
+</span><span class='line'>[10, 3,  8,  1 ]
+</span><span class='line'>[11, 4,  9,  2 ]
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally, note that the full chords generated by pitch classes other that the generators lead to subgroups of the <a href="http://en.wikipedia.org/wiki/Cyclic_group">cyclic group</a> Z12 (corresponding to the chromatic scale), the groups Z6, Z4, Z3, Z2, Z1 (divisors of 12). They correspond the the hexatonic, diminished, augmented symmetric scales, the tritone and a single pitch class.</p>
+
+<h2>Conclusion</h2>
+
+<p>We have presented a mathematical method for generating musical chords – by skipping degrees of a scale or directly the pitch classes by steps of constant size. This way we are able to generate many commonly used chords, eg. in jazz. We presented the chords derived from the major scale and several minor scales and also quartal, augmented and diminished chords. Partial and altered chords were not addressed.</p>
+
+<h2>References</h2>
+
+<p>[1] Pen, Ronald (1992). Introduction to Music, p. 81. McGraw-Hill, <a href="http://en.wikipedia.org/wiki/Special:BookSources/0070380686">ISBN 0-07-038068-6</a>. “A triad is a chord consisting of three notes built on successive intervals of a third. A triad can be constructed upon any note by adding alternating notes drawn from the scale.” Source: <a href="http://en.wikipedia.org/wiki/Triad_(music)">Triad</a> at Wikipedia</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Harmonic Minor Scale in Action - Cancion Del Mariachi]]></title>
+    <link href="http://zamecnik.me/blog/2011/harmonic-minor-scale-in-action-cancion-del-mariachi/"/>
+    <updated>2011-10-01T01:17:00+02:00</updated>
+    <id>http://zamecnik.me/blog/2011/harmonic-minor-scale-in-action-cancion-del-mariachi</id>
+    <content type="html"><![CDATA[<p>Let’s start the blog with with some brief, yet interesting, thoughts. I’ve ever liked the distinct sound of latin or spanish music which is full of passion. Also I’ve wondered what is the key to it. As an example take the song <a href="http://www.youtube.com/watch?v=TY3F5A9L3V0">Cancion del Mariachi by Los Lobos</a>.</p>
+
+<!--more-->
+
+
+<p>When we look at the chords of the song we can clearly see (or rather hear) the following:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Em / B7 / B7 / Em
+</span><span class='line'>Am / Em / B7 / Em</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But what does it mean? The key is the usage of the harmonic minor scale. Simply said, it is a natural minor scale where the flat 7th is risen a half tone to the natural 7th. Or when numbering each half tone in an octave with numbers from <code>0</code> to <code>12</code> (as so called pitch classes) it can be expressed as: <code>[0, 2, 3, 5, 7, 8, 11]</code>. I love the expressive visual analogy to a clock. Click on the links below images to show an interactive pitch class set calculator (the screenshots are from an old version of this application, now it’s much nicer).</p>
+
+<p><img src="http://zamecnik.me/assets/posts/harmonic-minor-scale-in-action-cancion-del-mariachi/c-natural-minor-scale.png" alt="C natural minor scale"></p>
+
+<p><a href="http://bzamecnik.github.io/music-theory-toolbox/?pcs=0,2,3,5,7,8,10">C natural minor scale</a></p>
+
+<p><img src="http://zamecnik.me/assets/posts/harmonic-minor-scale-in-action-cancion-del-mariachi/c-harmonic-minor-scale-vs-natural.png" alt="C natural harmonic scale"></p>
+
+<p><a href="http://bzamecnik.github.io/music-theory-toolbox/?pcs=0,2,3,5,7,8,11">C harmonic minor scale</a> (compared to the natural minor scale)</p>
+
+<p>Given a scale we can generate some chords from it. We can make a stencil and select the 1st, 3rd, 5th tone in the scale (so that there is always a one tone gap between neighbor tones). This is called a <em>triad</em>, eg. <code>[0, 3, 7]</code>. If we subsequently start from each tone of the scale (ie. shift the pattern) we get seven different chords:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Im
+</span><span class='line'>IImb5
+</span><span class='line'>II#5
+</span><span class='line'>IVm
+</span><span class='line'>V
+</span><span class='line'>VI
+</span><span class='line'>VIImb5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The roman numerals indicate the root note (ie. the shift + 1). If we add also the 7th tone to the pattern we get those full and more interesting chords:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ImM7
+</span><span class='line'>IIm7b5 (= VII half-dim)
+</span><span class='line'>IIM7#5
+</span><span class='line'>IVm7
+</span><span class='line'>V7
+</span><span class='line'>VIM7
+</span><span class='line'>VIIm6b5 (= VII dim)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The chords in bold look a bit familiar. Im looks like Em, IVm7 looks like Am and V7 looks like B7. We can see the tonal center of the song is E and the song is based on the E harmonic minor scale. So what about the chords? Im is the tonic, the steady place, the home. V7 is the dominant which drives the passion, makes the tension and produces a feeling of returning home. IVm is the subdominant which produces weaker feeling of being on a trip. Looking at the song with those glasses we can see the harmony as follows:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Im / V7 / V7 / Im
+</span><span class='line'>IVm / Im / V7 / Im</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Compared to the major scale the pitch class <code>4</code> is lowered to <code>3</code> and pitch class <code>9</code> is lowered to <code>8</code>. This corresponds to moving natural 3rd to flat 3rd and 6th to flat 6th. Regarding the chords the flat 3 in the scale is responsible for making the I chord minor and the flat 6 makes the IV chord minor.</p>
+
+<p><img src="http://zamecnik.me/assets/posts/harmonic-minor-scale-in-action-cancion-del-mariachi/c-major-scale.png" alt="C major scale"></p>
+
+<p><a href="http://bzamecnik.github.io/music-theory-toolbox/?pcs=0,2,4,5,7,9,11">C major scale</a></p>
+
+<p><img src="http://zamecnik.me/assets/posts/harmonic-minor-scale-in-action-cancion-del-mariachi/c-harmonic-minor-scale-vs-major.png" alt="C hamonic minor scale"></p>
+
+<p><a href="http://bzamecnik.github.io/music-theory-toolbox/?pcs=0,2,3,5,7,8,11">C harmonic minor scale</a> (compared to the natural major scale)</p>
+
+<p>The combination of flat 3rd <code>[3]</code> and natural 7th <code>[11]</code> produces a nice pattern <code>[11,0,2,3]</code> – half tone, whole tone, half tone – also known from the melodic minor scale. Also the one and half tone interval between the flat 6th <code>[8]</code> and 7th <code>[11]</code> sounds really good. In fact the harmonic minor scale is not only specific to latin american or spanish music since the roots are from the Middle east. But that’s another story!</p>
+
+<p>PS: Would you like to see the tones in the pitch class circle from you own music in real-time? Check out the <a href="http://harmoneye.com/?utm_medium=blog">HarmonEye</a> desktop application. Or would you like to play with them interactively medidate over the harmony? Then try the online <a href="http://bzamecnik.github.io/music-theory-toolbox/">music theory toolbox</a>. Anyway thay in touch and enjoy :)</p>
+]]></content>
+  </entry>
+  
+</feed>
