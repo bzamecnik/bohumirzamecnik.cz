@@ -11,7 +11,9 @@ After a life-time blessing and curse kiss by the first computer in 1993, after <
   
 I day-dream a lot and I believe that &ldquo;the whole is greater than the sum of its parts&rdquo;. What defines me is embracing a wide spectrum of tools and interests that allow to envision a bigger picture. Then I've realized that most important problem is to <a href="http://en.wikipedia.org/wiki/Lean_Startup">learn</a> what the problem is. The rest are [implementation details](/projects/ "My projects").
 
+{% comment %}
 Each month more people would like to <a href="http://www.linkedin.com/in/bohumirzamecnik" title="Now, after graduating, I can empathise into an attractive blond :)">hire me</a> than girls <a href="https://soundcloud.com/bohumir-zamecnik/coursera-jazz-04" title="If that happens then afterewards usually some music is produced as a result.">fell</a> in <a href="https://soundcloud.com/bohumir-zamecnik/coursera-jazz-imp-week1" title="...especially when a Jazz Improvization course is around. I didn't wait a while.">love</a> with me. If you're one, please be patient. I'm open to challenges but now the first thing on my TODO list is launching my own music-processing startup. Then I'll see what to do next.
+{% endcomment %}
 
 I love music. Both sharing the <a href="http://corale.cz/" title="Since high school I sing with great people in the Corale choir">emotions</a> with other people and <a href="/blog/archives/" title="I occassionally write a blog about music theory">discovering</a> the gorgeous math theory behind. For the like visually-thinking people I'm crafting an <a href="http://harmoneye.com/" title="HarmonEye">application</a> that lets you utilize your eyes to see the harmony in music you're listening to, all the chords an tones, without clutter.
 
