@@ -65,7 +65,9 @@ Advanced Halftoning Methods
 **Abstract:** The goal of the thesis was to design and implement a modular library for digital halftoning methods. The aim were photorealistic methods utilizing space- filling curves and blue-noise, artistic methods were considered as well. From the point of view of software design, emphasis was on modularity and extensibility, in order to support experimenting, even with new algorithms. The library along with a graphical user interface has been integrated as a plug-in with the framework of a popular image-processing application GIMP.
 
 - [thesis text](https://www.dropbox.com/sh/6rkoubtpoc1fsje/MnN9pEKw7r/mff-uk/advanced-halftoning-methods_zamecnik_thesis_2009.pdf) (0.5 MB)
-- HalftoneLab - [GitHub repo](https://github.com/bzamecnik/HalftoneLab)
+- HalftoneLab
+	- [GitHub repo](https://github.com/bzamecnik/HalftoneLab)
+	- [Project page at Sourceforge](http://sourceforge.net/projects/halftonelab/) - download
 - Supervisor: [Josef Pelikán](http://cgg.mff.cuni.cz/~pepca/)
 - Technologies: C#, .NET, Gtk#, GIMP#, SVN, MS Visual Studio, LaTeX
 
@@ -172,12 +174,14 @@ Advanced Halftoning Methods
 
  - [Java](http://d3s.mff.cuni.cz/~hnetynka/?n=Teaching.JavaZS20132014) (NPRG013)
  - monitoring of statuses of people in a jabber contact list, archiving, visualization
+ - [GitHub repo](https://github.com/bzamecnik/jacomo)
  - Java, J2SE, Swing, Smack, SVN, NetBeans
 
 ### Pango
 
 - [Programming II](http://is.cuni.cz/studium/predmety/index.php?do=predmet&kod=NPRG031) (PRG031)
 - remake of the old Pango game, a clone of [Pengo](http://en.wikipedia.org/wiki/Pengo)
+- [GitHub repo](https://github.com/bzamecnik/pango-csharp)
 - C#, .NET, SVN, MS Visual Studio
 
 ### GeToDo
@@ -198,19 +202,21 @@ Advanced Halftoning Methods
 - [Computer graphics I](http://cgg.ms.mff.cuni.cz/~pepca/lectures/cv/pgr003.html) (NPGR003)	
 - Java, NetBeans
 
-### Gate network simulator
+### Logic Gate Network simulator
 
 - [C# Language and .NET Framework](https://is.cuni.cz/studium/predmety/index.php?do=predmet&kod=NPRG035) (NPRG035)
+- [GitHub repo](https://github.com/bzamecnik/logic-gate-simulator)
 - C#, MS Visual Studio
 
 ### Infix calculator
 
- - [Java](http://d3s.mff.cuni.cz/~hnetynka/?n=Teaching.JavaZS20132014) (NPRG013)
+- [Java](http://d3s.mff.cuni.cz/~hnetynka/?n=Teaching.JavaZS20132014) (NPRG013)
 - Java SE, NetBeans
 
 ### FFT and spectral analyzer
 
 - [Non-procedural programming](http://is.cuni.cz/studium/predmety/index.php?do=predmet&kod=NPRG005) (PRG005)
+- [GitHub repo](https://github.com/bzamecnik/fft-haskell)
 - Haskell
 
 ### Frak - fractal rendering
