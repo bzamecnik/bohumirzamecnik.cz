@@ -42,7 +42,7 @@ footer: true
 On Rendering with Complex Camera Models
 
 - [paper](http://www.cescg.org/CESCG-2012/papers/Zamecnik-On_Rendering_with_Complex_Camera_Models.pdf) (1 MB)
-- [demonstration site](http://bokehlab.zamecnik.org)
+- [demonstration site](http://bzamecnik.github.io/bokehlab/)
 
 #### Master thesis
 
