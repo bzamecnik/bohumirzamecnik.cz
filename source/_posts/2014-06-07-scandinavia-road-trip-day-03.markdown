@@ -6,7 +6,7 @@ comments: true
 categories: [travel, Scandinavia 2014]
 ---
 
-Zajímavý sen, stopaři z Německa, dítě zamčené v rozpáleném autě, divící se děda, "park krajobrazowy", kde kromě vojenské základny je houby k vidění, zasloužená koupel v jezeře.
+Polsko. Zajímavý sen, stopaři z Německa, dítě zamčené v rozpáleném autě, divící se děda, "park krajobrazowy", kde kromě vojenské základny je houby k vidění, zasloužená koupel v jezeře.
 
 <!--more-->
 
@@ -41,3 +41,5 @@ Inu v parku jsem toho moc neviděl a tak jsem se vydal na sever směrem na Elk. 
 Jezero bylo fakt osvěžující. Sice tu je značený kemp, ale ten jsem tu nikde neviděl. Ale zato na jeho místě je aspoň parkoviště a vedle velké molo s dřavěnou plovárnou. Po tří dnech pocení za volantem fakt příjemné. Jen tu navečer trochu řve diskotéka a nabušení týpky na vodě ladí skůtry, na souši morotky. Asi by to chtělo trochu klidnější kout u jezera.
 
 Je docela příjemné přijet za světla a ne moc utahaný. Aspoň můžu pěkně sepisovat deník a hodit ho do svého blogu. Mapy dost žerou data, tak se fakt hodí, že publikace je jeden git push a ne nějaké zběsilé klikání ve WordPressu.
+
+[Další den](/blog/2014/scandinavia-road-trip-day-04/).

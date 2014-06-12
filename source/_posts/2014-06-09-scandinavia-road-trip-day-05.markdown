@@ -6,7 +6,7 @@ comments: true
 categories: [travel, Scandinavia 2014]
 ---
 
-Ranní dávka "navigace", cesta kolem velké řeky do města, kde včely vyměšují džus místo medu; setkání s motorkářem, který se podruhé narodil; malebná krajina; Hora křížů.
+Litva. Ranní dávka "navigace", cesta kolem velké řeky do města, kde včely vyměšují džus místo medu; setkání s motorkářem, který se podruhé narodil; malebná krajina; Hora křížů.
 
 <!--more-->
 
@@ -31,3 +31,5 @@ Dnešním cílem byla Hora křížů, Križiu Kalnas, asi nejznámější poutn�
 Nakonec jsem byl v deset tak unavený, že jsem to nechal na tamnějším parkovišti vedle páru karavanů. Dneska jsem ujel od rána do večera 254 km. Informační centrum, jakož i placené parkování otevírali až v osm, tak jsem měl dost času. Tyhle pozdní západy slunce jsou fakt zajímavé.
 
 Večer jsem koukal na informace o datových SIMkách. Jsem to ale pako. Původně jsem si říkal, že si ji koupím až ve Finsku, Švédsku a Norsku, kde budu nejvíc dní a do té doby mi bude stačit datový roaming od Mobil.cz, 50 MB / 185 Kč a od 11.6. 100 MB za stejnou cenu. Dočetl jsem se ale, že datové SIMky ve všech zemích po cestě se ale dají sehnat na každé pumpě nebo trafice za pár šupů (třeba i od stovky, nikoliv třeba od tří stovek, jak jsem si myslel) a mají mnohem větší kapacitu, než český roaming, nebo jsou skoro bez omezení. Minimálně kvůli mapám a navigaci je připojení k netu fakt velmi užitečné, TomToma s sebou nemám. Takže nebudu čekat do 11.6., kdy bude mít roamingový balíček dvojnásobnou kapacitu, ale další plán je jasný - v každé zemi jednu datovou SIMku. A teď se pěkně vyspat a zítra hurá do Lotyšska.
+
+[Další den](/blog/2014/scandinavia-road-trip-day-06/).

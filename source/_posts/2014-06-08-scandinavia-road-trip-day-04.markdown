@@ -6,7 +6,7 @@ comments: true
 categories: [travel, Scandinavia 2014]
 ---
 
-Spaní v kempu pro mrtvé, liška bystrouška, zašmodrchaný smysl pro navigaci, piknik na soutoku řek v Kaunasu, motání jacka na kolejích.
+Polsko, Litva. spaní v kempu pro mrtvé, liška bystrouška, zašmodrchaný smysl pro navigaci, piknik na soutoku řek v Kaunasu, motání jacka na kolejích.
 
 <!--more-->
 
@@ -41,3 +41,5 @@ Nakonec mě vzali k sobě na kolej. Původně jsem si říkal, že klidně můž
 V životě bych nevěřil, že budu na koleji v Litvě o půlnoci opravovat ukroucený jack k repráčkům. Když holky slyšeli, že jsem programátor, udělaly na mě udělaly smutné oči, že jim to nehraje. Ale pájku neměly. A tak jsem vytáhl kudličku a izolepu a jal se kroucení měděných drátků. Na jednom prkýnku jsme krájeli houby do večeře i isolaci z káblíku. Pango by to měl opravené za 3 minuty, já jsem nijak nespěchal, na plotně už se vařilo nějaké masíčko a při vyprávění příběhů z cesty to bylo za chvíli hotové. Sice hrozná prasečina, a kdybych byl u zkoušky z elektrotechniky, asi by mě hnali, ale repráčky hrály a to bylo hlavní. Jednooký mezi slepými králem.
 
 S borci ze Šumperka jsme u skleničky kecali až do noci a ani se nám nechtělo moc spát. Fakt milí lidé. Další překvapení bylo, že slunce zapadalo až někdy v jedenáct večer a vycházelo kolem čtvrté. Prostě už se blížím k polárním oblastem. Musím si zvyknout a dát si hadr na hlavu. Jo a dneska to bylo kratší než v Polsku, pohodových 176 km.
+
+[Další den](/blog/2014/scandinavia-road-trip-day-05/).

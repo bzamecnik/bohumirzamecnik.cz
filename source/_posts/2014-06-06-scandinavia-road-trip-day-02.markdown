@@ -6,7 +6,7 @@ comments: true
 categories: [travel, Scandinavia 2014]
 ---
 
-Ranní návštěva Kokotku, Čenstochová - co má společného Jan Pavel II. a Monty Python, Varšava - totálně ucpaná a děravá jako ementál.
+Polsko. Ranní návštěva Kokotku, Čenstochová - co má společného Jan Pavel II. a Monty Python, Varšava - totálně ucpaná a děravá jako ementál.
 
 <!--more-->
 
