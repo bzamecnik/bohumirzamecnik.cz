@@ -25,3 +25,5 @@ Tak jsem se vydal na severovýchod. Ráz krajiny se zase trochu změnil. Ale byl
 Kolem silnice se občas objevovaly hnědé značky se symbolem jako je na klávese CMD na Macu - jednalo se o památky nebo zajímavá místa. Akorát že byly v estonštině (to už kód v Perlu by byl možná srozumitelnější). Jedno takové hnědé jsem si vybral a nechal to na parkovišti. Od silnice bylo vidět nějakou kamennou stodolu s komínem a čapím hnízdem. Myslel jsem, že to je tam památka. Nicméně proti parkovišti se tyčil u řeky krásný růžový zámeček Laupa. Klidné místo a konečně zas pěkné delší spaní.
 
 Tachák ukazoval 1744 km a za dnešek 264 km. Takže zítra vzhůru na sever do Kundy!
+
+[Další den](/blog/2014/scandinavia-road-trip-day-08/).
