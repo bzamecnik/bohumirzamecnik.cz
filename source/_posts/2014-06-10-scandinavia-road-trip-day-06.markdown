@@ -39,3 +39,5 @@ Vydal jsem se tedy pěšky do centra na sraz. Mělo to být na nějakém náměs
 Na srazu jsem pokecal s mnoha zajímavými lidmi. Třeba mě překvapil skoro šedesátiletý vitální chlapík z Austrálie, který projezdil skoro celý svět a nyní žije v Lotyšsku a píše ebooky. Říkal spoustu moudrých slov a místy jsem si připadal, že poslouchám Čtyři dohody v podání Jaroslava Duška. I tam bylo spousta místních a lidí z celé Evropy. Celkově zajímavé povídání.
 
 No jenže, když jsem se vrátil byly dvě v noci, byla kosa, na obzoru ještě trochu světlo a už se mi nikam jezdil nechtělo, jak jsem byl unavený. Tak jsem prostě přespal v té ulici, kde jsem parkoval. Byla celkem prázdná, jen když jsem šel připravoval v zadu spaní, přímo vedle mě si stoupnul taxikář. Za chvíli ale odjel a já mohl klidně spát. Plán byl, že od osmi si koupím parkovací lístek a půjdu se podívat do staré Rigy.
+
+[Další den](/blog/2014/scandinavia-road-trip-day-07/).
