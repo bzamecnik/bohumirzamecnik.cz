@@ -30,7 +30,7 @@ No fakt, že jo! Manželé, co pracují v Petrohradu si udělali trip do Talinnu
 
 Poté, co jsme pokecali, jsem se vydal zapsat se do onoho slavného deníku. Byl tam, sice celý vlkhý (jak jinak) a plesnivý, ale byl tam. Ofotil jsem si nedávné zápisy a jeden taky přidal. Tím tedy byl kundí úkol splněn a zajížďka nebyla marná.
 
-Cestou na Talinn se ale náchází víc srandovních měst a vesniček. Pár jich je u jednoho národního parku - takového velkého lesa. Dobrý důvod podívat se po venkově a nehnat rovnou na dálnici. Dalším cílem byla Vihula. Co mě ale překvapilo a v mapě jsem předem ani nenašel, byla vesnice Vole. Kromě toho byly k vidění i města jako Vosa, ale to je slabý. Z Vihuly jsem to vzal lesní cestou do osady Mustoja.
+Cestou na Talinn se ale náchází víc srandovních měst a vesniček. Pár jich je u jednoho národního parku - takového velkého lesa. Dobrý důvod podívat se po venkově a nehnat rovnou na dálnici. Dalším cílem byla Vihula. Co mě ale překvapilo a v mapě jsem předem ani nenašel, byla vesnice Vole. Kromě toho byly k vidění i města jako Kobra, Vosa, Vosupere, ale to je slabý. Z Vihuly jsem to vzal lesní cestou do osady Mustoja.
 
 Vedla tam hlubokým lesem jen štěrková cesta plná děr. To, za co bych v některých místech Varšavy líbal ruce, byla asi nejhorší cesta během mé cesty po Estonsku. Projet se dala v pohodě na trojku. Aby byl dojem umocněn, krápání se zrovna v tu chvíli proměnilo ve fakt pořádný slejvák. Dokonce jsem zjistil, že stěrače mají ještě jeden režim, kdy kmitají, že by z toho epilepik dostal pomalu záchvat.
 
