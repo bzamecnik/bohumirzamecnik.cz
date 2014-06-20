@@ -4,7 +4,7 @@
   <title><![CDATA[Bohumír Zámečník]]></title>
   <link href="http://zamecnik.me/atom.xml" rel="self"/>
   <link href="http://zamecnik.me/"/>
-  <updated>2014-06-19T23:41:54+02:00</updated>
+  <updated>2014-06-20T11:29:24+02:00</updated>
   <id>http://zamecnik.me/</id>
   <author>
     <name><![CDATA[Bohumír Zámečník]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Scandinavia Road Trip - Den 15.]]></title>
+    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-15/"/>
+    <updated>2014-06-19T00:00:00+02:00</updated>
+    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-15</id>
+    <content type="html"><![CDATA[<p>Švédsko. Keška na Eiffelovce, další sobi, nečekané hezká zajížďka, bílé vrcholky hor.</p>
+
+<!--more-->
+
+
+<p>Ráno u řeky jsem si zase musel přitopit, asi to bude tady na severu potřeba každý den. Sousední karavanisti právě odjížděli a já se po snídani vydal zpět do města, do Arvidsjauru. Jaké bylo moje překvapení, když jsem na kruháku zase potkal stejné čtyři sobi, co včera večer. Tak jsem si je ještě jednou vyfotil a nebyl jsem sám. Starý sob se šel na tolik turistů osobně podívat po silnici, až ho místní museli odkázat klaksonem zase zpátky na trávu.</p>
+
+<p>Natankoval jsem u Stat Oilu za &ldquo;příjemných&rdquo; 14,14 SEK/l, nakoupil nějaké jídlo a šel lovil kešky. Jedna byla pod rozhlednou, co z kopce shlížela na celé město. Mají tam takovou maličkou dřevěnou Eiffelovku a výhled parádní. Ještě jednu jsem odlovil u kostela a mohlo se pokračovat.</p>
+
+<p>Cesta byla jasná, po státovce pořád na západ. Jedu jedu, kochám se stromy a lišejníky okolo cesty, až jsem si řekl, že bych mohl u jednoho takového úplně červeného kamene zastavit a zase vytáhnout Pentacon Six. Když jsem se nabažil a dofotil film, ještě jsem se mrknul do mapy, kde že to jsem. K mému překvapení jsem ale mířil ne na západ, ale na severozápad. Nevšiml jsem si totiž jedné křižovatky dvou státovek těsně za městem. Takže jsem byl 30 km někde v čudu.</p>
+
+<p>Místo abych se vracel, říkal jsem si, že to jde nějak projet, a Google Maps to potvrzovaly. Odbočil jsem teda na takovou štěrkovou cestu a čekal, kdy se napojí zas na nějakou asfaltku. Čekal jsem asi 30 km. Celková zajížďka asi 50 km. Ale všechno zlé je k něčemu dobré, příroda byla lese moc hezká, udělal jsem spoustu fotek, a jak jsem jel pomalu, mohl jsem se kochat a zastavit, kde jsem chtěl.</p>
+
+<p>Venku střídavě pršelo a bylo pod mrakem, nějaké tři hodiny a já dostal chuť na teplý oběd. Za chviličku se vedle mě objevilo pěkně velké parkoviště, u ohniště staré křeslo a pár metrů od toho hučela menší říčka. Tak jsem mohl zase vařit. To mě baví, když si můžu udělat ohýnek třeba dvakrát denně.</p>
+
+<p>Dál vedla cesta přes Slussfors. Švédské slovo fors znamená peřeje a ty tady byly pořádné a pěkné. Sice jsem tedy nejel na ty největší, Storforsen, u Alvsbynu, protože to bylo daleko a stejně pršelo, ale tady jsem si to vynahradil.</p>
+
+<p>Krajina mi čím dál tím víc začínala připomínat Krkonoše, ale je o mnoho rozlehlejší, spíš jak Alpy. Kopce se začínaly čím dál tím víc vlnit, až jednou se na obzoru začaly rýsovat zasněžené vrcholky hor. Kolem jezera byl na ně naprosto úžasný výhled a sluníčko je perfektně nasvěcovalo.</p>
+
+<p>Večer jsem přijel do dnešního cíle, Tärnaby. Ještě jsem natankoval poslední naftu před dražším Norskem, pokecal s týpkem, co si šel něco koupit na pumpu, a nechal auto u jezera za městem. Sice bylo zima a krápalo, a dřevo nechtělo moc hořet, ale ohýnek s teplým čajem přišel vhod. Docela se divím, že mě tentokrát nesežrali komáři. Asi jsem byl už tolik načuchlý kouřem, že jsem jim nevoněl.</p>
+
+<p>Dneska 316 km, celkem 3610 km, zbývá cca 2700 km. Zítra razím do Norska. Ještě musím nějak vyřešit, jak je to tam s placením mýtného.</p>
+
+<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-16/">Další den</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 14.]]></title>
@@ -801,28 +833,6 @@
 
 <p></p>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Week of Hustle - Day 4]]></title>
-    <link href="http://zamecnik.me/blog/2013/week-of-hustle-day-4/"/>
-    <updated>2013-12-05T18:42:00+01:00</updated>
-    <id>http://zamecnik.me/blog/2013/week-of-hustle-day-4</id>
-    <content type="html"><![CDATA[<p>Since the music processing code is quite ready, now it&rsquo;s the time for the nice graphical UI &ndash; the visualization that gives sense to the numbers. The goal is clear &ndash; to port the existing visualization where each pitch class (a tone in an arbitrary octave) is represented by a circular sector. The intensity is represented by the sector&rsquo;s length and color. In fact each tone is divided into multiple bins for greater precision.</p>
-
-<!--more-->
-
-
-<p><img alt="image" src="http://media.tumblr.com/9118d2c603047808dc31a4bc4870b795/tumblr_inline_mxcwv4t26S1s2upa7.png" /></p>
-
-<p>The visualization should be done via OpenGL, since it&rsquo;s updated after each computation, ie. many times per second. Mobile devices such as Android or iOS phones support only OpenGL ES, a variant of OpenGL adjusted for this kind of devices. Compared to OpenGL it lack some legacy stuff, such as calls like <code>glBegin()</code>, &hellip;draw something.., <code>glEnd()</code>. This means that the desktop OpenGL drawing code must be rewritten.</p>
-
-<p>As for today, I had to familiarize a little bit with OpenGL ES, shaders etc. Well, I&rsquo;ve done this stuff on the university and a part of the thesis project was written in OpenGL with shaders, but that&rsquo;s at least two years ago :)</p>
-
-<p>Among other things, I&rsquo;ve found a nice tool to write and test fragment shaders on the fly &ndash; <a href="http://glsl.heroku.com/">glsl.heroku.com</a>. Just write the code and if it compiles well it automatically draws on the background. It runs via WebGL in your browser. The future is here! Nice :)</p>
-
-<p>Unfortunately, today I&rsquo;ve focused on doing everything in a shader, which probably wasn&rsquo;t the best idea. Drawing shapes like lines or parametric curves and drawing them with antialiasing isn&rsquo;t the easiest task to begin with when writing a fragment shader. Well, it isn&rsquo;t impossible, but it can be done more easily with geometry like triangles or lines. The only thing is to explore the vertex buffers and index buffers &ndash; a more recent way of producing geometry than just calling <code>glVertex()</code>. Well, it&rsquo;s not the most recent like geometry shaders, but let&rsquo;s KISS for now.</p>
 ]]></content>
   </entry>
   
