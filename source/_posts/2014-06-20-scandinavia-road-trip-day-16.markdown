@@ -6,7 +6,7 @@ comments: true
 categories: [travel, Scandinavia 2014]
 ---
 
-Švédsko, Norsko. Bílé probuzení, saracén v horách,
+Švédsko, Norsko. Bílé probuzení, saracén v horách, hadí cesta lesem, trable se SIMkou, červánky nad peřejemi.
 
 <!--more-->
 
