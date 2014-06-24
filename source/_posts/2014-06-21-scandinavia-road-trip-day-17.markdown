@@ -6,7 +6,7 @@ comments: true
 categories: [travel, Scandinavia 2014]
 ---
 
-Norsko. Chčije a chčije, fujtajbl kafe, první fjord, ruiny nebo koncentrák, pozdemní peklo, sichravý, ale krásný Trondheim, noční jezdec.
+Norsko. Chčije a chčije, fujtajbl kafe, první fjord, ruiny nebo koncentrák, pozdemní peklo, sychravý, ale krásný Trondheim, noční jezdec.
 
 <!--more-->
 
