@@ -6,7 +6,7 @@ comments: true
 categories: [travel, Scandinavia 2014]
 ---
 
-Německo, Česko.
+Německo, Česko. Výlet Lužicí, zaprášené pošprechtění s šéfovou od lahváčů, odkud pochází starý objektiv?, vyprahlá nádrž, vojenská jatka před staletími, jak chutná Míša s Birellem?, poskákán a oblízán od Růženky.
 
 <!--more-->
 
@@ -14,7 +14,13 @@ Probuzení v lese bylo příjemné, sluníčko mi od rána vyhřívalo pelech, t
 
 Dnešním plánem je nehnat to dálnicí přes Drážďany a Prahy, ale projet si Lužicko - podívat se do Chotěbuzi, Görlitzu (odkud mám starý objektiv), Zittau. Pak zpět do České republiky - přes Hrádek nad Nisou, Liberec, Turnov, Jičín, Hradec Králové a známou štrekou až do Dlouhoňovic, tj. skoro do Žamberka.
 
-Vzal jsem to tedy po místních silnicích a navigaci jsem nechal vypnutou, stačil jen starý dobrý autoatlas. Menší silničky se klikatily nízkými lužními lesy a poli, každou chvíli vesnice. Nápisy na cedulích jasně dávaly vědět, že místní kromě Němčiny mluví i lužickou srbštinou. O původu názvů "Lužice" a "Srbové" mám po prohlédnutí spousty středověkých map takovou jednu odvážnou teorii, ale o ní až někdy jindy. Za chvíli jsem byl v Chotěbuzi, hlavním centru tohoto regionu. Moc jsem se tam nezdržoval, jen mě zaujala místní knihovna, nebo budova univerzity. Nevím, co to přesně bylo, ale je to příklad pěkné moderní architektury.
+Vzal jsem to tedy po místních silnicích a navigaci jsem nechal vypnutou, stačil jen starý dobrý autoatlas. Menší silničky se klikatily nízkými lužními lesy a poli, každou chvíli vesnice. Nápisy na cedulích jasně dávaly vědět, že místní kromě Němčiny mluví i lužickou srbštinou. O původu názvů "Lužice" a "Srbové" mám po prohlédnutí spousty středověkých map takovou jednu odvážnou teorii, ale o ní až někdy jindy.
+
+V jedné menší vesnici vidím zdálky nějaké basy piv a na baráku německý nápis "Getränke....něco...", asi jako sklad chlastu. Zaparkoval jsem to tam, protože bych tam mohl přeci sehnat nějaký místní pivka za slušný peníz. Přede dveřmi nad pár basami piv klábosili místní chlapi, uvnitř v chládku stohy bas nejrůznějších značek a za takovým stolečkem, spíš školní lavicí, seděla stará lužická babčka, co tomu tam šéfovala.
+
+Ptám se jí, jestli by mi mohla doporučit nějaké místní pivo, že sháním nějaký dárek. Záhy jsem zjistil, že asi anglicky toho moc nechytá a že bych asi teda měl trochu oprášit těch osm let němčiny, které jsou pokryté asi takovými šedivými pavučinami, co se tu táhly na stropě mezi traverzami. Za chvíli jsem šprechtil jako na gymplu a ještě jsme pokecali o tom, kudy jsem projížděl. No přiznávám, ta němčina byla ale hodně lámaná. Nicméně jsem si odvezl čtyři pěkné lahváče za (oproti severu) luxusní necelá čtyři éčka.
+
+Za pár hodin od výjezdu (jak se to po těch obcích vleklo) jsem byl v Chotěbuzi, hlavním centru tohoto regionu. Moc jsem se tam nezdržoval, jen mě zaujala místní knihovna, nebo budova univerzity. Nevím, co to přesně bylo, ale je to příklad pěkné moderní architektury.
 
 Na větší procházku jsem se ale zastavil ve městě Görlitz, polsky Zgorzelec. Zdá se, že někdy v minulosti město lehlo popelem. K foťáku mám jeden starý objektiv, co se používal na kinofilmových Praktikách. Jmenuje se Oreston a je od firmy Meyer právě z Görlitzu. Starou fabriku jsem nehledal, asi bych ji ani nenašel a stejně jsem neměl připojení k netu. Radši jsem se podíval do historického centra. Město je to velice malebné.
 
