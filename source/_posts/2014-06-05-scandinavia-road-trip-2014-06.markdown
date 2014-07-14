@@ -21,3 +21,11 @@ Jak jsem říkal, jih a západ Evropy už jsem dostkrát viděl, takže tam bych
 V plánu mám jet přes Polsko, pobaltské země, tj. Litvu, Lotyško, Estonsko, pak trajektem do Finska, přes Švédsko do Norska, pak dolů zas přes Švédsko, Dánsko, Německo. No a podle situace možná ještě zastávka v Holandsku a pak hurá domů.
 
 Dost bylo úvodní keců, stejně vás asi spíš zajímá [deník z cesty](/blog/categories/scandinavia-2014/). Můžete to vzít pěkně od začátku od [prvního dne](/blog/2014/scandinavia-road-trip-day-01/).
+
+## Fotky
+
+UPDATE: Postupně zpracovávám <a href="https://www.flickr.com/photos/elgriton/sets/72157645572363341">fotky z cesty</a> (je jich fakt hodně):
+
+<a href="https://www.flickr.com/photos/elgriton/sets/72157645572363341">
+<img src="https://c2.staticflickr.com/4/3894/14428156349_b9ad4709d5_h.jpg" width="100%" title="Do fotoalba...">
+</a>
