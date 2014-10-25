@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Bohumír Zámečník]]></title>
-  <link href="http://zamecnik.me/atom.xml" rel="self"/>
-  <link href="http://zamecnik.me/"/>
-  <updated>2014-07-14T23:03:41+02:00</updated>
-  <id>http://zamecnik.me/</id>
+  <link href="http://bohumirzamecnik.cz/atom.xml" rel="self"/>
+  <link href="http://bohumirzamecnik.cz/"/>
+  <updated>2014-10-25T23:08:21+02:00</updated>
+  <id>http://bohumirzamecnik.cz/</id>
   <author>
     <name><![CDATA[Bohumír Zámečník]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 24.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-24/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-24/"/>
     <updated>2014-06-28T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-24</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-24</id>
     <content type="html"><![CDATA[<p>Německo, Česko. Výlet Lužicí, zaprášené pošprechtění s šéfovou od lahváčů, odkud pochází starý objektiv?, vyprahlá nádrž, vojenská jatka před staletími, jak chutná Míša s Birellem?, poskákán a oblízán od Růženky.</p>
 
 <!--more-->
@@ -69,9 +69,9 @@
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 23.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-23/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-23/"/>
     <updated>2014-06-27T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-23</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-23</id>
     <content type="html"><![CDATA[<p>Německo. Burácení stíhaček, vikingské dědictví, kolik stupňů Celsia vydrží iPhone 4S?, smrad spáleného železa a klepající gumy, jak je ucpaná noční dálnice za Berlínem?, zuřivý pes v černém lese.</p>
 
 <!--more-->
@@ -101,15 +101,15 @@
 
 <p>Dnes nejdelších 488 km, celkem 6331 km.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-24/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-24/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 22.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-22/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-22/"/>
     <updated>2014-06-26T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-22</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-22</id>
     <content type="html"><![CDATA[<p>Dánsko, Německo. Rozjuchaná mládež ve starobylém městečku, nečekané mýto, dálniční šusi, hluční skauti, pazourková cesta.</p>
 
 <!--more-->
@@ -139,15 +139,15 @@
 
 <p>Dneska 349 km, celkem 5843 km, zbývá něco kolem 870 km.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-23/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-23/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 21.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-21/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-21/"/>
     <updated>2014-06-25T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-21</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-21</id>
     <content type="html"><![CDATA[<p>Švédsko, Dánsko. Hekající běžec, jahody ve Varle, tajemný rosol na pláži, stopař na dálnici, most ze sci-fi.</p>
 
 <!--more-->
@@ -179,15 +179,15 @@
 
 <p>Dnes rekordních 440 km, celkem 5494 km, zbývá cca 1130 km.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-22/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-22/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 20.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-20/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-20/"/>
     <updated>2014-06-24T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-20</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-20</id>
     <content type="html"><![CDATA[<p>Norsko, Švédsko. Překvapení s hnědou cedulkou, nidky nedobytá pevnost, kontakt s pravěkými lidmi, pobřeží tisíců ostrovů.</p>
 
 <!--more-->
@@ -255,15 +255,15 @@
 
 <p>Dneska 322 km, celkem 5054 km. Zítra bych rád našel nějaké jezero, kde by se dalo vykoupat (má být jasno a teplo), a udělal si na ohýnku teplý čaj se zázvorem a polívku. A když to pojede dobře, možná dojedu i do Dánska.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-21/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-21/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 19.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-19/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-19/"/>
     <updated>2014-06-23T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-19</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-19</id>
     <content type="html"><![CDATA[<p>Norsko. Olympijský můstek v Lillehammeru, rychlá i pomalá dálnice, teplota a žlutý papírek v Oslu.</p>
 
 <!--more-->
@@ -293,15 +293,15 @@
 
 <p>Teplota byla večer po pár dnech zas příjemná. Sice nejsem ani homosexuál, ani zoofil, ale přesto jsem si mohl dnes s klidným srdcem říct, &ldquo;<a href="http://www.youtube.com/watch?v=wqEjr_V-OQQ">nejtepleji bylo v Oslu</a>&rdquo; (alespoň za poslední týden). Slunce v duši.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-20/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-20/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 18.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-18/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-18/"/>
     <updated>2014-06-22T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-18</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-18</id>
     <content type="html"><![CDATA[<p>Norsko. Střechy porostlé smrčky, laciná nafta, naleštěné káry, lišejníkové království, ovce na sněhu, ukryté peřeje.</p>
 
 <!--more-->
@@ -329,15 +329,15 @@
 
 <p>Dnes 275 km a 4387 km celkem. Další plán je navštívit Oslo.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-19/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-19/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 17.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-17/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-17/"/>
     <updated>2014-06-21T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-17</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-17</id>
     <content type="html"><![CDATA[<p>Norsko. Chčije a chčije, fujtajbl kafe, první fjord, ruiny nebo koncentrák, pozdemní peklo, sychravý, ale krásný Trondheim, noční jezdec.</p>
 
 <!--more-->
@@ -371,15 +371,15 @@
 
 <p>Dneska 221 km, celkem 4112 km.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-18/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-18/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 16.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-16/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-16/"/>
     <updated>2014-06-20T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-16</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-16</id>
     <content type="html"><![CDATA[<p>Švédsko, Norsko. Bílé probuzení, saracén v horách, hadí cesta lesem, trable se SIMkou, červánky nad peřejemi.</p>
 
 <!--more-->
@@ -435,15 +435,15 @@
 
 <p>Dneska 281 km, celkem 3891 km, průměrná spotřeba mezi 4 a 5 litrů na sto.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-17/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-17/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 15.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-15/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-15/"/>
     <updated>2014-06-19T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-15</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-15</id>
     <content type="html"><![CDATA[<p>Švédsko. Keška na Eiffelovce, další sobi, nečekané hezká zajížďka, bílé vrcholky hor.</p>
 
 <!--more-->
@@ -467,15 +467,15 @@
 
 <p>Dneska 316 km, celkem 3610 km, zbývá cca 2700 km. Zítra razím do Norska. Ještě musím nějak vyřešit, jak je to tam s placením mýtného.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-16/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-16/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 14.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-14/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-14/"/>
     <updated>2014-06-18T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-14</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-14</id>
     <content type="html"><![CDATA[<p>Švédsko. Nejsevernější místo cesty, svéráz čerpacích stanic, Fin, co nečetl Ferdu Mravence, sobi a jejich zenově klidná mysl.</p>
 
 <!--more-->
@@ -511,15 +511,15 @@
 
 <p>Po pár kilometrech se objevilo pěkné parkování přímo u řeky Byskeälven a konečně jsem si mohl pro dnešek oddychnout. 298 km, celkem 3294 km, zbývá minimálně 2936 km. Přes den každou chvíli poprchává a je docela zima, tak 5-10 ˚C, nyní polojasno. Za lesem o půl jedné v noci zapadá za oranžovými červánky slunce. Teď si můžu nechat zdát třeba o sobech a zítra bych se rád dostal těsně před hranici s Norskem, nebo až za ni.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-15/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-15/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 13.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-13/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-13/"/>
     <updated>2014-06-17T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-13</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-13</id>
     <content type="html"><![CDATA[<p>Finsko, Švédsko. Padesátiletá letní sněhová bouře, tajemná hnědá Rystupije, dřevěné baráčky v Ii, komplikované shánění švédské datové SIMky, první (nano)cache, bílá noc v kalichu.</p>
 
 <!--more-->
@@ -555,15 +555,15 @@
 
 <p>Dneska 240 km, celkem skoro 3000 km, zbývá taky něco kolem 3000 km, 13 dní za mnou, 13 přede mnou. Jsem zhruba v půlce cesty. Je tu docela klid, tak tu za sepíšu kus deníku a přespím. Už se smráká a ani se mi nechce věřit hodinám, že právě odbila půlnoc. No jo, jsem už jen pár kilometrů od nejsevernějšího místa mojí cesty, které bude někde vedle města Töri a za týden bude letní slunovrat. Přes mraky ale midnight sun nevidím.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-14/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-14/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 12.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-12/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-12/"/>
     <updated>2014-06-16T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-12</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-12</id>
     <content type="html"><![CDATA[<p>Finsko. Veselý průvodce, pohádkový les, hlava jak po neštovicích, kafe u zvonů, lesní spaní.</p>
 
 <!--more-->
@@ -595,15 +595,15 @@
 
 <p>Dneska 269 km, celkem 2756 km. Zítra stále na sever směr Oulu, Tornio. Adieu Finsku a hurá do Švédska.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-13/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-13/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 11.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-11/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-11/"/>
     <updated>2014-06-15T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-11</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-11</id>
     <content type="html"><![CDATA[<p>Finsko. Slunečné probuzení, hranaté ameriky, studená koupel v jezeře, park se staletými borovicemi, trampské uspokojení u ohníčku.</p>
 
 <!--more-->
@@ -639,15 +639,15 @@
 
 <p>Ale ještě na mě čeká park a 500 let staré borovice. Ty dám až zítra. Snad nebude moc pršet, i když hlásí, že asi jo. Dneska mám v kolech 276 km a ještě pěkných pár kilásků v nohách, snad mě zítra nebude bolet koleno.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-12/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-12/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 10.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-10/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-10/"/>
     <updated>2014-06-14T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-10</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-10</id>
     <content type="html"><![CDATA[<p>Estonsko, Finsko. Lodí do Helsinek, Finové si vezou basy piv, důkladná prohlídka u celníků a &hellip; no nechte se překvapit, jak to dopadlo.</p>
 
 <!--more-->
@@ -697,15 +697,15 @@
 
 <p>Večer jsem dorazil do Lahti, což je takové spíš větší město. Dojel jsem až na takové menší parkoviště u parku s jezírek. Ukázalo se, že hned vedle za podchodem leží přístav pro různé jezerní čluny a plachetnice. Vedle mě stál karavan, takže asi není problém tu přespat. Když jsem na noc rozdělával zadní sedačky, pěkně jsem si zanadával, jak mi to ti celníci pojebali, že je to celé zaseknuté. V dřevotřískové desce jsou tam totiž nějaké vyrvané vruty a na jedné straně deska trochu padá a je ji potřeba nadzvednout, když se zandavá sedačka. Večer jsem se prošel kolem přístavu a jezírka, moc pěkné. Za dnešek asi 90 km lodí a 127 km autem. Zítra bych si přál ale vykoupat se v jezeru a dát si konečně už nějaký ohýnek.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-11/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-11/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 9.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-09/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-09/"/>
     <updated>2014-06-13T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-09</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-09</id>
     <content type="html"><![CDATA[<p>Estonsko. Řehtající probuzení, vyvrcholení pobaltské turistiky v Talinnu, plný břich indické masaly, uťapané mokré nohy, arktický ležák.</p>
 
 <!--more-->
@@ -745,15 +745,15 @@
 
 <p>Když jsem dopil a dopsal, byla už půlnoc, i když venku to tak vůbec nevypadalo. Normálně bylo šero, že se dalo docela i číst. Holt čím dál na sever, tím jsou v létě noci kratší a za týden je dokonce i letní slunovrat. Ty jo, třeba bych mohl vidět i nějakou polární záři. Těžko říct, uvidíme.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-10/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-10/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 8.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-08/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-08/"/>
     <updated>2014-06-12T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-08</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-08</id>
     <content type="html"><![CDATA[<p>Estonsko. Vlhký den, z Poikvy do Kundy a dalších funny měst, nečekané setkání a zasvěcení do tajného klubu, chutná IPA u dostihového závodiště, kterým trajektem jet?.</p>
 
 <!--more-->
@@ -793,15 +793,15 @@
 
 <p>Po stresující jízdě centrem jsem se uklidnil doušky z IPA Fullers a mohl sepsat další den deníku. Ještě mám pár dní skluz, snad něco stihnu sepsat zítra, když se ty moje kecy tolika lidem líbí. Taky bych rád přidal fotky, jenže spoustu z nich nemám ani stažené do kompu, natož abych si je stihnul prohlídnou, vytřídit, upravit, hodit na web. Prostě nebojte, fotky budou, spousta zajímavých, ale časem. Tak dobrou a zítra celodenní procházka jedním z nejkrásnějších měst Pobaltí.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-09/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-09/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 7.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-07/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-07/"/>
     <updated>2014-06-11T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-07</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-07</id>
     <content type="html"><![CDATA[<p>Lotyšsko, Estonsko. Krátké spaní v centru Rigy, zoufalé hledání hajzlíku, hraní si na turistu, ospalá cesta do Estonska.</p>
 
 <!--more-->
@@ -823,15 +823,15 @@
 
 <p>Tachák ukazoval 1744 km a za dnešek 264 km. Takže zítra vzhůru na sever do Kundy!</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-08/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-08/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 6.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-06/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-06/"/>
     <updated>2014-06-10T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-06</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-06</id>
     <content type="html"><![CDATA[<p>Litva, Lotyšsko. Budování silnic v plném proudu, trnitá cesta k datové SIMce, luxusní jezírko a les, Baltské moře a nekonečné pláže Jurmaly, couchsurfingový sraz v Jurmale, co dělá Australský děda v Lotyšsku?</p>
 
 <!--more-->
@@ -867,15 +867,15 @@
 
 <p>No jenže, když jsem se vrátil byly dvě v noci, byla kosa, na obzoru ještě trochu světlo a už se mi nikam jezdil nechtělo, jak jsem byl unavený. Tak jsem prostě přespal v té ulici, kde jsem parkoval. Byla celkem prázdná, jen když jsem šel připravoval v zadu spaní, přímo vedle mě si stoupnul taxikář. Za chvíli ale odjel a já mohl klidně spát. Plán byl, že od osmi si koupím parkovací lístek a půjdu se podívat do staré Rigy.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-07/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-07/">Další den</a>.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Scandinavia Road Trip - Den 5.]]></title>
-    <link href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-05/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-05/"/>
     <updated>2014-06-09T00:00:00+02:00</updated>
-    <id>http://zamecnik.me/blog/2014/scandinavia-road-trip-day-05</id>
+    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-05</id>
     <content type="html"><![CDATA[<p>Litva. Ranní dávka &ldquo;navigace&rdquo;, cesta kolem velké řeky do města, kde včely vyměšují džus místo medu; setkání s motorkářem, který se podruhé narodil; malebná krajina; Hora křížů.</p>
 
 <!--more-->
@@ -903,7 +903,7 @@
 
 <p>Večer jsem koukal na informace o datových SIMkách. Jsem to ale pako. Původně jsem si říkal, že si ji koupím až ve Finsku, Švédsku a Norsku, kde budu nejvíc dní a do té doby mi bude stačit datový roaming od Mobil.cz, 50 MB / 185 Kč a od 11.6. 100 MB za stejnou cenu. Dočetl jsem se ale, že datové SIMky ve všech zemích po cestě se ale dají sehnat na každé pumpě nebo trafice za pár šupů (třeba i od stovky, nikoliv třeba od tří stovek, jak jsem si myslel) a mají mnohem větší kapacitu, než český roaming, nebo jsou skoro bez omezení. Minimálně kvůli mapám a navigaci je připojení k netu fakt velmi užitečné, TomToma s sebou nemám. Takže nebudu čekat do 11.6., kdy bude mít roamingový balíček dvojnásobnou kapacitu, ale další plán je jasný &ndash; v každé zemi jednu datovou SIMku. A teď se pěkně vyspat a zítra hurá do Lotyšska.</p>
 
-<p><a href="http://zamecnik.me/blog/2014/scandinavia-road-trip-day-06/">Další den</a>.</p>
+<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-06/">Další den</a>.</p>
 ]]></content>
   </entry>
   

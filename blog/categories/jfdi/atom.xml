@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Jfdi | Bohumír Zámečník]]></title>
-  <link href="http://zamecnik.me/blog/categories/jfdi/atom.xml" rel="self"/>
-  <link href="http://zamecnik.me/"/>
-  <updated>2014-07-14T23:03:41+02:00</updated>
-  <id>http://zamecnik.me/</id>
+  <link href="http://bohumirzamecnik.cz/blog/categories/jfdi/atom.xml" rel="self"/>
+  <link href="http://bohumirzamecnik.cz/"/>
+  <updated>2014-10-25T23:08:21+02:00</updated>
+  <id>http://bohumirzamecnik.cz/</id>
   <author>
     <name><![CDATA[Bohumír Zámečník]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Week of Hustle - Day 6 and 7]]></title>
-    <link href="http://zamecnik.me/blog/2013/week-of-hustle-day-6-and-7/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-6-and-7/"/>
     <updated>2013-12-07T16:10:00+01:00</updated>
-    <id>http://zamecnik.me/blog/2013/week-of-hustle-day-6-and-7</id>
+    <id>http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-6-and-7</id>
     <content type="html"><![CDATA[<p>The project is moving forwards! I&rsquo;ve managed to merge the music-processing and visualization code and to tune the visualization so that it looks almost as good as the original desktop version. What remains is a major optimization by using a more advanced processing algorithm. In a few days it might be ready for launching on Google Play.</p>
 
 <!--more-->
@@ -26,7 +26,7 @@
 <p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/1XAOxyACpWw "></iframe></div></p>
 
 <!--
-<iframe frameborder="0" height="315" src="http://zamecnik.me//www.youtube.com/embed/1XAOxyACpWw" width="420"></iframe>
+<iframe frameborder="0" height="315" src="http://bohumirzamecnik.cz//www.youtube.com/embed/1XAOxyACpWw" width="420"></iframe>
 -->
 
 ]]></content>
@@ -34,9 +34,9 @@
   
   <entry>
     <title type="html"><![CDATA[Week of Hustle - Day 5]]></title>
-    <link href="http://zamecnik.me/blog/2013/week-of-hustle-day-5/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-5/"/>
     <updated>2013-12-05T19:09:23+01:00</updated>
-    <id>http://zamecnik.me/blog/2013/week-of-hustle-day-5</id>
+    <id>http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-5</id>
     <content type="html"><![CDATA[<p>Today's productivity was very non-uniform. Almost whole day I had to work on another project and finally in the evening I could continue. I was thinging a lot about what would be the most suitable way of implementing the visualization via circular sectors. Finally I've managed to implement a viable prototype.</p>
 
 
@@ -62,9 +62,9 @@
   
   <entry>
     <title type="html"><![CDATA[Week of Hustle - Day 4]]></title>
-    <link href="http://zamecnik.me/blog/2013/week-of-hustle-day-4/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-4/"/>
     <updated>2013-12-05T18:42:00+01:00</updated>
-    <id>http://zamecnik.me/blog/2013/week-of-hustle-day-4</id>
+    <id>http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-4</id>
     <content type="html"><![CDATA[<p>Since the music processing code is quite ready, now it&rsquo;s the time for the nice graphical UI &ndash; the visualization that gives sense to the numbers. The goal is clear &ndash; to port the existing visualization where each pitch class (a tone in an arbitrary octave) is represented by a circular sector. The intensity is represented by the sector&rsquo;s length and color. In fact each tone is divided into multiple bins for greater precision.</p>
 
 <!--more-->
@@ -84,9 +84,9 @@
   
   <entry>
     <title type="html"><![CDATA[Week of Hustle - Day 3]]></title>
-    <link href="http://zamecnik.me/blog/2013/week-of-hustle-day-3/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-3/"/>
     <updated>2013-12-03T16:25:00+01:00</updated>
-    <id>http://zamecnik.me/blog/2013/week-of-hustle-day-3</id>
+    <id>http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-3</id>
     <content type="html"><![CDATA[<p>Worries are gone, euphoria is back! After today&rsquo;s handful of hacking it finally works, albeit on a very rudimental level. I&rsquo;ve managed to get the audio input code working and ported the computation code to Android along with all the libraries. Thanks to the fact there&rsquo;s no native code, just Java, the transition was quite smooth. There&rsquo;s no fancy OpenGL graphical visualization yet, just a text output showing a bar graph of the intensisites of each tone bin in an octave. But when I sing or whistle to it, it shows the expected pattern.</p>
 
 <!--more-->
@@ -106,9 +106,9 @@
   
   <entry>
     <title type="html"><![CDATA[Week of Hustle - Day 2]]></title>
-    <link href="http://zamecnik.me/blog/2013/week-of-hustle-day-2/"/>
+    <link href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-2/"/>
     <updated>2013-12-02T12:05:00+01:00</updated>
-    <id>http://zamecnik.me/blog/2013/week-of-hustle-day-2</id>
+    <id>http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-2</id>
     <content type="html"><![CDATA[<p>I&rsquo;m a bit worried. Trying to work (with an IDE like Eclipse-based Android Development Tools) on a slow home computer is turning into a neverending painful waiting for the disk to stop rumbling&hellip; I was trying to work on porting the audio processing code, but with no tangible results. Today I&rsquo;m really not sure if I&rsquo;ll be able to get anywhere before the MacBook arrives or I move to another computer beforehand. :(</p>
 
 <p>On the other hand, a today&rsquo;s talk with my brother was far more productive. We&rsquo;ve came up with three product ideas! Two e-books with tutorials in his area of expertise and a web application to link people for demand and supply of some kind of useful information.</p>

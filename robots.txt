@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://zamecnik.me/sitemap.xml 
+Sitemap: http://bohumirzamecnik.cz/sitemap.xml 
