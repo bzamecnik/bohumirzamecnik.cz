@@ -4,7 +4,7 @@
   <title><![CDATA[Bohumír Zámečník]]></title>
   <link href="http://bohumirzamecnik.cz/atom.xml" rel="self"/>
   <link href="http://bohumirzamecnik.cz/"/>
-  <updated>2014-11-09T00:00:28+01:00</updated>
+  <updated>2014-12-30T01:06:32+01:00</updated>
   <id>http://bohumirzamecnik.cz/</id>
   <author>
     <name><![CDATA[Bohumír Zámečník]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Install Tkinter With Python 3 on Mac]]></title>
+    <link href="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/"/>
+    <updated>2014-12-30T00:00:00+01:00</updated>
+    <id>http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac</id>
+    <content type="html"><![CDATA[<p><img src="http://bohumirzamecnik.cz/assets/posts/install-tkinter-with-python-3-on-mac/tkinter-missing.png" width="296" align="right">
+Tkinter is an old GUI toolkit, that has been popular also in some Python projects. Sometimes it might be tricky to install. If you just can&rsquo;t get past <code>ImportError: No module named '_tkinter'</code>, read on. We&rsquo;ll install it with Python 3.4 on Mac OX S Yosemite and macports.</p>
+
+<!--more-->
+
+
+<p>We&rsquo;re assuming to have a Python 3 installation, possibly inside a pyvenv.</p>
+
+<p>If we&rsquo;d like to use tkinter, we get the following error:</p>
+
+<pre><code>$ python
+&gt;&gt;&gt; import tkinter
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+&lt;ipython-input-1-b98d59735c04&gt; in &lt;module&gt;()
+----&gt; 1 import tkinter
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/tkinter/__init__.py in &lt;module&gt;()
+     36     from tkinter import _fix
+     37 
+---&gt; 38 import _tkinter # If this fails your Python may not be configured for Tk
+     39 TclError = _tkinter.TclError
+     40 from tkinter.constants import *
+
+ImportError: No module named '_tkinter'
+</code></pre>
+
+<p>First we check that we have the <code>tkinter</code> package installed and it&rsquo;s in the Python module path.</p>
+
+<p>For Python 3.4 there&rsquo;s a port named <code>py34-tkinter</code>:</p>
+
+<pre><code>$ sudo port install py34-tkinter
+</code></pre>
+
+<p>The installed files are here:</p>
+
+<pre><code>$ port contents py34-tkinter
+
+Port py34-tkinter contains:
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/_tkinter.so
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/tkinter-0.0.0-py3.4.egg-info
+</code></pre>
+
+<p>However the module is not in the Python path (note the <code>site-packages/</code> subdirectory):</p>
+
+<pre><code>$ python -c 'import sys; print(*sys.path, sep="\n")'
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python34.zip
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/plat-darwin
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/lib-dynload
+</code></pre>
+
+<p>It seems that the <code>py34-tkinter</code> package should put the <code>_tkinter.so</code> file one directory level higher. We can hack it by making a symlink:</p>
+
+<pre><code>$ TKMODULE=$(port contents py34-tkinter|grep _tkinter.so)
+$ sudo ln -s $TKMODULE $(echo $TKMODULE|sed 's/site-packages\///')
+</code></pre>
+
+<p>If it&rsquo;s ok, the <code>tkinter</code> module can be imported without any error:</p>
+
+<pre><code>$ python -m tkinter
+</code></pre>
+
+<p>Importing the module this way opens up a small testing GUI dialog.</p>
+
+<p>Hope this helps!</p>
+
+<p><img src="http://bohumirzamecnik.cz/assets/posts/install-tkinter-with-python-3-on-mac/tkinter-test-dialog.png" width="281"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Let's Share the Ideas With the World!]]></title>
@@ -907,50 +984,6 @@
 <p>Tachák ukazoval 1744 km a za dnešek 264 km. Takže zítra vzhůru na sever do Kundy!</p>
 
 <p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-08/">Další den</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Scandinavia Road Trip - Den 6.]]></title>
-    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-06/"/>
-    <updated>2014-06-10T00:00:00+02:00</updated>
-    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-06</id>
-    <content type="html"><![CDATA[<p>Litva, Lotyšsko. Budování silnic v plném proudu, trnitá cesta k datové SIMce, luxusní jezírko a les, Baltské moře a nekonečné pláže Jurmaly, couchsurfingový sraz v Jurmale, co dělá Australský děda v Lotyšsku?</p>
-
-<!--more-->
-
-
-<p>Konečně trochu víc spánku. Ale chtělo by to vyrazit, než bude parkování placené, protože drobné litasy u sebe nemám. Hurá zpět do města Šiauliai nakoupit trochu zásob a natankovat. Třičtvrtě nádrže, 33 l za cca 150 LVL, tj. 1200 Kč. Spotřeba něco kolem 4,1 l / 100 km.</p>
-
-<p>Dnešním cílem je Riga a okolí a večer couchsurfingový sraz. Ze Šiauliai do Lotyšska to bylo po státovce kousek. Člověk by si hranice pomalu ani nevšiml. Aspoň na něco je dobrá Evropská unie. Další pauzu jsem dal na zříceninách panství Eleja. Prý významné klasicistní šlechtické sídlo s parkem, v I. sv. válce vyhořelo. Aspoň je tu klid na odpočinek a psaní deníku.</p>
-
-<p>I v Loyšsku, podobně jako v Litvě a Polsku, dost budují, takže hlavní státovka byla tak rozkopaná, že místy by lesní cesta byla proti tomu úhledným bulvárem. Ale aspoň až to dostaví, bude se tam jezdit příjemně.</p>
-
-<p>Ráz krajiny se trochu změnil. Najednou víc bříz a takových baculacých křovin. Je pravda, že se mění každou chvíli, ale rozdíly ve složení rostlinstva mezi jednotlivými zeměni jsou trochu cítit.</p>
-
-<p>Po poledni jsem přijel do většího města Jelgavy a na tacháku je nějakých 1400 km. Řekl jsem si, že bude dobré koupit si v každé zemi datovou SIMku a tak jsem ji šel shánět. Kousek vedle bylo nákupní centrum. Dívčina v trafice mi pár balíčkům předplacených SIMek nabídla, jenže popisky byly jen lotyšsky a nikde žádné parametry. Jen na jedné jsem viděl 4 Mb/s, takže asi nějaké připojení k netu tam bude. Koupil jsem ji za 3 éčka, tj. něco přes stovku v českých.</p>
-
-<p>Značka Zelta Zivtina od Tele2. 100 MB + volání, dokonce i microsim pro iPhone 4S, stačilo jen vyloupnout. Uvnitř balíčku byl dokonce i stručný anglický popisek. Tak jsem to šel aktivovat SMSkou. Bohužel ale připojení nefungovalo. Hm, jsem si říkal, to je divné.</p>
-
-<p>Asi tam je potřeba nastavit APN a přihlašovací údaje, ale ty nemám a v balíčku nejsou napsané. Pak jsem si všiml, že v nákupní centru mají free wifi, ale na webu tele2 o APN ani zmínka, natožpak anglická verze. Ani hotline nebyla v angličtině dostupná, i když o ní psali. Ani na <a href="prepaidwithdata.wikia.com/wiki/Latvia">wiki k předplaceným datovým simkám</a> tato značka není popsána. Jediné, co zbývá najít nějaký obchod s mobily a poptat se.</p>
-
-<p>Jeden obchůdek Tele2 byl o pár bloků vedle a dvě slečny tam obsluhovaly pár důchodců. Chvíli jsem počkal ve frontě a pak jedna slečna začala zkoumat, jak to rozchodit. Shodli jsme se, že to musí být to APN. Nakonec se povedlo, internet fičel a já mohl pokračovat.</p>
-
-<p>Pokračoval jsem nikoliv přímo do Rigy, ale na sever na Jurmalu, což je prý vyhlášené plážové středisko. Jel jsem skrz národní park a jedno místo v lese vedle odpočívadla bylo vyložené luxusní. Borový les, borůvčí, jezírko, traviny, do toho sluníčko. Tak jsem si tam chvíli odpočinul.</p>
-
-<p>Vjezd do Jurmaly je dlouhý jako Lovosice. Všude staré dřevěné domy v lázeňské módě. Cítil jsem se jak někde v Karlových Varech. Kolem pobřeží se tvoří duny a na nich rostou borovice. Našel jsem si svoje místečko kousek od pláže a vyrazil na ni. Po schodech cestičkou přes dunu a přede mnou se otevřel pohled na nekonečné pláže Jurmaly.</p>
-
-<p>Asi poprvé jsem viděl Baltské moře. Na pláži jemný světlý píseček a v něm chomáče travin. Od moře vál hodně čerstvý vítr a hnal zrníčka písku po pláži, takže ta měnila odstíny béžové jako chobotnice. Osvěžil jsem si nohy, ale na koupání jsem to moc neviděl. Voda úplně teplá nebyla. Tak jsem se tam chvíli plácal, odpočíval a hlavně fotil. Fakt příjemné místo.</p>
-
-<p>Ale dnešním cílem byla Riga, konkrétně couchsurfingový sraz. Když jsem odjížděl z Jurmaly už začínal. Do Rigy je to po státovce půl hodiny a je to někde v centru. Zjistil jsem ale, že do starého města se nedá zajet, leda bych měl nějaký placený permit, tak to stačí nechat někde v blízkých ulicích. Přijel jsem krátce po osmé a od osmi večer do osmi ráno je parkování zadarmo, takže pohoda. Parkovací automaty byly jen na karty, ale bohužel jen s lotyšskými popiskami. Tachák ukazoval 1480 km a za dnešek 180 km, spotřeba se drží kolem 4,1. Připadá mi, že Litevský diesel žere lehoučce víc, než Shell FuelSave.</p>
-
-<p>Vydal jsem se tedy pěšky do centra na sraz. Mělo to být na nějakém náměstí v open-air hospodě. Na jedno takové jsem dorazil, ale nikde žádný velký hlouček. Podle mapy jsem ale viděl, že musím ještě kousek dál a další náměstí. Tam to opravdu bylo. Minimálně tak 20 lidí. Stejně tolik měly u baru píp s různými pivy. Škoda, že jsem řídil, jinak bych si dal. Říkal jsem si, že na noc buď seženu couch hosta, nebo to zaparkuju někde mimo centrum.</p>
-
-<p>Na srazu jsem pokecal s mnoha zajímavými lidmi. Třeba mě překvapil skoro šedesátiletý vitální chlapík z Austrálie, který projezdil skoro celý svět a nyní žije v Lotyšsku a píše ebooky. Říkal spoustu moudrých slov a místy jsem si připadal, že poslouchám Čtyři dohody v podání Jaroslava Duška. I tam bylo spousta místních a lidí z celé Evropy. Celkově zajímavé povídání.</p>
-
-<p>No jenže, když jsem se vrátil byly dvě v noci, byla kosa, na obzoru ještě trochu světlo a už se mi nikam jezdil nechtělo, jak jsem byl unavený. Tak jsem prostě přespal v té ulici, kde jsem parkoval. Byla celkem prázdná, jen když jsem šel připravoval v zadu spaní, přímo vedle mě si stoupnul taxikář. Za chvíli ale odjel a já mohl klidně spát. Plán byl, že od osmi si koupím parkovací lístek a půjdu se podívat do staré Rigy.</p>
-
-<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-07/">Další den</a>.</p>
 ]]></content>
   </entry>
   

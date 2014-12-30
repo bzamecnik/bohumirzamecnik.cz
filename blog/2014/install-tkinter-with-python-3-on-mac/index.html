@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Week of Hustle - Day 5 - Bohumír Zámečník</title>
+  <title>How to Install Tkinter With Python 3 on Mac - Bohumír Zámečník</title>
   <meta name="author" content="Bohumír Zámečník">
 
   
-  <meta name="description" content="Today&#8217;s productivity was very non-uniform. Almost whole day I had to work on another project and finally in the evening I could continue. I was &hellip;">
+  <meta name="description" content="Tkinter is an old GUI toolkit, that has been popular also in some Python projects. Sometimes it might be tricky to install. If you just can&rsquo;t &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-5">
+  <link rel="canonical" href="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac">
   <link href="https://s.gravatar.com/avatar/f90538dcd2df4a510c8f0b057154dea1?s=32" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Bohumír Zámečník" type="application/atom+xml">
@@ -82,7 +82,7 @@
   
   <header>
     
-      <h1 class="entry-title">Week of Hustle - Day 5</h1>
+      <h1 class="entry-title">How to Install Tkinter With Python 3 on Mac</h1>
     
     
       <p class="meta">
@@ -98,33 +98,82 @@
   
 
 
-<time datetime="2013-12-05T19:09:23+01:00" pubdate data-updated="true">Dec 5<span>th</span>, 2013</time>
+<time datetime="2014-12-30T00:00:00+01:00" pubdate data-updated="true">Dec 30<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Today&#8217;s productivity was very non-uniform. Almost whole day I had to work on another project and finally in the evening I could continue. I was thinging a lot about what would be the most suitable way of implementing the visualization via circular sectors. Finally I&#8217;ve managed to implement a viable prototype.</p>
-
+<div class="entry-content"><p><img src="/assets/posts/install-tkinter-with-python-3-on-mac/tkinter-missing.png" width="296" align="right">
+Tkinter is an old GUI toolkit, that has been popular also in some Python projects. Sometimes it might be tricky to install. If you just can&rsquo;t get past <code>ImportError: No module named '_tkinter'</code>, read on. We&rsquo;ll install it with Python 3.4 on Mac OX S Yosemite and macports.</p>
 
 <!--more-->
 
 
-<p><img alt="image" src="http://media.tumblr.com/8bb541a50ca180acb2ff55bd7627c537/tumblr_inline_mxcypk7As31s2upa7.jpg" /></p>
+<p>We&rsquo;re assuming to have a Python 3 installation, possibly inside a pyvenv.</p>
 
+<p>If we&rsquo;d like to use tkinter, we get the following error:</p>
 
-<p>After yesterday&#8217;s GLSL playground I&#8217;ve decided to get hand dirty with vertex buffers, triangles and transformation matrices. I&#8217;ll have to use it someday, so why to today. So the result is this simple application that given an array of values draws the properly sized circular segments (as triangles) and colors them simple from black to white. On the screenshot there is a plot of a function derived from cosine. What needs to be plotted is a sampled parametric plot in polar coordinates, but not just the line, but rather what is under the line.</p>
+<pre><code>$ python
+&gt;&gt;&gt; import tkinter
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+&lt;ipython-input-1-b98d59735c04&gt; in &lt;module&gt;()
+----&gt; 1 import tkinter
 
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/tkinter/__init__.py in &lt;module&gt;()
+     36     from tkinter import _fix
+     37 
+---&gt; 38 import _tkinter # If this fails your Python may not be configured for Tk
+     39 TclError = _tkinter.TclError
+     40 from tkinter.constants import *
 
-<p>It isn&#8217;t visually most appealing, but it should be sufficient for a prototype to carry the necessary data. From now it can be only nicer :)</p>
+ImportError: No module named '_tkinter'
+</code></pre>
 
+<p>First we check that we have the <code>tkinter</code> package installed and it&rsquo;s in the Python module path.</p>
 
-<p>Tomorrow&#8217;s task is to merge this visualization with the computation code and to make the plot less ugly. The original temperature-scale color function should be used and the borders and tone names are missing now.</p>
+<p>For Python 3.4 there&rsquo;s a port named <code>py34-tkinter</code>:</p>
 
+<pre><code>$ sudo port install py34-tkinter
+</code></pre>
 
-<p></p>
+<p>The installed files are here:</p>
 
+<pre><code>$ port contents py34-tkinter
+
+Port py34-tkinter contains:
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/_tkinter.so
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/tkinter-0.0.0-py3.4.egg-info
+</code></pre>
+
+<p>However the module is not in the Python path (note the <code>site-packages/</code> subdirectory):</p>
+
+<pre><code>$ python -c 'import sys; print(*sys.path, sep="\n")'
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python34.zip
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/plat-darwin
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/lib-dynload
+</code></pre>
+
+<p>It seems that the <code>py34-tkinter</code> package should put the <code>_tkinter.so</code> file one directory level higher. We can hack it by making a symlink:</p>
+
+<pre><code>$ TKMODULE=$(port contents py34-tkinter|grep _tkinter.so)
+$ sudo ln -s $TKMODULE $(echo $TKMODULE|sed 's/site-packages\///')
+</code></pre>
+
+<p>If it&rsquo;s ok, the <code>tkinter</code> module can be imported without any error:</p>
+
+<pre><code>$ python -m tkinter
+</code></pre>
+
+<p>Importing the module this way opens up a small testing GUI dialog.</p>
+
+<p>Hope this helps!</p>
+
+<p><img src="/assets/posts/install-tkinter-with-python-3-on-mac/tkinter-test-dialog.png" width="281"></p>
 </div>
 
 
@@ -147,12 +196,12 @@
   
 
 
-<time datetime="2013-12-05T19:09:23+01:00" pubdate data-updated="true">Dec 5<span>th</span>, 2013</time>
+<time datetime="2014-12-30T00:00:00+01:00" pubdate data-updated="true">Dec 30<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/harmoneye/'>harmoneye</a>, <a class='category' href='/blog/categories/jfdi/'>jfdi</a>, <a class='category' href='/blog/categories/week-of-hustle/'>week of hustle</a>
+    <a class='category' href='/blog/categories/python/'>python</a>
   
 </span>
 
@@ -161,7 +210,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-5/" data-via="bzamecnik" data-counturl="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-5/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/" data-via="bzamecnik" data-counturl="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -172,10 +221,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/week-of-hustle-day-4/" title="Previous Post: Week of Hustle - Day 4">&laquo; Week of Hustle - Day 4</a>
+        <a class="basic-alignment left" href="/blog/2014/lets-share-the-ideas-with-the-world/" title="Previous Post: Let's Share The Ideas With The World!">&laquo; Let's Share The Ideas With The World!</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/week-of-hustle-day-6-and-7/" title="Next Post: Week of Hustle - Day 6 and 7">Week of Hustle - Day 6 and 7 &raquo;</a>
       
     </p>
   </footer>
@@ -261,8 +308,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-5/';
-        var disqus_url = 'http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-5/';
+        var disqus_identifier = 'http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/';
+        var disqus_url = 'http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/';
         var disqus_script = 'embed.js';
       
     (function () {

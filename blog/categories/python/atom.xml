@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Python | Bohumír Zámečník]]></title>
+  <link href="http://bohumirzamecnik.cz/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://bohumirzamecnik.cz/"/>
+  <updated>2014-12-30T01:06:32+01:00</updated>
+  <id>http://bohumirzamecnik.cz/</id>
+  <author>
+    <name><![CDATA[Bohumír Zámečník]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to Install Tkinter With Python 3 on Mac]]></title>
+    <link href="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/"/>
+    <updated>2014-12-30T00:00:00+01:00</updated>
+    <id>http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac</id>
+    <content type="html"><![CDATA[<p><img src="/assets/blog/categories/python/tkinter-missing.png" width="296" align="right">
+Tkinter is an old GUI toolkit, that has been popular also in some Python projects. Sometimes it might be tricky to install. If you just can&rsquo;t get past <code>ImportError: No module named '_tkinter'</code>, read on. We&rsquo;ll install it with Python 3.4 on Mac OX S Yosemite and macports.</p>
+
+<!--more-->
+
+
+<p>We&rsquo;re assuming to have a Python 3 installation, possibly inside a pyvenv.</p>
+
+<p>If we&rsquo;d like to use tkinter, we get the following error:</p>
+
+<pre><code>$ python
+&gt;&gt;&gt; import tkinter
+---------------------------------------------------------------------------
+ImportError                               Traceback (most recent call last)
+&lt;ipython-input-1-b98d59735c04&gt; in &lt;module&gt;()
+----&gt; 1 import tkinter
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/tkinter/__init__.py in &lt;module&gt;()
+     36     from tkinter import _fix
+     37 
+---&gt; 38 import _tkinter # If this fails your Python may not be configured for Tk
+     39 TclError = _tkinter.TclError
+     40 from tkinter.constants import *
+
+ImportError: No module named '_tkinter'
+</code></pre>
+
+<p>First we check that we have the <code>tkinter</code> package installed and it&rsquo;s in the Python module path.</p>
+
+<p>For Python 3.4 there&rsquo;s a port named <code>py34-tkinter</code>:</p>
+
+<pre><code>$ sudo port install py34-tkinter
+</code></pre>
+
+<p>The installed files are here:</p>
+
+<pre><code>$ port contents py34-tkinter
+
+Port py34-tkinter contains:
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/_tkinter.so
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/tkinter-0.0.0-py3.4.egg-info
+</code></pre>
+
+<p>However the module is not in the Python path (note the <code>site-packages/</code> subdirectory):</p>
+
+<pre><code>$ python -c 'import sys; print(*sys.path, sep="\n")'
+
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python34.zip
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/plat-darwin
+/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/lib-dynload
+</code></pre>
+
+<p>It seems that the <code>py34-tkinter</code> package should put the <code>_tkinter.so</code> file one directory level higher. We can hack it by making a symlink:</p>
+
+<pre><code>$ TKMODULE=$(port contents py34-tkinter|grep _tkinter.so)
+$ sudo ln -s $TKMODULE $(echo $TKMODULE|sed 's/site-packages\///')
+</code></pre>
+
+<p>If it&rsquo;s ok, the <code>tkinter</code> module can be imported without any error:</p>
+
+<pre><code>$ python -m tkinter
+</code></pre>
+
+<p>Importing the module this way opens up a small testing GUI dialog.</p>
+
+<p>Hope this helps!</p>
+
+<p><img src="/assets/blog/categories/python/tkinter-test-dialog.png" width="281"></p>
+]]></content>
+  </entry>
+  
+</feed>
