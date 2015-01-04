@@ -4,7 +4,7 @@
   <title><![CDATA[Bohumír Zámečník]]></title>
   <link href="http://bohumirzamecnik.cz/atom.xml" rel="self"/>
   <link href="http://bohumirzamecnik.cz/"/>
-  <updated>2014-12-31T23:59:13+01:00</updated>
+  <updated>2015-01-05T00:36:12+01:00</updated>
   <id>http://bohumirzamecnik.cz/</id>
   <author>
     <name><![CDATA[Bohumír Zámečník]]></name>
@@ -12,6 +12,162 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Run SMS-tools on Python 3 on Mac]]></title>
+    <link href="http://bohumirzamecnik.cz/blog/2015/how-to-run-sms-tools-on-python-3-on-mac/"/>
+    <updated>2015-01-04T18:20:09+01:00</updated>
+    <id>http://bohumirzamecnik.cz/blog/2015/how-to-run-sms-tools-on-python-3-on-mac</id>
+    <content type="html"><![CDATA[<p><img class="right" src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_cover_t.png"></p>
+
+<p><a href="https://github.com/MTG/sms-tools">SMS-tools</a> (Spectral modeling synthesis) is a Python education library for audio signal analysis and modeling. It serves for practical excercises within the <a href="https://www.coursera.org/course/audio">Audio Signal Processing for Music Applications</a> course at Coursera. It was written to run Ubuntu Linux and Python 2.7. Here we see how to run it on latest Python 3.4 on Mac OS X Yosemite.</p>
+
+<!--more-->
+
+
+<h2>Overview</h2>
+
+<p>What are SMS-tools good for? In short they provide models for music analysis &ndash; how to turn a music recording into a spectrogram and then a each frame into a sum of sinusoids, sum of harmonic sinusoids, sum of harmonic sinusoids and random noise, etc. Also it contains some very cool transformations including sound morphing. Besides the library of models and transformations there is some GUI that allows you to quickly experimentat with various parameters and data. Just open a wav file, set the params, look at the graphs and play the reconstructed audio. Also there&rsquo;s a lot of short example scripts.</p>
+
+<p>If you look at the <a href="https://www.coursera.org/course/audio">Audio Signal Processing for Music Applications</a> course at Coursera you can see the theory, practical details and more. I liked to attend the first session of this course which was held in Autumn/Winter 2014. Since I found some free time after the course ended I&rsquo;m going to take it now and wait for the next session this year to get the certificate. Anyway the software is quite interesting for my own experiments.</p>
+
+<p>In the README you can find the recommended environment is Python 2.7 and Ubuntu Linux. I don&rsquo;t use none of it and don&rsquo;t want to install a lot of GB just to run some little piece of Python code.</p>
+
+<p>There must be a way to run it on Python 3.4 and Mac. Fortunately there is! It consists of two steps: install all the dependencies, port the code to Python 3. The good news is that the step 2 is already done for you. So in this article I&rsquo;ll just summarize both.</p>
+
+<h2>Install dependencies</h2>
+
+<p>As for the package manager I use macports. For homebrew it should be quite similar (or try to <a href="https://class.coursera.org/audio-001/forum/thread?thread_id=126#post-535">consult the fora</a>).</p>
+
+<p>First we&rsquo;ll assume that you already have Python 3 installed (otherwise you wouldn&rsquo;t find this tutorial). If not <code>sudo port install python34</code> (or the latest).</p>
+
+<p>It is recommended to keep Python packages for different purposes in virtual environments (or at least in one) and not to install into the system location to prevent conflicts. Python 3.4 contains out-of-the-box a nice tool called <a href="https://docs.python.org/3/library/venv.html">pyvenv</a> which can solve exactly this problem. So we&rsquo;ll assume you have one virtual env and it is activated. Otherwise:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pyvenv my-audio-env
+</span><span class='line'>source my-audio-env/bin/activate</span></code></pre></td></tr></table></div></figure>
+
+
+<p>SMS-tools requires several Python packages and other dependencies. Some of them are available via pip, some of them via macports. Tkinter, SDL, XQuartz (eg. XQuartz-2.7.7.dmg) and Pygame.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo port install libsdl-framework libsdl_ttf-framework libsdl_image-framework libsdl_mixer-framework mercurial
+</span><span class='line'>pip install cython numpy scipy matplotlib ipython readline
+</span><span class='line'>pip install hg+http://bitbucket.org/pygame/pygame</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Note that installing PyGame via a pip package doesn&rsquo;t work now and as alternative we install from a Mercurial repo.</p>
+
+<p>XQuartz is an implementation of X11 UI server. It can be installed from a DMG from <a href="http://xquartz.macosforge.org/">xquartz.macosforge.org</a>. You should log out and log in again for some settings to take effect.</p>
+
+<p>SMS-tools also use Tkinter GUI toolkit with is a bit tricky to install. I&rsquo;ve describe its installation in a separate article <a href="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/">How to Install Tkinter With Python 3 on Mac</a>. In summary you need to install py34-tkinter and make a symlink since the module in on the wrong path.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo port install py34-tkinter</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Install SMS-tools</h2>
+
+<p>Clone the fork SMS-tools and checkout the branch with Python 3 port:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/bzamecnik/sms-tools.git
+</span><span class='line'>git checkout -b python3</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Run</h2>
+
+<p>Make sure you have activated you pyvenv.</p>
+
+<p>There are two GUIs, one for models, the other for transformations. You can run the GUIs like this. Yes, it really expects you to be inside that directory&hellip;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sms-tools $ cd software/models_interface
+</span><span class='line'>models_interface $ python models_GUI.py
+</span><span class='line'>models_interface $ cd ../transformations_interface
+</span><span class='line'>transformations_interface $ python transformations_GUI.py</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_gui_hps.png"></p>
+
+<h2>How was porting to Python 3?</h2>
+
+<p>First I converted the source code with <code>2to3</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sms-tools $ 2to3 -w .</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then it was necessary to fix some more subtle problems.</p>
+
+<p>The / operator now represents floating-point division, not integer one.
+So to avoid indexing with floats it was sometimes necessary to convert the result to integer via <code>int()</code>.</p>
+
+<p>Tkinter stuff needs to be imported in a little bit different way. This should work both in Python 2 and 3.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>try:
+</span><span class='line'>  from tkinter import *
+</span><span class='line'>  from tkinter import messagebox, filedialog
+</span><span class='line'>except ImportError:
+</span><span class='line'>  from Tkinter import *
+</span><span class='line'>  import tkFileDialog as filedialog, tkMessageBox as messagebox</span></code></pre></td></tr></table></div></figure>
+
+
+<p>instead of</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>from Tkinter import *
+</span><span class='line'>import tkFileDialog, tkMessageBox</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And that&rsquo;s about it. The result should be compatible with Python 3.4. Since I don&rsquo;t have Python 2.7 I can&rsquo;t test if it still work. Probably not. But anyway, Python 2 is history.</p>
+
+<p>Thanks for reading and have fun with audio processing with SMS-tools.</p>
+
+<p>Here are some nice screenshots:</p>
+
+<p>DFT spectrum of a single frame:
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/01_dft_piano.png"></p>
+
+<p>STFT spectrogram:
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/02_stft_piano.png"></p>
+
+<p>Analysis with the sine model:
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/03_sine_model_analysis_bendir.png"></p>
+
+<p>Harmonic sines model:
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/04_harmonic_model_analysis_vignesh.png"></p>
+
+<p>Stochastic model:
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/05_stochastic_model_ocean.png"></p>
+
+<p>Sine plus residuals model:
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/06_spr_model_bendir.png"></p>
+
+<p>Stocharstic plus residuals model:
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/07_sps_model_bendir.png"></p>
+
+<p>Harmonic sines plus residuals model:
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hpr_model_sax_phrase_short.png"></p>
+
+<p>Harmonic sines plus stochastic model:
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hps_model_sax_phrase_short.png"></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[My First Handmade Bushcraft Knife]]></title>
@@ -970,54 +1126,6 @@ $ sudo ln -s $TKMODULE $(echo $TKMODULE|sed 's/site-packages\///')
 <p>Když jsem dopil a dopsal, byla už půlnoc, i když venku to tak vůbec nevypadalo. Normálně bylo šero, že se dalo docela i číst. Holt čím dál na sever, tím jsou v létě noci kratší a za týden je dokonce i letní slunovrat. Ty jo, třeba bych mohl vidět i nějakou polární záři. Těžko říct, uvidíme.</p>
 
 <p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-10/">Další den</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Scandinavia Road Trip - Den 8.]]></title>
-    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-08/"/>
-    <updated>2014-06-12T00:00:00+02:00</updated>
-    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-08</id>
-    <content type="html"><![CDATA[<p>Estonsko. Vlhký den, z Poikvy do Kundy a dalších funny měst, nečekané setkání a zasvěcení do tajného klubu, chutná IPA u dostihového závodiště, kterým trajektem jet?.</p>
-
-<!--more-->
-
-
-<p>Ráno jsem se na pěkném parkovišti naproti růžovému zámečku vyspal pěkně do růžova. Co ale růžové nebylo, začalo padat z oblohy. Teda ne že by padalo něco hnedého, to zas ne, ale prostě po týdnu veder se zatáhlo a přišla bílá vlhká deka. Celý den byl takový vlkhý.</p>
-
-<p>Možná to byl dozvuk té obrovské bouřky v Německu, kdy se nebe zatáhlo úplně do černa a padaly kroupy jak brambory. Tady jen lilo jako z kropítka. Ještě cajk, že jsem s deštěm počítal už před odjezdem a nabalil si i nějaké pohory, bundu a dokonce i deštník. I když ten není úplně známka punku, ukázal se jako klíčový.</p>
-
-<p>K zámečku se začaly sjíždět lidi jak vosy, ale jako pořádná sršeň dopoledne bzučel křoviňák, kterým místní dva kluci osekávali kopřivy okolo parkoviště. Ten druhý hrabal. Dopoledne se neslo ve znamení odpočinku &ndash; v klidu jsem se najedl, prohlídnul a ofotil zámeček a hlavně starou kamennou stodolu s čápem. Vedle zámečku teče něco mezi říčkou a bažinou a v ní rostou přesličky. Nebo plavuně? Už si to z biologie moc nepamatuju, jen vím, že to v pravěku bylo dost velké a zkamenělo to. Tyhle byly malé a zelené. A bylo jich celé koryto.</p>
-
-<p>Jen co jsem někdy v jedenáct vyjel směr Kunda, značka mi připomněla, kam jsem se to ještě chtěl zastavit. Bylo na ní napsáno &ldquo;Poikva 8 &ndash;>&rdquo;. Průměrně sběhlý čtenář ve věcech rozmnožovacích, jistně už tuší, že jde o takový malý předkrm k večernímu hlavnímu chodu. Případným čtenářům, kteří čtou napřeskáčku a ne od začátku, připomenu, že jsem již navštívil Dziewkovice, Kokotek a Seredžius a dnes mířím do Kundy. A to ještě nevím, kolik dalších úlovků do sbírky mne dnes čeká. Cesta do &ldquo;pochvy&rdquo; byla hladká asfaltová, z pochvy to ale trochu drhlo &ndash; po štěrku.</p>
-
-<p>Po cestě jsem byl opět velmi štastný, že jsem si stihnul koupit nové pořádné stěrače. Díky nim jsem viděl i v tom největším lijáku &ndash; a že přišel. Kolem poledne jsem se stavil v Paide v místním supáči trochu doplnit zásoby. První jsem zamířil mezi piva &ndash; přeci jen nechci přijet domů s prázdnou. Mezi velkým výběrem piv mě na první pohled zaujal Černovar a Zlatopramen. Czech Import. Měli tam ale i pravou India Pale Ale od Fuller&rsquo;s, &ldquo;brewed besides the Thames river&rdquo;. Zatím jsem pil jen českou IPA &ndash; Raptora Matušky. Večer jsem si dal na uklidněnou &ndash; mňam. U kasy měli i Elisa refill ticket za 1 EUR &ndash; pro další den připojení na net. Prostě jsem dostal jen další lístek vyjetý z termotiskárny a na něm číslo do nabití kreditu. Jednoduché a praktické.</p>
-
-<p>Deštivou cestou na sever najednou u města Siedla vidím nalevo větrný mlýn. Říkám si, krajina i životní úroveň mi připadala jako v Holandsku, ale větrný mlýn? To se snad nějak opičej? Mlýn ale vypadal lákavě, tak jsem tam zajel. Nádhera! Krásný starý větrný mlýn v nejlepší kondici. Ono totiž tady do Estonsku větrné mlýny přišly snad z Německa a v době jejich největší slávy jich tu bylo na 300. Tenhle je jediný zachovalý a relativně nedávno kompletně zrekonstruovaný. Dnes je v něm muzeum.</p>
-
-<p>Je půl druhé, vlkho až na pytliku a já konečně přijíždím do vysněné Kundy! Myslel jsem, že takové důležité město bude mít stejně velkou značku jak ta ostatní, ale značka byla jen mrňavá. Hodil jsem to hned za kruhákem a pln elánu šlapal kolem krajnice s iphonem k té značce. Plný radosti cvakám selfie. Dámy a pánové, právě jsem v Kundě!</p>
-
-<p>No ale co tady je tak k vidění? Za sebou vidím velkou cementárnu. TripAdvisor praví, že kromě toho, že tu pálí cement už dlouhá léta, je tu ještě zajímavý kamenný kostelík, co má zvon mimo věž a celý je orientovaný opačně &ndash; na západ. A taky, že jo. No pak ještě první baltská hydroelektrárna a přístav. A to je asi tak vše. Sjel jsem dolů k vodě a vyrazil s foťákem, že cvaknu nějaké romantické molo a lodě, co vozí cement. Kousek ode mě ale zaparkovalo další auto s koly na střeše. Když se vracím zpátky od vody, kde nebylo vůbec nic k vidění, zdravím pána z toho auta, vedle jen jeho paní, a on na mě &ldquo;Dobrý den&rdquo;. Cože? To jsou tady Češi?</p>
-
-<p>No fakt, že jo! Manželé, co pracují v Petrohradu si udělali trip do Talinnu &ndash; prý aby si taky trochu odpočali od těch Rusáků a cestou se stavili v Kundě a projeli se na kole. Jenže pršelo. Prozradili mi důležité tajemství. Existuje totiž <a href="http://pobalti.wz.cz/kunda.htm">klub Kunďáků</a>, lidí, typicky Čechů, kteří při návštěvě Estonska zavítají obligátně do Kundy a zapíšou se do Kundodeníku. Ten je ukrytý hned naproti značce na silnici od východu u kamenné zdi a je schovaný jako klasická regular keška &ndash; v plastové krabici pod kameny.</p>
-
-<p>Poté, co jsme pokecali, jsem se vydal zapsat se do onoho slavného deníku. Byl tam, sice celý vlkhý (jak jinak) a plesnivý, ale byl tam. Ofotil jsem si nedávné zápisy a jeden taky přidal. Tím tedy byl kundí úkol splněn a zajížďka nebyla marná.</p>
-
-<p>Cestou na Talinn se ale náchází víc srandovních měst a vesniček. Pár jich je u jednoho národního parku &ndash; takového velkého lesa. Dobrý důvod podívat se po venkově a nehnat rovnou na dálnici. Dalším cílem byla Vihula. Co mě ale překvapilo a v mapě jsem předem ani nenašel, byla vesnice Vole. Kromě toho byly k vidění i města jako Kobra, Vosa, Vosupere, ale to je slabý. Z Vihuly jsem to vzal lesní cestou do osady Mustoja.</p>
-
-<p>Vedla tam hlubokým lesem jen štěrková cesta plná děr. To, za co bych v některých místech Varšavy líbal ruce, byla asi nejhorší cesta během mé cesty po Estonsku. Projet se dala v pohodě na trojku. Aby byl dojem umocněn, krápání se zrovna v tu chvíli proměnilo ve fakt pořádný slejvák. Dokonce jsem zjistil, že stěrače mají ještě jeden režim, kdy kmitají, že by z toho epilepik dostal pomalu záchvat.</p>
-
-<p>V Mustoje, kousíček od moře, stálo na samotě uprostřed lesa jen pár pěkných baráčků. Tak jsem si přes sklo cvaknul ceduli, otočil se a mohl s klidným srdcem zamířit na Talinn. Na dálnici mě zas překvapila odleduplnost místních. Limit 110 a všichni jeli kolem těch 110, ne že by to někdo střihal 180 a dělal jednu myšku za druhou. Ale možná je to tím, že dálnice byla relativně volná a pršelo.</p>
-
-<p>Po dálnici to bylo do Talinnu kousek. Jak člověk vjel do města, změnila se na magistrálu &ndash; zahloubenou do země. Kolem jste viděli místo betonu vrstvy skály. Malebné jako na starém hradě. To jsem ještě netušil, že z tohohle kamene je postavené celé staré město. On totiž Talinn má krásně zachovalé středověké jádro, které sem jezdí očumuval mraky turistů.</p>
-
-<p>Přemýšlel jsem kam to dát na noc, protože centrum je docela fest placené a v okolí je dost živo. Nakonec jsem našel jednu hezkou uličku u lesa vedlo dostihového závodiště. Místo příjemné, auta nehlučela, ptáci štěbetali, jen tam chodili na procházky zástupy lidí &ndash; večer i dopoledne.</p>
-
-<p>Než jsem šel spát, řešil jsem, jak to udělat s lodí do Helsinek. Původní plán byl jet dnes ve 14:30 za 43 EUR. Tou dobou jsem nebyl ani v Kundě. Další loď jede zítra ve 12:00 nebo 14:30. To bych ale si ale vůbec nestihl prohlídnout centrum, nebo bych oběhal pár uliček jako nadmutá koza. A ještě k tomu lístek za 50 nebo 70 EUR. Nakonec jsem se rozhodl nespěchat a jet až v sobotu v poledne za 46 EUR. To se ukázalo jako velmi rozumné rozhodutí.</p>
-
-<p>Po stresující jízdě centrem jsem se uklidnil doušky z IPA Fullers a mohl sepsat další den deníku. Ještě mám pár dní skluz, snad něco stihnu sepsat zítra, když se ty moje kecy tolika lidem líbí. Taky bych rád přidal fotky, jenže spoustu z nich nemám ani stažené do kompu, natož abych si je stihnul prohlídnou, vytřídit, upravit, hodit na web. Prostě nebojte, fotky budou, spousta zajímavých, ale časem. Tak dobrou a zítra celodenní procházka jedním z nejkrásnějších měst Pobaltí.</p>
-
-<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-09/">Další den</a>.</p>
 ]]></content>
   </entry>
   
