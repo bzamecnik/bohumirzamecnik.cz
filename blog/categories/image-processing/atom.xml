@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Image-processing | Bohumír Zámečník]]></title>
+  <link href="http://bohumirzamecnik.cz/blog/categories/image-processing/atom.xml" rel="self"/>
+  <link href="http://bohumirzamecnik.cz/"/>
+  <updated>2015-02-16T01:05:15+01:00</updated>
+  <id>http://bohumirzamecnik.cz/</id>
+  <author>
+    <name><![CDATA[Bohumír Zámečník]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Image Whitening - Clean B&W Documents From Nasty Photos]]></title>
+    <link href="http://bohumirzamecnik.cz/blog/2015/image-whitening/"/>
+    <updated>2015-02-15T19:29:32+01:00</updated>
+    <id>http://bohumirzamecnik.cz/blog/2015/image-whitening</id>
+    <content type="html"><![CDATA[<p><img class="<a" src="href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_orig_and_whitened_row_t.jpg">http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_orig_and_whitened_row_t.jpg</a>"></p>
+
+<p>Turn a poor smartphone-camera photo of a document or whiteboard into a nice black &amp; white or color &ldquo;scan&rdquo; that can be printed or converted to PDF. It works for text / line drawings / sheet music. The method is described here along with a Photoshop tutorial (and a Photoshop action for download) and a handful of examples.</p>
+
+<!--more-->
+
+
+<h2>The problem</h2>
+
+<p>As you can see in the image above, we have taken a photo of a whiteboard at some irregular ambient day light. In order to print it or embed it into web page we want pure white background and nice black text or lines. The image should not be binarized (ie. only black and white pixel), the anti-aliasing of the lines should be preserved.</p>
+
+<h3>Thresholding &ndash; bad</h3>
+
+<p>The trivial method is <a href="http://en.wikipedia.org/wiki/Thresholding_%28image_processing%29">thresholding</a> &ndash; all pixels darker than some value will be black, and the rest white. It works kind of ok for scans with regular lighting but fails miserably for our photos. The problem is the threshold is global for the whole image and cannot cope with gradients in background. Also scanners are usually not available at hand and certainly cannot scan whiteboards. The other problem with thresholding is that we lose color information and anti-aliasing.</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_threshold_150.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_threshold_150_t.jpg" alt="" /></a></p>
+
+<p>Well, yes, there are some adaptive thresholding methods out there which try to find optimal threshold value for small image block. Yet, they still produce binarized image and lose colors. We need something better.</p>
+
+<h2>The solution</h2>
+
+<p>I&rsquo;ve came across this problem many time through the years, tried to solve it many ways, including spectral filtering, without much success. Yesterday I needed to prepare some illustration images for my one of my <a href="http://www.visualmusictheory.com/tone-circle.html">blog articles</a> and make an animated GIF. I only had my new whiteboard and iphone.</p>
+
+<p>Suddenly, the light bulb in my head lit up:</p>
+
+<blockquote><p>Use the median filter!</p></blockquote>
+
+<p>What does the <a href="http://en.wikipedia.org/wiki/Median_filter">median filter</a> do. Simply said, for each pixel it finds the most common value from its neighborhood, a <a href="http://en.wikipedia.org/wiki/Median">median</a>. From the image processing lecture I can remember it is good for removing salt and pepper noise, ie. lone black or white pixels. And what are the lines and text? A kind of salt and pepper!</p>
+
+<p>The median filter with wide enough radius of neighborhood just keeps the background and removes the text. Then we can just remove this background, eg. divide the original image by the median-filtered one. A similar (yet not really the same) procedure is called <em>whitening</em> in the image-processing field.</p>
+
+<pre><code>I_whitened = I / median2d(I, radius)
+</code></pre>
+
+<h3>How to do it in Photoshop</h3>
+
+<p>The easiest tool to experiment with this idea is probably Photoshop (although it might not be the best for batch processing and certainly it is not free).</p>
+
+<p>So here the procedure:</p>
+
+<ul>
+<li>open the image</li>
+<li>duplicate the layer twice
+
+<ul>
+<li>name the top layer &ldquo;median&rdquo; (not necessary, just for clarity)</li>
+<li>name the second layer from top &ldquo;background&rdquo;</li>
+</ul>
+</li>
+<li>apply the median filter to the &ldquo;median&rdquo; layer: Filter &ndash;> Noise &ndash;> Median
+
+<ul>
+<li>fiddle with the radius so that the background is quite smooth</li>
+<li>start eg. with 100px for a 6Mpx photo</li>
+</ul>
+</li>
+<li>set the &ldquo;median&rdquo; layer blending mode to &ldquo;divide&rdquo;</li>
+<li>merge down the &ldquo;median&rdquo; and &ldquo;background&rdquo; layers</li>
+<li>voilà!</li>
+</ul>
+
+
+<h4>Tips</h4>
+
+<p>Try to fiddle with the radius. Use the least radius that doesn&rsquo;t leave too much dark blobs.</p>
+
+<p>In case there are larger areas filled with black or color the whitening doesn&rsquo;t work well. See the &ldquo;Document with color diagrams&rdquo; example below. But there&rsquo;s a work around. We need to remove the big spots from the median layer. The <em>Content-aware fill</em> feature is our savior:</p>
+
+<ul>
+<li>just select the remaining blobs</li>
+<li>Edit &ndash;> Fill (SHIFT+F5) &ndash;> Content Aware</li>
+<li>and select the &ldquo;divide&rdquo; blending mode again</li>
+</ul>
+
+
+<p>Denoise before whitening. A great denoising tool is in Lightroom. Something is probably in Photoshop as well.</p>
+
+<p>Adjust Levels after whitening &ndash; do white and black clipping. This leaves the background perfectly white and makes the lines/text more contrasty.</p>
+
+<p><img class="<a" src="href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/photoshop/levels.png">http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/photoshop/levels.png</a>" width="268"></p>
+
+<h4>Photoshop Action</h4>
+
+<p>It is too much hand work. As a bonus I have made a Photoshop action and exported it so that you can just plug it in your installation!</p>
+
+<ul>
+<li><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/photoshop_actions/median_whitening.atn">median_whitening.atn</a></li>
+</ul>
+
+
+<h2>Examples</h2>
+
+<h3>Document with color diagrams</h3>
+
+<p>Original (bad gradients from a table lamp):</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_orig.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_orig_t.jpg" width="400"></a></p>
+
+<p>Thresholded at 100 (bad):</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_threshold_100.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_threshold_100_t.jpg" width="400"></a></p>
+
+<p>Median with 100 px radius (notice the color blobs):</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_median_100px.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_median_100px_t.jpg" width="400"></a></p>
+
+<p>Whitened (artifacts from color blobs):</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_whitented.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_whitented_t.jpg" width="400"></a></p>
+
+<p>Median with 100 px radius + content-aware fill:</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_median_100px_content_aware_fill.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_median_100px_content_aware_fill_t.jpg" width="400"></a></p>
+
+<p>Whitened (artifacts are gone):</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_whitented_content_aware_fill.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_whitented_content_aware_fill_t.jpg" width="400"></a></p>
+
+<h3>Sheet music</h3>
+
+<p>Original (shadow from my hand):</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_original_photo.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_original_photo_t.jpg" width="400"></a></p>
+
+<p>Thresholded at 128 (bad):</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_threshold_128.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_threshold_128_t.jpg" width="400"></a></p>
+
+<p>Median with 100 px radius:</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_median_50px.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_median_50px_t.jpg" width="400"></a></p>
+
+<p>Original divided by the median:</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_whitened_divide.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_whitened_divide_t.jpg" width="400"></a></p>
+
+<h3>Simple whiteboard</h3>
+
+<p>Original, denoised (in Lightroom):</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_denoised.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_denoised_t.jpg" width="400"></a></p>
+
+<p>Thresholded at 80 (the light blue is gone &ndash; bad):</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262-threshold_80.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262-threshold_80_t.jpg" width="400"></a></p>
+
+<p>Median with 100 px radius:</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_median_100px.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_median_100px_t.jpg" width="400"></a></p>
+
+<p>Whitened:</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_whitened.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_whitened_t.jpg" width="400"></a></p>
+
+<p>Whitened + levels:</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_whitened_levels.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_whitened_levels_t.jpg" width="400"></a></p>
+
+<h3>Whiteboard</h3>
+
+<p>Original (day light + some reflections):</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_orig.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_orig_t.jpg" width="400"></a></p>
+
+<p>Denoised in Lightroom (click for detail view):</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_t.jpg" width="400"></a></p>
+
+<p>Denoised + thresholded at 150 (bad):</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_threshold_150.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_threshold_150_t.jpg" width="400"></a></p>
+
+<p>Median with 100 px radius:</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_median_100px.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_median_100px_t.jpg" width="400"></a></p>
+
+<p>Whitened:</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_whitened_color.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_whitened_color_t.jpg" width="400"></a></p>
+
+<p>Whitened + desaturated + levels:</p>
+
+<p><a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_whitened_bw_levels.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_whitened_bw_levels_t.jpg" width="400"></a></p>
+
+<h2>Conclusion / TL;DR</h2>
+
+<p>In this article I&rsquo;ve presented a very simple, yet effective method for converting photographed or scanned documents or whiteboards to a nice printable form with pure white backround and crispy dark text / lines.</p>
+
+<p>The principle is using median filter with a wide radius to remove the text and then divide the original image by the filtered one.</p>
+
+<p>We have seen a procedure in Photoshop and the action available for download.</p>
+
+<p>This method is most suitable for smaller text and lines. It has problems with larger dark or colored blobs. In such case we can manually apply content-aware fill to the remaing blobs in median layer to overcome the problem.</p>
+
+<p>It is good to use denoising before and adjust level after the filter.</p>
+
+<h3>Further directions</h3>
+
+<p>Since Photoshop is not free and most importantly is it not that great for true batch processing I&rsquo;d like to implement this method in Python. Hope the code will be available soon.</p>
+
+<p>I also hope you found this article useful. If so feel free to share it and let me know. Also you can follow me at twitter: <a href="https://twitter.com/bzamecnik">@bzamecnik</a>.</p>
+
+<p>Enjoy!</p>
+]]></content>
+  </entry>
+  
+</feed>
