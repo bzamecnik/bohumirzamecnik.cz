@@ -4,7 +4,7 @@
   <title><![CDATA[Bohumír Zámečník]]></title>
   <link href="http://bohumirzamecnik.cz/atom.xml" rel="self"/>
   <link href="http://bohumirzamecnik.cz/"/>
-  <updated>2015-02-16T01:05:15+01:00</updated>
+  <updated>2015-05-29T00:32:06+02:00</updated>
   <id>http://bohumirzamecnik.cz/</id>
   <author>
     <name><![CDATA[Bohumír Zámečník]]></name>
@@ -12,6 +12,306 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to Make a Hive UDF With Conflicting Guava]]></title>
+    <link href="http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/"/>
+    <updated>2015-05-29T00:31:00+02:00</updated>
+    <id>http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava</id>
+    <content type="html"><![CDATA[<p>If you&rsquo;re using Hive sooner or later you&rsquo;ll need to create user defined functions (UDFs). Chances are such a function would use a code that depends on the Guava library. And it is not that unlikely that the required Guava version would be newer than Hive&rsquo;s. Then you&rsquo;re running into a trouble. Hopefully this article save you much of the pain I had to suffer to make it working. Let&rsquo;s make a simple UDF and fix it using both maven and gradle.</p>
+
+<!--more-->
+
+
+<h2>Example UDF &ndash; top private domain</h2>
+
+<p>As a concrete example take a UDF that given a internet host name computes the top private domain. Eg. for host name <code>www.google.co.uk</code>, <code>uk</code> and <code>co.uk</code> are public domains, <code>google.co.uk</code> and <code>www.google.co.uk</code> are private domains and <code>google.co.uk</code> is the highest (top) private domain in this case.</p>
+
+<p>Guava&rsquo;s <code>InternetDomainName.topPrivateDomain()</code> already does this job. We need lastest Guava in order to have an up-to-date trie representing public domains. However, there&rsquo;s a difference between ancient Guava 11 and latest Guava 18:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="n">InternetDomainName</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="s">&quot;www.google.co.uk&quot;</span><span class="o">).</span><span class="na">topPrivateDomain</span><span class="o">().</span><span class="na">toString</span><span class="o">()</span>
+</span><span class='line'><span class="c1">// returns &quot;google.co.uk&quot; in Guava 18</span>
+</span><span class='line'><span class="c1">// returns &quot;InternetDomainName{name=google.co.uk}&quot; in Guava 11</span>
+</span><span class='line'><span class="c1">//   &quot;google.co.uk&quot; is returned by name() instead of toString()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The whole UDF class looks like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">hive</span><span class="o">.</span><span class="na">udf</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kn">import</span> <span class="nn">com.google.common.net.InternetDomainName</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.hadoop.hive.ql.exec.UDF</span><span class="o">;</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">org.apache.hadoop.io.Text</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> * Extracts top private domain from a host name.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TopPrivateDomain</span> <span class="kd">extends</span> <span class="n">UDF</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">Text</span> <span class="nf">evaluate</span><span class="o">(</span><span class="n">Text</span> <span class="n">host</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">host</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>        <span class="k">try</span> <span class="o">{</span>
+</span><span class='line'>            <span class="k">return</span> <span class="k">new</span> <span class="nf">Text</span><span class="o">(</span><span class="n">InternetDomainName</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">host</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span>
+</span><span class='line'>                <span class="o">.</span><span class="na">topPrivateDomain</span><span class="o">()</span>
+</span><span class='line'>                <span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+</span><span class='line'>        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalArgumentException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case the incompatibility is just in the return value but in other cases there might be runtime errors such as added/removed/changed classes, methods, etc.</p>
+
+<h2>Conflicts in library versions</h2>
+
+<p>So what&rsquo;s the problem with Guava and Hive? Hadoop and Hive are in general packaged with ancient or outdated version of Guava. Eg. Hive 0.14 available in CDH5 has Guava 11 and current Hive 1.2 has Guava 15, while the most recent Guava version is 18. The bigger the version difference the higher chance of incompatibilities. And the problem is that more than one version of the library cannot be easily loaded within JVM (at least in Hive).</p>
+
+<p>However, there&rsquo;s a trick. If there a conflict between classes in the same package(s) (in this case <code>com.google.common</code> and <code>com.google.thirdparty</code>), why not to rename the package(s)?</p>
+
+<p>There&rsquo;s one more catch with Hive UDFs. For some strange reason when registering the UDF Hive sees only classes from the JAR than contains the UDF class and not from other specified JARs. This along with renaming the packages leads to the need for a fat JAR, ie. a JAR containing all the necessary dependencies for the UDF class (or at least those shaded or not seen by Hive). Blindly packaging all transitive dependencies might result in a big bloated JAR, so we&rsquo;d also like to minimize it just to classes that are actually used by our UDF.</p>
+
+<p>The overall plan is thus to:</p>
+
+<ul>
+<li>package all the dependencies of the UDF into a fat JAR
+
+<ul>
+<li>to make Hive see the other classes</li>
+</ul>
+</li>
+<li>rename (shade) the Guava packages
+
+<ul>
+<li>both the packages of the Guava classes and their imports in our code</li>
+<li>to prevent conflict with Hive&rsquo;s own Guava</li>
+</ul>
+</li>
+<li>(optional) minimize the resuling fat JAR
+
+<ul>
+<li>remove unnecessary dependencies or even unused classes</li>
+</ul>
+</li>
+</ul>
+
+
+<p>We&rsquo;ll explore how to do it using maven&rsquo;s <code>maven-shade-plugin</code> and gradle&rsquo;s <code>shadow</code> plugin.</p>
+
+<h2>Maven &ndash; maven-shade-plugin</h2>
+
+<p>If your&rsquo;re using maven for building fortunately there&rsquo;s a plugin called <a href="https://maven.apache.org/plugins/maven-shade-plugin/">maven-shade-plugin</a> which can do both creating a fat JAR and renaming packages.</p>
+
+<p>Within Maven&rsquo;s <code>pom.xml</code> in the plugin&rsquo;s configuration just specify using the <code>&lt;relocation&gt;</code> tags which package(s) should be renamed to what. The old package name is in the <code>&lt;pattern&gt;</code> and the new one in <code>&lt;shadedPattern&gt;</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;build&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;plugins&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;plugin&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;artifactId&gt;</span>maven-shade-plugin<span class="nt">&lt;/artifactId&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;version&gt;</span>2.3<span class="nt">&lt;/version&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;executions&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;execution&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;goals&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;goal&gt;</span>shade<span class="nt">&lt;/goal&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/goals&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;relocations&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;relocation&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;pattern&gt;</span>com.google.common<span class="nt">&lt;/pattern&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;shadedPattern&gt;</span>com.example.shaded.com.google.common<span class="nt">&lt;/shadedPattern&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/relocation&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;relocation&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;pattern&gt;</span>com.google.thirdparty<span class="nt">&lt;/pattern&gt;</span>
+</span><span class='line'>                <span class="nt">&lt;shadedPattern&gt;</span>com.example.shaded.com.google.thirdparty<span class="nt">&lt;/shadedPattern&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;/relocation&gt;</span>
+</span><span class='line'>            <span class="nt">&lt;/relocations&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/configuration&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;/execution&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/executions&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/plugin&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/plugins&gt;</span>
+</span><span class='line'><span class="nt">&lt;/build&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In order to minimize the JAR, enable it via the following. Beware that this might remove some classes used only by reflection. In such a case explicitly include the class via <code>configuration.filters.filter.include</code>. Please find the details in the <a href="https://maven.apache.org/plugins/maven-shade-plugin/examples/includes-excludes.html">docs</a>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>...
+</span><span class='line'><span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;minimizeJar&gt;</span>true<span class="nt">&lt;/minimizeJar&gt;</span>
+</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By default the plugin produces the shaded JAR with the same name as the original and add a prefix <code>original-</code> to the latter. If we want the opposite behavior (mark the shaded JAR, eg. with <code>-jar-with-dependencies</code> suffix), we can to this via:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'>...
+</span><span class='line'><span class="nt">&lt;configuration&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;shadedArtifactAttached&gt;</span>true<span class="nt">&lt;/shadedArtifactAttached&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;shadedClassifierName&gt;</span>jar-with-dependencies<span class="nt">&lt;/shadedClassifierName&gt;</span>
+</span><span class='line'><span class="nt">&lt;/configuration&gt;</span>
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then just build the JAR with <code>$ maven package</code> and copy it to the machine(s) running Hive.</p>
+
+<h2>Gradle &ndash; shadow</h2>
+
+<p>Gradle <a href="https://github.com/johnrengelman/shadow">Shadow</a> plugin is inspired by <code>maven-shade-plugin</code>. The basic configuration might look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">plugins</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">id</span> <span class="s1">&#39;java&#39;</span> <span class="c1">// or &#39;groovy&#39; Must be explicitly applied</span>
+</span><span class='line'>  <span class="n">id</span> <span class="s1">&#39;com.github.johnrengelman.shadow&#39;</span> <span class="n">version</span> <span class="s1">&#39;1.2.1&#39;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;java&#39;</span> <span class="c1">// or &#39;groovy&#39;. Must be explicitly applied</span>
+</span><span class='line'><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;com.github.johnrengelman.shadow&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">shadowJar</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">relocate</span><span class="o">(</span><span class="s1">&#39;org.google.common&#39;</span><span class="o">,</span> <span class="s1">&#39;com.exaple.shaded.org.google.common&#39;</span><span class="o">)</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>gradle shadowJar
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Registering the UDF</h2>
+
+<p>Within Hive register the UDF like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">ADD</span> <span class="n">JAR</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="k">to</span><span class="o">/</span><span class="n">the</span><span class="o">/</span><span class="n">example</span><span class="o">-</span><span class="n">hive</span><span class="o">-</span><span class="n">udf</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="o">-</span><span class="n">jar</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">dependencies</span><span class="p">.</span><span class="n">jar</span><span class="p">;</span>
+</span><span class='line'><span class="k">CREATE</span> <span class="k">TEMPORARY</span> <span class="k">FUNCTION</span> <span class="n">topPrivateDomain</span> <span class="k">AS</span> <span class="s1">&#39;com.example.hive.udf.TopPrivateDomain&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first command tells Hive to copy the JAR into the distributed cache and put it on the claspath, so that it is visible from all MapReduce tasks. The second one registers the UDF class with the given function name.</p>
+
+<h2>Tips</h2>
+
+<p>In case you just need to modify the classpath and give your JAR more priority (without renaming packages) try to fiddle with these options:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">export </span><span class="nv">HADOOP_USER_CLASSPATH_FIRST</span><span class="o">=</span><span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SET</span> <span class="n">mapreduce</span><span class="p">.</span><span class="n">job</span><span class="p">.</span><span class="k">user</span><span class="p">.</span><span class="n">classpath</span><span class="p">.</span><span class="k">first</span><span class="o">=</span><span class="k">true</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>hive --hiveconf hive.aux.jars.path<span class="o">=</span><span class="s1">&#39;some-jar-1.0.jar&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>More info on Hive UDFs:</p>
+
+<ul>
+<li><a href="https://cwiki.apache.org/confluence/display/Hive/HivePlugins">https://cwiki.apache.org/confluence/display/Hive/HivePlugins</a></li>
+<li><a href="http://blog.matthewrathbone.com/2013/08/10/guide-to-writing-hive-udfs.html">http://blog.matthewrathbone.com/2013/08/10/guide-to-writing-hive-udfs.html</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Image Whitening - Clean B&W Documents From Nasty Photos]]></title>
@@ -1231,64 +1531,6 @@ $ sudo ln -s $TKMODULE $(echo $TKMODULE|sed 's/site-packages\///')
 <p>Ale ještě na mě čeká park a 500 let staré borovice. Ty dám až zítra. Snad nebude moc pršet, i když hlásí, že asi jo. Dneska mám v kolech 276 km a ještě pěkných pár kilásků v nohách, snad mě zítra nebude bolet koleno.</p>
 
 <p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-12/">Další den</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Scandinavia Road Trip - Den 10.]]></title>
-    <link href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-10/"/>
-    <updated>2014-06-14T00:00:00+02:00</updated>
-    <id>http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-10</id>
-    <content type="html"><![CDATA[<p>Estonsko, Finsko. Lodí do Helsinek, Finové si vezou basy piv, důkladná prohlídka u celníků a &hellip; no nechte se překvapit, jak to dopadlo.</p>
-
-<!--more-->
-
-
-<p>V noci se mi zdálo něco o střílení z kuší nebo takových malých luků. Asi to bude tím, že jsem včera na tržišti viděl jeden takový stánek se dřevěnými zbraněmi na hraní a pán mi pár opakovacích kuší ukazoval. No byla to spíš hračka, na <a href="https://www.youtube.com/watch?v=Kb_QgbSnDZk">mistra praků</a> a jeho mega praky to je trochu krátké.</p>
-
-<p>Myslel jsem, že zastrčené místo bude klidné, ale od rána tam šlo pár lidí se psem. Všichni ale v pohodě, nikdo mě nevyháněl. Taky proč, že jo? Ok, takže všechno snad připraveno na plavbu a můžeme vyrazit do přístavu. Myslím, že den v Talinnu stál za to a bylo by velká škoda spěchat dál, jen kvůli tomu, že jsem si večer před cestou vytyčil nějaký hrubý plán cesty. Kilometry se dají v pohodě dohnat po státovkách ve Skandinávii, když bude potřeba.</p>
-
-<p>Trajektem jsem ještě nikdy nejel. Větší lodí asi jen jednou, z Chorvatska do Benátek, ale s autem ne. Ticket jsem si koupil přes net na portálu <a href="http://directferries.cz/">directferries.cz</a>. Vyhledávání relativně cajk, ale když hledáte víckrát po sobě se stejnými parametry, jen v různých časech, je to úplně na piču. Vůbec si ty parametry neumí zapamatovat a musíte to pokaždé zadávat znovu. Ale aspoň se dá zaplatit kartou a mailem vám přijde potvrzení s číslem rezervace.</p>
-
-<p>Pak jen přijedete do přístavu na správný terminál, slečně v budce se závorou dáte tohle číslo a ona vám vytiskne tickety pro auto a pro osobu, které pak nikde stejně nepoužijete. Pak jen zajedete přes celnici k molu do fronty a čekáte. Celník neprohledává auto, ani se vás neptá, kolik vezete litrů piva, nebo jestli máte v kufru přistěhovalce, prostě jen ukáže, že máte jet doleva. Nakonec vám paní v zelené vestě ukáže, že máte zastavit tady. Myslel jsem, že to bude složitější, ale bylo to fakt easy, že to zvládne snad i cvičená opice.</p>
-
-<p>Pro jistotu jsem přijel radši brzy, takže jsem si v přístavu s ostatními auty chvilku počkal a mohl si prohlédnout, jak to vypadá. Kolem jedenácté přijela Finlandia, fakt velká modrá loď. Na vršku hučícího kolosu, který je nad hladinou vysoký asi jako desetipatrový panelák se točily radary a někde na můstku to řídil kapitán, aby se náhodou loď někde nepoškrábala.</p>
-
-<p>Přemýšlel jsem, jak se loď asi otočí, aby zaparkovala zadkem k nájezdové rampě, ale v tom se začal otevírat předek a z něj se spouštěla ještě jedna rampa. Za chvíli už z útrob lodi vyjížděl jeden kamion za druhým, pár karavanů, nějací cyklisti a pak skoro nekonečný zástup osobáků. Nahoře v terminálové chodbě zase pro změnu davy cestujících. Asi jako Noemova archa. Za notnou chvíli jsme mohli najet i my, co jedeme z Estonska. V lodi je několik pater parkovacích míst a všude ukazují lidičky v zelených vestách, kdo má kam zajet.</p>
-
-<p>Takže autíčko zaparkované a můžu vyrazit nahoru na palubu. Míjím hrací automaty, jeden bar vedle druhého, až se dostávám na horní otevřenou palubu, kde je dobrý výhled. Ale taky pěkně fouká. Škoda, že mám jen kapucu a čepici jsem si nechal v autě. Spolu se mnou tam nahoře cvaká fotky dost dalších lidí. Výhled je fakt pěkný. Do toho hlubokým hlasem pobrukují dieslové motory a z komínů se valí tmavý dým.</p>
-
-<p>Poté, co jsem se fotograficky nabažil, loď už vyplouvala z přístavu, přesně na čas. Posledních pár fotek a do tepla. Pěkně kafíčko, najít sedačku s výhledem na moře a můžu psát další díl deníku. Takže vzhůru do Helsinek!</p>
-
-<p>Po moři je to z Talinnu do Helsinek nějakých 90 km za dvě a půl hodiny. Neprší, usmívá se sluníčko, moře je klidné a loď ani moc nehoupe. Všude kolem je pochopitelně slyšek finština, ze které nerozumím ani jediné slovo. Plavba je asi krátká, takže se Finové zatím nepotácí tak, jak vyprávěl motorkář Manfred, nicméně všude jsou vidět ke kufrům přibalené basy piv, pardon kartony plechovek. Dva dny deníku mám dopsané, vlny se lehce zvedají a na obzoru se rýsuje finská země, tak abych šel zas fotit.</p>
-
-<p>Loď připlouvá do přístavu, nesrozumitelný hlas v rozhlase patrně říká, že se řidiči mají odebrat ke svým autům. Dole v garáži si připadám jako ve vaultu. Kdo někdy hrál starou počítačovou hru Fallout, ví přesně, co tím myslím. Velká hala s kovovými stěnami a nápisy &ldquo;no smoking&rdquo;, přítmí, všude to hučí, občas něco bliká a jsou slyšet podivné industriální zvuky. Ještě tam chybí za rohem mutanti s raketomety. Ale to už mává pán v zelené vestě.</p>
-
-<p>Za chviličku už vyjíždíme na Finskou pevninu. Ještě projet celnicí a hurá na procházku do Helsinek. Jeden z celníků ale na mě ukázal rukou &ldquo;to the right&rdquo; a pak &ldquo;your papers&rdquo;. Ok, cajk, jen si prohlídne pas, techničák, případně dokument o půjčení auta a jedu. Jenže on si prohlédl papíry, podíval se do kufru a řekl jen &ldquo;follow me&rdquo;. Projeli jsme kolem kamer zase zpátky k lodi a já si říkal, WTF? Jsme snad v Schöngenu, tak proč by měl měl zas posílat zpátky na loď?</p>
-
-<p>Přijeli jsme k takové hale a on se na mě beze slova chvíli díval. &ldquo;Is there any problem?&rdquo; &ldquo;Just get into the hall and step outside.&rdquo; Hm, takže mě budou asi zkoumat pod lupu, jestli něco nepašuju. Celnice mi řekla, ať si vyndám věci z kapes a jestli nemám něco nebezpečného. Akorát tak kudličku na mazání sádla a pár plechovek piva ze zemí, které jsem navštívil. Pak mě celník prohmatal, jestli nemám snad pistoli, nebo pás s trhavinami a celnice mě zavedla do takové zavřené budky s mléčnými okny, ať tam počkám. Měly tam jen lavičku a topení a mě se chtělo hrozně spát.</p>
-
-<p>V hlavě mi běhalo, co bych tam mohl tak mít, co by se jim nelíbilo. Možná dobře, že jsem se ještě zbavil tuhého lihu na vaření, protože to je hořlavina a na loď asi moc nepatří. A taky je prý zdraví škodlivý. Ale nic moc mě nenapadalo. Co když mě pošlou zpátky? Pojedu zas stejnou trasu, nebo to hodím jinudy. Ale proč by to dělali, když jedu do Finska tak akorát pustit chlup, že jo?</p>
-
-<p>Po asi půl hodince přišla celnice zpět a řekla: &ldquo;Put you things into the car and go.&rdquo; Super, takže nemusím se vracet a můžu pokračovat do Skandinávie! Jeden z celníků mi pak ještě trochu pomáhal dát věci do auta a trochu jsem s ním pokecal. Prý taky fotil, tak když viděl stativ, ptal se mě jestli fotím spíš přírodu nebo lidi. Ještě mi poradil, jak je to s limity na pivo a kempováním v přírodě. Prozradil mi, že jim přišel podezřelý kufr, který měl neoriginální překližkové dno. Pango to stavěl, aby tam mohl dát velký reprák a navrch rozkládací postel. Celníkům ale připadalo, že je to ideální prostor na pašování nějakého velkého pytle se šňupacím práškem. Nakonec mě ještě autem ukázali, jak z přístavu ke kruháku a mohl jsem jet.</p>
-
-<p>První věc v další zemi bylo zaparkovat a sehnat datovou SIMku. Chvíli jsem kroužil ulicemi okolo přístavu, až jsem našel jedno volné místo u parkovacího automatu. Vypláznul jsem dvě éčka za hodinu parkování. Trochu divné mi ale přišlo, že tam není čas do 17:45, ale do 10:00. Hm, asi to mají nějaké rozbité, lepší mít lístek, než pak platit pokutu. Šel jsem pár bloků do nedalekého R-kiosku a už se ptal po předplacené SIMce, kterou jsem si předtím vybral na wiki. Říkám Suolahti. Prodavač ale, myslíte Saunalahti, že jo? Jo jasně. Spletl jsem si to s městem, kde jsem chtěl spát.</p>
-
-<p>Za pár minut jsem hodil micro-SIMku do mobilu, nastavil a zas jsem byl v civilizaci. Návod krásně anglicky, včetně nastavení APN, kdyby to nešlo automaticky. Neomezené připojení 2 EUR na den. Tohle byla zatím nejjednodušší SIMka. Ok, tak mám připojení, teď bych se mohl trochu porozhlédnout po městě a vyrazit dál.</p>
-
-<p>Další parkovací automat měl zase na hodinách 9:00 a to mi přišlo divné. Zkusil jsem tedy zadat nápis na displeji do překladače a hodilo mi to &ldquo;Free parking&rdquo;. Aha, ona je vlastně zase sobota. Tím pádem vůbec nemusím spěchat. Takže loď posunutá o pár dní se vyplatila hned dvakrát. No ale stejně jsem si zašel zpátky do auta pro čepici a svetr, protože u moře festově foukalo a bylo zima.</p>
-
-<p>S foťáčkem jsem tedy mohl vyrazit do centra, prohlídnout si architekturu, starý přístav a tak. V hlavním parku, něco jako u nás Václavák, bylo už zdálky slyšet metal (co taky jiného ve Finsku, že jo?) a okolo postávali a houpali se do rytmu staří fousatí rockeři s plechovkou piva i běžní kolemjdoucí. Na pódiu pět maldých vyzáblých kluků s dlouhými vlasy (buď blonaďatými, nebo nabarvenými na černo) hrálo docela slušnou muziku. Stylem mi nejvíc připomínala asi Iron Maiden. Na stacku od Marshala měli název kapely Sanatorium.</p>
-
-<p>Pak jsem ještě zašel do přístavu, kolem lachtanů plivajících proudy vody do fontány, až mě zaujala krásná dřevěná fregata. Jmenovala se Gerda a byla fakt moc hezká. Na pevných stěžních a ráhnech bylo napnuto tolik lan, že se v tom člověk ztrácel. Takhle si asi musí připadat laik, když kouká programátorovi přes rameno.</p>
-
-<p>Dál jsem to vzal po dálnici na sever až do města Lahti, což prý znamená záliv. Krajina podobná trochu jako v Estonsku, ale víc kopečků. Kolem dálnice zase moře kytiček, ale tentokrát nebyly žluté, ale modrofialové, něco jako náprstníky. Narozdíl od předchozích zemí jsou ve Finsku rychlostní limity nižší, město sice 50, ale mimo město 80, občas 100 a dálnice 100 nebo 110. Lidi to většinou docela respektují a zběsile nepředjíždějí. Ta osmdesátka se mi líbí, připadá mi velmi pohodlná. Jak jsem se tak kochal stále se proměňující přírodou okolo silnice, vrtalo mi hlavou, že tu něco nehraje. Aha, kde jsou kamiony? Možná to bude tím, že je sobota, tak někde odpočívají.</p>
-
-<p>Začal jsem mít chuť na svačinku a auto taky. Tak jsem mu trochu doplnil. Pro Diesel u Neste Oil byl tuším za 1,549 EUR za litr. Ostatní věci na pumpě taky nebyly moc levné. Ale oproti Norsku to ještě asi jde, co jsem slyšel. Na dálnici to při plné rychlosti taky pěkně žere. Místo 4 litrů na sto, víc než 5. Asi lepší bude buď jet pomaleji, ale radši to vzít po menších cestách, kde aspoň bude vidět víc krajiny a měst.</p>
-
-<p>Večer jsem dorazil do Lahti, což je takové spíš větší město. Dojel jsem až na takové menší parkoviště u parku s jezírek. Ukázalo se, že hned vedle za podchodem leží přístav pro různé jezerní čluny a plachetnice. Vedle mě stál karavan, takže asi není problém tu přespat. Když jsem na noc rozdělával zadní sedačky, pěkně jsem si zanadával, jak mi to ti celníci pojebali, že je to celé zaseknuté. V dřevotřískové desce jsou tam totiž nějaké vyrvané vruty a na jedné straně deska trochu padá a je ji potřeba nadzvednout, když se zandavá sedačka. Večer jsem se prošel kolem přístavu a jezírka, moc pěkné. Za dnešek asi 90 km lodí a 127 km autem. Zítra bych si přál ale vykoupat se v jezeru a dát si konečně už nějaký ohýnek.</p>
-
-<p><a href="http://bohumirzamecnik.cz/blog/2014/scandinavia-road-trip-day-11/">Další den</a>.</p>
 ]]></content>
   </entry>
   

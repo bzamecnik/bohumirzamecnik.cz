@@ -9,7 +9,7 @@
   <meta name="author" content="Bohumír Zámečník">
 
   
-  <meta name="description" content="Turn a poor smartphone-camera photo of a document or whiteboard into a nice black &amp; white or color &ldquo;scan&rdquo; that can be printed or &hellip;">
+  <meta name="description" content="If you&rsquo;re using Hive sooner or later you&rsquo;ll need to create user defined functions (UDFs). Chances are such a function would use a code &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/">How to Make a Hive UDF With Conflicting Guava</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-05-29T00:31:00+02:00" pubdate data-updated="true">May 29<span>th</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you&rsquo;re using Hive sooner or later you&rsquo;ll need to create user defined functions (UDFs). Chances are such a function would use a code that depends on the Guava library. And it is not that unlikely that the required Guava version would be newer than Hive&rsquo;s. Then you&rsquo;re running into a trouble. Hopefully this article save you much of the pain I had to suffer to make it working. Let&rsquo;s make a simple UDF and fix it using both maven and gradle.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -456,47 +497,6 @@ Tkinter is an old GUI toolkit, that has been popular also in some Python project
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/scandinavia-road-trip-day-20/">Scandinavia Road Trip - Den 20.</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-06-24T00:00:00+02:00" pubdate data-updated="true">Jun 24<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Norsko, Švédsko. Překvapení s hnědou cedulkou, nidky nedobytá pevnost, kontakt s pravěkými lidmi, pobřeží tisíců ostrovů.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/scandinavia-road-trip-day-20/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -523,6 +523,10 @@ Tkinter is an old GUI toolkit, that has been popular also in some Python project
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/">How to Make a Hive UDF With Conflicting Guava</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2015/image-whitening/">Image Whitening - Clean B&W Documents From Nasty Photos</a>
       </li>
     
@@ -536,10 +540,6 @@ Tkinter is an old GUI toolkit, that has been popular also in some Python project
     
       <li class="post">
         <a href="/blog/2014/install-tkinter-with-python-3-on-mac/">How to Install Tkinter With Python 3 on Mac</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/lets-share-the-ideas-with-the-world/">Let&#8217;s Share the Ideas With the World!</a>
       </li>
     
   </ul>
