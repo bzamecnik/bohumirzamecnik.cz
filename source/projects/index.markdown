@@ -10,17 +10,41 @@ footer: true
 
 ## Personal projects
 
-- [HarmonEye](http://harmoneye.com/) - real-time music harmony visualization
+- [repository of ideas](https://github.com/bzamecnik/ideas)
+- [chord recognition using deep convolutional neural networks](https://github.com/bzamecnik/ml-playground)
+- [music audio processing toolbox](https://github.com/bzamecnik/music-processing-experiments)
+- [MIREX-style chord label parser and tools](https://github.com/bzamecnik/chord-labels)
+- [Python Hash Trie](https://github.com/bzamecnik/python-hash-trie)
+- [ToneCircle](https://play.google.com/store/apps/details?id=com.harmoneye.tonecircle), [GitHub](https://github.com/bzamecnik/tone-circle-android)
+- **[HarmonEye](http://harmoneye.com/)** - real-time music harmony visualization
+- [Perfect Tuner](https://github.com/bzamecnik/perfect-tuner-android)
+- [Pan/Zoom controller for Procesing (P5)](https://github.com/bzamecnik/pan-zoom-processing)
 - [Music Theory Toolbox](http://bzamecnik.github.io/music-theory-toolbox/)
 - [corale.cz](http://corale.cz/) - web site of our high-school choir Corale
 - [A collaboration tool for our choir](http://info.corale.cz)
-- [Salutr](http://www.salutr.com/) - automatic Czech name declension with a REST API
+- [Salutr](https://github.com/bzamecnik/salutr) - automatic Czech name declension with a REST API
 	- Scala, Play
+- [Pong for Android](https://github.com/bzamecnik/pong-android)
 - [Simple JS Image Slider](https://github.com/bzamecnik/simple-js-image-slider)
 - [DokuWiki Table Edit Plug-in](https://github.com/bzamecnik/dokuwiki-tableedit)
 - [Czech Amateur Keyboard Layout](https://www.dropbox.com/sh/6rkoubtpoc1fsje/j4jKV40ZoN/czech-amateur-keyboard-layout_windows7_2010-08-22.zip)
 	- a combination of Czech and English keyboard suitable for programmers
 	- works on Windows 7+
+- [journal dates generator](https://github.com/bzamecnik/journal_dates)
+
+## [Jumpshot](http://www.jumpshot.com/)
+
+- internet-scale web analytics and market insights
+- machine learning for time-series and anomaly detection
+
+## [FAIROS MEDIA](http://fairos.cz/)
+
+- [e-shop feed converter](https://github.com/bzamecnik/s3dt-catalog) - python, Heroku
+
+## [Wikidi](http://www.wikidi.com/)
+
+- machine learning for time-series and natural language processing
+- algorithmic trading system
 
 ## [Etnetera](http://www.etnetera.cz/)
 
@@ -199,7 +223,7 @@ Advanced Halftoning Methods
 
 - Guilloché, SFC Dither with adaptive clustering, Mosaic
 - modules for a educational computer graphics library
-- [Computer graphics I](http://cgg.ms.mff.cuni.cz/~pepca/lectures/cv/pgr003.html) (NPGR003)	
+- [Computer graphics I](http://cgg.ms.mff.cuni.cz/~pepca/lectures/cv/pgr003.html) (NPGR003)
 - Java, NetBeans
 
 ### Logic Gate Network simulator
