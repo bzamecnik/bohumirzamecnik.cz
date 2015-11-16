@@ -6,6 +6,8 @@ comments: true
 categories:
 ---
 
+<img src="{% asset_path sunpilots.png %}" width="400" align="right">
+
 In this article I'd like to summarize lessons learned during three years of development of software for music analysis, visualization and machine learning and of my life. You can find a lot of experience and advice not to repeat the mistakes I did.
 
 The goal: see what you hear in music. When you think you're genius and can do all features at once, stop... It's a trap! Go by small steps and get much further.
