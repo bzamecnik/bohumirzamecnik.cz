@@ -4,7 +4,7 @@
   <title><![CDATA[Bohumír Zámečník]]></title>
   <link href="http://bohumirzamecnik.cz/atom.xml" rel="self"/>
   <link href="http://bohumirzamecnik.cz/"/>
-  <updated>2015-11-16T15:22:13+01:00</updated>
+  <updated>2015-11-16T15:37:25+01:00</updated>
   <id>http://bohumirzamecnik.cz/</id>
   <author>
     <name><![CDATA[Bohumír Zámečník]]></name>
@@ -18,7 +18,9 @@
     <link href="http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience/"/>
     <updated>2015-11-16T15:15:15+01:00</updated>
     <id>http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience</id>
-    <content type="html"><![CDATA[<p>In this article I&rsquo;d like to summarize lessons learned during three years of development of software for music analysis, visualization and machine learning and of my life. You can find a lot of experience and advice not to repeat the mistakes I did.</p>
+    <content type="html"><![CDATA[<p><img src="http://bohumirzamecnik.cz/assets/posts/harmoneye-hard-won-experience/sunpilots.png" width="400" align="right"></p>
+
+<p>In this article I&rsquo;d like to summarize lessons learned during three years of development of software for music analysis, visualization and machine learning and of my life. You can find a lot of experience and advice not to repeat the mistakes I did.</p>
 
 <p>The goal: see what you hear in music. When you think you&rsquo;re genius and can do all features at once, stop&hellip; It&rsquo;s a trap! Go by small steps and get much further.</p>
 
