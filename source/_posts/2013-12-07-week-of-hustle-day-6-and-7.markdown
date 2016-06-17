@@ -13,7 +13,3 @@ The project is moving forwards! I've managed to merge the music-processing and v
 <!--more-->
 
 {% youtube 1XAOxyACpWw %}
-
-<!--
-<iframe frameborder="0" height="315" src="//www.youtube.com/embed/1XAOxyACpWw" width="420"></iframe>
--->
