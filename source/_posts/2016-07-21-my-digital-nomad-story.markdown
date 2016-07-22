@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "My Digital Nomad Story"
-date: 2016-07-21
+date: 2016-07-22
 comments: true
 categories: [Digital Nomad]
 ---
