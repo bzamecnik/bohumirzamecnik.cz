@@ -3,7 +3,7 @@ layout: post
 title: "HarmonEye: hard-won experience after three years of my life"
 date: 2015-11-16 15:15:15 +0100
 comments: true
-categories:
+categories: [harmoneye]
 ---
 
 <img src="{% asset_path sunpilots.png %}" width="400" align="right">

@@ -3,7 +3,7 @@ layout: post
 title: "How to make STL with SVG logo and text in OpenSCAD"
 date: 2016-05-01 18:02:51 +0200
 comments: true
-categories: "3D print"
+categories: [3D print]
 ---
 
 <img src="{% asset_path example_reel.png %}" width="300" align="right">

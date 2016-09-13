@@ -3,7 +3,7 @@ layout: post
 title: "Image whitening - clean B&W documents from nasty photos"
 date: 2015-02-15 19:29:32 +0100
 comments: true
-categories: image-processing
+categories: [image processing]
 ---
 
 {% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_orig_and_whitened_row_t.jpg %}

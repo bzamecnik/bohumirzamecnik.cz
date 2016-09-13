@@ -3,7 +3,7 @@ layout: post
 title: "How to make a Hive UDF with conflicting Guava"
 date: 2015-05-29 00:31:00 +0200
 comments: true
-categories: Hive, Big Data, Maven, Java
+categories: [Hive, Big Data, Maven, Java]
 ---
 If you're using Hive sooner or later you'll need to create user defined functions (UDFs). Chances are such a function would use a code that depends on the Guava library. And it is not that unlikely that the required Guava version would be newer than Hive's. Then you're running into a trouble. Hopefully this article save you much of the pain I had to suffer to make it working. Let's make a simple UDF and fix it using both maven and gradle.
 
