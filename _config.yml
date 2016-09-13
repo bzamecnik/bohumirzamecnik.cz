@@ -4,7 +4,7 @@
 
 url: http://bohumirzamecnik.cz
 title: Bohumír Zámečník
-subtitle: 
+subtitle:
 author: Bohumír Zámečník
 simple_search: http://google.com/search
 description:
@@ -34,7 +34,7 @@ destination: public
 plugins: plugins
 code_dir: downloads/code
 category_dir: blog/categories
-markdown: rdiscount
+markdown: kramdown
 rdiscount:
   extensions:
     - autolink
