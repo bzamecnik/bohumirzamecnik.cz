@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "ADS-B Flight Tracking For The Curious"
+title: "ADS-B Part 1 - Flight Tracking For The Curious"
 date: 2016-09-09 17:34:00 +0200
 comments: true
 categories: [flight tracking]
