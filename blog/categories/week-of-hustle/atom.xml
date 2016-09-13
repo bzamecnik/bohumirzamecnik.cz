@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Week of Hustle | Bohumír Zámečník]]></title>
   <link href="http://bohumirzamecnik.cz/blog/categories/week-of-hustle/atom.xml" rel="self"/>
   <link href="http://bohumirzamecnik.cz/"/>
-  <updated>2016-09-09T17:36:26+02:00</updated>
+  <updated>2016-09-13T18:04:07+02:00</updated>
   <id>http://bohumirzamecnik.cz/</id>
   <author>
     <name><![CDATA[Bohumír Zámečník]]></name>
@@ -18,10 +18,9 @@
     <link href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-6-and-7/"/>
     <updated>2013-12-07T16:10:00+01:00</updated>
     <id>http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-6-and-7</id>
-    <content type="html"><![CDATA[<p>The project is moving forwards! I&rsquo;ve managed to merge the music-processing and visualization code and to tune the visualization so that it looks almost as good as the original desktop version. What remains is a major optimization by using a more advanced processing algorithm. In a few days it might be ready for launching on Google Play.</p>
+    <content type="html"><![CDATA[<p>The project is moving forwards! I’ve managed to merge the music-processing and visualization code and to tune the visualization so that it looks almost as good as the original desktop version. What remains is a major optimization by using a more advanced processing algorithm. In a few days it might be ready for launching on Google Play.</p>
 
 <!--more-->
-
 
 <p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/1XAOxyACpWw "></iframe></div></p>
 ]]></content>
@@ -33,25 +32,12 @@
     <updated>2013-12-05T19:09:23+01:00</updated>
     <id>http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-5</id>
     <content type="html"><![CDATA[<p>Today's productivity was very non-uniform. Almost whole day I had to work on another project and finally in the evening I could continue. I was thinging a lot about what would be the most suitable way of implementing the visualization via circular sectors. Finally I've managed to implement a viable prototype.</p>
-
-
 <!--more-->
-
-
 <p><img alt="image" src="http://media.tumblr.com/8bb541a50ca180acb2ff55bd7627c537/tumblr_inline_mxcypk7As31s2upa7.jpg" /></p>
-
-
 <p>After yesterday's GLSL playground I've decided to get hand dirty with vertex buffers, triangles and transformation matrices. I'll have to use it someday, so why to today. So the result is this simple application that given an array of values draws the properly sized circular segments (as triangles) and colors them simple from black to white. On the screenshot there is a plot of a function derived from cosine. What needs to be plotted is a sampled parametric plot in polar coordinates, but not just the line, but rather what is under the line.</p>
-
-
 <p>It isn't visually most appealing, but it should be sufficient for a prototype to carry the necessary data. From now it can be only nicer :)</p>
-
-
 <p>Tomorrow's task is to merge this visualization with the computation code and to make the plot less ugly. The original temperature-scale color function should be used and the borders and tone names are missing now.</p>
-
-
-<p></p>
-
+<p />
 ]]></content>
   </entry>
   
@@ -60,20 +46,19 @@
     <link href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-4/"/>
     <updated>2013-12-05T18:42:00+01:00</updated>
     <id>http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-4</id>
-    <content type="html"><![CDATA[<p>Since the music processing code is quite ready, now it&rsquo;s the time for the nice graphical UI &ndash; the visualization that gives sense to the numbers. The goal is clear &ndash; to port the existing visualization where each pitch class (a tone in an arbitrary octave) is represented by a circular sector. The intensity is represented by the sector&rsquo;s length and color. In fact each tone is divided into multiple bins for greater precision.</p>
+    <content type="html"><![CDATA[<p>Since the music processing code is quite ready, now it’s the time for the nice graphical UI - the visualization that gives sense to the numbers. The goal is clear - to port the existing visualization where each pitch class (a tone in an arbitrary octave) is represented by a circular sector. The intensity is represented by the sector’s length and color. In fact each tone is divided into multiple bins for greater precision.</p>
 
 <!--more-->
 
-
 <p><img alt="image" src="http://media.tumblr.com/9118d2c603047808dc31a4bc4870b795/tumblr_inline_mxcwv4t26S1s2upa7.png" /></p>
 
-<p>The visualization should be done via OpenGL, since it&rsquo;s updated after each computation, ie. many times per second. Mobile devices such as Android or iOS phones support only OpenGL ES, a variant of OpenGL adjusted for this kind of devices. Compared to OpenGL it lack some legacy stuff, such as calls like <code>glBegin()</code>, &hellip;draw something.., <code>glEnd()</code>. This means that the desktop OpenGL drawing code must be rewritten.</p>
+<p>The visualization should be done via OpenGL, since it’s updated after each computation, ie. many times per second. Mobile devices such as Android or iOS phones support only OpenGL ES, a variant of OpenGL adjusted for this kind of devices. Compared to OpenGL it lack some legacy stuff, such as calls like <code>glBegin()</code>, …draw something.., <code>glEnd()</code>. This means that the desktop OpenGL drawing code must be rewritten.</p>
 
-<p>As for today, I had to familiarize a little bit with OpenGL ES, shaders etc. Well, I&rsquo;ve done this stuff on the university and a part of the thesis project was written in OpenGL with shaders, but that&rsquo;s at least two years ago :)</p>
+<p>As for today, I had to familiarize a little bit with OpenGL ES, shaders etc. Well, I’ve done this stuff on the university and a part of the thesis project was written in OpenGL with shaders, but that’s at least two years ago :)</p>
 
-<p>Among other things, I&rsquo;ve found a nice tool to write and test fragment shaders on the fly &ndash; <a href="http://glsl.heroku.com/">glsl.heroku.com</a>. Just write the code and if it compiles well it automatically draws on the background. It runs via WebGL in your browser. The future is here! Nice :)</p>
+<p>Among other things, I’ve found a nice tool to write and test fragment shaders on the fly - <a href="http://glsl.heroku.com/">glsl.heroku.com</a>. Just write the code and if it compiles well it automatically draws on the background. It runs via WebGL in your browser. The future is here! Nice :)</p>
 
-<p>Unfortunately, today I&rsquo;ve focused on doing everything in a shader, which probably wasn&rsquo;t the best idea. Drawing shapes like lines or parametric curves and drawing them with antialiasing isn&rsquo;t the easiest task to begin with when writing a fragment shader. Well, it isn&rsquo;t impossible, but it can be done more easily with geometry like triangles or lines. The only thing is to explore the vertex buffers and index buffers &ndash; a more recent way of producing geometry than just calling <code>glVertex()</code>. Well, it&rsquo;s not the most recent like geometry shaders, but let&rsquo;s KISS for now.</p>
+<p>Unfortunately, today I’ve focused on doing everything in a shader, which probably wasn’t the best idea. Drawing shapes like lines or parametric curves and drawing them with antialiasing isn’t the easiest task to begin with when writing a fragment shader. Well, it isn’t impossible, but it can be done more easily with geometry like triangles or lines. The only thing is to explore the vertex buffers and index buffers - a more recent way of producing geometry than just calling <code>glVertex()</code>. Well, it’s not the most recent like geometry shaders, but let’s KISS for now.</p>
 ]]></content>
   </entry>
   
@@ -82,20 +67,19 @@
     <link href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-3/"/>
     <updated>2013-12-03T16:25:00+01:00</updated>
     <id>http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-3</id>
-    <content type="html"><![CDATA[<p>Worries are gone, euphoria is back! After today&rsquo;s handful of hacking it finally works, albeit on a very rudimental level. I&rsquo;ve managed to get the audio input code working and ported the computation code to Android along with all the libraries. Thanks to the fact there&rsquo;s no native code, just Java, the transition was quite smooth. There&rsquo;s no fancy OpenGL graphical visualization yet, just a text output showing a bar graph of the intensisites of each tone bin in an octave. But when I sing or whistle to it, it shows the expected pattern.</p>
+    <content type="html"><![CDATA[<p>Worries are gone, euphoria is back! After today’s handful of hacking it finally works, albeit on a very rudimental level. I’ve managed to get the audio input code working and ported the computation code to Android along with all the libraries. Thanks to the fact there’s no native code, just Java, the transition was quite smooth. There’s no fancy OpenGL graphical visualization yet, just a text output showing a bar graph of the intensisites of each tone bin in an octave. But when I sing or whistle to it, it shows the expected pattern.</p>
 
 <!--more-->
 
-
 <p><a href="https://twitter.com/bzamecnik/status/407922221277904896/photo/1" title="The original tweet"><img alt="image" src="http://media.tumblr.com/e1c0f6c4a9259a9d59214cb46a52b114/tumblr_inline_mx91zfxcjI1s2upa7.jpg" /></a></p>
 
-<p>Also I was affraid of memory and CPU consuption on a phone. Well, if the quality parameters are reduced, it is quite fast, but for parameters normal on desktop it needs optimization. On the other hand I&rsquo;m aware that the current algorithm is not the most memory efficient and there are several obvious optimizations. However, &ldquo;premature optimization is the root of all evil&rdquo;, so let&rsquo;s have a working product first.</p>
+<p>Also I was affraid of memory and CPU consuption on a phone. Well, if the quality parameters are reduced, it is quite fast, but for parameters normal on desktop it needs optimization. On the other hand I’m aware that the current algorithm is not the most memory efficient and there are several obvious optimizations. However, “premature optimization is the root of all evil”, so let’s have a working product first.</p>
 
-<p>Here&rsquo;s a video showing the app in action:</p>
+<p>Here’s a video showing the app in action:</p>
 
 <p><div class="embed-video-container"><iframe src="http://www.youtube.com/embed/HoPOUV4EAeo "></iframe></div></p>
 
-<p>So let&rsquo;s look forward to the following days until HarmonEye for Andoid gets a nicer graphical look. It&rsquo;ll be fun porting the old OpenGL code to OpenGL ES.</p>
+<p>So let’s look forward to the following days until HarmonEye for Andoid gets a nicer graphical look. It’ll be fun porting the old OpenGL code to OpenGL ES.</p>
 ]]></content>
   </entry>
   
@@ -104,9 +88,9 @@
     <link href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-2/"/>
     <updated>2013-12-02T12:05:00+01:00</updated>
     <id>http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-2</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m a bit worried. Trying to work (with an IDE like Eclipse-based Android Development Tools) on a slow home computer is turning into a neverending painful waiting for the disk to stop rumbling&hellip; I was trying to work on porting the audio processing code, but with no tangible results. Today I&rsquo;m really not sure if I&rsquo;ll be able to get anywhere before the MacBook arrives or I move to another computer beforehand. :(</p>
+    <content type="html"><![CDATA[<p>I’m a bit worried. Trying to work (with an IDE like Eclipse-based Android Development Tools) on a slow home computer is turning into a neverending painful waiting for the disk to stop rumbling… I was trying to work on porting the audio processing code, but with no tangible results. Today I’m really not sure if I’ll be able to get anywhere before the MacBook arrives or I move to another computer beforehand. :(</p>
 
-<p>On the other hand, a today&rsquo;s talk with my brother was far more productive. We&rsquo;ve came up with three product ideas! Two e-books with tutorials in his area of expertise and a web application to link people for demand and supply of some kind of useful information.</p>
+<p>On the other hand, a today’s talk with my brother was far more productive. We’ve came up with three product ideas! Two e-books with tutorials in his area of expertise and a web application to link people for demand and supply of some kind of useful information.</p>
 ]]></content>
   </entry>
   

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Hive, | Bohumír Zámečník]]></title>
+  <title><![CDATA[Category: Hive | Bohumír Zámečník]]></title>
   <link href="http://bohumirzamecnik.cz/blog/categories/hive/atom.xml" rel="self"/>
   <link href="http://bohumirzamecnik.cz/"/>
-  <updated>2016-09-09T17:36:26+02:00</updated>
+  <updated>2016-09-13T18:04:07+02:00</updated>
   <id>http://bohumirzamecnik.cz/</id>
   <author>
     <name><![CDATA[Bohumír Zámečník]]></name>
@@ -18,16 +18,15 @@
     <link href="http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/"/>
     <updated>2015-05-29T00:31:00+02:00</updated>
     <id>http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava</id>
-    <content type="html"><![CDATA[<p>If you&rsquo;re using Hive sooner or later you&rsquo;ll need to create user defined functions (UDFs). Chances are such a function would use a code that depends on the Guava library. And it is not that unlikely that the required Guava version would be newer than Hive&rsquo;s. Then you&rsquo;re running into a trouble. Hopefully this article save you much of the pain I had to suffer to make it working. Let&rsquo;s make a simple UDF and fix it using both maven and gradle.</p>
+    <content type="html"><![CDATA[<p>If you’re using Hive sooner or later you’ll need to create user defined functions (UDFs). Chances are such a function would use a code that depends on the Guava library. And it is not that unlikely that the required Guava version would be newer than Hive’s. Then you’re running into a trouble. Hopefully this article save you much of the pain I had to suffer to make it working. Let’s make a simple UDF and fix it using both maven and gradle.</p>
 
 <!--more-->
 
-
-<h2>Example UDF &ndash; top private domain</h2>
+<h2 id="example-udf---top-private-domain">Example UDF - top private domain</h2>
 
 <p>As a concrete example take a UDF that given a internet host name computes the top private domain. Eg. for host name <code>www.google.co.uk</code>, <code>uk</code> and <code>co.uk</code> are public domains, <code>google.co.uk</code> and <code>www.google.co.uk</code> are private domains and <code>google.co.uk</code> is the highest (top) private domain in this case.</p>
 
-<p>Guava&rsquo;s <code>InternetDomainName.topPrivateDomain()</code> already does this job. We need lastest Guava in order to have an up-to-date trie representing public domains. However, there&rsquo;s a difference between ancient Guava 11 and latest Guava 18:</p>
+<p>Guava’s <code>InternetDomainName.topPrivateDomain()</code> already does this job. We need lastest Guava in order to have an up-to-date trie representing public domains. However, there’s a difference between ancient Guava 11 and latest Guava 18:</p>
 
 <p><code>java
 InternetDomainName.from("www.google.co.uk").topPrivateDomain().toString()
@@ -45,9 +44,9 @@ package com.example.hive.udf;</p>
 import org.apache.hadoop.hive.ql.exec.UDF;
 import org.apache.hadoop.io.Text;</p>
 
-<p>/<em>*
+<p>/**
  * Extracts top private domain from a host name.
- </em>/
+ */
 public class TopPrivateDomain extends UDF {</p>
 
 <pre><code>public Text evaluate(Text host) {
@@ -61,128 +60,118 @@ public class TopPrivateDomain extends UDF {</p>
     } catch (IllegalArgumentException ex) {
         return null;
     }
-}
+} } ```
 </code></pre>
-
-<p>}
-```</p>
 
 <p>In this case the incompatibility is just in the return value but in other cases there might be runtime errors such as added/removed/changed classes, methods, etc.</p>
 
-<h2>Conflicts in library versions</h2>
+<h2 id="conflicts-in-library-versions">Conflicts in library versions</h2>
 
-<p>So what&rsquo;s the problem with Guava and Hive? Hadoop and Hive are in general packaged with ancient or outdated version of Guava. Eg. Hive 0.14 available in CDH5 has Guava 11 and current Hive 1.2 has Guava 15, while the most recent Guava version is 18. The bigger the version difference the higher chance of incompatibilities. And the problem is that more than one version of the library cannot be easily loaded within JVM (at least in Hive).</p>
+<p>So what’s the problem with Guava and Hive? Hadoop and Hive are in general packaged with ancient or outdated version of Guava. Eg. Hive 0.14 available in CDH5 has Guava 11 and current Hive 1.2 has Guava 15, while the most recent Guava version is 18. The bigger the version difference the higher chance of incompatibilities. And the problem is that more than one version of the library cannot be easily loaded within JVM (at least in Hive).</p>
 
-<p>However, there&rsquo;s a trick. If there a conflict between classes in the same package(s) (in this case <code>com.google.common</code> and <code>com.google.thirdparty</code>), why not to rename the package(s)?</p>
+<p>However, there’s a trick. If there a conflict between classes in the same package(s) (in this case <code>com.google.common</code> and <code>com.google.thirdparty</code>), why not to rename the package(s)?</p>
 
-<p>There&rsquo;s one more catch with Hive UDFs. For some strange reason when registering the UDF Hive sees only classes from the JAR than contains the UDF class and not from other specified JARs. This along with renaming the packages leads to the need for a fat JAR, ie. a JAR containing all the necessary dependencies for the UDF class (or at least those shaded or not seen by Hive). Blindly packaging all transitive dependencies might result in a big bloated JAR, so we&rsquo;d also like to minimize it just to classes that are actually used by our UDF.</p>
+<p>There’s one more catch with Hive UDFs. For some strange reason when registering the UDF Hive sees only classes from the JAR than contains the UDF class and not from other specified JARs. This along with renaming the packages leads to the need for a fat JAR, ie. a JAR containing all the necessary dependencies for the UDF class (or at least those shaded or not seen by Hive). Blindly packaging all transitive dependencies might result in a big bloated JAR, so we’d also like to minimize it just to classes that are actually used by our UDF.</p>
 
 <p>The overall plan is thus to:</p>
 
 <ul>
-<li>package all the dependencies of the UDF into a fat JAR
-
-<ul>
-<li>to make Hive see the other classes</li>
-</ul>
-</li>
-<li>rename (shade) the Guava packages
-
-<ul>
-<li>both the packages of the Guava classes and their imports in our code</li>
-<li>to prevent conflict with Hive&rsquo;s own Guava</li>
-</ul>
-</li>
-<li>(optional) minimize the resuling fat JAR
-
-<ul>
-<li>remove unnecessary dependencies or even unused classes</li>
-</ul>
-</li>
+  <li>package all the dependencies of the UDF into a fat JAR
+    <ul>
+      <li>to make Hive see the other classes</li>
+    </ul>
+  </li>
+  <li>rename (shade) the Guava packages
+    <ul>
+      <li>both the packages of the Guava classes and their imports in our code</li>
+      <li>to prevent conflict with Hive’s own Guava</li>
+    </ul>
+  </li>
+  <li>(optional) minimize the resuling fat JAR
+    <ul>
+      <li>remove unnecessary dependencies or even unused classes</li>
+    </ul>
+  </li>
 </ul>
 
+<p>We’ll explore how to do it using maven’s <code>maven-shade-plugin</code> and gradle’s <code>shadow</code> plugin.</p>
 
-<p>We&rsquo;ll explore how to do it using maven&rsquo;s <code>maven-shade-plugin</code> and gradle&rsquo;s <code>shadow</code> plugin.</p>
+<h2 id="maven---maven-shade-plugin">Maven - maven-shade-plugin</h2>
 
-<h2>Maven &ndash; maven-shade-plugin</h2>
+<p>If your’re using maven for building fortunately there’s a plugin called <a href="https://maven.apache.org/plugins/maven-shade-plugin/">maven-shade-plugin</a> which can do both creating a fat JAR and renaming packages.</p>
 
-<p>If your&rsquo;re using maven for building fortunately there&rsquo;s a plugin called <a href="https://maven.apache.org/plugins/maven-shade-plugin/">maven-shade-plugin</a> which can do both creating a fat JAR and renaming packages.</p>
+<p>Within Maven’s <code>pom.xml</code> in the plugin’s configuration just specify using the <code>&lt;relocation&gt;</code> tags which package(s) should be renamed to what. The old package name is in the <code>&lt;pattern&gt;</code> and the new one in <code>&lt;shadedPattern&gt;</code>.</p>
 
-<p>Within Maven&rsquo;s <code>pom.xml</code> in the plugin&rsquo;s configuration just specify using the <code>&lt;relocation&gt;</code> tags which package(s) should be renamed to what. The old package name is in the <code>&lt;pattern&gt;</code> and the new one in <code>&lt;shadedPattern&gt;</code>.</p>
-
-<p>```xml
+<p>```xml</p>
 <build>
-  <plugins></p>
-
-<pre><code>&lt;plugin&gt;
-  &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
-  &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;
-  &lt;version&gt;2.3&lt;/version&gt;
-  &lt;executions&gt;
-    &lt;execution&gt;
-      &lt;phase&gt;package&lt;/phase&gt;
-      &lt;goals&gt;
-        &lt;goal&gt;shade&lt;/goal&gt;
-      &lt;/goals&gt;
-      &lt;configuration&gt;
-        &lt;relocations&gt;
-          &lt;relocation&gt;
-            &lt;pattern&gt;com.google.common&lt;/pattern&gt;
-            &lt;shadedPattern&gt;com.example.shaded.com.google.common&lt;/shadedPattern&gt;
-          &lt;/relocation&gt;
-          &lt;relocation&gt;
-            &lt;pattern&gt;com.google.thirdparty&lt;/pattern&gt;
-            &lt;shadedPattern&gt;com.example.shaded.com.google.thirdparty&lt;/shadedPattern&gt;
-          &lt;/relocation&gt;
-        &lt;/relocations&gt;
-      &lt;/configuration&gt;
-    &lt;/execution&gt;
-  &lt;/executions&gt;
-&lt;/plugin&gt;
-</code></pre>
-
-<p>  </plugins>
+  <plugins>
+    <plugin>
+      <groupid>org.apache.maven.plugins</groupid>
+      <artifactid>maven-shade-plugin</artifactid>
+      <version>2.3</version>
+      <executions>
+        <execution>
+          <phase>package</phase>
+          <goals>
+            <goal>shade</goal>
+          </goals>
+          <configuration>
+            <relocations>
+              <relocation>
+                <pattern>com.google.common</pattern>
+                <shadedpattern>com.example.shaded.com.google.common</shadedpattern>
+              </relocation>
+              <relocation>
+                <pattern>com.google.thirdparty</pattern>
+                <shadedpattern>com.example.shaded.com.google.thirdparty</shadedpattern>
+              </relocation>
+            </relocations>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
 </build>
-```</p>
+<p>```</p>
 
 <p>In order to minimize the JAR, enable it via the following. Beware that this might remove some classes used only by reflection. In such a case explicitly include the class via <code>configuration.filters.filter.include</code>. Please find the details in the <a href="https://maven.apache.org/plugins/maven-shade-plugin/examples/includes-excludes.html">docs</a>.</p>
 
-<p><code>xml
-...
-&lt;configuration&gt;
-  &lt;minimizeJar&gt;true&lt;/minimizeJar&gt;
-&lt;/configuration&gt;
-...
-</code></p>
+<p>```xml
+…</p>
+<configuration>
+  <minimizejar>true</minimizejar>
+</configuration>
+<p>…
+```</p>
 
 <p>By default the plugin produces the shaded JAR with the same name as the original and add a prefix <code>original-</code> to the latter. If we want the opposite behavior (mark the shaded JAR, eg. with <code>-jar-with-dependencies</code> suffix), we can to this via:</p>
 
-<p><code>xml
-...
-&lt;configuration&gt;
-  &lt;shadedArtifactAttached&gt;true&lt;/shadedArtifactAttached&gt;
-  &lt;shadedClassifierName&gt;jar-with-dependencies&lt;/shadedClassifierName&gt;
-&lt;/configuration&gt;
-...
-</code></p>
+<p>```xml
+…</p>
+<configuration>
+  <shadedartifactattached>true</shadedartifactattached>
+  <shadedclassifiername>jar-with-dependencies</shadedclassifiername>
+</configuration>
+<p>…
+```</p>
 
 <p>Then just build the JAR with <code>$ maven package</code> and copy it to the machine(s) running Hive.</p>
 
-<h2>Gradle &ndash; shadow</h2>
+<h2 id="gradle---shadow">Gradle - shadow</h2>
 
 <p>Gradle <a href="https://github.com/johnrengelman/shadow">Shadow</a> plugin is inspired by <code>maven-shade-plugin</code>. The basic configuration might look like this:</p>
 
 <p>```groovy
 plugins {
-  id &lsquo;java&rsquo; // or &lsquo;groovy&rsquo; Must be explicitly applied
-  id &lsquo;com.github.johnrengelman.shadow&rsquo; version &lsquo;1.2.1&rsquo;
+  id ‘java’ // or ‘groovy’ Must be explicitly applied
+  id ‘com.github.johnrengelman.shadow’ version ‘1.2.1’
 }</p>
 
-<p>apply plugin: &lsquo;java&rsquo; // or &lsquo;groovy&rsquo;. Must be explicitly applied
-apply plugin: &lsquo;com.github.johnrengelman.shadow&rsquo;</p>
+<p>apply plugin: ‘java’ // or ‘groovy’. Must be explicitly applied
+apply plugin: ‘com.github.johnrengelman.shadow’</p>
 
 <p>shadowJar {
-  relocate(&lsquo;org.google.common&rsquo;, &lsquo;com.exaple.shaded.org.google.common&rsquo;)
+  relocate(‘org.google.common’, ‘com.exaple.shaded.org.google.common’)
 }
 ```</p>
 
@@ -190,7 +179,7 @@ apply plugin: &lsquo;com.github.johnrengelman.shadow&rsquo;</p>
 $ gradle shadowJar
 </code></p>
 
-<h2>Registering the UDF</h2>
+<h2 id="registering-the-udf">Registering the UDF</h2>
 
 <p>Within Hive register the UDF like this:</p>
 
@@ -201,7 +190,7 @@ CREATE TEMPORARY FUNCTION topPrivateDomain AS 'com.example.hive.udf.TopPrivateDo
 
 <p>The first command tells Hive to copy the JAR into the distributed cache and put it on the claspath, so that it is visible from all MapReduce tasks. The second one registers the UDF class with the given function name.</p>
 
-<h2>Tips</h2>
+<h2 id="tips">Tips</h2>
 
 <p>In case you just need to modify the classpath and give your JAR more priority (without renaming packages) try to fiddle with these options:</p>
 
@@ -220,10 +209,9 @@ hive --hiveconf hive.aux.jars.path='some-jar-1.0.jar'
 <p>More info on Hive UDFs:</p>
 
 <ul>
-<li><a href="https://cwiki.apache.org/confluence/display/Hive/HivePlugins">https://cwiki.apache.org/confluence/display/Hive/HivePlugins</a></li>
-<li><a href="http://blog.matthewrathbone.com/2013/08/10/guide-to-writing-hive-udfs.html">http://blog.matthewrathbone.com/2013/08/10/guide-to-writing-hive-udfs.html</a></li>
+  <li>https://cwiki.apache.org/confluence/display/Hive/HivePlugins</li>
+  <li>http://blog.matthewrathbone.com/2013/08/10/guide-to-writing-hive-udfs.html</li>
 </ul>
-
 ]]></content>
   </entry>
   

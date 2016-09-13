@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | Bohumír Zámečník]]></title>
   <link href="http://bohumirzamecnik.cz/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://bohumirzamecnik.cz/"/>
-  <updated>2016-09-09T17:36:26+02:00</updated>
+  <updated>2016-09-13T18:04:07+02:00</updated>
   <id>http://bohumirzamecnik.cz/</id>
   <author>
     <name><![CDATA[Bohumír Zámečník]]></name>
@@ -18,15 +18,14 @@
     <link href="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/"/>
     <updated>2014-12-30T00:00:00+01:00</updated>
     <id>http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac</id>
-    <content type="html"><![CDATA[<p><img src="/assets/blog/categories/python/tkinter-missing.png" width="296" align="right">
-Tkinter is an old GUI toolkit, that has been popular also in some Python projects. Sometimes it might be tricky to install. If you just can&rsquo;t get past <code>ImportError: No module named '_tkinter'</code>, read on. We&rsquo;ll install it with Python 3.4 on Mac OX S Yosemite and macports.</p>
+    <content type="html"><![CDATA[<p><img src="/assets/blog/categories/python/tkinter-missing.png" width="296" align="right" />
+Tkinter is an old GUI toolkit, that has been popular also in some Python projects. Sometimes it might be tricky to install. If you just can’t get past <code>ImportError: No module named '_tkinter'</code>, read on. We’ll install it with Python 3.4 on Mac OX S Yosemite and macports.</p>
 
 <!--more-->
 
+<p>We’re assuming to have a Python 3 installation, possibly inside a pyvenv.</p>
 
-<p>We&rsquo;re assuming to have a Python 3 installation, possibly inside a pyvenv.</p>
-
-<p>If we&rsquo;d like to use tkinter, we get the following error:</p>
+<p>If we’d like to use tkinter, we get the following error:</p>
 
 <pre><code>$ python
 &gt;&gt;&gt; import tkinter
@@ -45,9 +44,9 @@ ImportError                               Traceback (most recent call last)
 ImportError: No module named '_tkinter'
 </code></pre>
 
-<p>First we check that we have the <code>tkinter</code> package installed and it&rsquo;s in the Python module path.</p>
+<p>First we check that we have the <code>tkinter</code> package installed and it’s in the Python module path.</p>
 
-<p>For Python 3.4 there&rsquo;s a port named <code>py34-tkinter</code>:</p>
+<p>For Python 3.4 there’s a port named <code>py34-tkinter</code>:</p>
 
 <pre><code>$ sudo port install py34-tkinter
 </code></pre>
@@ -77,7 +76,7 @@ Port py34-tkinter contains:
 $ sudo ln -s $TKMODULE $(echo $TKMODULE|sed 's/site-packages\///')
 </code></pre>
 
-<p>If it&rsquo;s ok, the <code>tkinter</code> module can be imported without any error:</p>
+<p>If it’s ok, the <code>tkinter</code> module can be imported without any error:</p>
 
 <pre><code>$ python -m tkinter
 </code></pre>
@@ -86,7 +85,7 @@ $ sudo ln -s $TKMODULE $(echo $TKMODULE|sed 's/site-packages\///')
 
 <p>Hope this helps!</p>
 
-<p><img src="/assets/blog/categories/python/tkinter-test-dialog.png" width="281"></p>
+<p><img src="/assets/blog/categories/python/tkinter-test-dialog.png" width="281" /></p>
 ]]></content>
   </entry>
   

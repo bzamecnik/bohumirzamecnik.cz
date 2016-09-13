@@ -24,6 +24,7 @@
   <link rel="canonical" href="http://bohumirzamecnik.cz/blog/2015/how-to-run-sms-tools-on-python-3-on-mac">
   <link href="https://s.gravatar.com/avatar/f90538dcd2df4a510c8f0b057154dea1?s=32" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/tables.css" media="screen, projection" rel="stylesheet" type="text/css" />
   <link href="/atom.xml" rel="alternate" title="Bohumír Zámečník" type="application/atom+xml">
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -108,92 +109,85 @@
   </header>
 
 
-<div class="entry-content"><p><img class="right" src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_cover_t.png"></p>
+<div class="entry-content"><p><img class="right" src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_cover_t.png" /></p>
 
 <p><a href="https://github.com/MTG/sms-tools">SMS-tools</a> (Spectral modeling synthesis) is a Python education library for audio signal analysis and modeling. It serves for practical excercises within the <a href="https://www.coursera.org/course/audio">Audio Signal Processing for Music Applications</a> course at Coursera. It was written to run Ubuntu Linux and Python 2.7. Here we see how to run it on latest Python 3.4 on Mac OS X Yosemite.</p>
 
 <!--more-->
 
+<h2 id="overview">Overview</h2>
 
-<h2>Overview</h2>
+<p>What are SMS-tools good for? In short they provide models for music analysis - how to turn a music recording into a spectrogram and then a each frame into a sum of sinusoids, sum of harmonic sinusoids, sum of harmonic sinusoids and random noise, etc. Also it contains some very cool transformations including sound morphing. Besides the library of models and transformations there is some GUI that allows you to quickly experimentat with various parameters and data. Just open a wav file, set the params, look at the graphs and play the reconstructed audio. Also there’s a lot of short example scripts.</p>
 
-<p>What are SMS-tools good for? In short they provide models for music analysis &ndash; how to turn a music recording into a spectrogram and then a each frame into a sum of sinusoids, sum of harmonic sinusoids, sum of harmonic sinusoids and random noise, etc. Also it contains some very cool transformations including sound morphing. Besides the library of models and transformations there is some GUI that allows you to quickly experimentat with various parameters and data. Just open a wav file, set the params, look at the graphs and play the reconstructed audio. Also there&rsquo;s a lot of short example scripts.</p>
+<p>If you look at the <a href="https://www.coursera.org/course/audio">Audio Signal Processing for Music Applications</a> course at Coursera you can see the theory, practical details and more. I liked to attend the first session of this course which was held in Autumn/Winter 2014. Since I found some free time after the course ended I’m going to take it now and wait for the next session this year to get the certificate. Anyway the software is quite interesting for my own experiments.</p>
 
-<p>If you look at the <a href="https://www.coursera.org/course/audio">Audio Signal Processing for Music Applications</a> course at Coursera you can see the theory, practical details and more. I liked to attend the first session of this course which was held in Autumn/Winter 2014. Since I found some free time after the course ended I&rsquo;m going to take it now and wait for the next session this year to get the certificate. Anyway the software is quite interesting for my own experiments.</p>
+<p>In the README you can find the recommended environment is Python 2.7 and Ubuntu Linux. I don’t use none of it and don’t want to install a lot of GB just to run some little piece of Python code.</p>
 
-<p>In the README you can find the recommended environment is Python 2.7 and Ubuntu Linux. I don&rsquo;t use none of it and don&rsquo;t want to install a lot of GB just to run some little piece of Python code.</p>
+<p>There must be a way to run it on Python 3.4 and Mac. Fortunately there is! It consists of two steps: install all the dependencies, port the code to Python 3. The good news is that the step 2 is already done for you. So in this article I’ll just summarize both.</p>
 
-<p>There must be a way to run it on Python 3.4 and Mac. Fortunately there is! It consists of two steps: install all the dependencies, port the code to Python 3. The good news is that the step 2 is already done for you. So in this article I&rsquo;ll just summarize both.</p>
-
-<h2>Install dependencies</h2>
+<h2 id="install-dependencies">Install dependencies</h2>
 
 <p>As for the package manager I use macports. For homebrew it should be quite similar (or try to <a href="https://class.coursera.org/audio-001/forum/thread?thread_id=126#post-535">consult the fora</a>).</p>
 
-<p>First we&rsquo;ll assume that you already have Python 3 installed (otherwise you wouldn&rsquo;t find this tutorial). If not <code>sudo port install python34</code> (or the latest).</p>
+<p>First we’ll assume that you already have Python 3 installed (otherwise you wouldn’t find this tutorial). If not <code>sudo port install python34</code> (or the latest).</p>
 
-<p>It is recommended to keep Python packages for different purposes in virtual environments (or at least in one) and not to install into the system location to prevent conflicts. Python 3.4 contains out-of-the-box a nice tool called <a href="https://docs.python.org/3/library/venv.html">pyvenv</a> which can solve exactly this problem. So we&rsquo;ll assume you have one virtual env and it is activated. Otherwise:</p>
+<p>It is recommended to keep Python packages for different purposes in virtual environments (or at least in one) and not to install into the system location to prevent conflicts. Python 3.4 contains out-of-the-box a nice tool called <a href="https://docs.python.org/3/library/venv.html">pyvenv</a> which can solve exactly this problem. So we’ll assume you have one virtual env and it is activated. Otherwise:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>pyvenv my-audio-env
-</span><span class='line'>source my-audio-env/bin/activate</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">pyvenv my-audio-env
+</span><span class="line">source my-audio-env/bin/activate</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>SMS-tools requires several Python packages and other dependencies. Some of them are available via pip, some of them via macports. Tkinter, SDL, XQuartz (eg. XQuartz-2.7.7.dmg) and Pygame.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo port install libsdl-framework libsdl_ttf-framework libsdl_image-framework libsdl_mixer-framework mercurial
-</span><span class='line'>pip install cython numpy scipy matplotlib ipython readline
-</span><span class='line'>pip install hg+http://bitbucket.org/pygame/pygame</span></code></pre></td></tr></table></div></figure>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo port install libsdl-framework libsdl_ttf-framework libsdl_image-framework libsdl_mixer-framework mercurial
+</span><span class="line">pip install cython numpy scipy matplotlib ipython readline
+</span><span class="line">pip install hg+http://bitbucket.org/pygame/pygame</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-
-<p>Note that installing PyGame via a pip package doesn&rsquo;t work now and as alternative we install from a Mercurial repo.</p>
+<p>Note that installing PyGame via a pip package doesn’t work now and as alternative we install from a Mercurial repo.</p>
 
 <p>XQuartz is an implementation of X11 UI server. It can be installed from a DMG from <a href="http://xquartz.macosforge.org/">xquartz.macosforge.org</a>. You should log out and log in again for some settings to take effect.</p>
 
-<p>SMS-tools also use Tkinter GUI toolkit with is a bit tricky to install. I&rsquo;ve describe its installation in a separate article <a href="/blog/2014/install-tkinter-with-python-3-on-mac/">How to Install Tkinter With Python 3 on Mac</a>. In summary you need to install py34-tkinter and make a symlink since the module in on the wrong path.</p>
+<p>SMS-tools also use Tkinter GUI toolkit with is a bit tricky to install. I’ve describe its installation in a separate article <a href="/blog/2014/install-tkinter-with-python-3-on-mac/">How to Install Tkinter With Python 3 on Mac</a>. In summary you need to install py34-tkinter and make a symlink since the module in on the wrong path.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo port install py34-tkinter</span></code></pre></td></tr></table></div></figure>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sudo port install py34-tkinter</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-
-<h2>Install SMS-tools</h2>
+<h2 id="install-sms-tools">Install SMS-tools</h2>
 
 <p>Clone the fork SMS-tools and checkout the branch with Python 3 port:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git clone https://github.com/bzamecnik/sms-tools.git
-</span><span class='line'>git checkout -b python3</span></code></pre></td></tr></table></div></figure>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">git clone https://github.com/bzamecnik/sms-tools.git
+</span><span class="line">git checkout -b python3</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-
-<h2>Run</h2>
+<h2 id="run">Run</h2>
 
 <p>Make sure you have activated you pyvenv.</p>
 
-<p>There are two GUIs, one for models, the other for transformations. You can run the GUIs like this. Yes, it really expects you to be inside that directory&hellip;</p>
+<p>There are two GUIs, one for models, the other for transformations. You can run the GUIs like this. Yes, it really expects you to be inside that directory…</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sms-tools $ cd software/models_interface
-</span><span class='line'>models_interface $ python models_GUI.py
-</span><span class='line'>models_interface $ cd ../transformations_interface
-</span><span class='line'>transformations_interface $ python transformations_GUI.py</span></code></pre></td></tr></table></div></figure>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sms-tools $ cd software/models_interface
+</span><span class="line">models_interface $ python models_GUI.py
+</span><span class="line">models_interface $ cd ../transformations_interface
+</span><span class="line">transformations_interface $ python transformations_GUI.py</span></code></pre></td></tr></table></div></figure></notextile></div>
 
+<p><img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_gui_hps.png" /></p>
 
-<p><img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_gui_hps.png"></p>
-
-<h2>How was porting to Python 3?</h2>
+<h2 id="how-was-porting-to-python-3">How was porting to Python 3?</h2>
 
 <p>First I converted the source code with <code>2to3</code>:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sms-tools $ 2to3 -w .</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">sms-tools $ 2to3 -w .</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Then it was necessary to fix some more subtle problems.</p>
 
@@ -202,60 +196,58 @@ So to avoid indexing with floats it was sometimes necessary to convert the resul
 
 <p>Tkinter stuff needs to be imported in a little bit different way. This should work both in Python 2 and 3.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>try:
-</span><span class='line'>  from tkinter import *
-</span><span class='line'>  from tkinter import messagebox, filedialog
-</span><span class='line'>except ImportError:
-</span><span class='line'>  from Tkinter import *
-</span><span class='line'>  import tkFileDialog as filedialog, tkMessageBox as messagebox</span></code></pre></td></tr></table></div></figure>
-
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">try:
+</span><span class="line">	from tkinter import *
+</span><span class="line">	from tkinter import messagebox, filedialog
+</span><span class="line">except ImportError:
+</span><span class="line">	from Tkinter import *
+</span><span class="line">	import tkFileDialog as filedialog, tkMessageBox as messagebox</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>instead of</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>from Tkinter import *
-</span><span class='line'>import tkFileDialog, tkMessageBox</span></code></pre></td></tr></table></div></figure>
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">from Tkinter import *
+</span><span class="line">import tkFileDialog, tkMessageBox</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-
-<p>And that&rsquo;s about it. The result should be compatible with Python 3.4. Since I don&rsquo;t have Python 2.7 I can&rsquo;t test if it still work. Probably not. But anyway, Python 2 is history.</p>
+<p>And that’s about it. The result should be compatible with Python 3.4. Since I don’t have Python 2.7 I can’t test if it still work. Probably not. But anyway, Python 2 is history.</p>
 
 <p>Thanks for reading and have fun with audio processing with SMS-tools.</p>
 
 <p>Here are some nice screenshots:</p>
 
 <p>DFT spectrum of a single frame:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/01_dft_piano.png"></p>
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/01_dft_piano.png" /></p>
 
 <p>STFT spectrogram:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/02_stft_piano.png"></p>
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/02_stft_piano.png" /></p>
 
 <p>Analysis with the sine model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/03_sine_model_analysis_bendir.png"></p>
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/03_sine_model_analysis_bendir.png" /></p>
 
 <p>Harmonic sines model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/04_harmonic_model_analysis_vignesh.png"></p>
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/04_harmonic_model_analysis_vignesh.png" /></p>
 
 <p>Stochastic model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/05_stochastic_model_ocean.png"></p>
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/05_stochastic_model_ocean.png" /></p>
 
 <p>Sine plus residuals model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/06_spr_model_bendir.png"></p>
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/06_spr_model_bendir.png" /></p>
 
 <p>Stocharstic plus residuals model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/07_sps_model_bendir.png"></p>
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/07_sps_model_bendir.png" /></p>
 
 <p>Harmonic sines plus residuals model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hpr_model_sax_phrase_short.png"></p>
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hpr_model_sax_phrase_short.png" /></p>
 
 <p>Harmonic sines plus stochastic model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hps_model_sax_phrase_short.png"></p>
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hps_model_sax_phrase_short.png" /></p>
 </div>
 
 
@@ -341,7 +333,15 @@ So to avoid indexing with floats it was sometimes necessary to convert the resul
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2016/ads-b-flight-tracking/">ADS-B Flight Tracking for the Curious</a>
+        <a href="/blog/2016/travel-log-1-wroclaw/">Travel.log #1 - Wrocław</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/ads-b-flight-tracking/">ADS-B Part 1 - Flight Tracking for the Curious</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2016/adsb-part-2-hardware/">ADS-B Part 2 - Hardware</a>
       </li>
     
       <li class="post">
@@ -350,14 +350,6 @@ So to avoid indexing with floats it was sometimes necessary to convert the resul
     
       <li class="post">
         <a href="/blog/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad/">How to Make STL With SVG Logo and Text in OpenSCAD</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/harmoneye-hard-won-experience/">HarmonEye: Hard-won Experience After Three Years of My Life</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/">How to Make a Hive UDF With Conflicting Guava</a>
       </li>
     
   </ul>
