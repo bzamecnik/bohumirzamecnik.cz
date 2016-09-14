@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Flight Tracking | Bohumír Zámečník]]></title>
   <link href="http://bohumirzamecnik.cz/blog/categories/flight-tracking/atom.xml" rel="self"/>
   <link href="http://bohumirzamecnik.cz/"/>
-  <updated>2016-09-13T18:04:07+02:00</updated>
+  <updated>2016-09-14T17:06:30+02:00</updated>
   <id>http://bohumirzamecnik.cz/</id>
   <author>
     <name><![CDATA[Bohumír Zámečník]]></name>
@@ -12,6 +12,661 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ADS-B Part 2 - Hardware]]></title>
+    <link href="http://bohumirzamecnik.cz/blog/2016/adsb-part-2-hardware/"/>
+    <updated>2016-09-14T17:00:00+02:00</updated>
+    <id>http://bohumirzamecnik.cz/blog/2016/adsb-part-2-hardware</id>
+    <content type="html"><![CDATA[<p>We’ll explore how to choose and set up hardware for our ADS-B receiver, go through the various decisions and show a concrete example.</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/elgriton/29675443435/in/album-72157670559963284/" title="Raspberry + RTL2832/R820T"><img src="https://c4.staticflickr.com/9/8221/29675443435_27d7aa2398_z.jpg" width="640" height="480" alt="Raspberry + RTL2832/R820T" /></a><script async="" src="http://bohumirzamecnik.cz//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<!-- more -->
+
+<h2 id="ads-b-flight-tracking-for-the-curious-series">ADS-B Flight Tracking for the Curious series</h2>
+
+<ul>
+  <li><a href="../ads-b-flight-tracking/">Part 1: Why should be build our own ADS-B receiver and roughly how it works?</a></li>
+  <li><strong>Part 2: Hardware - architecture an installation</strong></li>
+  <li>Part 3: Software for feeding data</li>
+  <li>Part 4: Software for viewing data</li>
+  <li>…</li>
+</ul>
+
+<h2 id="table-of-contents">Table of contents</h2>
+
+<ul id="markdown-toc">
+  <li><a href="#ads-b-flight-tracking-for-the-curious-series">ADS-B Flight Tracking for the Curious series</a></li>
+  <li><a href="#table-of-contents">Table of contents</a></li>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#tldr---my-hardware-list">TL;DR - my hardware list</a></li>
+  <li><a href="#going-backwards-along-the-requirements">Going backwards along the requirements</a>    <ul>
+      <li><a href="#sdr-receiver">SDR receiver</a>        <ul>
+          <li><a href="#choosing-a-compatible-dvb-t-stick">Choosing a compatible DVB-T stick</a></li>
+          <li><a href="#list-of-compatible-sticks-found-in-czech-republic">List of compatible sticks found in Czech republic</a></li>
+        </ul>
+      </li>
+      <li><a href="#computer">Computer</a>        <ul>
+          <li><a href="#raspberry-pi">Raspberry Pi</a></li>
+          <li><a href="#power-supply">Power supply</a></li>
+          <li><a href="#case">Case</a></li>
+        </ul>
+      </li>
+      <li><a href="#antenna">Antenna</a>        <ul>
+          <li><a href="#small-bundled-tv-antenna">Small bundled TV antenna</a></li>
+          <li><a href="#professional-1090-mhz-antenna">Professional 1090 MHz antenna</a></li>
+          <li><a href="#diy-1090-mhz-antenna">DIY 1090 MHz antenna</a></li>
+          <li><a href="#my-choice---cantenna">My choice - cantenna</a></li>
+        </ul>
+      </li>
+      <li><a href="#connectors">Connectors</a></li>
+      <li><a href="#rf-cables-and-adapters">RF cables and adapters</a>        <ul>
+          <li><a href="#amplifier---optional">Amplifier - optional</a>            <ul>
+              <li><a href="#what-didnt-work-well">What didn’t work well</a></li>
+              <li><a href="#what-may-work">What may work</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#power-source">Power source</a></li>
+      <li><a href="#internet-connection">Internet connection</a></li>
+    </ul>
+  </li>
+  <li><a href="#where-to-place-and-how-to-mount-the-components">Where to place and how to mount the components?</a>    <ul>
+      <li><a href="#options-for-mounting-the-parts">Options for mounting the parts</a></li>
+      <li><a href="#antenna-mount">Antenna mount</a></li>
+    </ul>
+  </li>
+  <li><a href="#putting-it-together">Putting it together</a></li>
+  <li><a href="#conclusion">Conclusion</a>    <ul>
+      <li><a href="#slack-channel">Slack channel</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>As we discussed in the first part our goal is to send data to the services and exchanges we talked about in the introduction. The hardware should not be expensive and should be relatively easy to install for a normal programmer with basic Linux skills. As always this is just description of my experience and your milage may vary.</p>
+
+<p>In my installation I wanted to support the following sites: FlightRadar24.com, FlightAware.com, PlaneFinder.net, ADSBexchange.com and CZADSB.cz and also be able to archive my data. So which hardware to choose?</p>
+
+<p>If you’d like to support only one site, the easiest path is to buy or borrow specialized equipment that various services provide in order to get new data sources. The problem is that you cannot or should not modify it.</p>
+
+<ul>
+  <li><a href="https://www.flightradar24.com/apply-for-receiver">FR24 receiver</a> - free</li>
+  <li><a href="http://flightaware.com/adsb/flightfeeder/">FlightFeeder</a> - free for sites with no coverage</li>
+</ul>
+
+<p>In for following text I’d like to summarize what I’ve found during a few evenings of web researching for what’s possible and available.</p>
+
+<h2 id="tldr---my-hardware-list">TL;DR - my hardware list</h2>
+
+<p>This is the hardware I bought for my project. We’ll look at the details in a few moments.</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/elgriton/29675444105/in/album-72157670559963284/" title="Hardware bought"><img src="https://c2.staticflickr.com/9/8529/29675444105_b0ee25369e_z.jpg" width="640" height="480" alt="Hardware bought" /></a><script async="" src="http://bohumirzamecnik.cz//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>part</th>
+      <th>description</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://www.ges.cz/cz/dvb-t-usb-tuner-s-sdr-dab-a-fm-GES08804665.html">DVB-T tuner</a></td>
+      <td>RTL2832/R820T, IEC</td>
+      <td>559 CZK</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><strong>parts for DIY antenna (quarter-wave whip):</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>soldering N panel connector</td>
+      <td><a href="http://www.gme.cz/koaxialni-konektor-n512-p836-011">N-512</a></td>
+      <td>86 CZK</td>
+    </tr>
+    <tr>
+      <td>old 1mm thick wire</td>
+      <td>for the whip</td>
+      <td>free</td>
+    </tr>
+    <tr>
+      <td>small old can</td>
+      <td>to serve as a ground plane</td>
+      <td>free</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><strong>cables &amp; adapters:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>N male - F female adapter</td>
+      <td><a href="http://www.gme.cz/redukce-cvp-107-p835-004">CVP-107</a></td>
+      <td>70 CZK</td>
+    </tr>
+    <tr>
+      <td>RG6 cable</td>
+      <td>11m</td>
+      <td>165 CZK</td>
+    </tr>
+    <tr>
+      <td>2 male cable F connectors</td>
+      <td> </td>
+      <td>2x 20 CZK</td>
+    </tr>
+    <tr>
+      <td>IEC male - F female adapter</td>
+      <td><a href="http://www.gme.cz/redukce-cvp-308-p835-016">CVP-308</a></td>
+      <td>13 CZK</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><strong>computer:</strong></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><a href="https://www.alza.cz/raspberry-pi-3-d4078690.htm?o=1">Raspberry Pi 3</a></td>
+      <td> </td>
+      <td>1399 CZK</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.alza.cz/raspberry-pi-cerne-d3837597.htm">RPi case</a></td>
+      <td> </td>
+      <td>213 CZK</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.alza.cz/raspberry-pi-2-5a-d4191252.htm">RPi power source</a></td>
+      <td>2.5A, 5.1V, 13W</td>
+      <td>399 CZK</td>
+    </tr>
+    <tr>
+      <td>microSD card</td>
+      <td>16 GB</td>
+      <td>199 CZK</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><strong>total cost:</strong></td>
+      <td>3143 CZK (~130 USD)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>If I didn’t hurry I could buy the DVB-T for half the price. Also I bought an amplifier and a few supporting parts. However, there was a problem with the amp/injector combination, so I should have chosen another one.</p>
+
+<p>Concrete scheme of the hardware architecture of my installation:</p>
+
+<p><img src="/assets/blog/categories/flight-tracking/adsb-hardware-concrete-schema.svg" type="image/svg+xml" /></p>
+
+<p>Now let’s dig deeper how to choose your own the hardware and learn how to decide.</p>
+
+<h2 id="going-backwards-along-the-requirements">Going backwards along the requirements</h2>
+
+<p>Abstract scheme of the hardware architecture:</p>
+
+<p><img src="/assets/blog/categories/flight-tracking/adsb-hardware-abstract-schema.svg" type="image/svg+xml" /></p>
+
+<h3 id="sdr-receiver">SDR receiver</h3>
+
+<p>The commercial sites usually provide you with a convenient software package to feed their service that you can install with minimal fuss. What is common for all the sites is that they support feeding data in format offered by a program called <code>dump1090</code>. And that is good for us, we can use one program to feed them all.</p>
+
+<p><code>dump1090</code> uses the <code>RTLSDR</code> driver for Software Defined Radio which works with a family of DVB-T tuners. For us it means we can choose a cheap DVB-T stick compatible with RTLSDR and watch planes instead of TV.</p>
+
+<h4 id="choosing-a-compatible-dvb-t-stick">Choosing a compatible DVB-T stick</h4>
+
+<p>The RTLSDR driver project exploits some tricks in one particular chipset <strong>Realtec RTL2832</strong>. There exist DVB-T sticks on the market with different chipsets but this driver cannot utilize them. It may not always be apparent which chipset a particular tuner contains but fortunately there are some tables which map the tuner models and chipsets:</p>
+
+<ul>
+  <li><a href="http://sdr.osmocom.org/trac/wiki/rtl-sdr">http://sdr.osmocom.org/trac/wiki/rtl-sdr</a> - official list of supported hardware</li>
+  <li><a href="http://rtlsdr.org/">http://rtlsdr.org/</a></li>
+  <li><a href="http://elinux.org/RPi_VerifiedPeripherals#USB_TV_Tuners_and_DVB_devices">http://elinux.org/RPi_VerifiedPeripherals#USB_TV_Tuners_and_DVB_devices</a></li>
+  <li><a href="https://www.linuxtv.org/wiki/index.php/DVB-T_USB_Devices/Full">https://www.linuxtv.org/wiki/index.php/DVB-T_USB_Devices/Full</a></li>
+  <li><a href="http://www.rtl-sdr.com/about-rtl-sdr/">http://www.rtl-sdr.com/about-rtl-sdr/</a></li>
+</ul>
+
+<p>Note there are two relevant parts of a DVB-T stick - chipset and tuner.</p>
+
+<p>The supported chipset is <strong><a href="http://www.realtek.com.tw/products/productsView.aspx?Langid=1&amp;PNid=22&amp;PFid=35&amp;Level=4&amp;Conn=3&amp;ProdID=257">Realtec RTL2832U</a></strong>. It comes with various tuners: <strong>Rafaelo Micro R820T</strong>, <strong>R820T2</strong>, <strong>R828D</strong>, <strong><a href="http://www.superkuh.com/gnuradio/Elonics-E4000-Low-Power-CMOS-Multi-Band-Tunner-Datasheet.pdf">Elonics E4000</a></strong> (discontinued), Fitipower FC0013. All are fine.</p>
+
+<p>Chipsets unsupported by the driver are <strong>IT9135</strong>, <strong>IT9130</strong>, <strong>AF9135</strong>. The Fitipower FC0012 and FCI FC2580 tuners may not suitable due to not covering the 1090 Mhz band in their range.</p>
+
+<p>The DVB-T stick I bought contains the Realtec RTL2832U chipset and Rafaelo Micro R820T tuner.</p>
+
+<p>Since I was a bit in a hurry I bought it a local store for about 20 USD. Otherwise I’d buy this one: <a href="http://www.dx.com/en/p/rtl2832u-r820t-mini-dvb-t-dab-fm-usb-digital-tv-dongle-black-170541">RTL2832U + R820T Mini DVB-T + DAB+ + FM USB Digital TV Dongle - Black</a> for only 10.5 USD.</p>
+
+<h4 id="list-of-compatible-sticks-found-in-czech-republic">List of compatible sticks found in Czech republic</h4>
+
+<p>Just to make sense of the brands:</p>
+
+<p>Good:</p>
+
+<ul>
+  <li><a href="http://www.ges.cz/cz/dvb-t-usb-tuner-s-sdr-dab-a-fm-GES08804665.html">DVB-T+DAB+FM+SDR</a> - RTL2832U/R820T</li>
+  <li>Sencor SDB 522RT - RTL2832U/E4000</li>
+  <li>Logilink VG0002a - RTL2832U/FC0013</li>
+  <li>Not Only TV Tuner DVB-T LV5T Deluxe USB 2.0 - RTL2832U</li>
+  <li>LifeView LV5T Deluxe - RTL2832U</li>
+  <li>Cabletech DVBT - RTL2832U</li>
+</ul>
+
+<p>Bad:</p>
+
+<ul>
+  <li>Aver - AF9013, AF9035</li>
+  <li>Evolveo Mars - IT9135</li>
+  <li>Evolveo Venus - IT9135</li>
+  <li>Technaxx - IT9135</li>
+  <li>Omega T300 - IT9135</li>
+  <li>Media-Tech MT4171 - IT9130</li>
+  <li>Terratec Cinergy - RTL2832U/FC0012</li>
+</ul>
+
+<p>Anyway, I haven’t found any better local deal than on DX.</p>
+
+<h3 id="computer">Computer</h3>
+
+<p>For decoding the ADB-B message stream via the said DVB-T tuner we need a computer. Basically any computer capable of running Linux, with a USB connector and connected to the internet is fine. Some ADS-B software also runs on OS X or Windows but it is out of scope of this series (I don’t use Windows and OS X will be covered briefly just for testing the DVB-T stick).</p>
+
+<p>We need it to run 24/7, so that if its power consumption is low we save on electricity bills. Also a micro-computer is easier to install near to the antenna, eg. to an attic or into a waterproof box on the roof, if that’s our wish.</p>
+
+<h4 id="raspberry-pi">Raspberry Pi</h4>
+
+<p>A very nice choice is <strong><a href="https://www.raspberrypi.org/">Raspberry Pi</a></strong>. It’s a fully-featured credit-card sized device with only a few watts consumption. I think any version should be sufficient. Note that RPi Zero does not have an ethernet port integrated and requires and external USB-ethernet adapter.</p>
+
+<p>I chose Raspberry Pi 3 for it’s higher performance and both ethernet and integrated WiFi. The ADS-B programs are not very resource hungry, still I wanted more headroom for additional software. If you want to save money take an older version (eg. RPi 2 B). The system is stored on a small microSD card and the device is powered via USB.</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/elgriton/29384688240/in/album-72157670559963284/" title="Raspberry Pi 3"><img src="https://c1.staticflickr.com/9/8162/29384688240_99c16865d2_z.jpg" width="640" height="480" alt="Raspberry Pi 3" /></a><script async="" src="http://bohumirzamecnik.cz//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<h4 id="power-supply">Power supply</h4>
+
+<p>The RPi is powered by a small 5V power supply via a mini USB cable (the same as on Android phones). The power supply <a href="https://www.raspberrypi.org/help/faqs/#powerReqs">capacity depends on the RPi model</a>. Generally any phone PSU with 2.5A capacity on 5V is fine, although Raspberry-branded PSU’s are for sale.</p>
+
+<h4 id="case">Case</h4>
+
+<p>Also you may want to put the RPi into a case so it does not get hurt. For outside mount you can put all the stuff into a bigger waterproof case, then a dedicated RPi case is not needed.</p>
+
+<h3 id="antenna">Antenna</h3>
+
+<p>DVB-T sticks usually come with a small indoor antenna. You can catch some planes on it but it is optimized for TV, not ADS-B, and has a short cable (eg. 0.5 m). A better option is a dedicated antenna tuned for the 1090 MHz band. Typically we need an omnidirectional antenna, ie. catching signals equally from all direction. In case we wish eg. to focus only on an airport nearby, we may use a directional antenna.</p>
+
+<p>Also in order to provide good condition for signal reception the antenna should be placed on a place with good view to the whole sky, typically a roof or a stand, not indoors. It means the antena and the cables to the receiver need to be weather-proof.</p>
+
+<h4 id="small-bundled-tv-antenna">Small bundled TV antenna</h4>
+
+<p>A small antenna usually bundled with the DVB-T tuner can useful to test the set up before we prepare any better antenna. It is typically equipped with the IEC connector.</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/elgriton/29384686450/in/album-72157670559963284/" title="Raspberry + RTL2832/R820T + stock antenna"><img src="https://c3.staticflickr.com/9/8365/29384686450_55f0da9970_z.jpg" width="640" height="480" alt="Raspberry + RTL2832/R820T + stock antenna" /></a><script async="" src="http://bohumirzamecnik.cz//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<h4 id="professional-1090-mhz-antenna">Professional 1090 MHz antenna</h4>
+
+<p>In case we have enough money and want to invest in a good antenna we can buy a ready-made collinear antenna (eg. the <a href="http://shop.jetvision.de/epages/64807909.sf/en_GB/?ObjectPath=/Shops/64807909/Products/67120">“SCO-1090-MCX” Antenna (1090 MHz), 3m cable, MCX</a> for about $78). A benefit is such antenna will almost for sure work properly (given a good view of sky) compared to DIY solutions.</p>
+
+<p><img src="http://shop.jetvision.de/WebRoot/Store26/Shops/64807909/5571/6D68/8B17/9348/B3D4/C0A8/2AB9/5CD3/67120_ml.jpg" style="height: 400px" /></p>
+
+<h4 id="diy-1090-mhz-antenna">DIY 1090 MHz antenna</h4>
+
+<p>If we don’t have enough money, if we’re radio amateurs with experience in building microwave antennas or if we just want some fun, we can build an antenna ourselves.</p>
+
+<p>A simple fool-proof design that even a programmer with no experience in electro can build is called “quarter-wave <a href="https://en.wikipedia.org/wiki/Whip_antenna">whip</a> with <a href="https://en.wikipedia.org/wiki/Ground_plane">ground plane</a>”.</p>
+
+<p>Eg. the user abcd567 at the FlightAware forum wrote a nice tutorial <a href="http://discussions.flightaware.com/post157718.html#p157718">3 easy antennas for beginners</a>.</p>
+
+<p><img src="https://farm9.staticflickr.com/8743/16550012467_1dbb68602f.jpg" /></p>
+
+<p>Roughly we:</p>
+
+<ul>
+  <li>take a soldering panel N connector</li>
+  <li>attach a pice of wire with a pre-computed length</li>
+  <li>attach a few other wires, metal plate, or a can</li>
+  <li>we seal everything to be waterproof</li>
+</ul>
+
+<p>And we have an antenna.</p>
+
+<p>The whip should be of quarter-wave (<code>lambda / 4</code>) length, in our case roughly <strong>69 mm</strong>. How to we compute that? Just take the freqeuency and speed of light:</p>
+
+<p><code>
+lambda = c / f
+lambda / 4 = 299792458 / 1.09^9 * 1^3 / 4 ~= 68.76 mm
+</code></p>
+
+<p>Also the ground plane should be at least <code>lambda / 4</code> long from the center to the edge, according to <a href="https://en.wikipedia.org/wiki/Ground_plane">Wikipedia</a>. Ie. a larger ground plane is not a problem.</p>
+
+<blockquote>
+  <p>A ground plane is a flat or nearly flat horizontal conducting surface that serves as part of an antenna, to reflect the radio waves from the other antenna elements. […] To function as a ground plane, the conducting surface must be at least a quarter of the wavelength (λ/4) of the radio waves in size.</p>
+</blockquote>
+
+<p>You can be a bit creative with the ground-plane:</p>
+
+<ul>
+  <li>4-legged spider from wires</li>
+  <li>8-legged spider</li>
+  <li>can</li>
+  <li>cone</li>
+</ul>
+
+<p>In case we’re experienced radio amateurs we can build our own version of the commercially available collinear antennas.</p>
+
+<h4 id="my-choice---cantenna">My choice - cantenna</h4>
+
+<p>I’ve used the bundled antenna for testing and then that my brother Vojtěch (who at least studied an electro high-school) helped me to build a whip with a ground plane made of a can. It’s based on an soldering panel N connector and there’s an adapter to the F connector on the cable. We took a piece of a wire of thickess so it fits the N connector hole, soldered it there, cut a small can to the quarter-wave height, made a hole in the middle, fitted it with the N connector and atteched a N-F adapter. For the outside we sealed the wire with a gaffa tape and the connector with a hot-glue. It’s not perfect, but it works.</p>
+
+<p>I’d rather recommend another ground-plane type. The reason is a can has sharp edges and the space inside is tight so it’s hard to do anything there without cutting the fingers. Also the can was from steel and soon it started to rust. Better would be alluminium, or just the copper spider legs.</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/elgriton/29384674600/in/album-72157670559963284/" title="DIY 1090 MHz ADS-B antenna"><img src="https://c1.staticflickr.com/9/8103/29384674600_2d551070a1_z.jpg" width="640" height="480" alt="DIY 1090 MHz ADS-B antenna" /></a><script async="" src="http://bohumirzamecnik.cz//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<h3 id="connectors">Connectors</h3>
+
+<p>You may notice there is a wide variety of RF (radio-frequency) cable connectors. Let’s describe the most common ones:</p>
+
+<ul>
+  <li>IEC (<a href="https://en.wikipedia.org/wiki/TV_aerial_plug">IEC 61169-2</a>)
+    <ul>
+      <li>medium-sized round TV connector without a screw</li>
+      <li>usually on a DVB-T tuner as an input</li>
+      <li>useful indoors</li>
+    </ul>
+    <p><a href="https://commons.wikimedia.org/wiki/File:IEC_169-2_male_and_female_connector.JPG#/media/File:IEC_169-2_male_and_female_connector.JPG"><img src="https://upload.wikimedia.org/wikipedia/commons/2/23/IEC_169-2_male_and_female_connector.JPG" alt="IEC 169-2 male and female connector.JPG" height="214" width="320" /></a><br />By <a href="http://bohumirzamecnik.cz//commons.wikimedia.org/wiki/User:Josutus" title="User:Josutus">Josutus</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a></p>
+  </li>
+  <li><a href="https://en.wikipedia.org/wiki/F_connector">F</a>
+    <ul>
+      <li>medium-sized connector with a screw</li>
+      <li>diameter: 11 mm (male), 9.5 mm (female)</li>
+      <li>for general radio applications</li>
+      <li>usage mostly indoors, but weatherproof variants exist</li>
+      <li>usually used with the RG-6/U cable</li>
+    </ul>
+    <p><a href="https://commons.wikimedia.org/wiki/File:F_Connector_Side.jpg#/media/File:F_Connector_Side.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/F_Connector_Side.jpg" alt="F Connector Side.jpg" height="214" width="320" /></a><br />By © <a href="http://bohumirzamecnik.cz//commons.wikimedia.org/wiki/User:Colin" title="User:Colin">User:Colin</a>&nbsp;/&nbsp;<a href="http://bohumirzamecnik.cz//commons.wikimedia.org/wiki/Main_Page" title="Main Page">Wikimedia Commons</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a></p>
+  </li>
+  <li><a href="https://en.wikipedia.org/wiki/N_connector">N</a>
+    <ul>
+      <li>bigger connector with a screw</li>
+      <li>can be used to make a DIY antenna</li>
+      <li>can be used outdoors</li>
+      <li>diameter: 20.3 mm (male), 15.7 mm (female)</li>
+    </ul>
+    <p><a href="https://commons.wikimedia.org/wiki/File:Male_type_N_connector.jpg#/media/File:Male_type_N_connector.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Male_type_N_connector.jpg" alt="Male type N connector.jpg" height="214" width="320" /></a><br />By <a href="http://bohumirzamecnik.cz//commons.wikimedia.org/w/index.php?title=User:Swift.Hg&amp;action=edit&amp;redlink=1" class="new" title="User:Swift.Hg (page does not exist)">Swift.Hg</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a></p>
+  </li>
+  <li><a href="https://en.wikipedia.org/wiki/SMA_connector">SMA</a>
+    <ul>
+      <li>smaller connector with a screw</li>
+      <li>50 Ω impedance</li>
+      <li>diameter: 7.9 mm (male)</li>
+    </ul>
+    <p><a href="https://commons.wikimedia.org/wiki/File:Male_50_ohm_SMA_connector.jpg#/media/File:Male_50_ohm_SMA_connector.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Male_50_ohm_SMA_connector.jpg" alt="Male 50 ohm SMA connector.jpg" height="235" width="320" /></a><br />By <a href="http://bohumirzamecnik.cz//commons.wikimedia.org/w/index.php?title=User:Swift.Hg&amp;action=edit&amp;redlink=1" class="new" title="User:Swift.Hg (page does not exist)">Swift.Hg</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a></p>
+  </li>
+  <li><a href="https://en.wikipedia.org/wiki/SMC_connector">SMC</a>
+    <ul>
+      <li>small connector with a screw</li>
+      <li>diameter: 4.8 mm</li>
+    </ul>
+    <p><a href="https://commons.wikimedia.org/wiki/File:SMC-Steckverbinder.jpg#/media/File:SMC-Steckverbinder.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/SMC-Steckverbinder.jpg" alt="SMC-Steckverbinder.jpg" height="240" width="320" /></a><br />By <a href="https://de.wikipedia.org/wiki/User:DH4YM" class="extiw" title="de:User:DH4YM">DH4YM</a> at the <a href="https://de.wikipedia.org/wiki/" class="extiw" title="de:">German language Wikipedia</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a></p>
+  </li>
+  <li><a href="https://en.wikipedia.org/wiki/MCX_connector">MCX</a>
+    <ul>
+      <li>small golden connector, no screw</li>
+      <li>used on some DVB-T tuners as an alternative input</li>
+      <li>outer plug diameter: 3.6 mm</li>
+    </ul>
+    <p><a href="https://en.wikipedia.org/wiki/File:MCX_Male%26Female.jpg#/media/File:MCX_Male%26Female.jpg"><img src="https://upload.wikimedia.org/wikipedia/en/b/bb/MCX_Male%26Female.jpg" alt="MCX Male&amp;Female.jpg" height="127" width="630" /></a><br />By <a href="http://bohumirzamecnik.cz//en.wikipedia.org/w/index.php?title=User:ChucklesNuts&amp;action=edit&amp;redlink=1" class="new" title="User:ChucklesNuts (page does not exist)">ChucklesNuts</a> (<a href="http://bohumirzamecnik.cz//en.wikipedia.org/wiki/User_talk:ChucklesNuts" title="User talk:ChucklesNuts">talk</a>) (<a href="http://bohumirzamecnik.cz//en.wikipedia.org/wiki/Special:ListFiles/ChucklesNuts" title="Special:ListFiles/ChucklesNuts">Uploads</a>) - Own work, <a href="http://bohumirzamecnik.cz//en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License" title="GNU Free Documentation License">GFDL</a></p>
+  </li>
+</ul>
+
+<h3 id="rf-cables-and-adapters">RF cables and adapters</h3>
+
+<p>We need to feed the microwave signal from the antenna to the tuner. The choice of a cable depends on the distance. Also we should take care to choose components of the same <a href="https://en.wikipedia.org/wiki/Electrical_impedance">impedance</a>, otherwise there’s additional <a href="https://en.wikipedia.org/wiki/Coaxial_cable#Choice_of_impedance">attenuation from the impedance mismatch</a>.</p>
+
+<p>In my case I used a 11 m coaxial RG-6 cable with 75 ohm impedance to connect antenna on an old chimney to the receiver at the attic. The cable could be a bit shorter than 11m but I wanted some reserve. Two male F connectors were attached to the cable.</p>
+
+<p>The antenna has an N female connector so there’s N male - F female adapter to connect it to the the cable.</p>
+
+<p>On the other side the tuner has an IEC female connector so we need an IEC male - F female adapter.</p>
+
+<h4 id="amplifier---optional">Amplifier - optional</h4>
+
+<p>I wanted to try adding an amplifier which could allow me to see more distant planes.</p>
+
+<p>I tested some parts and they didn’t work together well. Anyway I’ll write down the experience. For the next time I’d rather use other some other parts. Still, the basic schema of how to connect and amp and power inserter is generally applicable.</p>
+
+<p><img src="/assets/blog/categories/flight-tracking/adsb-hardware-schema-with-amp.svg" type="image/svg+xml" /></p>
+
+<h5 id="what-didnt-work-well">What didn’t work well</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>part</th>
+      <th>description</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Alcad PL-310 amplifier</td>
+      <td>wide-band</td>
+      <td>245 CZK</td>
+    </tr>
+    <tr>
+      <td>power inserter for the amp P1-101</td>
+      <td> </td>
+      <td>130 CZK</td>
+    </tr>
+    <tr>
+      <td>connector for the power inserter DCK 21 HQ</td>
+      <td> </td>
+      <td>22 CZK</td>
+    </tr>
+    <tr>
+      <td><a href="http://www.ges.cz/cz/napajeci-adapter-sitovy-napajec-stabilizovany-zdroj-mw-18v-1-3a-GES07507063.html">power source for the amp power inserter</a></td>
+      <td> </td>
+      <td>269 CZK</td>
+    </tr>
+    <tr>
+      <td>2x adapters F female-female</td>
+      <td> </td>
+      <td>2 x 40 CZK</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td><strong>total cost:</strong></td>
+      <td>746 CZK (~31 USD)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For this I chose the <a href="http://satcom.cz/zbozi/linkovy-zesilovac-alcad-pr-310-5-2400-mhz-260">Alcad PL-310</a> wide-band amplifier. It has two F female connectors.</p>
+
+<ul>
+  <li>frequency range: 5-2400 MHz</li>
+  <li>gain: 10±1 dB</li>
+  <li>power source: +13/18V, max 0.5 A</li>
+  <li><a href="http://www.alcad.com.au/wp-content/uploads/2012/04/PR-310.pdf">datasheet</a></li>
+</ul>
+
+<p>Also it needs a <a href="http://www.ges.cz/cz/napajeci-adapter-sitovy-napajec-stabilizovany-zdroj-mw-18v-1-3a-GES07507063.html">power supply</a> and a power inserter, in this case <a href="http://satcom.cz/zbozi/napajeci-vyhybka-356">P1-101</a> (also with two female F connectors). The amp requires either 13 or 18 V DC and the supply provides up to 1.3 A at 18 V.</p>
+
+<p>The power supply has a 1.7m cable with 5.5/2.1mm jack connector where (+) is in the middle and (-) around. Since the power inserter doesn’t have any connector I bought a matching one (<a href="http://www.ges.cz/cz/dck-21-hq-GES06615822.html">DCK 21 HQ</a>).</p>
+
+<p>The amplifier goes between the antenna and the cable and the inserter between the tuner and the cable. For this we need in addition two adapters F female-female to be put between the F male-male points.</p>
+
+<p>The power inserter is marked quite clearly:</p>
+
+<ul>
+  <li>TO ANT - goes to towards the antenna</li>
+  <li>TO TV - goes to the tuner</li>
+</ul>
+
+<p>The amplifier is not marked so well: most probably the antenna goes to the left side and the tuner to the right, ie. signal goes in the direction of the bold arrows.</p>
+
+<p>When we put this together with my more electo-proficient brother, we found out the set up with the amp doesn’t work. Specifically when watching the spectrum in <a href="https://www.smittix.co.uk/installing-the-latest-version-of-gqrx-on-macos-el-capitan/">GQRX</a> (on OSX just <code>brew install Caskroom/cask/gqrx</code>), the signal at 1090 MHz was maybe 10-20 dB weaker than without the amp.</p>
+
+<p>My hypothesis is that the power inserter is not suitable for this frequency, although the SAT TV technician in the shop was recommending it. The reason is it’s described as being for frequency range 40-860 MHz. Otherwise, maybe we just soldered it in some wrong way.</p>
+
+<p>Anyway, without the amp the reception is still quite sufficient.</p>
+
+<h5 id="what-may-work">What may work</h5>
+
+<p>There’s Czech brand Teroz, a manufacturer of various satelite amplifiers and other parts. It produces also an amp tuned specifically for ADS-B which is not so expensive.</p>
+
+<p><a href="http://www.teroz.cz/cs/zesilovace/kanalove">Teroz 499</a>:</p>
+
+<ul>
+  <li>tuned to: 1090 MHz, probably with some band-pass filter</li>
+  <li>gain: 25 dB</li>
+  <li>price: 545 CZK (22.5 USD)</li>
+  <li>delivery: usually not in stock, manufactured upon request</li>
+</ul>
+
+<p>Also there are other products, however more expensive:</p>
+
+<ul>
+  <li><a href="http://flightaware.com/adsb/prostick/">FlightAware Pro Stick</a>
+    <ul>
+      <li>17 USD (quite good price)</li>
+    </ul>
+  </li>
+  <li><a href="https://store.uputronics.com/index.php?route=product/product&amp;product_id=50">Uptronics 1090Mhz ADS-B Filtered Preamp</a>
+    <ul>
+      <li>47.5 USD</li>
+    </ul>
+  </li>
+  <li><a href="http://shop.jetvision.de/epages/64807909.sf/en_GB/?ObjectPath=/Shops/64807909/Products/68200">“Active Diapason” Antenna (1090 MHz)
+</a>
+    <ul>
+      <li>antenna with an integrated amp</li>
+      <li>2 dB antenna gain + 21 dB amp gain</li>
+      <li>
+        <ul>
+          <li>power inserter with power over USB</li>
+        </ul>
+      </li>
+      <li>quite expensive: about 200 USD</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="power-source">Power source</h3>
+
+<p>What remains is connecting the computer to the outside world (electricity and internet).</p>
+
+<p>There are multiple possibilities for supplying electric power:</p>
+
+<ul>
+  <li><strong>USB cable, power source, 230 V extension cord</strong></li>
+  <li>USB extension cord, power source</li>
+  <li>power over ethernet</li>
+</ul>
+
+<p>Basically when you place the computer indoors, there’s not problem of putting 230 V next to the computer, so we can just plug the a USB power source and it’s done.</p>
+
+<p>Otherwise, when we put RPi in a box outside, a cheap solution to avoid 230 V socket on the rain is USB extension cord. Just expose only 5 V there. However, we may be limited by the maximum USB cable lengths. For WiFi connection we only have a single cable, for ethernet we have two cables.</p>
+
+<p>So there’s a third way how to overcome longer distances with just a single cable and that’s power over ethernet. The drawback is it needs additional devices (power injector and extractor) and it’s more expensive. On the other hand it’s more suitable for weather-proof installations.</p>
+
+<p>In my case I chose the simplest solution.</p>
+
+<h3 id="internet-connection">Internet connection</h3>
+
+<p>Possibilities:</p>
+
+<ul>
+  <li>ethernet</li>
+  <li>WiFi - in RPi 3 integrated, otherwise needs a USB stick</li>
+</ul>
+
+<p>WiFi might be sometimes more convenient since it avoids cables, however it requires setting up the credentials. For older RPi’s not all WiFi sticks are compatible. Ethernet works out of the box, however.</p>
+
+<h2 id="where-to-place-and-how-to-mount-the-components">Where to place and how to mount the components?</h2>
+
+<h3 id="options-for-mounting-the-parts">Options for mounting the parts</h3>
+
+<ul>
+  <li>antenna, receiver &amp; computer inside
+    <ul>
+      <li>(+) this is easiest, eg. to test the set up</li>
+      <li>(-) but the antenna doesn’t have enough sky view</li>
+      <li>thus it’s not recommended at all</li>
+    </ul>
+  </li>
+  <li><strong>antenna outside / receiver &amp; computer inside</strong>
+    <ul>
+      <li>(+) this is recommended since the electronic parts doesn’t have to be weatherproof sealed</li>
+      <li>(+) easy to access the device</li>
+      <li>needs a long-enough RF cable</li>
+      <li>(-) a very long cable may attenuate the signal
+        <ul>
+          <li>Check the cable specification. Eg. RG-6 cable attenuation at 1000 MHz is 0.21 dB / m. You may need an amplifier. Still, an amplifier may improve signal reception even with a short cable.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>antenna &amp; receiver outside / computer inside
+    <ul>
+      <li>(+) only small RF attenuation due to short cable</li>
+      <li>(+) easy to access the device</li>
+      <li>(-) needs a long USB cable (up to 5 meters)</li>
+      <li>(-) may need a <a href="http://www.yourcablestore.com/USB-Cable-Length-Limitations-And-How-To-Break-Them_ep_42-1.html">USB repeater</a> (active cable) - up to 20-30 meters</li>
+    </ul>
+  </li>
+  <li><a href="http://imgur.com/a/Y8s2X">antenna, receiver &amp; computer outside</a>
+    <ul>
+      <li>(+) no need for long RF or USB cables</li>
+      <li>(+) looks cool</li>
+      <li>(-) more complicated network/power supply cabling
+        <ul>
+          <li>power-over-ethernet might be practical, but it’s expensive</li>
+          <li>taking 230 V to the roof might be bad due to possible humidity</li>
+          <li>power over USB - also limits on the length</li>
+        </ul>
+      </li>
+      <li>(-) needs weatherproof case, may overheat in summer</li>
+      <li>(-) harder to access the device</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="antenna-mount">Antenna mount</h3>
+
+<p>We’ve already said the antenna must have a good sky view, so usually it’s on the roof of a building. It must withstand weather conditions, such as rain, heavy wind and snow.</p>
+
+<p>Antennas are typically tightly attached to a mast via a mount. Ie. an iron rod is screwed into the building and the antenna is fixed to the rod. It depends heavily on the antenna size and type and on your craftsmanship. Since our cantenna is very light we can eg. put it into a PVC tube and just secure it at least with via plastic straps.</p>
+
+<p>In my case I was in a hurry and hacked it completely, so I’m a bit ashamed of it. I just took a silver tape and taped the cable around the chimney :). It just works, but it is not pleasant to look at.</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/elgriton/29594128971/in/album-72157670559963284/" title="DIY 1090 MHz ADS-B antenna"><img src="https://c4.staticflickr.com/9/8854/29594128971_6a8a0818ea_z.jpg" width="480" height="640" alt="DIY 1090 MHz ADS-B antenna" /></a><script async="" src="http://bohumirzamecnik.cz//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<h2 id="putting-it-together">Putting it together</h2>
+
+<p>At the beginning I’d recommend installing and testing the DVB-T stick with the stock antenna. You can do it on a normal MacBook. Just to make sure it works. Then you can set up software on RPi. Details will be covered in the next part of the series.</p>
+
+<p>When it’s ok proceed to building the antenna and connect all the cables. The reception should be better. How to compare it? Either try to roughly count the visible planes or look for the maximum distance. More precisely look for increased signal strength near 1090 MHz in the spectrogram, eg. via <a href="http://gqrx.dk">GQRX</a>.</p>
+
+<p>Then prepare the mast and secure the antenna on it for production usage. Try to make sure the water cannot go inside the cables and wind cannot take it down.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>It this article we discussed how to choose our custom ADS-B receiver hardware and what are the various possibilities. Also we presented a concrete example. Even a programmer that’s lame it DIY hardware can put it together.</p>
+
+<p>In the next article we will focus on the software that will process our radio signals into planes on the map.</p>
+
+<p>Here are a few photos from my installation:</p>
+
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/elgriton/albums/72157670559963284" title="ADS-B Flight Tracking"><img src="https://c4.staticflickr.com/9/8221/29675443435_27d7aa2398_z.jpg" width="640" height="480" alt="ADS-B Flight Tracking" /></a><script async="" src="http://bohumirzamecnik.cz//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script></p>
+
+<h3 id="slack-channel">Slack channel</h3>
+
+<p>If you have any questions or just would like to chat about flight tracking, feel free to check the <a href="https://adsb.slack.com">ADS-B Flight Tracking</a> Slack channel. Automatic invitation is on <a href="https://adsb.signup.team">adsb.signup.team</a>.</p>
+
+<p><a href="https://adsb.signup.team"><img src="http://i.bohumirzamecnik.cz/adsb/adsb-slack.png" /></a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ADS-B Part 1 - Flight Tracking for the Curious]]></title>
@@ -157,463 +812,6 @@ can be easily found in electro stores or in e-shops. The only catch is to find o
 <p>If you have any questions or just would like to chat about flight tracking, feel free to check the <a href="https://adsb.slack.com">ADS-B Flight Tracking</a> Slack channel. Automatic invitation is on <a href="https://adsb.signup.team">adsb.signup.team</a>.</p>
 
 <p><a href="https://adsb.signup.team"><img src="http://i.bohumirzamecnik.cz/adsb/adsb-slack.png" /></a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ADS-B Part 2 - Hardware]]></title>
-    <link href="http://bohumirzamecnik.cz/blog/2016/adsb-part-2-hardware/"/>
-    <updated>2016-09-02T20:55:41+02:00</updated>
-    <id>http://bohumirzamecnik.cz/blog/2016/adsb-part-2-hardware</id>
-    <content type="html"><![CDATA[<p>We’ll explore how to choose and set up hardware for our ADS-B receiver.</p>
-
-<p>TODO: photo</p>
-
-<!-- more -->
-
-<ul id="markdown-toc">
-  <li><a href="#ads-b-flight-tracking-for-the-curious-series">ADS-B Flight Tracking for the Curious series</a></li>
-  <li><a href="#introduction">Introduction</a></li>
-  <li><a href="#tldr---my-hardware-list">TL;DR - my hardware list</a></li>
-  <li><a href="#going-backwards-along-the-requirements">Going backwards along the requirements</a>    <ul>
-      <li><a href="#sdr-receiver">SDR receiver</a>        <ul>
-          <li><a href="#choosing-a-compatible-dvb-t-stick">Choosing a compatible DVB-T stick</a></li>
-        </ul>
-      </li>
-      <li><a href="#computer">Computer</a>        <ul>
-          <li><a href="#raspberry-pi">Raspberry Pi</a></li>
-          <li><a href="#power-supply">Power supply</a></li>
-          <li><a href="#case">Case</a></li>
-        </ul>
-      </li>
-      <li><a href="#antenna">Antenna</a>        <ul>
-          <li><a href="#small-bundled-tv-antenna">Small bundled TV antenna</a></li>
-          <li><a href="#professional-1090-mhz-antenna">Professional 1090 MHz antenna</a></li>
-          <li><a href="#diy-1090-mhz-antenna">DIY 1090 MHz antenna</a></li>
-          <li><a href="#my-choice---cantenna">My choice - cantenna</a></li>
-          <li><a href="#connectors">Connectors</a></li>
-        </ul>
-      </li>
-      <li><a href="#rf-cables-and-adapters">RF cables and adapters</a></li>
-      <li><a href="#power-source">Power source</a></li>
-      <li><a href="#internet-connection">Internet connection</a></li>
-    </ul>
-  </li>
-  <li><a href="#putting-it-together">Putting it together</a></li>
-  <li><a href="#where-to-place-and-how-to-mount-the-components">Where to place and how to mount the components?</a>    <ul>
-      <li><a href="#options-for-mounting-the-parts">Options for mounting the parts</a></li>
-      <li><a href="#antenna-mount">Antenna mount</a></li>
-      <li><a href="#a-concrete-scheme">A concrete scheme</a></li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="ads-b-flight-tracking-for-the-curious-series">ADS-B Flight Tracking for the Curious series</h2>
-
-<ul>
-  <li><a href="../ads-b-flight-tracking/">Part 1: Why should be build our own ADS-B receiver and roughly how it works?</a></li>
-  <li><strong>Part 2: Hardware - architecture an installation</strong></li>
-  <li>Part 3: Software for feeding data</li>
-  <li>Part 4: Software for viewing data</li>
-  <li>…</li>
-</ul>
-
-<h2 id="introduction">Introduction</h2>
-
-<p>So our goal is to send data to the services and exchanges we talked about in the introduction. The hardware should not be expensive and should be realatively easy to install for a normal programmer with basic Linux skills. As always this is just description of my experience and your milage may vary.</p>
-
-<p>In my installation I wanted to support the following sites: FlightRadar24.com, FlightAware.com, PlaneFinder.net, ADSBexchange.com and CZADSB.cz and also be able to archive my data. So which hardware to choose?</p>
-
-<h2 id="tldr---my-hardware-list">TL;DR - my hardware list</h2>
-
-<p>This is the hardware I bought for my project. Below we’ll look at the details.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>part</th>
-      <th>description</th>
-      <th>price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="http://www.ges.cz/cz/dvb-t-usb-tuner-s-sdr-dab-a-fm-GES08804665.html">DVB-T tuner</a></td>
-      <td>Realtec RTL2832 chipset, Rafaelo Micro R820T tuner, frequency ange 25 - 1750 MHz, IEC female connector</td>
-      <td>559 CZK</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><strong>parts for DIY antenna (quarter-wave whip):</strong></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>soldering N panel connector</td>
-      <td>N-512</td>
-      <td>86 CZK</td>
-    </tr>
-    <tr>
-      <td>N male - F female adapter</td>
-      <td>CVP-107</td>
-      <td>70 CZK</td>
-    </tr>
-    <tr>
-      <td>small old can</td>
-      <td>to serve as a ground plane</td>
-      <td>free</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><strong>cables &amp; adapters:</strong></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>RG6 cable</td>
-      <td>11m</td>
-      <td>165 CZK</td>
-    </tr>
-    <tr>
-      <td>2 male F connectors</td>
-      <td> </td>
-      <td>2x 20 CZK</td>
-    </tr>
-    <tr>
-      <td>Alcad PL-310 amplifier</td>
-      <td>wide-band, not used at the end</td>
-      <td>245 CZK</td>
-    </tr>
-    <tr>
-      <td>power inserter for the amp P1-101</td>
-      <td>not used at the end)</td>
-      <td>130 CZK</td>
-    </tr>
-    <tr>
-      <td>connector for the power inserter DCK 21 HQ</td>
-      <td> </td>
-      <td>22 CZK</td>
-    </tr>
-    <tr>
-      <td>power source for the amp power inserter</td>
-      <td> </td>
-      <td>269 CZK</td>
-    </tr>
-    <tr>
-      <td>2x adapters F female-female</td>
-      <td> </td>
-      <td>2 x 40 CZK</td>
-    </tr>
-    <tr>
-      <td>IEC male - F female adapter CVP-308</td>
-      <td> </td>
-      <td>?</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td><strong>computer:</strong></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td>Raspberry Pi 3</td>
-      <td> </td>
-      <td>1399 CZK</td>
-    </tr>
-    <tr>
-      <td>RPi case</td>
-      <td> </td>
-      <td>213 CZK</td>
-    </tr>
-    <tr>
-      <td>RPi power source</td>
-      <td> </td>
-      <td>399 CZK</td>
-    </tr>
-    <tr>
-      <td>microSD card</td>
-      <td>16 GB</td>
-      <td>199 CZK</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Total cost: 3897 CZK (~162 USD).</p>
-
-<p>If I didn’t hurry I could buy the DVB-T for half the price. Also there was a problem with the amp/injector, I should have chosen another one.</p>
-
-<p>Now let’s dig deeper how to choose your own the hardware and learn how to decide.</p>
-
-<h2 id="going-backwards-along-the-requirements">Going backwards along the requirements</h2>
-
-<p>Abstract scheme of the hardware architecture:</p>
-
-<p><img src="/assets/blog/categories/flight-tracking/adsb-hardware-abstract-schema.svg" type="image/svg+xml" />&lt;/img&gt;</p>
-
-<h3 id="sdr-receiver">SDR receiver</h3>
-
-<p>The commercial sites usually provide you with a convenient software package to feed their service that you can install with minimal fuss. But what is common for all the sites is that they support feeding data in format offered by a program called <code>dump1090</code>. And that is good for us, we can use one program to feed them all.</p>
-
-<p><code>dump1090</code> uses the <code>RTLSDR</code> driver for Software Defined Radio which works with a family of DVB-T tuners. For us it means we can choose a cheap DVB-T stick compatible with RTLSDR and watch planes instead of TV.</p>
-
-<h4 id="choosing-a-compatible-dvb-t-stick">Choosing a compatible DVB-T stick</h4>
-
-<p>The RTLSDR driver project exploits some tricks in one particular chipset <strong>Realtec RTL2832</strong>. There exist DVB-T sticks on the market with different chipsets but this driver cannot utilize them. It may not always be apparent which chipset a particular tuner contains but fortunately there are some tables which map the tuner models and chipsets:</p>
-
-<ul>
-  <li>http://sdr.osmocom.org/trac/wiki/rtl-sdr - official list of supported hardware</li>
-  <li>http://rtlsdr.org/</li>
-  <li>http://elinux.org/RPi_VerifiedPeripherals#USB_TV_Tuners_and_DVB_devices</li>
-  <li>https://www.linuxtv.org/wiki/index.php/DVB-T_USB_Devices/Full</li>
-  <li>http://www.rtl-sdr.com/about-rtl-sdr/</li>
-</ul>
-
-<p>Note there are two relevant parts of a DVB-T stick - chipset and tuner.</p>
-
-<p>The supported chipset is <strong><a href="http://www.realtek.com.tw/products/productsView.aspx?Langid=1&amp;PNid=22&amp;PFid=35&amp;Level=4&amp;Conn=3&amp;ProdID=257">Realtec RTL2832U</a></strong>. It comes with various tuners: <strong>Rafaelo Micro R820T</strong>, <strong>R820T2</strong>, <strong>R828D</strong>, <strong><a href="http://www.superkuh.com/gnuradio/Elonics-E4000-Low-Power-CMOS-Multi-Band-Tunner-Datasheet.pdf">Elonics E4000</a></strong> (discontinued), Fitipower FC0013. All are fine.</p>
-
-<p>Chipsets unsupported by the driver are <strong>IT9135</strong>, <strong>IT9130</strong>, <strong>AF9135</strong>. The Fitipower FC0012 and FCI FC2580 tuners may not suitable due to not covering the 1090 Mhz band in their range.</p>
-
-<p>The DVB-T stick I bought contains the Realtec RTL2832U chipset and Rafaelo Micro R820T tuner.</p>
-
-<p>Since I was a bit in a hurry I bought it a local store for about $20. Otherwise I’d buy this one: <a href="http://www.dx.com/en/p/rtl2832u-r820t-mini-dvb-t-dab-fm-usb-digital-tv-dongle-black-170541">RTL2832U + R820T Mini DVB-T + DAB+ + FM USB Digital TV Dongle - Black</a> for only 10.5 USD.</p>
-
-<h3 id="computer">Computer</h3>
-
-<p>For decoding the ADB-B message stream via the said DVB-T tuner we need a computer. Basically any computer capable of running Linux, with a USB connector and connected to the internet is fine. Some ADS-B software also runs on OS X or Windows but it is out of scope of this series (I don’t use Windows and OS X will be covered briefly just for testing the DVB-T stick).</p>
-
-<p>We need it to run 24/7, so that if it’s power consumption is low, we save on electricity bills. Also a micro-computer is easier to install near to the antenna, eg. to an attic or into a waterproof box on the roof, if that’s our wish.</p>
-
-<h4 id="raspberry-pi">Raspberry Pi</h4>
-
-<p>A very nice choice is <strong><a href="https://www.raspberrypi.org/">Raspberry Pi</a></strong>. It’s a fully-features credit-card sized device with only a few watts consumption. I think any version should be sufficient. Note that RPi Zero does not have an ethernet port integrated and requires and external USB-ethernet adapter.</p>
-
-<p>I chose Raspberry Pi 3 for it’s higher performance and both ethernet and integrated WiFi. The ADS-B programs are not very resource hungry, still I wanted more headroom for additional software. If you want to save money take an older version (eg. RPi 2 B). The system is stored on a small microSD card and the device is powered via USB.</p>
-
-<h4 id="power-supply">Power supply</h4>
-
-<p>The RPi is powered by a small 5V power supply via a mini USB cable (the same as on Android phones). The power supply <a href="https://www.raspberrypi.org/help/faqs/#powerReqs">capacity depends on the RPi model</a>. Generally any phone PSU with 2.5A capacity on 5V is fine.</p>
-
-<h4 id="case">Case</h4>
-
-<p>Also you may want to put the RPi into a case so it does not get hurt. For outside mount you can put all the stuff into a bigger waterproof case, then a dedicated RPi case is not needed.</p>
-
-<h3 id="antenna">Antenna</h3>
-
-<p>DVB-T sticks usually come with a small indoor antenna. You can catch some planes on it but it is optimized for TV, not ADS-B, and has a short cable (eg. 0.5 m). A better option is a dedicated antenna tuned for the 1090 MHz band. Typically we need an omnidirectional antenna, ie. catching signals equally from all direction. In case we wish eg. to focus only on an airport nearby, we may use a directional antenna.</p>
-
-<p>Also in order to provide good condition for signal reception the antenna should be placed on a place with good view to the whole sky, typically a roof or a stand, not indoors. It means the antena and the cables to the receiver need to be weather-proof.</p>
-
-<h4 id="small-bundled-tv-antenna">Small bundled TV antenna</h4>
-
-<p>A small antenna usually bundled with the DVB-T tuner can useful to test the set up before we prepare any better antenna. It is typically equipped with the IEC connector.</p>
-
-<h4 id="professional-1090-mhz-antenna">Professional 1090 MHz antenna</h4>
-
-<p>In case we have enough money and want to invest in a good antenna we can buy a ready-made collinear antenna (eg. the <a href="http://shop.jetvision.de/epages/64807909.sf/en_GB/?ObjectPath=/Shops/64807909/Products/67120">“SCO-1090-MCX” Antenna (1090 MHz), 3m cable, MCX</a> for about $78). A benefit is such antenna will almost for sure work properly (given a good view of sky) compared to DIY solutions.</p>
-
-<h4 id="diy-1090-mhz-antenna">DIY 1090 MHz antenna</h4>
-
-<p>If we don’t have enough money, if we’re radio amateurs with experience in building microwave antennas or if we just want some fun, we can build an antenna ourselves.</p>
-
-<p>A simple fool-proof design that even a programmer with no experience in electro can build is called “quarter-wave <a href="https://en.wikipedia.org/wiki/Whip_antenna">whip</a> with <a href="https://en.wikipedia.org/wiki/Ground_plane">ground plane</a>”.</p>
-
-<p>Eg. the user abcd567 at the FlightAware forum wrote a nice tutorial <a href="http://discussions.flightaware.com/post157718.html#p157718">3 easy antennas for beginners</a>.</p>
-
-<p><img src="https://farm9.staticflickr.com/8743/16550012467_1dbb68602f.jpg" /></p>
-
-<p>Roughly we:
-- take a soldering panel N connector
-- attach a pice of wire with a pre-computed length
-- attach a few other wires, metal plate, or a can
-- we seal everything to be waterproof</p>
-
-<p>And we have an antenna.</p>
-
-<p>The whip should be of quarter-wave (<code>lambda / 4</code>) length, in our case roughly <strong>69 mm</strong>. How to we compute that? Just take the freqeuency and speed of light:</p>
-
-<p><code>
-lambda = c / f
-lambda / 4 = 299792458 / 1.09^9 * 1^3 / 4 ~= 68.76 mm
-</code></p>
-
-<p>Also the ground plane should be at least <code>lambda / 4</code> from the center to the edge. According to <a href="https://en.wikipedia.org/wiki/Ground_plane">Wikipedia</a>. Ie. a larger ground plane is not a problem.</p>
-
-<blockquote>
-  <p>A ground plane is a flat or nearly flat horizontal conducting surface that serves as part of an antenna, to reflect the radio waves from the other antenna elements. […] To function as a ground plane, the conducting surface must be at least a quarter of the wavelength (λ/4) of the radio waves in size.</p>
-</blockquote>
-
-<p>You can be a bit creative with the ground-plane:</p>
-
-<ul>
-  <li>4-legged spider from wires</li>
-  <li>8-legged spider</li>
-  <li>can</li>
-  <li>cone</li>
-</ul>
-
-<p>In case we’re experienced we can build our own version of the commercially available collinear antennas.</p>
-
-<h4 id="my-choice---cantenna">My choice - cantenna</h4>
-
-<p>I’ve used the bundled antenna for testing and then that my brother Vojtěch helped me to build a whip with a ground plane made of a can. It’s based on an soldering panel N connector and there’s a adapter to the F connector on the cable. We took a piece of a wire of thickess so it fits the N connector hole, soldered it there, cut a small can to the quarter-wave height, made a hole in the middle, fitted it with the N connector and atteched a N-F adapter. For the outside we sealed the wire with a gaffa tape and the connector with a hot-glue. It’s not perfect, but it works.</p>
-
-<p>I’d rather recommend another ground-plane type. The reason is a can has sharp edges and the space inside is tight so it’s hard to do anything there without cutting the fingers. Also the can was from steel and soon it started to rust. Better would be alluminium, or just the copper spider legs.</p>
-
-<p>TODO: photo of my antenna</p>
-
-<h4 id="connectors">Connectors</h4>
-
-<p>You may notice there is a wide variety of RF (radio-frequency) cable connectors. Let’s describe the most common ones:</p>
-
-<ul>
-  <li>IEC (<a href="https://en.wikipedia.org/wiki/TV_aerial_plug">IEC 61169-2</a>)
-    <ul>
-      <li>medium-sized round TV connector without a screw</li>
-      <li>usually on a DVB-T tuner as an input</li>
-      <li>useful indoors</li>
-    </ul>
-    <p><a href="https://commons.wikimedia.org/wiki/File:IEC_169-2_male_and_female_connector.JPG#/media/File:IEC_169-2_male_and_female_connector.JPG"><img src="https://upload.wikimedia.org/wikipedia/commons/2/23/IEC_169-2_male_and_female_connector.JPG" alt="IEC 169-2 male and female connector.JPG" height="214" width="320" /></a><br />By <a href="http://bohumirzamecnik.cz//commons.wikimedia.org/wiki/User:Josutus" title="User:Josutus">Josutus</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a></p>
-  </li>
-  <li><a href="https://en.wikipedia.org/wiki/F_connector">F</a>
-    <ul>
-      <li>medium-sized connector with a screw</li>
-      <li>diameter: 11 mm (male), 9.5 mm (female)</li>
-      <li>for general radio applications</li>
-      <li>usage mostly indoors, but weatherproof variants exist</li>
-      <li>usually used with the RG-6/U cable</li>
-    </ul>
-    <p><a href="https://commons.wikimedia.org/wiki/File:F_Connector_Side.jpg#/media/File:F_Connector_Side.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/F_Connector_Side.jpg" alt="F Connector Side.jpg" height="214" width="320" /></a><br />By © <a href="http://bohumirzamecnik.cz//commons.wikimedia.org/wiki/User:Colin" title="User:Colin">User:Colin</a>&nbsp;/&nbsp;<a href="http://bohumirzamecnik.cz//commons.wikimedia.org/wiki/Main_Page" title="Main Page">Wikimedia Commons</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a></p>
-  </li>
-  <li><a href="https://en.wikipedia.org/wiki/N_connector">N</a>
-    <ul>
-      <li>bigger connector with a screw</li>
-      <li>can be used to make a DIY antenna</li>
-      <li>can be used outdoors</li>
-      <li>diameter: 20.3 mm (male), 15.7 mm (female)</li>
-    </ul>
-    <p><a href="https://commons.wikimedia.org/wiki/File:Male_type_N_connector.jpg#/media/File:Male_type_N_connector.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Male_type_N_connector.jpg" alt="Male type N connector.jpg" height="214" width="320" /></a><br />By <a href="http://bohumirzamecnik.cz//commons.wikimedia.org/w/index.php?title=User:Swift.Hg&amp;action=edit&amp;redlink=1" class="new" title="User:Swift.Hg (page does not exist)">Swift.Hg</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a></p>
-  </li>
-  <li><a href="https://en.wikipedia.org/wiki/SMA_connector">SMA</a>
-    <ul>
-      <li>smaller connector with a screw</li>
-      <li>50 Ω impedance</li>
-      <li>diameter: 7.9 mm (male)</li>
-    </ul>
-    <p><a href="https://commons.wikimedia.org/wiki/File:Male_50_ohm_SMA_connector.jpg#/media/File:Male_50_ohm_SMA_connector.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Male_50_ohm_SMA_connector.jpg" alt="Male 50 ohm SMA connector.jpg" height="235" width="320" /></a><br />By <a href="http://bohumirzamecnik.cz//commons.wikimedia.org/w/index.php?title=User:Swift.Hg&amp;action=edit&amp;redlink=1" class="new" title="User:Swift.Hg (page does not exist)">Swift.Hg</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="http://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a></p>
-  </li>
-  <li><a href="https://en.wikipedia.org/wiki/SMC_connector">SMC</a>
-    <ul>
-      <li>small connector with a screw</li>
-      <li>diameter: 4.8 mm</li>
-    </ul>
-    <p><a href="https://commons.wikimedia.org/wiki/File:SMC-Steckverbinder.jpg#/media/File:SMC-Steckverbinder.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/SMC-Steckverbinder.jpg" alt="SMC-Steckverbinder.jpg" height="240" width="320" /></a><br />By <a href="https://de.wikipedia.org/wiki/User:DH4YM" class="extiw" title="de:User:DH4YM">DH4YM</a> at the <a href="https://de.wikipedia.org/wiki/" class="extiw" title="de:">German language Wikipedia</a>, <a href="http://creativecommons.org/licenses/by-sa/3.0/" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a></p>
-  </li>
-  <li><a href="https://en.wikipedia.org/wiki/MCX_connector">MCX</a>
-    <ul>
-      <li>small golden connector, no screw</li>
-      <li>used on some DVB-T tuners as an alternative input</li>
-      <li>outer plug diameter: 3.6 mm</li>
-    </ul>
-    <p><a href="https://en.wikipedia.org/wiki/File:MCX_Male%26Female.jpg#/media/File:MCX_Male%26Female.jpg"><img src="https://upload.wikimedia.org/wikipedia/en/b/bb/MCX_Male%26Female.jpg" alt="MCX Male&amp;Female.jpg" height="127" width="630" /></a><br />By <a href="http://bohumirzamecnik.cz//en.wikipedia.org/w/index.php?title=User:ChucklesNuts&amp;action=edit&amp;redlink=1" class="new" title="User:ChucklesNuts (page does not exist)">ChucklesNuts</a> (<a href="http://bohumirzamecnik.cz//en.wikipedia.org/wiki/User_talk:ChucklesNuts" title="User talk:ChucklesNuts">talk</a>) (<a href="http://bohumirzamecnik.cz//en.wikipedia.org/wiki/Special:ListFiles/ChucklesNuts" title="Special:ListFiles/ChucklesNuts">Uploads</a>) - Own work, <a href="http://bohumirzamecnik.cz//en.wikipedia.org/wiki/Wikipedia:Text_of_the_GNU_Free_Documentation_License" title="GNU Free Documentation License">GFDL</a></p>
-  </li>
-</ul>
-
-<h3 id="rf-cables-and-adapters">RF cables and adapters</h3>
-
-<p>We need to feed the microware signal from the antenna to the tuner. The choice of a cable depends on the distance.</p>
-
-<p>In my case I used a 11 m coaxial RG-6 cable to connect antenna on an old chimney to the receiver in the attic. The cable could be shorter.</p>
-
-<p>What impedance: typically 75 ohm.</p>
-
-<ul>
-  <li>my setup:
-    <ul>
-      <li>RG-6 cable</li>
-      <li>F connector</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="power-source">Power source</h3>
-
-<p>Possibilities:</p>
-
-<ul>
-  <li>USB cable, power source, 230 V extension cord</li>
-  <li>USB extension cord, power source</li>
-  <li>power over ethernet
-    <ul>
-      <li>injector, extractor</li>
-      <li>expensive</li>
-      <li>OK for outdoor mounting</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="internet-connection">Internet connection</h3>
-
-<p>Possibilities:</p>
-
-<ul>
-  <li>ethernet</li>
-  <li>WiFi</li>
-</ul>
-
-<h2 id="putting-it-together">Putting it together</h2>
-
-<h2 id="where-to-place-and-how-to-mount-the-components">Where to place and how to mount the components?</h2>
-
-<h3 id="options-for-mounting-the-parts">Options for mounting the parts</h3>
-
-<ul>
-  <li>antenna, receiver &amp; computer inside
-    <ul>
-      <li>this is easiest, eg. to test the set up</li>
-      <li>(-) but the antenna doesn’t have enough sky view</li>
-      <li>thus it’s not recommended at all</li>
-    </ul>
-  </li>
-  <li><strong>antenna outside / receiver &amp; computer inside</strong>
-    <ul>
-      <li>(+) this is recommended since the electronic parts doesn’t have to be weatherproof sealed</li>
-      <li>(+) easy to access the device</li>
-      <li>needs a long-enough RF cable</li>
-      <li>(-) a very long cable may attenuate the signal
-        <ul>
-          <li>Check the cable specification. Eg. RG-6 cable attenuation at 1000 MHz is 0.21 dB / m. You may need an amplifier. Still, an amplifier may improve signal reception even with a short cable.</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>antenna &amp; receiver outside / computer inside
-    <ul>
-      <li>(+) only small RF attenuation due to short cable</li>
-      <li>(+) easy to access the device</li>
-      <li>(-) needs a long USB cable (up to 5 meters)</li>
-      <li>(-) may need a <a href="http://www.yourcablestore.com/USB-Cable-Length-Limitations-And-How-To-Break-Them_ep_42-1.html">USB repeater</a> (active cable) - up to 20-30 meters</li>
-    </ul>
-  </li>
-  <li><a href="http://imgur.com/a/Y8s2X">antenna, receiver &amp; computer outside</a>
-    <ul>
-      <li>(+) no need for long RF or USB cables</li>
-      <li>(+) looks cool</li>
-      <li>(-) more complicated network/power supply cabling
-        <ul>
-          <li>power-over-ethernet might be practical, but it’s expensive</li>
-          <li>taking 230 V to the roof might be bad due to possible humidity</li>
-          <li>power over USB - also limits on the length</li>
-        </ul>
-      </li>
-      <li>(-) needs weatherproof case, may overheat in summer</li>
-      <li>(-) harder to access the device</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="antenna-mount">Antenna mount</h3>
-
-<h3 id="a-concrete-scheme">A concrete scheme</h3>
-
-<p>Concrete scheme of the hardware architecture of my installation:</p>
 ]]></content>
   </entry>
   
