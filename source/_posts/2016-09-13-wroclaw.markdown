@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Travel.log #1 - Wrocław"
+title: "Poland - Wrocław"
 date: 2016-09-13 18:05:00 +0200
 comments: true
 categories: [travel, digital nomad, Poland]
@@ -94,10 +94,10 @@ At 5:30 the sun started to rise and sometimes a cyclist rode across the bridge -
 
 At about 7 AM I packed my things, shut down the fire with some green water and went towards the city. At least both me and my blazer have survived it. But then I said to myself. Well, I managed it, but that's enough for a while. There's some work waiting for me, so let's get some comfortable AirBnb room for several days and focus on the work.
 
-During the morning I was not so tired and went for a walk around the Oława park. It was an amazing sunday misty morning. Then I headed for the bus to Kraków, the next destination.
+During the morning I was not so tired and went for a walk around the Oława park. It was an amazing sunday misty morning. Then I headed for the bus to [Kraków](/blog/2016/krakow/), the next destination.
 
 <a data-flickr-embed="true"  href="https://www.flickr.com/photos/elgriton/29651905445/in/album-72157673569277236/" title="Near Olawa"><img src="https://c6.staticflickr.com/9/8226/29651905445_3d7ed7f57b_z.jpg" width="640" height="361" alt="Near Olawa"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
 
 ## The whole gallery of photos
 
-<a data-flickr-embed="true" href="https://www.flickr.com/photos/elgriton/albums/72157673569277236" title="2016/09 Poland"><img src="https://c3.staticflickr.com/9/8425/29288968090_71730ac883_z.jpg" width="640" height="361" alt="2016/09 Poland"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/elgriton/albums/72157673569277236" title="2016/09 Wroclaw"><img src="https://c3.staticflickr.com/9/8425/29288968090_71730ac883_z.jpg" width="640" height="361" alt="2016/09 Wroclaw"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
