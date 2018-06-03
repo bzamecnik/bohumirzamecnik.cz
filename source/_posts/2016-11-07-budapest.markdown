@@ -1,0 +1,68 @@
+---
+layout: post
+title: "Hungary - Budapest"
+date: 2016-11-07 20:00:00 +0100
+comments: true
+categories: [travel, digital nomad, Hungary]
+published: false
+---
+
+<!-- more -->
+
+## 16 September 2016 (Friday)
+
+So I boarded the delayed bus in Krakow and the next 8 hours I was just watching a nice movie unrolling behind the windows. I was admiring the Tatra mountains in Slovakia and the mightly Danube river. Also I starting to read the book Test-Driven Machine Learning. The total delay was something like an hour and half but still I came at a reasonable time in the evening. It was quite warm in Budapest.
+
+After some time I realized I forgot my lovely straw hat in the upper compartment of the bus :( It was very comfortable one and one of the few that fit my head well.
+
+It took a bit of time to get the right ticket for metro, since there were separate machines for metro and train ticket next to each other, each with a different queue.
+
+I arrived at the hostel located next to the Keleti Pályaudvar train station at around six. It was a familiar place where I arrived to Budapest the last autumn for the Apache Big Data conference. At first I could not find the door bell number since I didn't read the AirBnb instructions well, but a lady from the shop nearby helped me. Probably everybody struggles here so she's already trained.
+
+When I opened the door on the built-on gallery and rang the bell. The door opened, a girl inside and a guy immediately shouted on her that she must not open to strange people and shut down the door. Quite a strange greeting. I asked the guy whether I'm on the right address. At first he was a bit confused but then admitted my AirBnb reservation is alright. So I got accomodated at the Lokomotiv hostel.
+
+It was a quite comfortable place. In the lounge there were tables with benches and soft-light lamps, just like in a café, a great place to talk with people. My bed was in an upper floor inside on of the shared rooms. A bit warm air, otherwise ok.
+
+In the everning I went out for a beer with a scottish guy Gavin from the #nomads chanel on NomadList Slack to the Élesztő pub (meaning yeast). He was also a developer, writing full-stack Javascript. After I returned at midnight I met three korean girls (Hyerin and a few others) and an Irish guy Shane in the lounge. We had an awesome chat till 2:30 AM. This is a benefit of hostels.
+
+## 17 September 2016 (Saturday)
+
+I booked accomodation for the next 10 days (here and in some private room).
+
+A Finnish guy Alex came and accomodated next to me. He worked as a photographer in Finland and now started his studies in the University in Budapest. We had a lot to talk about.
+
+In the afternoon we joined a guided tour over the Jewish heritage in the city. It was nice to learn about the history.
+
+In the everning I realized it's possible to export transactions from AirBank directly to CSV. Originally I thought I'd have to extract it from the PDFs. Unfortunately it's limited to 1000 records. At least a few years of data.
+
+## 18 September 2016 (Sunday)
+
+I started cooking some nice dish again - some pasta with meat, zuchinni and salad.
+
+We had a nice talk with a guy called Kane from Vietnam.
+
+For my mum I was able to install some e-shop catalog software, I wrote in the past, as a Debian service on my computer. Before it was ran just on Heroku and due to the background workers it was a bit cumbersome to use. It would be nice to improve the UI as well.
+
+## 19 September 2016 (Monday)
+
+As I said I got some remote work offer (ML/big-data). Today we had an interview. I quite made sense.
+
+During the day I started a project called [Music Instrument Classification](https://github.com/bzamecnik/ml/tree/master/instrument-classification). I decided to set up the ML process and tools on some rather simple audio task. So I chose to synthesize a dataset of single tones with different pitch and instrument and classify the instrument. In practice classifying instruments could be useful eg. for a tuner application.
+
+## 20 September 2016 (Tuesday)
+
+I moved to a private apartment I booked on AirBnb. It was not directly in the center but still quite close eg. to the West End shopping center. On the way I visited some nice bigger park.
+
+Also I worked synthesizing the dataset using the mignus library (Python to MIDI) to FluidSynth (MIDI to audio).
+
+There was a nice place, Buddha Expres, near the Nyugati Pályaudvar station with pretty decent thai noodles.
+
+In the evening we had a nice chat with Michael, the AirBnb host. He was working as some Network Operations manager for TV streaming, quite a lot of stress, and after they broke off with his girlfriend he decided to rent flats over AirBnb.
+
+Afterwards I met some other people from the #nomads channel in the Szimpla Kert. It's a most famous ruin pub in Budapest. Since I visited it for the first time last year I love that place and I like to return there again and again.
+
+## 21 September 2016 (Wednesday)
+
+Round the noon somebody rang the bell. Guys from the electric company came to shut down the electricity because of a debt! WTF?
+
+## The whole gallery of photos
