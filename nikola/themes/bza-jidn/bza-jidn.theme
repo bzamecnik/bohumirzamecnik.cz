@@ -1,0 +1,6 @@
+[Theme]
+engine = mako
+parent = jidn
+author = Bohumir Zamecnik
+based_on = Clinton James, lanyon, Hynek <https://hynek.me>
+license = MIT
