@@ -43,10 +43,12 @@ Various things I was working on. Very incomplete list.
 ## [Rossum](http://rossum.ai/)
 
 - document extraction machine learning research and engineering
+- performance tuning
 
 ## [Neuron SoundWare](http://www.neuronsw.com/)
 
 - sound processing / music generation machine learning research and engineering
+- OCR of bar graphs
 
 ## Freelance ML engineer
 
@@ -55,7 +57,9 @@ Various things I was working on. Very incomplete list.
 ## [Jumpshot](http://www.jumpshot.com/)
 
 - internet-scale web analytics and market insights
+  - Java, Scala
 - machine learning for time-series and anomaly detection
+	- Keras
 
 ## [FAIROS MEDIA](http://fairos.cz/)
 
@@ -67,15 +71,16 @@ Various things I was working on. Very incomplete list.
 
 - machine learning for time-series and natural language processing
 - algorithmic trading system
+- Python, Theano, GenSim, Java
 
 ## [Etnetera](http://www.etnetera.cz/)
 
-- [Datart](http://datart.cz) - e-shop
-- [Soyka](http://soyka.etnetera.cz/) - personalization and analytics tool
+- [Datart](http://datart.cz) - e-shop, Java
+- [Soyka](http://soyka.etnetera.cz/) - personalization and analytics tool, Java, MongoDB
 
 ## [Unicorn Solutions](http://www.unicorn.eu/)
 
-- [Unicorn Universe](https://unicornuniverse.eu/) - flexible enterprise information system
+- [Unicorn Universe](https://unicornuniverse.eu/) - flexible enterprise information system, Java
 
 ## Charles University in Prague
 
@@ -97,6 +102,7 @@ Interactive Preview Renderer for Complex Camera Models
 **Abstract:** An interactive renderer was implemented that allows users to preview the effects of imaging with lenses, such as depth of field, bokeh (defocus highlights) and tilt-shift lens configurations. It is based on a state-of-the-art method which combines the power of GPU rasterization and ray tracing. Many models and interactive visualizations were created. A non-interactive simulation of a complex geometrical lens model has been made which is able to produce optical aberrations. Also a prototype implementation of recent fast spreading filters is available. A thorough summary of the principles of optical image formation, lens models and depth of field rendering methods used in computer graphics is given along with a comparison of the approaches and new insights. New possibilities of representing the behavior of complex lenses are suggested, which could be employed to accelerate the rendering.
 
 - [thesis text](https://www.dropbox.com/sh/6rkoubtpoc1fsje/bZJdaelwjz/mff-uk/interactive-preview-renderer-for-complex-camera-models_zamecnik_thesis_2011.pdf) (7.2 MB)
+- [project site](https://bzamecnik.github.io/bokehlab/)
 - [slides](https://www.dropbox.com/sh/6rkoubtpoc1fsje/7UGduv0iBO/mff-uk/bokehlab_defence_slides_2011.pdf)
 - [GitHub repo](https://github.com/bzamecnik/bokehlab)
 - Supervisor: [Alexander Wilkie](http://cgg.mff.cuni.cz/~wilkie/Website/Home.html)
@@ -122,7 +128,7 @@ Advanced Halftoning Methods
 - Software Project (NPRG023)
 - XML router - a lightweight alternative to ESB
 - C#, .NET, XML, Schematron, Git
-- [Assembla project site](https://www.assembla.com/spaces/xrouter)
+- [GitHub](https://github.com/bzamecnik/XRouter), [Assembla project site](https://www.assembla.com/spaces/xrouter)
 - team of five people
 - Supervisor: [Martin Nečaský](http://www.ksi.mff.cuni.cz/~necasky/)
 
@@ -209,10 +215,11 @@ Advanced Halftoning Methods
 - JaGrLib module
 - Java, SVN, Eclipse
 
-### Carousel
+### Swan Carousel
 
 - [Virtual Reality](http://dcgi.felk.cvut.cz/home/zara/PGR012/) (NPGR012)
 - interactive virtual reality model
+- [GitHub repo](https://github.com/bzamecnik/vrml-swan-carousel)
 - VRML, Javascript, SVN
 - three-people teamwork
 
