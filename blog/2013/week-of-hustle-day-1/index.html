@@ -1,350 +1,188 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>
-    Week of Hustle - Day 1 - 
-    
-    Bohumír Zámečník</title>
-  <meta name="author" content="Bohumír Zámečník">
-
-  
-  <meta name="description" content="Over the next week I’ll be trying hard to port the HarmonEye application from desktop to Android. You’ll be able to watch the progress and &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-1">
-  <link href="https://s.gravatar.com/avatar/f90538dcd2df4a510c8f0b057154dea1?s=32" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/tables.css" media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="/atom.xml" rel="alternate" title="Bohumír Zámečník" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-44857522-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Week of Hustle - Day 1 | Bohumír Zámečník</title>
+<link href="../../../assets/css/all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="canonical" href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-1/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Bohumír Zámečník">
+<link rel="prev" href="../refactoring-the-path-to-freedom/" title="Refactoring The Path To Freedom" type="text/html">
+<link rel="next" href="../week-of-hustle-day-2/" title="Week of Hustle - Day 2" type="text/html">
+<meta property="og:site_name" content="Bohumír Zámečník">
+<meta property="og:title" content="Week of Hustle - Day 1">
+<meta property="og:url" content="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-1/">
+<meta property="og:description" content="Over the next week I'll be trying hard to port the HarmonEye application from desktop to Android. You'll be able to watch the progress and experiences in this blog. And hopefully in a week there will ">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2013-12-01T16:41:00+01:00">
+<meta property="article:tag" content="harmoneye">
+<meta property="article:tag" content="jfdi">
+<meta property="article:tag" content="week of hustle">
 </head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+            styles, `#sidebar-checkbox` for behavior. -->
+    <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox"><!-- Toggleable sidebar --><div class="sidebar" id="sidebar">
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Bohumír Zámečník</a></h1>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-    <li><a href="http://eepurl.com/xX1M1" rel="subscribe-email" title="subscribe via email">Email</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:bohumirzamecnik.cz" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/blog/">Blog</a></li>
-  <li><a href="/blog/archives/">Archives</a></li>
-  <li><a href="/projects/">Projects</a></li>
-  <li><a href="/about/">About</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">Week of Hustle - Day 1</h1>
+        <nav role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../"><i class="fa fa-2x fa-fw fa-home"></i> Home</a>
+          <a class="sidebar-nav-item" href="../../"><i class="fa fa-2x fa-fw fa-user-circle"></i> Blog</a>
+        </nav><nav id="menu" role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../about/">About</a>
+        <a class="sidebar-nav-item" href="../../../projects/">Projects</a>
+        <a class="sidebar-nav-item" href="../../../archive.html">Archive</a>
+        <a class="sidebar-nav-item" href="../../../categories/">Tags</a>
+        <a class="sidebar-nav-item" href="../../../rss.xml">RSS feed</a>
+        <a class="sidebar-nav-item" href="https://github.com/bzamecnik/">GitHub</a>
+        <a class="sidebar-nav-item" href="https://twitter.com/bzamecnik">Twitter</a>
+        <a class="sidebar-nav-item" href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn</a>
+        <a class="sidebar-nav-item" href="https://www.flickr.com/photos/elgriton/">Flickr</a>
+        <a class="sidebar-nav-item" href="mailto:bohumir.zamecnik@gmail.com">E-mail</a>
     
     
-      <p class="meta">
+    </nav>
+</div>
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          
+    <h2 id="brand" class="masthead-title">
+      <a href="../../../" title="Bohumír Zámečník" rel="home">Bohumír Zámečník</a>
+    </h2>
+
+        </div>
+      </div>
+
+      <div class="container content" id="content">
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/BlogPosting"><header><h1 class="post-title p-name entry-title" itemprop="headline">
+      <a href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-1/" class="u-url">Week of Hustle - Day 1</a>
+</h1>
+        <div class="metadata">
+        <meta itemprop="inLanguage" content="en">
+<p class="dateline">
+            <time class="post-date published dt-published" datetime="2013-12-01T16:41:00+01:00" itemprop="datePublished" title="2013-12-01">2013-12-01</time></p>
+                <p class="commentline">
+        
+    <a href="#disqus_thread" data-disqus-identifier="cache/posts/2013/week-of-hustle-day-1.html">Comments</a>
+
+
+        </p>
+</div>
         
 
+    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
+<p>Over the next week I'll be trying hard to port the <a href="http://harmoneye.com/">HarmonEye </a>application from desktop to Android. You'll be able to watch the progress and experiences in this blog. And hopefully in a week there will be a app with most basic features available for downloading to your mobile device.</p>
+<!-- TEASER_END -->
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-01T16:41:00+01:00" pubdate data-updated="true">Dec 1<span>st</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>Over the next week I’ll be trying hard to port the <a href="http://harmoneye.com/">HarmonEye </a>application from desktop to Android. You’ll be able to watch the progress and experiences in this blog. And hopefully in a week there will be a app with most basic features available for downloading to your mobile device.</p>
-
-<!--more-->
-
-<p>I’ve been watching the communities of product bootstrapping, one of which is Justin Jackson’s <a href="http://jfdi.bz/" title="Just F***ing Do It">JFDI</a>. Fortunately, new registration spots have been open recently, so I decided to join. Moreover, today has started the second round of so called <a href="http://justinjackson.ca/why-you-need-a-week-of-hustle/">Week of Hustle</a>, a nice way to get rid of distractions and let people motivate each other (read: “kick oneself in the ass”) to build and launch a project within a single week sprint.</p>
-
-<p>I’ve already started porting it several months ago and got to a point of having basic audio input, very simple processing (just an average volume) and simple rendering (a moving graph). Since then I’ve felt very tired and I waited for the day D.</p>
-
+<p>I've been watching the communities of product bootstrapping, one of which is Justin Jackson's <a href="http://jfdi.bz/" title="Just F***ing Do It">JFDI</a>. Fortunately, new registration spots have been open recently, so I decided to join. Moreover, today has started the second round of so called <a href="http://justinjackson.ca/why-you-need-a-week-of-hustle/">Week of Hustle</a>, a nice way to get rid of distractions and let people motivate each other (read: "kick oneself in the ass") to build and launch a project within a single week sprint.</p>
+<p>I've already started porting it several months ago and got to a point of having basic audio input, very simple processing (just an average volume) and simple rendering (a moving graph). Since then I've felt very tired and I waited for the day D.</p>
 <p>As I left the job I had to return the MacBook and I decided to buy a new 2013 Retina one. What a coincidence, on 29th November, the last day in the work, Apple held the Black Friday and the MacBook can be had for a decent price. The downside (compared to buying it earlier) is that it will be delivered by around 10th December.</p>
-
-<p>So there’s a week and half to suffer from a painfully slow (albeit just a year-old) home computer in order to get to work done… At least it’s a way to appreciate fast a SSD, 4x more RAM and a friendlier OS :) Anyway, what have we been using ever since? Are we just too spoilt or the system always sucked? Anyway, I have to prepare the development environment from scratch and on a different platform.</p>
-
+<p>So there's a week and half to suffer from a painfully slow (albeit just a year-old) home computer in order to get to work done... At least it's a way to appreciate fast a SSD, 4x more RAM and a friendlier OS :) Anyway, what have we been using ever since? Are we just too spoilt or the system always sucked? Anyway, I have to prepare the development environment from scratch and on a different platform.</p>
 <p><strong>The goal features</strong></p>
-
 <ul>
-  <li>capture the audio from microphone</li>
-  <li>process it - compute the volume for each tone bin</li>
-  <li>visualize it - in a circle (a bin for each tone)</li>
-  <li>allow play/pause</li>
+<li>capture the audio from microphone</li>
+<li>process it - compute the volume for each tone bin</li>
+<li>visualize it - in a circle (a bin for each tone)</li>
+<li>allow play/pause</li>
 </ul>
-
 <p><strong>Roadmap</strong></p>
-
 <ul>
-  <li>prepare the development environment (including a testing phone)</li>
-  <li>run the existing desktop application and basic Android port</li>
-  <li>get to work rendering via OpenGL ES</li>
-  <li>port the circle visualization into OpenGL ES (HarmonEye desktop uses some legacy functions not present in ES)</li>
-  <li>port the buffering code</li>
-  <li>get the FFT library working</li>
-  <li>port the processing code (CQT and the auxilliary filters)</li>
-  <li>implement single-octave CQT for better efficiency (both memory and CPU)</li>
-  <li>implement the controls (play/pause)</li>
-  <li>build the release package</li>
-  <li>publish on Google Play</li>
+<li>prepare the development environment (including a testing phone)</li>
+<li>run the existing desktop application and basic Android port</li>
+<li>get to work rendering via OpenGL ES</li>
+<li>port the circle visualization into OpenGL ES (HarmonEye desktop uses some legacy functions not present in ES)</li>
+<li>port the buffering code</li>
+<li>get the FFT library working</li>
+<li>port the processing code (CQT and the auxilliary filters)</li>
+<li>implement single-octave CQT for better efficiency (both memory and CPU)</li>
+<li>implement the controls (play/pause)</li>
+<li>build the release package</li>
+<li>publish on Google Play</li>
 </ul>
-
-<p><strong>Today’s summary</strong></p>
-
-<p>The environment is ready, as well as both existing applications. Both are running, however I’m suspicious that the desktop one has some data format problems as the visualization results don’t seem alright. I’ll have to debug it a bit.</p>
-
-<p>For months the testing HTC Desire had a problem - an annoying pupup message with a stacktrace appeard about twice a minute. I wasn’t able to fix it and since I’m using an iPhone recently I’ve almost gave up. What eventually helped was to remove all the sync accounts! So testing will hopefully be ok.</p>
-
-<p>Also as you can see the blog starts to be alive again. I’ve written a motivation behind all this doing - <a href="/blog/2013/refactoring-the-path-to-freedom/">Refactoring The Path To Freedom</a>.</p>
-
+<p><strong>Today's summary</strong></p>
+<p>The environment is ready, as well as both existing applications. Both are running, however I'm suspicious that the desktop one has some data format problems as the visualization results don't seem alright. I'll have to debug it a bit.</p>
+<p>For months the testing HTC Desire had a problem - an annoying pupup message with a stacktrace appeard about twice a minute. I wasn't able to fix it and since I'm using an iPhone recently I've almost gave up. What eventually helped was to remove all the sync accounts! So testing will hopefully be ok.</p>
+<p>Also as you can see the blog starts to be alive again. I've written a motivation behind all this doing - <a href="../refactoring-the-path-to-freedom/">Refactoring The Path To Freedom</a>.</p>
 <p>Last but not least if you find this interesting and would like to receive interesting information about music theory and visualization, feel free to <a href="http://eepurl.com/xX1M1" target="_blank">subscribe to my newsletter</a><span>.</span></p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Bohumír Zámečník</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-01T16:41:00+01:00" pubdate data-updated="true">Dec 1<span>st</span>, 2013</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/harmoneye/'>harmoneye</a>, <a class='category' href='/blog/categories/jfdi/'>jfdi</a>, <a class='category' href='/blog/categories/week-of-hustle/'>week of hustle</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-1/" data-via="bzamecnik" data-counturl="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-1/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/refactoring-the-path-to-freedom/" title="Previous Post: Refactoring The Path To Freedom">&laquo; Refactoring The Path To Freedom</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/week-of-hustle-day-2/" title="Next Post: Week of Hustle - Day 2">Week of Hustle - Day 2 &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-	<h1>About Me</h1>
-	<img src="/images/homepage/bza.jpg" style="max-width: 200px; border-radius: 150px; margin: 5px">
-	<p>How do things work? Ever since 1987 I’ve fallen in love with thinking about it. That's how I became a <a href="/about/">software engineer</a>.</p>
-	<p>#python · #scala · #
-	<abbr title="Machine Learning" data-toggle="tooltip" data-placement="bottom">ml</abbr>
-	· #audio · #
-	<abbr title="Digital Signal Processing" data-toggle="tooltip" data-placement="bottom">dsp</abbr>
-	· #bigdata· #digitalnomad</p>
-	<ul>
-		<li>
-			<a href="https://twitter.com/bzamecnik" class="twitter-follow-button" data-show-count="false">@bzamecnik on Twitter</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</li>
-		<li>
-			<a href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn profile</a>
-		</li>
-		<li>
-			<a href="http://github.com/bzamecnik/">GitHub</a>
-		</li>
-		<li>
-			<a href="http://flickr.com/people/elgriton/">Photos on Flickr</a>
-		</li>
-	</ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2016/krakow/">Poland - Kraków</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/adsb-part-2-hardware/">ADS-B Part 2 - Hardware</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/wroclaw/">Poland - Wrocław</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/ads-b-flight-tracking/">ADS-B Part 1 - Flight Tracking for the Curious</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/my-digital-nomad-story/">My Digital Nomad Story</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/112168593075061741028?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
+    </section><aside class="sharing no-print"><a href="#content" aria-label="Post beginning">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-up" aria-hidden="true" title="Post beginning"></i>
     </a>
-  </h1>
-</section>
+    <a href="http://bohumirzamecnik.cz/blog/2013/refactoring-the-path-to-freedom/" rel="prev" title="Refactoring The Path To Freedom">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-left" aria-hidden="true" title="Previous post: Refactoring The Path To Freedom"></i>
+    </a>
+    <a href="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-2/" rel="next" title="Next post: Week of Hustle - Day 2" aria-label="Next post: Week of Hustle - Day 2">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-right" aria-hidden="true"></i>
+    </a>
+    <span class="post-sharing">
+     <a href="http://twitter.com/share?text=Week+of+Hustle+-+Day+1&amp;url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2013%2Fweek-of-hustle-day-1%2F" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" aria-label="Share on Twitter">
+       <i class="fa fa-2x fa-fw fa-twitter-square" aria-hidden="true" title="Share on Twitter">
+     </i></a>
+     <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2013%2Fweek-of-hustle-day-1%2F" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" aria-label="Share on Facebook">
+       <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px" aria-hidden="true" title="Share of Facebook">
+     </i></a>
+     <a href="https://plus.google.com/share?url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2013%2Fweek-of-hustle-day-1%2F" aria-label="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+       <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px" aria-hidden="true" title="Share on Google+">
+     </i></a>
+     </span>
+</aside><div itemprop="author" itemscope itemtype="http://schema.org/Person">
 
 
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - <a href="/about/">Bohumír Zámečník</a> -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'bzamecnik';
-      
+        <section class="comments hidden-print"><h2>Comments</h2>
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-1/';
-        var disqus_url = 'http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-1/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="bzamecnik",
+            disqus_url="http://bohumirzamecnik.cz/blog/2013/week-of-hustle-day-1/",
+        disqus_title="Week of Hustle - Day 1",
+        disqus_identifier="cache/posts/2013/week-of-hustle-day-1.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section><script>var disqus_shortname="bzamecnik";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>
+© 2018 <a href="mailto:bohumir.zamecnik@gmail.com">Bohumír Zámečník</a>
+- Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>,
+theme based on: <a href="https://themes.getnikola.com/v7/jidn/">jidn</a>
+/ <a href="https://github.com/poole/lanyon">lanyon</a>
 
+</p>
+            
+        </footer>
+</div>
+    </article>
+</div>
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-44857522-1']);
+_gaq.push(['_trackPageview']);
 
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-<a href="https://github.com/bzamecnik/bohumirzamecnik.cz/" class="github-ribbon"><img src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
-
-
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script><script src="../../../assets/js/all-nocdn.js"></script><!-- fancy dates --><script>
+    moment.locale("en");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</div>
 </body>
 </html>

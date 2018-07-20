@@ -1,679 +1,386 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>
-    HarmonEye: Hard-won Experience After Three Years of My Life - 
-    
-    Bohumír Zámečník</title>
-  <meta name="author" content="Bohumír Zámečník">
-
-  
-  <meta name="description" content="In this article I’d like to summarize lessons learned during three years of development of software for music analysis, visualization and machine &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience">
-  <link href="https://s.gravatar.com/avatar/f90538dcd2df4a510c8f0b057154dea1?s=32" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/tables.css" media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="/atom.xml" rel="alternate" title="Bohumír Zámečník" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-44857522-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HarmonEye: hard-won experience after three years of my life | Bohumír Zámečník</title>
+<link href="../../../assets/css/all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="canonical" href="http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Bohumír Zámečník">
+<link rel="prev" href="../how-to-make-a-hive-udf-with-conflicting-guava/" title="How to make a Hive UDF with conflicting Guava" type="text/html">
+<link rel="next" href="../../2016/how-to-make-stl-with-svg-logo-and-text-in-openscad/" title="How to make STL with SVG logo and text in OpenSCAD" type="text/html">
+<meta property="og:site_name" content="Bohumír Zámečník">
+<meta property="og:title" content="HarmonEye: hard-won experience after three years of my life">
+<meta property="og:url" content="http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience/">
+<meta property="og:description" content="In this article I'd like to summarize lessons learned during three years of development of software for music analysis, visualization and machine learning and of my life. You can find a lot of experie">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2015-11-16T15:15:15+01:00">
+<meta property="article:tag" content="harmoneye">
 </head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+            styles, `#sidebar-checkbox` for behavior. -->
+    <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox"><!-- Toggleable sidebar --><div class="sidebar" id="sidebar">
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Bohumír Zámečník</a></h1>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-    <li><a href="http://eepurl.com/xX1M1" rel="subscribe-email" title="subscribe via email">Email</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:bohumirzamecnik.cz" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/blog/">Blog</a></li>
-  <li><a href="/blog/archives/">Archives</a></li>
-  <li><a href="/projects/">Projects</a></li>
-  <li><a href="/about/">About</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">HarmonEye: Hard-won Experience After Three Years of My Life</h1>
+        <nav role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../"><i class="fa fa-2x fa-fw fa-home"></i> Home</a>
+          <a class="sidebar-nav-item" href="../../"><i class="fa fa-2x fa-fw fa-user-circle"></i> Blog</a>
+        </nav><nav id="menu" role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../about/">About</a>
+        <a class="sidebar-nav-item" href="../../../projects/">Projects</a>
+        <a class="sidebar-nav-item" href="../../../archive.html">Archive</a>
+        <a class="sidebar-nav-item" href="../../../categories/">Tags</a>
+        <a class="sidebar-nav-item" href="../../../rss.xml">RSS feed</a>
+        <a class="sidebar-nav-item" href="https://github.com/bzamecnik/">GitHub</a>
+        <a class="sidebar-nav-item" href="https://twitter.com/bzamecnik">Twitter</a>
+        <a class="sidebar-nav-item" href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn</a>
+        <a class="sidebar-nav-item" href="https://www.flickr.com/photos/elgriton/">Flickr</a>
+        <a class="sidebar-nav-item" href="mailto:bohumir.zamecnik@gmail.com">E-mail</a>
     
     
-      <p class="meta">
+    </nav>
+</div>
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          
+    <h2 id="brand" class="masthead-title">
+      <a href="../../../" title="Bohumír Zámečník" rel="home">Bohumír Zámečník</a>
+    </h2>
+
+        </div>
+      </div>
+
+      <div class="container content" id="content">
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/BlogPosting"><header><h1 class="post-title p-name entry-title" itemprop="headline">
+      <a href="http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience/" class="u-url">HarmonEye: hard-won experience after three years of my life</a>
+</h1>
+        <div class="metadata">
+        <meta itemprop="inLanguage" content="en">
+<p class="dateline">
+            <time class="post-date published dt-published" datetime="2015-11-16T15:15:15+01:00" itemprop="datePublished" title="2015-11-16">2015-11-16</time></p>
+                <p class="commentline">
+        
+    <a href="#disqus_thread" data-disqus-identifier="cache/posts/2015/harmoneye-hard-won-experience.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-11-16T15:15:15+01:00" pubdate data-updated="true">Nov 16<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p><img src="/assets/posts/harmoneye-hard-won-experience/sunpilots.png" width="400" align="right" /></p>
-
-<p>In this article I’d like to summarize lessons learned during three years of development of software for music analysis, visualization and machine learning and of my life. You can find a lot of experience and advice not to repeat the mistakes I did.</p>
-
-<p>The goal: see what you hear in music. When you think you’re genius and can do all features at once, stop… It’s a trap! Go by small steps and get much further.</p>
-
-<!--more-->
+    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
+<p><img src="../../../images/harmoneye-hard-won-experience/sunpilots.png" width="400" align="right"></p>
+<p>In this article I'd like to summarize lessons learned during three years of development of software for music analysis, visualization and machine learning and of my life. You can find a lot of experience and advice not to repeat the mistakes I did.</p>
+<p>The goal: see what you hear in music. When you think you're genius and can do all features at once, stop... It's a trap! Go by small steps and get much further.</p>
+<!-- TEASER_END -->
 
 <p>Almost two years ago in December 2013 I quit my regular job at <a href="http://www.etnetera.cz/">Etnetera</a>. Working on e-commerce backend I was missing applied mathematics badly and wanted to build my own products. Martin Holečko, one of the founders of Etnetera gave me a nice book tip: <a href="http://fourhourworkweek.com/">4-Hour Work Week</a> by Tim Ferris. I decided <a href="http://bohumirzamecnik.cz/blog/2013/refactoring-the-path-to-freedom/">I want more freedom</a> and do what I was dreaming of and working on before.</p>
-
 <p>The idea is simple. I love music and want to understand better how it works. But my eyes are much more efficient and trained in finding patterns than my hearing.</p>
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/mStudajyJvo"></iframe></div>
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/mStudajyJvo "></iframe></div>
-
-<h2 id="a-bit-of-history">A bit of history</h2>
-
-<p>Since being a child I was fascinated by some beautifully strange moments in songs. But classical music theory was a complete mess for me. My brother Vojta “Pango” has been a <a href="http://www.stuff.co.nz/the-press/news/mid-canterbury-selwyn/72751381/nature-inspires-pangos-tunes">piano</a>  <a href="http://www.stuff.co.nz/timaru-herald/news/72121876/Piano-man-fills-Stafford-St-with-music">genius</a> and I was more interested in computers. However, at the high school I started <a href="http://corale.cz/">singing in a choir</a> and to play guitar at jam sessions. And I’ve been wondering if it possible to automatically recognize chords from audio recording, how to measure similarity between songs and things like that. Also Honza Hovorka, one of my friends from the choir and a very talented clarinet player, inspired me with this master’s thesis on recognizing voice and music in audio.</p>
-
-<p>This ideas of audio processing and pattern recognition lead me to study Computer Science at the Charles University. There were indeed some lectures on DSP and machine learning, however only theoretical, without any practice. In the master’s years I was more interested in computer graphics and computational photography, however.</p>
-
+<h3>A bit of history</h3>
+<p>Since being a child I was fascinated by some beautifully strange moments in songs. But classical music theory was a complete mess for me. My brother Vojta "Pango" has been a <a href="http://www.stuff.co.nz/the-press/news/mid-canterbury-selwyn/72751381/nature-inspires-pangos-tunes">piano</a>  <a href="http://www.stuff.co.nz/timaru-herald/news/72121876/Piano-man-fills-Stafford-St-with-music">genius</a> and I was more interested in computers. However, at the high school I started <a href="http://corale.cz/">singing in a choir</a> and to play guitar at jam sessions. And I've been wondering if it possible to automatically recognize chords from audio recording, how to measure similarity between songs and things like that. Also Honza Hovorka, one of my friends from the choir and a very talented clarinet player, inspired me with this master's thesis on recognizing voice and music in audio.</p>
+<p>This ideas of audio processing and pattern recognition lead me to study Computer Science at the Charles University. There were indeed some lectures on DSP and machine learning, however only theoretical, without any practice. In the master's years I was more interested in computer graphics and computational photography, however.</p>
 <p>Then after graduating I came to Etnetera to do something practical. I did backend for e-commerce and <a href="http://soyka.etnetera.cz/en/">personalization</a>. Still, there was some internal urge to deal with music processing and visualization. Web development was not that satisfying.</p>
-
-<p>In the meantime years I became more and more interested in music theory - how it works. I realized that there are some deep connections between physics, algebra, number theory and calculus in music theory and that the underlying models are far simpler that what is taught in schools as “classical music theory”. Imagine 400-years old open-source code with backwards compatible API and no chance to be refactored. When I googled what I found out I realized there’s about 30 years of <a href="https://en.wikipedia.org/wiki/Set_theory_%28music%29">research</a> in this area, so it is not a complete nonsense.</p>
-
-<h2 id="birth-of-harmoneye">Birth of HarmonEye</h2>
-
+<p>In the meantime years I became more and more interested in music theory - how it works. I realized that there are some deep connections between physics, algebra, number theory and calculus in music theory and that the underlying models are far simpler that what is taught in schools as "classical music theory". Imagine 400-years old open-source code with backwards compatible API and no chance to be refactored. When I googled what I found out I realized there's about 30 years of <a href="https://en.wikipedia.org/wiki/Set_theory_%28music%29">research</a> in this area, so it is not a complete nonsense.</p>
+<h3>Birth of HarmonEye</h3>
 <p>I set the goal to build a tool that automatically recognizes what tones (or more precisely <a href="https://en.wikipedia.org/wiki/Pitch_class">pitch classes</a>) are being played in audio and visualize them. Ideally in real-time from microphone on a mobile phone. The visualization was quite simple, just a <a href="http://www.visualmusictheory.com/tone-circle.html">circle like a clock</a> with each of 12 segments representing intensity of each pitch class.</p>
-
-<p><img src="http://i.visualmusictheory.com/tone-circle/pen_and_paper_examples.jpg" alt="" /></p>
-
-<p>As I learned music theory by myself I have drawn a vast number of such circle diagrams with pen and paper. It was a beautiful tool to understand a lot of concepts. But my idea was to put this into a mobile phone app and leave the work to machines. The name HarmonEye popped in my mind as a portmanteau of “harmony” and “eye” denoting the connection between musical chords and visual perception.</p>
-
-<p><img src="http://harmoneye.com/img/harmoneye-logo-512-512.png" alt="" /></p>
-
+<p><img alt="" src="http://i.visualmusictheory.com/tone-circle/pen_and_paper_examples.jpg"></p>
+<p>As I learned music theory by myself I have drawn a vast number of such circle diagrams with pen and paper. It was a beautiful tool to understand a lot of concepts. But my idea was to put this into a mobile phone app and leave the work to machines. The name HarmonEye popped in my mind as a portmanteau of "harmony" and "eye" denoting the connection between musical chords and visual perception.</p>
+<p><img alt="" src="http://harmoneye.com/img/harmoneye-logo-512-512.png"></p>
 <p>I researched tons of papers on audio processing and made model of the computational pipeline in my head. In December 2012 I started coding. The work was quite irregular, just when I had some free time. In one year I had a working prototype running on Mac desktop.</p>
-
-<p><img src="/assets/posts/harmoneye-hard-won-experience/harmoneye-github-timeline.png" /></p>
-
-<p><img src="http://harmoneye.com/img/harmoneye-mac-c-maj7.png" alt="" /></p>
-
+<p><img src="../../../images/harmoneye-hard-won-experience/harmoneye-github-timeline.png"></p>
+<p><img alt="" src="http://harmoneye.com/img/harmoneye-mac-c-maj7.png"></p>
 <p>On 6th June 2013 the HarmonEye for Mac was released as a paid app.</p>
-
 <p>Also I shared the progress on Twitter <a href="https://twitter.com/HarmonEye">@harmoneye</a>.</p>
-
-<h2 id="features">Features</h2>
-
-<p>The basic features of HarmonEye is to show what pitch classes are being played at the moment. Imagine a piano keyboard with sound intensity on each key. Then you roll the piano into a circle where tones are aligned by octaves. That’s the <a href="http://www.visualmusictheory.com/tone-circle.html">mental model</a>.</p>
-
+<h3>Features</h3>
+<p>The basic features of HarmonEye is to show what pitch classes are being played at the moment. Imagine a piano keyboard with sound intensity on each key. Then you roll the piano into a circle where tones are aligned by octaves. That's the <a href="http://www.visualmusictheory.com/tone-circle.html">mental model</a>.</p>
 <p>I wanted to analyze audio from the microphone in real-time so that I can experiment with it interactively. For the prototype I just wanted it to run on my computer.</p>
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/eIoJYKPXecM"></iframe></div>
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/eIoJYKPXecM "></iframe></div>
-
-<p>In the first step I wanted to show just the raw intensities so that one can see what’s there. In the second step I wanted to move the classification of the pitch classes from human brain to some machine learning algorithm.</p>
-
+<p>In the first step I wanted to show just the raw intensities so that one can see what's there. In the second step I wanted to move the classification of the pitch classes from human brain to some machine learning algorithm.</p>
 <p>Key detection for coloring.</p>
-
-<h2 id="the-architecture">The architecture</h2>
-
+<h3>The architecture</h3>
 <p>I will describe the architecture of HarmonEye and how it evolved over time in more detail in separate article. This is just a quick high-level overview.</p>
-
 <p>So we have microphone input on one side and a animated plot on the other side. We can go backwards to find out what computation is required.</p>
-
 <p>A smooth animation requires something about 25 frames per second. In each frame we need the data for backing the plot (either raw intensity features or ideally the recognized pitch classes). To obtain this we need to do some kind of spectral decomposition that detects amount of energy in each pitch bin. In other words we need to quantize the frequency domain of time-frequency plane into bins that correspond to musical semitones, ie. are uniform in the log-frequency domain. There are various methods, for the initial implementation I chose CQT (Constant-Q Transform), afterwards I found TF-reassignment is much more suitable. The input to this is a plain spectrogram, ie. STFT (Short-Time Fourier Transform). Each frame in STFT needs a frame of the original audio. Thus we get to the audio source, that is in this case a microphone.</p>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/9YkXvjwQNlE "></iframe></div>
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/9YkXvjwQNlE"></iframe></div>
 
 <p>Things get a bit complicated in this part. Audio samples are read from the sound interface in batches in a blocking manner. However, we want to process blocks of samples that are of different size than audio buffer size, are overlapping and the processing is done at an rate independent on the input rate. This is described in Computer Science as the producer-consumer problem. One way to solve this problem is a read data in one thread, process it and another one and hold the data in a shared resource. Such a efficient resource that allows writing blocks of samples of one size and reading blocks of other size is ring buffer.</p>
-
 <p>When we look at the results of such system, we quickly realize that showing the spectrogram with log-frequency quantization is not enough. There are multiple problems. First, typical instruments produce not a single sinusoid but multiple sinusoids, typically integer multiples (these are called harmonic tones). But we need to show only energy corresponding to the fundamental frequency. Second, typical music is not composed only of harmonic tones but also from a lot of percussive or noisy sounds. Third, with STFT windowing spectrum of each sinusoid is not a single peak but has side-lobes. So we need to filter all of this noise out. Fourth, for visualization we need to normalize the results so that the important information is not hidden in the remaining background noise.</p>
-
 <p>The other rather technical challenges were in obtaining the audio via Java API, drawing OpenGL in a Swing UI, getting it work with Mac OS. Back then I wanted a paid Mac application, so I put inside some licensing (LimeLM, now gone), payment processing (FastSpring, deprecated) and code obfuscation (ProGuard). At least ProGuard turned out to be useful for code minimization on Android.</p>
-
-<h2 id="half-a-year-sprint">Half-a-year sprint</h2>
-
+<h3>Half-a-year sprint</h3>
 <p>After reading the 4HWW book I realized I could make some money from such an app and I also wanted to work while traveling like a digital nomad. So on 1st December 2013 I started on my own. From my savings with a runway of a few months.</p>
-
 <p>Since I started I was thinking that I need to make a product quickly so that I could launch it and start making money. The sprint started with a Week of Hustle in the community of product makers called <a href="http://jfdi.bz/">JFDI</a> (Just Fucking Do it) by <a href="http://justinjackson.ca/">Justin Jackson</a> - now called <a href="http://productpeople.club/">productpeople.club</a>. There are a <a href="http://bohumirzamecnik.cz/blog/categories/week-of-hustle/">few articles from that time</a> on my blog.</p>
-
 <p>I focused much on building the application. Also I tried to find if other people are interested. I talked with many people live and some said they love the idea. I can remember when I was returning back from one Scala Dojo, we were talking about HarmonEye with one friend in the metro and some other guy listened to us and told me that he wants to buy it, just to tell him where. He was a musician.</p>
-
-<p>This validated that there’s something interesting not only for me in the product.</p>
-
-<p>I created a <a href="http://harmoneye.com/">website</a> a newsletter and posted some messages and screenshots to some online fora. Sometimes the reaction was “we like it”, most often “fuck off with your commercial shit”.</p>
-
+<p>This validated that there's something interesting not only for me in the product.</p>
+<p>I created a <a href="http://harmoneye.com/">website</a> a newsletter and posted some messages and screenshots to some online fora. Sometimes the reaction was "we like it", most often "fuck off with your commercial shit".</p>
 <p>I read some self-development books to understand how online marketing can work. Most notably Amplification by Justin Jackson. The basic message was:</p>
-
 <ul>
-  <li>research for some pain, at best your own pain that you see also at others</li>
-  <li>determine who is your audience</li>
-  <li>start creating some useful content, eg. blog posts, videos, etc.</li>
-  <li>start creating a community, eg. using a newsletter</li>
-  <li>build your product and then launch it to your community</li>
+<li>research for some pain, at best your own pain that you see also at others</li>
+<li>determine who is your audience</li>
+<li>start creating some useful content, eg. blog posts, videos, etc.</li>
+<li>start creating a community, eg. using a newsletter</li>
+<li>build your product and then launch it to your community</li>
 </ul>
-
-<p>Although I knew theoretically what to do I didn’t do it.</p>
-
+<p>Although I knew theoretically what to do I didn't do it.</p>
 <p>I thought my pain is in finding chords/tones in some unknown music. I thought other people also like to find chords and visualize the music. I though my audience are amateur musicians or people who start learning music.</p>
-
-<p>I didn’t start writing articles for such people. I created a newsletter but didn’t write anything useful to it, only some info about the app being available. When I launched the Mac app a handful of people bought it. As for the Android app I launched only a free version without a price tag or ads.</p>
-
+<p>I didn't start writing articles for such people. I created a newsletter but didn't write anything useful to it, only some info about the app being available. When I launched the Mac app a handful of people bought it. As for the Android app I launched only a free version without a price tag or ads.</p>
 <p>Why?</p>
-
-<p>I was too focused on making the app working before my runway ends so I didn’t start writing about music and using HarmonEye for music. I needed to have a working app to show examples. When the app was ready it was almost impossible to create a meaningful video since it was completely hardcoded with mic input and OpenGL output.</p>
-
+<p>I was too focused on making the app working before my runway ends so I didn't start writing about music and using HarmonEye for music. I needed to have a working app to show examples. When the app was ready it was almost impossible to create a meaningful video since it was completely hardcoded with mic input and OpenGL output.</p>
 <p>Along the way I wrote a lot of code and solved a lot of implementation problems but those were not useful for the musicians audience.</p>
-
 <p>When I showed the app to the musicians some said it is not needed for them, some were interested.</p>
-
-<p>I desperately wanted to create the full-featured app that I skipped even the initial phase, that is validating the problem and audience. It is an important step and its outcome determines what should be the next goal. I set the goal without knowing if it is really useful. I set the inital goal too high and too broad. There’s need to focus on something small and do it. And iterate.</p>
-
-<h2 id="the-pains-with-java-etc">The pains with Java, etc.</h2>
-
-<p>For the implementation I chose Java. Three years before it was quite natural, since I was using Java every day at work and it is of of the native languages for Android. However, from today’s perspective it was a really a bad decision. As bad a using C# at the university for team project, bachelor thesis and master thesis. Honestly, Java or C# are not suitable for this kind of projects at all. The reasons are multiple.</p>
-
-<h3 id="it-is-hard-and-expensive-to-experiment">It is hard and expensive to experiment</h3>
-
-<p>I’ve became a great fan of prototyping and found that crucial for this is to be able to quickly and cheaply experiment.</p>
-
-<h3 id="lack-of-shell">Lack of shell</h3>
-
-<p>For experimenting I find interactive shell an indispensable tool. You just open up the shell, type a few lines of code, see the results, type other code (while still having the previous results at hand) and iterate until you’re satisfied. Quick and dirty.</p>
-
-<h3 id="initial-overhead-with-build-tools">Initial overhead with build tools</h3>
-
+<p>I desperately wanted to create the full-featured app that I skipped even the initial phase, that is validating the problem and audience. It is an important step and its outcome determines what should be the next goal. I set the goal without knowing if it is really useful. I set the inital goal too high and too broad. There's need to focus on something small and do it. And iterate.</p>
+<h3>The pains with Java, etc.</h3>
+<p>For the implementation I chose Java. Three years before it was quite natural, since I was using Java every day at work and it is of of the native languages for Android. However, from today's perspective it was a really a bad decision. As bad a using C# at the university for team project, bachelor thesis and master thesis. Honestly, Java or C# are not suitable for this kind of projects at all. The reasons are multiple.</p>
+<h4>It is hard and expensive to experiment</h4>
+<p>I've became a great fan of prototyping and found that crucial for this is to be able to quickly and cheaply experiment.</p>
+<h4>Lack of shell</h4>
+<p>For experimenting I find interactive shell an indispensable tool. You just open up the shell, type a few lines of code, see the results, type other code (while still having the previous results at hand) and iterate until you're satisfied. Quick and dirty.</p>
+<h4>Initial overhead with build tools</h4>
 <p>In contrast, in Java world you need to create a project, set up a build tool, write some test class, some class with the code, run it and see the results. When you want to explore to results, you need to modify the code, compile and run again. This is just a huge overhead that quickly makes prototyping expensive, annoying and leads to writing lots of code blindly and then debugging the same amount of time. At least there are languages on JVM such as Scala or Groovy that provide shell.</p>
-
-<h3 id="lack-of-usable-libraries---numeric-computation-plotting">Lack of usable libraries - numeric computation, plotting</h3>
-
-<p>A big pain when working on HarmonEye and the university projects was that I had to reinvent wheel a lot of time just to have some basic tools. This takes a lot of time and effort, leads to suboptimal tools and projects since you have to invest your time not only in your own project but to all the tooling. I admit sometimes it is necessary to create the tooling - when there’s none available or doesn’t not fit your application at all. But otherwise it’s just a waste of time. You can do wonders if you can stand on shoulders of giants. And that’s exactly what existing libraries provide. Thanks to our predecessors who creted the tooling. Sometime you find yourself to create tooling along the way, that will be useful for other as well. That’s just a wonderful open-source ecosystem.</p>
-
-<p>We, programmers, tend to be very arrogant when it comes other people’s code. Sometimes the critique is valid. Most often the problems of existing code results not from other people being totally stupid morons, just from lack of experience, lack of time, too much politics, etc. We think we’ll handle the problem better and often we fall into the same trap.</p>
-
+<h4>Lack of usable libraries - numeric computation, plotting</h4>
+<p>A big pain when working on HarmonEye and the university projects was that I had to reinvent wheel a lot of time just to have some basic tools. This takes a lot of time and effort, leads to suboptimal tools and projects since you have to invest your time not only in your own project but to all the tooling. I admit sometimes it is necessary to create the tooling - when there's none available or doesn't not fit your application at all. But otherwise it's just a waste of time. You can do wonders if you can stand on shoulders of giants. And that's exactly what existing libraries provide. Thanks to our predecessors who creted the tooling. Sometime you find yourself to create tooling along the way, that will be useful for other as well. That's just a wonderful open-source ecosystem.</p>
+<p>We, programmers, tend to be very arrogant when it comes other people's code. Sometimes the critique is valid. Most often the problems of existing code results not from other people being totally stupid morons, just from lack of experience, lack of time, too much politics, etc. We think we'll handle the problem better and often we fall into the same trap.</p>
 <p>I needed to represent and handle multidimensional arrays efficiently. In Python you have numpy which has wonderful API, efficient memory representation and super-optimized C/Fortran backend. In Java I had plain arrays of integers. Now, you have <a href="https://github.com/deeplearning4j/nd4j">ND4J</a>, but this was not available at that time (initial commit at 31 Aug 2014). So since ND-arrays were not my main business I made some working code but it quickly became really painful to use.</p>
-
 <p>The same goes for FFT, window functions, sparse matrices, complex numbers, zero-phase low-pass filtering, decimation and a ton of other numerical goodies. Scipy has all this stuff already available, tested and optimized. By hand you spend a lot of time to find bugs afterwards and you app waits for your attention and suffers.</p>
-
 <p>Plotting is a chapter in itself. When you do signal processing you need visibility to the amounts of your data. A lot of various plots of different types. Sometimes at best interactive or animated. Doing this stuff by hand is possible of course but eats huge amounts of time and it really suboptimal and not nicely reusable. First I had to draw to the canvas in Swing UI, then in OpenGL. Both were really really painful and not suitable for experimenting at all. At least I found <a href="https://processing.org/">Processing</a> to be a nice tool for prototyping, even with a Java-like code. It helped me a lot.</p>
-
 <p>In Python world you can use matplotlib or Bokeh. Output can go to a GUI, notebook, web page or to a file and could be interactive. There are tons of plots, options and examples. It is possible to create animations quite easily and produce videos that can be uploaded to YouTube. The integration between numpy or matplotlib is excellent.</p>
-
-<h3 id="memory-management-with-gc">Memory management with GC</h3>
-
+<h4>Memory management with GC</h4>
 <p>When I first ran HarmonEye <a href="https://play.google.com/store/apps/details?id=com.harmoneye.android&amp;hl=cs">ported to Android</a> it ran for about 2 seconds. Then it crashed. Why? It turned out that some parts of the app including some third-party libraries allocate on-heap memory in each iteration. This quickly overloaded the GC and the application was terminated. The old HTC Android phone had a little memory and GC was not so fast.</p>
-
 <p>I had to rewrite the code so that already allocated arrays are reused. This lead to abandoning functional paradigm and overwriting some shared memory. Bad.</p>
-
 <p><em>First port of HarmonEye to Android, with rather geeky text mode plotting.</em></p>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/HoPOUV4EAeo "></iframe></div>
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/HoPOUV4EAeo"></iframe></div>
 
 <p><em>Pango playing on software keyboard that is visualized by some old versions of HarmonEye for Mac and Android 2.3. Note the slow response and lots of background noise.</em></p>
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/tW1H8GP_1tk"></iframe></div>
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/tW1H8GP_1tk "></iframe></div>
-
-<h3 id="lack-of-functional-programming-tools">Lack of functional programming tools</h3>
-
-<p>Java was created with procedural and object-oriented paradigm in mind. Functional paradigm in contrast to the previously mentioned is based on the idea that the elements of code are pure transformations, functions that do not have any side-effects. This allows for better testing, much higher-level code and is very suitable for today’s need for concurrent and parallel computation. Most importantly it relieves the programmer of considering the behavior of some code in all possible states because there’s no mutable state or it is very isolated.</p>
-
-<p>As said this is a very powerful tool that allows to express code very concisely and minimizes the room for errors from mutable state. Java didn’t support functional paradigm up to version 8. And I used Java 6 or 7 at that time since Java 8 was released at Mar 18, 2014. Scala managed to join object-oriented and functional paradigm but I didn’t use it due to lack of experience and since it running it on Android was uncertain.</p>
-
-<p>After experience with Python I wouldn’t give up functional programming for prototyping or production code until absolutely necessary. Well, when you have working code and measure a clear bottleneck that can be solved by some very optimized procedural code, then OK. Bot not before. Otherwise functional programming saves a lot of time and nerves which is usually the bottleneck during development.</p>
-
-<h3 id="static-typing-and-explicit-naming">Static typing and explicit naming</h3>
-
+<h4>Lack of functional programming tools</h4>
+<p>Java was created with procedural and object-oriented paradigm in mind. Functional paradigm in contrast to the previously mentioned is based on the idea that the elements of code are pure transformations, functions that do not have any side-effects. This allows for better testing, much higher-level code and is very suitable for today's need for concurrent and parallel computation. Most importantly it relieves the programmer of considering the behavior of some code in all possible states because there's no mutable state or it is very isolated.</p>
+<p>As said this is a very powerful tool that allows to express code very concisely and minimizes the room for errors from mutable state. Java didn't support functional paradigm up to version 8. And I used Java 6 or 7 at that time since Java 8 was released at Mar 18, 2014. Scala managed to join object-oriented and functional paradigm but I didn't use it due to lack of experience and since it running it on Android was uncertain.</p>
+<p>After experience with Python I wouldn't give up functional programming for prototyping or production code until absolutely necessary. Well, when you have working code and measure a clear bottleneck that can be solved by some very optimized procedural code, then OK. Bot not before. Otherwise functional programming saves a lot of time and nerves which is usually the bottleneck during development.</p>
+<h4>Static typing and explicit naming</h4>
 <p>One thing I noticed when I was comparing my Java and Python code was that code in Java needed a lot more names for everything. Classes, methods, variable for everything. In Python using functional constructs, lambda functions and high-level APIs there was much less need for naming.</p>
-
-<p>Also Java is strongly typed and Python duck-typed. This means that in Java you need to make custom classes and interfaces all the time. Things that behave the same way but have incompatible interfaces just can’t be used together without all the adapters and crap like that.</p>
-
-<p>In duck-typed languages it doesn’t matter whether you provide a <code>plot()</code> function with a numpy array, list, tuple or you custom object as long as it behaves as expected. No need for some common explicit interface. No need for lots of names. Most of the time numpy arrays are the universal interface between various libraries.</p>
-
-<p>A Computer Science cliche quotations says two hardest things in CS to do right is caching and naming things. When you don’t have to name a thing you don’t have a hard problem to solve. And this means more time for the actual business. I don’t say make anything anonymous, just don’t make everything explicit unless it’s really necessary.</p>
-
-<h2 id="practical-machine-learning">Practical Machine learning</h2>
-
+<p>Also Java is strongly typed and Python duck-typed. This means that in Java you need to make custom classes and interfaces all the time. Things that behave the same way but have incompatible interfaces just can't be used together without all the adapters and crap like that.</p>
+<p>In duck-typed languages it doesn't matter whether you provide a <code>plot()</code> function with a numpy array, list, tuple or you custom object as long as it behaves as expected. No need for some common explicit interface. No need for lots of names. Most of the time numpy arrays are the universal interface between various libraries.</p>
+<p>A Computer Science cliche quotations says two hardest things in CS to do right is caching and naming things. When you don't have to name a thing you don't have a hard problem to solve. And this means more time for the actual business. I don't say make anything anonymous, just don't make everything explicit unless it's really necessary.</p>
+<h3>Practical Machine learning</h3>
 <p>After getting the pipeline to work I was happy. But soon I realized this is not what people would like to see. It is very hard to comprehend. The pitch class circle with intensities is just too low-level for humans to look at real-time.</p>
-
 <p>What was needed was to automatically recognize whether a pitch class is active or not. And that is a machine learning problem.</p>
-
 <p>One day an email came to my inbox from Coursera offering a the course of <a href="https://www.coursera.org/learn/machine-learning">Machine Learning</a> course taught by prof. Andrew Ng. I signed up since this was something that could provide the solution to the problems of HarmonEye. Besides that it was the first practical experience with ML. At the university there were theoretical lectures on pattern recognition or numerical optimization, bot nothing practical. Now we worked a lot of in MATLAB/Octave and it was also nice to experiment with the DSP stuff.</p>
-
 <p>At this course I was really happy we went trought all the tough and boring lectures at the university such as Linear Algebra, Calculus, Statistics, etc. Things that must have been hard for a lot of students were quite natural after having those math tools in the belt. I realized machine learning can be applied universally beyond music processing.</p>
-
 <p>Since the runway was almost off and the business was not going as I expected I concluded I need to find a job again. Doing machine learning with Python would be awesome. Soon I found an offer for such position.</p>
-
-<h2 id="exhaustion">Exhaustion</h2>
-
+<h3>Exhaustion</h3>
 <p>I developed HarmonEye about 6 months full-time. During that I worked way more than 8 hours per day (rather 12-16). I was just thinking about the project and could not relax. This is not sustainable. In order to minimize the cost of living I moved temporarily from Prague to my parents. Unfortunately the atmosphere was not quite healthy. Instead of being with people in the city I voluntarily imprisoned myself at home at my computer.</p>
-
-<p>After some time I became not able to focus well and became quite depressed. I tried to reconsider if the project I’m doing is meaningful. During the last few months/weeks I tried to come up with a plans B and C.</p>
-
+<p>After some time I became not able to focus well and became quite depressed. I tried to reconsider if the project I'm doing is meaningful. During the last few months/weeks I tried to come up with a plans B and C.</p>
 <p>I also create <a href="https://play.google.com/store/apps/details?id=com.harmoneye.tonecircle">Tone Circle</a>, an Android app that allow for playing with the pitch classes via touch gestures and shows the chord name.</p>
-
-<p><img src="http://i.visualmusictheory.com/tone-circle/tone_circle_c_e_g.png" alt="" /></p>
-
+<p><img alt="" src="http://i.visualmusictheory.com/tone-circle/tone_circle_c_e_g.png"></p>
 <p>Besides that I tried to come up with some simpler product, a guitar tuner. I took the guts from Harmoneye, focused on a single harmonic signal and did a completely different UI. There are two prototypes - <a href="https://www.youtube.com/watch?v=iOsym2fTOVY">beads</a> similar to the Tone Circle and <a href="https://www.youtube.com/watch?v=8mBO7Ry8uQs">linear</a>. It was deployed to Google Play but never published, since it lacked proper classification of tones. Note it was done before taking the ML course.</p>
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/iOsym2fTOVY"></iframe></div>
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/iOsym2fTOVY "></iframe></div>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/8mBO7Ry8uQs "></iframe></div>
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/8mBO7Ry8uQs"></iframe></div>
 
 <p>At least to write some useful stuff on music theory. Without a clear focus about who is the reader (a ordinary musician, a person with maths background, a programmer) it was very hard to write something at the right level of detail. I have the stuff stored somewhere in git, but it is waiting for its time.</p>
-
 <p>Finally I decided I have to quit this since it was pointless. I was so exhausted from all the things. I decided to pack my things and fuck off and clean my mind.</p>
-
-<h2 id="road-trip">Road trip</h2>
-
-<p>With a few bucks in my pocket and a car the obvious idea was to make a road trip. It was summer and the southern lands didn’t attract me. I’ve already been there. An unexplored territory was to the north, though. I’ve never been to Scandinavia before. After looking at the map a few days before leaving the rough plan was to drive around the Baltic sea to Scandinavia and back. I had a month before starting with the new job.</p>
-
+<h3>Road trip</h3>
+<p>With a few bucks in my pocket and a car the obvious idea was to make a road trip. It was summer and the southern lands didn't attract me. I've already been there. An unexplored territory was to the north, though. I've never been to Scandinavia before. After looking at the map a few days before leaving the rough plan was to drive around the Baltic sea to Scandinavia and back. I had a month before starting with the new job.</p>
 <p>6738 km, 24 days, 10 countries, 1 car, single traveller, wonderful nature, kind people, a lot of experience and a pile of photos. It was a trip of lifetime or maybe just a beginning.</p>
-
 <p>The route was from Czech republic through Poland, Lithuania, Latvia, Estonia, Finland, Sweden, Norway, Sweden, Denmark, Germany back to Czech republic.</p>
-
-<p>It was the best thing I could do. Wonderful experience! I alone was responsible for whatever I do. There was so much to see everywhere and beautiful nature to admire. I also met nice people on the road. Every day was different and surprise. Every day full of stories. I blogged the whole journey (unfortunately it’s still available in only Czech language) and tool a lot of photos. Not all are published yet (shame on me).</p>
-
+<p>It was the best thing I could do. Wonderful experience! I alone was responsible for whatever I do. There was so much to see everywhere and beautiful nature to admire. I also met nice people on the road. Every day was different and surprise. Every day full of stories. I blogged the whole journey (unfortunately it's still available in only Czech language) and tool a lot of photos. Not all are published yet (shame on me).</p>
 <p><a href="https://www.flickr.com/photos/elgriton/albums/72157645572363341">Scandinavia Road Trip 2014/06</a> on Flickr.</p>
-
 <p>A month later I returned as someone else. Full of energy and determination to continue.</p>
-
-<h2 id="wikidi">Wikidi</h2>
-
-<p>In July 2014 I started at Wikidi a private startup with a few projects. I worked on some algorithmic trading stuff. It was nice that I could use Python and learn and apply some deep learning techniques. During that time I made myself familiar with Theano, word2vec, approximate nearest neighbors, etc. After a few months a colleague left the team and I took his role. This was also some trading but in Java. The code was complete ugly mess. We worked hard to make it usable. That time careful test-driven development brought its fruits. The resulting code was quite nice, flexible and maintainable. I’m really pround of it. The problem though was all the projects didn’t seem to lead anywhere. Without a clear goal you cannot get to that place. The same mistake - trying to take too big steps without validating if the product is really useful. Abundance of resources might not be cure for all problems. After a few months I got another offer.</p>
-
-<h2 id="jumpshotavast">Jumpshot/AVAST</h2>
-
+<h3>Wikidi</h3>
+<p>In July 2014 I started at Wikidi a private startup with a few projects. I worked on some algorithmic trading stuff. It was nice that I could use Python and learn and apply some deep learning techniques. During that time I made myself familiar with Theano, word2vec, approximate nearest neighbors, etc. After a few months a colleague left the team and I took his role. This was also some trading but in Java. The code was complete ugly mess. We worked hard to make it usable. That time careful test-driven development brought its fruits. The resulting code was quite nice, flexible and maintainable. I'm really pround of it. The problem though was all the projects didn't seem to lead anywhere. Without a clear goal you cannot get to that place. The same mistake - trying to take too big steps without validating if the product is really useful. Abundance of resources might not be cure for all problems. After a few months I got another offer.</p>
+<h3>Jumpshot/AVAST</h3>
 <p>In winter 2014 AVAST was looking for someone to scale machine learning models to big data. It seemed to me quite appealing, so that I could do ML again. In February 2015 I started, already in a spin-off called <a href="https://www.jumpshot.com/">Jumpshot</a>. It has been very nice to meet so much smart people. The data was a few orders larger that I ever seen before. I did a lot of various backend stuff and started to recognize familiar patterns. The same problem as ever before but on scale. In my opinion the test-driven development and business should be repeated almost like a mantra. Unfortunately until present I was not able to do ML, except for an awesome week-long deep learning workshop in a <a href="https://www.it4i.cz/">scientific cluster in Ostrava</a>. Besides learning a lot about big data I started using Jupyter notebooks regularly.</p>
-
-<h2 id="some-stats-from-google-play">Some stats from Google Play</h2>
-
-<h3 id="harmoneye">HarmonEye</h3>
-
+<h3>Some stats from Google Play</h3>
+<h4>HarmonEye</h4>
 <p>HarmonEye for Android <a href="http://bohumirzamecnik.cz/blog/2014/harmoneye-for-android-released/">released</a> at 14 January 2014, about two months after leaving Etnetera and starting the port.</p>
-
 <p>Here are some number for HarmonEye for Android.</p>
-
 <ul>
-  <li>current installations: 513</li>
-  <li>total installations: 1738</li>
-  <li>percentage of active installation wrt. total: 29.5%</li>
+<li>current installations: 513</li>
+<li>total installations: 1738</li>
+<li>percentage of active installation wrt. total: 29.5%</li>
 </ul>
-
 <p>Total active users:</p>
-
-<p><img src="/assets/posts/harmoneye-hard-won-experience/google-play-harmoneye-users.png" /></p>
-
+<p><img src="../../../images/harmoneye-hard-won-experience/google-play-harmoneye-users.png"></p>
 <p>Total active users by OS version:</p>
-
-<p><img src="/assets/posts/harmoneye-hard-won-experience/google-play-harmoneye-users-by-os-version.png" /></p>
-
+<p><img src="../../../images/harmoneye-hard-won-experience/google-play-harmoneye-users-by-os-version.png"></p>
 <p>OS versions:</p>
-
-<p><img src="/assets/posts/harmoneye-hard-won-experience/google-play-harmoneye-os-versions.png" /></p>
-
-<h4 id="reviews">Reviews</h4>
-
-<p><img src="/assets/posts/harmoneye-hard-won-experience/google-play-harmoneye-reviews-summary.png" /></p>
-
-<p>Saint Rezo 14. 2. 2015 v 1:42:
-&gt; Are u serious? If you’re not then don’t do this to the rest of us, if yes then you should finish it.please more update!!! This is good start!</p>
-
-<p>Ian MicMultiMillian 28. 2. 2014 v 5:27:
-&gt; Amazing There’s nothing like this on the market anywhere and what’s better, it works perfectly! It’s beautifully simplistic design is so clear and nice to look at. Now I can learn the notes of whatever tune I want :)  And it’s also very pretty to look at, which, unfortunately, seems to be the most desired feature of apps today.</p>
-
-<p>Adi Napiza 5. 1. 2015 v 3:15:
-&gt; Like it Very helpful especially in a jam setting. Hoping dev will improve this by adding a chord finder feature and maybe mapping out octaves but so far its good and useful!</p>
-
-<p>sgtransit 74 27. 12. 2014 v 17:06:</p>
-
+<p><img src="../../../images/harmoneye-hard-won-experience/google-play-harmoneye-os-versions.png"></p>
+<h5>Reviews</h5>
+<p><img src="../../../images/harmoneye-hard-won-experience/google-play-harmoneye-reviews-summary.png"></p>
+<p>Saint Rezo 14. 2. 2015 v 1:42:</p>
 <blockquote>
-  <p>Something new. Hope developer can open source so it can be useful quickly.</p>
+<p>Are u serious? If you're not then don't do this to the rest of us, if yes then you should finish it.please more update!!! This is good start!</p>
 </blockquote>
-
-<p>Ethan Taylor 20. 4. 2015 v 1:02:
-&gt; Harmoneye is amazing Incredible tool for figuring out songs from recordings,  and live play, when the guitarists unexpectedly capo up.</p>
-
-<p>Халиль Разиньков 10. 7. 2015 v 3:56:
-&gt; Thanx, man Nice app in duet with Tone circle. But I’m used to a chord with #, not a b, which is little confusing. Can you make settings, like color themes or/and  chords forms in both apps?</p>
-
+<p>Ian MicMultiMillian 28. 2. 2014 v 5:27:</p>
+<blockquote>
+<p>Amazing There's nothing like this on the market anywhere and what's better, it works perfectly! It's beautifully simplistic design is so clear and nice to look at. Now I can learn the notes of whatever tune I want :)  And it's also very pretty to look at, which, unfortunately, seems to be the most desired feature of apps today.</p>
+</blockquote>
+<p>Adi Napiza 5. 1. 2015 v 3:15:</p>
+<blockquote>
+<p>Like it Very helpful especially in a jam setting. Hoping dev will improve this by adding a chord finder feature and maybe mapping out octaves but so far its good and useful!</p>
+</blockquote>
+<p>sgtransit 74 27. 12. 2014 v 17:06:</p>
+<blockquote>
+<p>Something new. Hope developer can open source so it can be useful quickly.</p>
+</blockquote>
+<p>Ethan Taylor 20. 4. 2015 v 1:02:</p>
+<blockquote>
+<p>Harmoneye is amazing Incredible tool for figuring out songs from recordings,  and live play, when the guitarists unexpectedly capo up.</p>
+</blockquote>
+<p>Халиль Разиньков 10. 7. 2015 v 3:56:</p>
+<blockquote>
+<p>Thanx, man Nice app in duet with Tone circle. But I'm used to a chord with #, not a b, which is little confusing. Can you make settings, like color themes or/and  chords forms in both apps?</p>
+</blockquote>
 <p>This gives me hope that there are indeed people who find it useful and want it to be even better.</p>
-
-<h3 id="tone-circle">Tone Circle</h3>
-
+<h4>Tone Circle</h4>
 <ul>
-  <li>current installations: 137</li>
-  <li>total installations: 618</li>
-  <li>percentage of active installation wrt. total: 22.1%</li>
+<li>current installations: 137</li>
+<li>total installations: 618</li>
+<li>percentage of active installation wrt. total: 22.1%</li>
 </ul>
-
-<h2 id="open-sourcing">Open-sourcing</h2>
-
-<p>Since the original HarmonEye written in Java is not quite suitable for further development there was no point in keeping it in a drawer. So that at some point I open-sourced it (<a href="https://github.com/bzamecnik/harmoneye/tree/develop">harmoneye</a>, <a href="https://github.com/bzamecnik/harmoneye-android">harmoneye-android</a>). Also I realized it is better to publish a lot of other research <a href="https://github.com/bzamecnik/ideas">ideas</a> and question. One never knows when he’s gone and it would be <a href="http://bohumirzamecnik.cz/blog/2014/lets-share-the-ideas-with-the-world/">shame to keep the ideas to the grave</a>.</p>
-
-<p>Also I thought about the audience. I realized that what I really enjoy is to teach. I have a lot of experience from those projects and feel a lot of pain when applying mathematical methods into practice. In my opinion there’s still a huge lag between researchers who speak in mathematical language with a lot of implicit context and between developers who speak in code. So another possibility is teach developers interested in music/audio processing and machine learning how to apply the mathematical methods. After all I’m one such person and I wished to have such a guidance earlier so that I can avoid all the costly mistakes.</p>
-
-<h2 id="new-goals">New goals</h2>
-
-<p>With this in mind I felt I need to build the tool I originally wanted to do. But in small steps and clear goal. Ie. series of tutorials for ML/MIR/DSP-interested programmers. If there’s HarmonEye 2.0 for mobile it should be a by-product not the end-goal.</p>
-
+<h3>Open-sourcing</h3>
+<p>Since the original HarmonEye written in Java is not quite suitable for further development there was no point in keeping it in a drawer. So that at some point I open-sourced it (<a href="https://github.com/bzamecnik/harmoneye/tree/develop">harmoneye</a>, <a href="https://github.com/bzamecnik/harmoneye-android">harmoneye-android</a>). Also I realized it is better to publish a lot of other research <a href="https://github.com/bzamecnik/ideas">ideas</a> and question. One never knows when he's gone and it would be <a href="http://bohumirzamecnik.cz/blog/2014/lets-share-the-ideas-with-the-world/">shame to keep the ideas to the grave</a>.</p>
+<p>Also I thought about the audience. I realized that what I really enjoy is to teach. I have a lot of experience from those projects and feel a lot of pain when applying mathematical methods into practice. In my opinion there's still a huge lag between researchers who speak in mathematical language with a lot of implicit context and between developers who speak in code. So another possibility is teach developers interested in music/audio processing and machine learning how to apply the mathematical methods. After all I'm one such person and I wished to have such a guidance earlier so that I can avoid all the costly mistakes.</p>
+<h3>New goals</h3>
+<p>With this in mind I felt I need to build the tool I originally wanted to do. But in small steps and clear goal. Ie. series of tutorials for ML/MIR/DSP-interested programmers. If there's HarmonEye 2.0 for mobile it should be a by-product not the end-goal.</p>
 <p>The other goal is to prepare a course in a non-classical visual approach to music theory for musicians. The main ideas are written in the <a href="https://github.com/bzamecnik/ideas/blob/master/visual_music_theory_manifesto.md">Manifesto of Visual Music Theory</a>.</p>
-
 <p>There are three blogs right now and I need to figure out what to do with them (merge or keep separate):</p>
-
 <ul>
-  <li><a href="http://bohumirzamecnik.cz/">bohumirzamecnik.cz</a> - audio processing, python, life, travels, etc.</li>
-  <li><a href="http://www.visualmusictheory.com/">visualmusictheory.com</a> - about music theory, for musicians</li>
-  <li><a href="http://www.neural.cz/">neural.cz</a> - about machine learning</li>
+<li>
+<a href="http://bohumirzamecnik.cz/">bohumirzamecnik.cz</a> - audio processing, python, life, travels, etc.</li>
+<li>
+<a href="http://www.visualmusictheory.com/">visualmusictheory.com</a> - about music theory, for musicians</li>
+<li>
+<a href="http://www.neural.cz/">neural.cz</a> - about machine learning</li>
 </ul>
-
-<h2 id="a-lot-of-learning">A lot of learning</h2>
-
-<p>I came across some awesome books and courses along the way. <a href="http://machinelearningmastery.com">Machine Learning Mastery</a> by Jason Brownlee is a very solid foundation for every ML practitioner. One of the main points is to take very small steps focused at learning one thing at time (a kind of TDD and Unix philosophy mix). Other useful concept is being lazy in learning the stuff - take a problem, explore it with some tools, then explore the methods, then write the algorithms, then dig deep into the maths. Not learn everything up front, but learn what’s needed at that point. This allows you to have meaningful results at each small steps and stay motivated.</p>
-
+<h3>A lot of learning</h3>
+<p>I came across some awesome books and courses along the way. <a href="http://machinelearningmastery.com">Machine Learning Mastery</a> by Jason Brownlee is a very solid foundation for every ML practitioner. One of the main points is to take very small steps focused at learning one thing at time (a kind of TDD and Unix philosophy mix). Other useful concept is being lazy in learning the stuff - take a problem, explore it with some tools, then explore the methods, then write the algorithms, then dig deep into the maths. Not learn everything up front, but learn what's needed at that point. This allows you to have meaningful results at each small steps and stay motivated.</p>
 <p>Recently the book <a href="http://justinjackson.ca/marketingfordevelopers/">Marketing for Developers</a> by Justin Jackson finally came out. It is a foundation to set the goals and do all the stuff outside pure coding (finding the audience, launching the product, scaling, etc.). Other useful books may include <a href="http://nathanbarry.com/authority/">Authority</a> by Nathan Barry or <a href="http://theleanstartup.com/">Lean Startup</a> by Eric Ries.</p>
-
 <p>A very nice experience was the <a href="http://www.dnxglobal.com/">DNX Digital Nomad Conference</a> in Berlin in summer 2015. About 500 like-minded gathered at one place sharing their thoughts and experience. There I finally realized for which audience I should create content.</p>
+<p>By the way on a sunny Sunday you can find a vast number of street musicians in Berlin's Mauerpark. Here's how it looks when HarmonEye on a tablet shows the sound of australian rock band <a href="http://thesunpilots.com/">The Sunpilots</a>.</p>
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/DhnZHA0vAfk"></iframe></div>
 
-<p>By the way on a sunny Sunday you can find a vast number of street musicians in Berlin’s Mauerpark. Here’s how it looks when HarmonEye on a tablet shows the sound of australian rock band <a href="http://thesunpilots.com/">The Sunpilots</a>.</p>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/DhnZHA0vAfk "></iframe></div>
-
-<p>Since autumn 2014 I’ve been attending <a href="http://www.mlmu.cz/">Machine Learning Meetups</a> in Prauge. Once I gave a lightning talk about ML on Time Series - comparision of financial and music data (in Czech language).</p>
-
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/8_0mUWC2XyM "></iframe></div>
+<p>Since autumn 2014 I've been attending <a href="http://www.mlmu.cz/">Machine Learning Meetups</a> in Prauge. Once I gave a lightning talk about ML on Time Series - comparision of financial and music data (in Czech language).</p>
+<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/8_0mUWC2XyM"></iframe></div>
 
 <p>I took or am presently attending various courses at Coursera and edX, namely <a href="https://www.edx.org/course/scalable-machine-learning-uc-berkeleyx-cs190-1x">Scalable Machine Learning</a> (in Spark), <a href="https://www.coursera.org/course/musictheory">Fundamentals of Music Theory</a>, <a href="https://www.coursera.org/course/audio">Audio Processing for Music Applications</a>, <a href="https://www.coursera.org/course/dsp">Digital Signal Processing</a> and the 5-course <a href="https://www.coursera.org/specializations/machine-learning">Machine Learning Specialization</a>.</p>
-
 <p>In October 2015 we had a wonderful chance to attend a week-long workshop AVAST Deep Learning Sprint organized by Martin Vejmelka. In a group of about 20 people we had rented a few machines on Anselm, one of two <a href="https://www.it4i.cz/">supercomputers in Ostrava</a>, attended a lot of lectures about supercomputing, machine learning, deep learning, etc. Finally we worked on our real-world problems. We used <a href="http://torch.ch">Torch</a> and <a href="http://keras.io">Keras</a> and trained to models on Tesla GPUs. I was quite surprised how neural networks can predict complicated time-series so that we can detect anomalies. Awesome.</p>
-
 <p>I realized good work needs a solid foundation in real life.</p>
-
-<p>A wonderful experience was learning about <a href="http://comfortzonecrusher.com">Comfort Zone Challenges</a> and attending the course <a href="http://courses.comfortzonecrusher.com/courses/make-yourself-do-anything">Make Yourself Do Anything</a> by Till H. Gross. Fear has been something that held me back and I’m still fighting with it. But at least I have powerful weapons to overcome it.</p>
-
-<p>Also I’m a geek and still fighting with relationships with girls. For years I was focusing too much on the work and had serious anxiety with approaching girls. Whenever I fell in love with any it became a catastrophe and it ended quickly. Thanks to Mark Manson and his book <a href="http://markmanson.net/books/models">Models: Attract Women Through Honesty</a> which provides really an enlightenment on how and why people behave and what can be done with this. It is applicable to general behavior beyond dating. I consider it one of the most important books I ever read.</p>
-
-<h2 id="small-steps-with-python--deep-learning">Small steps with Python &amp; Deep Learning</h2>
-
+<p>A wonderful experience was learning about <a href="http://comfortzonecrusher.com">Comfort Zone Challenges</a> and attending the course <a href="http://courses.comfortzonecrusher.com/courses/make-yourself-do-anything">Make Yourself Do Anything</a> by Till H. Gross. Fear has been something that held me back and I'm still fighting with it. But at least I have powerful weapons to overcome it.</p>
+<p>Also I'm a geek and still fighting with relationships with girls. For years I was focusing too much on the work and had serious anxiety with approaching girls. Whenever I fell in love with any it became a catastrophe and it ended quickly. Thanks to Mark Manson and his book <a href="http://markmanson.net/books/models">Models: Attract Women Through Honesty</a> which provides really an enlightenment on how and why people behave and what can be done with this. It is applicable to general behavior beyond dating. I consider it one of the most important books I ever read.</p>
+<h3>Small steps with Python &amp; Deep Learning</h3>
 <p>During the time at Wikidi and Jumpshot I was thinking what mistakes I did with HarmonEye and how to overcome them. I wanted to rewrite some parts of HarmonEye in Python, prepare suitable audio features and create ML models for chord recognition in the traditional way. Ie. give up real-time processing, which adds a lot of complexity, until the models are ready for it.</p>
-
-<p>I’ve rewritten code to compute spectrograms including reassignemnt from scratch in Python. It is available in a git repo <a href="https://github.com/bzamecnik/music-processing-experiments">music-processing-experiments</a>. It works but still needs a lot of work to make it easy to use. Most importantly it allows to split the audio to blocks and compute chromagram features to feed into further ML models.</p>
-
+<p>I've rewritten code to compute spectrograms including reassignemnt from scratch in Python. It is available in a git repo <a href="https://github.com/bzamecnik/music-processing-experiments">music-processing-experiments</a>. It works but still needs a lot of work to make it easy to use. Most importantly it allows to split the audio to blocks and compute chromagram features to feed into further ML models.</p>
 <p>A wow moment was when I found the <a href="isophonics.net/content/reference-annotations-beatles">Beatles reference annotations</a> dataset. Some students did the hard work, took 180 Beatles songs and annotated each beat and chord and each key by hand. This labelled dataset allows to train ML models using the supervised training approach.</p>
-
 <p>I found this dataset in summer 2014. The question was how should I visualize a song if the classification was working 100% accurately? Also one of the drawbacks of present HarmonEye is that is shows just a signle present moment without any context. However, eyes excel at looking at 2D landscapes. The result was this kind of visualization made in Processing (P5): http://vid.me/harmoneye.</p>
+<iframe src="https://vid.me/e/Wat?stats=1&amp;tools=1" width="640" height="358" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen scrolling="no"></iframe>
 
-<iframe src="https://vid.me/e/Wat?stats=1&amp;tools=1" width="640" height="358" frameborder="0" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" scrolling="no"></iframe>
-
-<iframe src="https://vid.me/e/is5?stats=1&amp;tools=1" width="640" height="242" frameborder="0" allowfullscreen="" webkitallowfullscreen="" mozallowfullscreen="" scrolling="no"></iframe>
+<iframe src="https://vid.me/e/is5?stats=1&amp;tools=1" width="640" height="242" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen scrolling="no"></iframe>
 
 <p>Since the chords are represented as textual labels described by a formal grammar and I needed to work with binary vectors I wrote a parser in ANTLR: <a href="https://github.com/bzamecnik/chord-labels">chord-labels</a>. This proved useful also for preparing data for ML.</p>
-
-<p>In ML it is said that data preparation can take 90% of time and training models is like a cherry on the cake. I agree. After long hard work on preparing the data I was finally able to <a href="https://github.com/bzamecnik/ml-playground/blob/master/beatles/simple_chord_classification.ipynb">start training</a> some model for chord recognition. It employs convolutional neural nets of similar architecture to recognizing images and it’s written in Keras.</p>
-
-<p>It needs some work but the results are quite promising. Right now I’m doing the three courses on Coursera and it takes long hours. And I hope to continue on the project and write more articles about the various things.</p>
-
-<p>In the meanwhile I’m very happy I had the priviledge to meet some people that are on the same wave and are also deeply interested in music theory, audio processing and machine learning. We met in real life, on the course fora, etc. In order to discuss the things I created a channel on Gitter called <a href="https://gitter.im/bzamecnik/audio_ml">audio_ml</a>. So let’s meet there.</p>
-
+<p>In ML it is said that data preparation can take 90% of time and training models is like a cherry on the cake. I agree. After long hard work on preparing the data I was finally able to <a href="https://github.com/bzamecnik/ml-playground/blob/master/beatles/simple_chord_classification.ipynb">start training</a> some model for chord recognition. It employs convolutional neural nets of similar architecture to recognizing images and it's written in Keras.</p>
+<p>It needs some work but the results are quite promising. Right now I'm doing the three courses on Coursera and it takes long hours. And I hope to continue on the project and write more articles about the various things.</p>
+<p>In the meanwhile I'm very happy I had the priviledge to meet some people that are on the same wave and are also deeply interested in music theory, audio processing and machine learning. We met in real life, on the course fora, etc. In order to discuss the things I created a channel on Gitter called <a href="https://gitter.im/bzamecnik/audio_ml">audio_ml</a>. So let's meet there.</p>
 <p>Ouch, this was a long article. Well, too much things happened in the last three years. Hope it was interesing and feel free to get in touch.</p>
-
-<h2 id="conclusion--tldr">Conclusion / TL;DR</h2>
-
+<h3>Conclusion / TL;DR</h3>
 <ul>
-  <li>do not blindly focus on your product, focus on the pain of your customers</li>
-  <li>set a clear big vision and small goals</li>
-  <li>make small steps, overcome the temptation to do everything at once</li>
-  <li>leverage Python with interactive notebooks and vast libraries</li>
-  <li>make automatic tests and do not forget to refactor</li>
-  <li>make experiments repeatable by fixing input data</li>
-  <li>first play with the data as a data scientist, then integrate a working pipeline</li>
-  <li>keep good visibility in your data, don’t debug in production app to experiment</li>
-  <li>write a blog about your successes and pains along the way</li>
-  <li>write small tutorials</li>
-  <li>don’t forget to relax to avoid burning out</li>
-  <li>find some girlfriend/boyfriend</li>
-  <li>traveling is awesome way to relax, make yourself more courageous and see things from a new perspective</li>
-  <li>don’t let fear hold you back, you can do awesome things</li>
+<li>do not blindly focus on your product, focus on the pain of your customers</li>
+<li>set a clear big vision and small goals</li>
+<li>make small steps, overcome the temptation to do everything at once</li>
+<li>leverage Python with interactive notebooks and vast libraries</li>
+<li>make automatic tests and do not forget to refactor</li>
+<li>make experiments repeatable by fixing input data</li>
+<li>first play with the data as a data scientist, then integrate a working pipeline</li>
+<li>keep good visibility in your data, don't debug in production app to experiment</li>
+<li>write a blog about your successes and pains along the way</li>
+<li>write small tutorials</li>
+<li>don't forget to relax to avoid burning out</li>
+<li>find some girlfriend/boyfriend</li>
+<li>traveling is awesome way to relax, make yourself more courageous and see things from a new perspective</li>
+<li>don't let fear hold you back, you can do awesome things</li>
 </ul>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Bohumír Zámečník</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-11-16T15:15:15+01:00" pubdate data-updated="true">Nov 16<span>th</span>, 2015</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/harmoneye/'>harmoneye</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience/" data-via="bzamecnik" data-counturl="http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/" title="Previous Post: How to make a Hive UDF with conflicting Guava">&laquo; How to make a Hive UDF with conflicting Guava</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad/" title="Next Post: How to make STL with SVG logo and text in OpenSCAD">How to make STL with SVG logo and text in OpenSCAD &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-	<h1>About Me</h1>
-	<img src="/images/homepage/bza.jpg" style="max-width: 200px; border-radius: 150px; margin: 5px">
-	<p>How do things work? Ever since 1987 I’ve fallen in love with thinking about it. That's how I became a <a href="/about/">software engineer</a>.</p>
-	<p>#python · #scala · #
-	<abbr title="Machine Learning" data-toggle="tooltip" data-placement="bottom">ml</abbr>
-	· #audio · #
-	<abbr title="Digital Signal Processing" data-toggle="tooltip" data-placement="bottom">dsp</abbr>
-	· #bigdata· #digitalnomad</p>
-	<ul>
-		<li>
-			<a href="https://twitter.com/bzamecnik" class="twitter-follow-button" data-show-count="false">@bzamecnik on Twitter</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</li>
-		<li>
-			<a href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn profile</a>
-		</li>
-		<li>
-			<a href="http://github.com/bzamecnik/">GitHub</a>
-		</li>
-		<li>
-			<a href="http://flickr.com/people/elgriton/">Photos on Flickr</a>
-		</li>
-	</ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2016/krakow/">Poland - Kraków</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/adsb-part-2-hardware/">ADS-B Part 2 - Hardware</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/wroclaw/">Poland - Wrocław</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/ads-b-flight-tracking/">ADS-B Part 1 - Flight Tracking for the Curious</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/my-digital-nomad-story/">My Digital Nomad Story</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/112168593075061741028?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
+    </section><aside class="sharing no-print"><a href="#content" aria-label="Post beginning">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-up" aria-hidden="true" title="Post beginning"></i>
     </a>
-  </h1>
-</section>
+    <a href="http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/" rel="prev" title="How to make a Hive UDF with conflicting Guava">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-left" aria-hidden="true" title="Previous post: How to make a Hive UDF with conflicting Guava"></i>
+    </a>
+    <a href="http://bohumirzamecnik.cz/blog/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad/" rel="next" title="Next post: How to make STL with SVG logo and text in OpenSCAD" aria-label="Next post: How to make STL with SVG logo and text in OpenSCAD">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-right" aria-hidden="true"></i>
+    </a>
+    <span class="post-sharing">
+     <a href="http://twitter.com/share?text=HarmonEye%3A+hard-won+experience+after+three+years+of+my+life&amp;url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2015%2Fharmoneye-hard-won-experience%2F" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" aria-label="Share on Twitter">
+       <i class="fa fa-2x fa-fw fa-twitter-square" aria-hidden="true" title="Share on Twitter">
+     </i></a>
+     <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2015%2Fharmoneye-hard-won-experience%2F" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" aria-label="Share on Facebook">
+       <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px" aria-hidden="true" title="Share of Facebook">
+     </i></a>
+     <a href="https://plus.google.com/share?url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2015%2Fharmoneye-hard-won-experience%2F" aria-label="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+       <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px" aria-hidden="true" title="Share on Google+">
+     </i></a>
+     </span>
+</aside><div itemprop="author" itemscope itemtype="http://schema.org/Person">
 
 
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - <a href="/about/">Bohumír Zámečník</a> -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'bzamecnik';
-      
+        <section class="comments hidden-print"><h2>Comments</h2>
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience/';
-        var disqus_url = 'http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="bzamecnik",
+            disqus_url="http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience/",
+        disqus_title="HarmonEye: hard-won experience after three years of my life",
+        disqus_identifier="cache/posts/2015/harmoneye-hard-won-experience.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section><script>var disqus_shortname="bzamecnik";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>
+© 2018 <a href="mailto:bohumir.zamecnik@gmail.com">Bohumír Zámečník</a>
+- Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>,
+theme based on: <a href="https://themes.getnikola.com/v7/jidn/">jidn</a>
+/ <a href="https://github.com/poole/lanyon">lanyon</a>
 
+</p>
+            
+        </footer>
+</div>
+    </article>
+</div>
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-44857522-1']);
+_gaq.push(['_trackPageview']);
 
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-<a href="https://github.com/bzamecnik/bohumirzamecnik.cz/" class="github-ribbon"><img src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
-
-
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script><script src="../../../assets/js/all-nocdn.js"></script><!-- fancy dates --><script>
+    moment.locale("en");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</div>
 </body>
 </html>

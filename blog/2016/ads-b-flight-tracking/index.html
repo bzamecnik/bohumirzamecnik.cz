@@ -1,443 +1,235 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>
-    ADS-B Part 1 - Flight Tracking for the Curious - 
-    
-    Bohumír Zámečník</title>
-  <meta name="author" content="Bohumír Zámečník">
-
-  
-  <meta name="description" content="Every moment tens of thousands airplanes are in the air and many are flying around. We can analyze their flights. In this series we will explore how &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://bohumirzamecnik.cz/blog/2016/ads-b-flight-tracking">
-  <link href="https://s.gravatar.com/avatar/f90538dcd2df4a510c8f0b057154dea1?s=32" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/tables.css" media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="/atom.xml" rel="alternate" title="Bohumír Zámečník" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-44857522-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ADS-B Part 1 - Flight Tracking For The Curious | Bohumír Zámečník</title>
+<link href="../../../assets/css/all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="canonical" href="http://bohumirzamecnik.cz/blog/2016/ads-b-flight-tracking/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Bohumír Zámečník">
+<link rel="prev" href="../my-digital-nomad-story/" title="My Digital Nomad Story" type="text/html">
+<link rel="next" href="../wroclaw/" title="Poland - Wrocław" type="text/html">
+<meta property="og:site_name" content="Bohumír Zámečník">
+<meta property="og:title" content="ADS-B Part 1 - Flight Tracking For The Curious">
+<meta property="og:url" content="http://bohumirzamecnik.cz/blog/2016/ads-b-flight-tracking/">
+<meta property="og:description" content="Every moment tens of thousands airplanes are in the air and many are flying around. We can analyze their flights. In this series we will explore how to capture flight information using a DIY ADS-B rec">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-09-09T17:34:00+02:00">
+<meta property="article:tag" content="flight tracking">
 </head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+            styles, `#sidebar-checkbox` for behavior. -->
+    <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox"><!-- Toggleable sidebar --><div class="sidebar" id="sidebar">
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Bohumír Zámečník</a></h1>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-    <li><a href="http://eepurl.com/xX1M1" rel="subscribe-email" title="subscribe via email">Email</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:bohumirzamecnik.cz" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/blog/">Blog</a></li>
-  <li><a href="/blog/archives/">Archives</a></li>
-  <li><a href="/projects/">Projects</a></li>
-  <li><a href="/about/">About</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">ADS-B Part 1 - Flight Tracking for the Curious</h1>
+        <nav role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../"><i class="fa fa-2x fa-fw fa-home"></i> Home</a>
+          <a class="sidebar-nav-item" href="../../"><i class="fa fa-2x fa-fw fa-user-circle"></i> Blog</a>
+        </nav><nav id="menu" role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../about/">About</a>
+        <a class="sidebar-nav-item" href="../../../projects/">Projects</a>
+        <a class="sidebar-nav-item" href="../../../archive.html">Archive</a>
+        <a class="sidebar-nav-item" href="../../../categories/">Tags</a>
+        <a class="sidebar-nav-item" href="../../../rss.xml">RSS feed</a>
+        <a class="sidebar-nav-item" href="https://github.com/bzamecnik/">GitHub</a>
+        <a class="sidebar-nav-item" href="https://twitter.com/bzamecnik">Twitter</a>
+        <a class="sidebar-nav-item" href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn</a>
+        <a class="sidebar-nav-item" href="https://www.flickr.com/photos/elgriton/">Flickr</a>
+        <a class="sidebar-nav-item" href="mailto:bohumir.zamecnik@gmail.com">E-mail</a>
     
     
-      <p class="meta">
+    </nav>
+</div>
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          
+    <h2 id="brand" class="masthead-title">
+      <a href="../../../" title="Bohumír Zámečník" rel="home">Bohumír Zámečník</a>
+    </h2>
+
+        </div>
+      </div>
+
+      <div class="container content" id="content">
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/BlogPosting"><header><h1 class="post-title p-name entry-title" itemprop="headline">
+      <a href="http://bohumirzamecnik.cz/blog/2016/ads-b-flight-tracking/" class="u-url">ADS-B Part 1 - Flight Tracking For The Curious</a>
+</h1>
+        <div class="metadata">
+        <meta itemprop="inLanguage" content="en">
+<p class="dateline">
+            <time class="post-date published dt-published" datetime="2016-09-09T17:34:00+02:00" itemprop="datePublished" title="2016-09-09">2016-09-09</time></p>
+                <p class="commentline">
+        
+    <a href="#disqus_thread" data-disqus-identifier="cache/posts/2016/ads-b-flight-tracking.html">Comments</a>
+
+
+        </p>
+</div>
         
 
+    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
+<p>Every moment tens of thousands airplanes are in the air and many are flying around. We can analyze their flights. In this series we will explore how to capture flight information using a DIY ADS-B receiver based on Raspberry Pi.</p>
+<p><img src="http://i.bohumirzamecnik.cz/adsb/vrs_2016-07-08_12-53-51_t.png"></p>
+<!-- TEASER_END -->
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-09-09T17:34:00+02:00" pubdate data-updated="true">Sep 9<span>th</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>Every moment tens of thousands airplanes are in the air and many are flying around. We can analyze their flights. In this series we will explore how to capture flight information using a DIY ADS-B receiver based on Raspberry Pi.</p>
-
-<p><img src="http://i.bohumirzamecnik.cz/adsb/vrs_2016-07-08_12-53-51_t.png" /></p>
-
-<!--more-->
-
-<p>Altough there’s plenty of focused tutorials on the web on particular topics, the reality is never straighforward. Here I’d like to provide a comprehensive guide based on my own experience with building an ADS-B receiver, cover the questions and decisions and when needed point to the existing tutorials for more details.</p>
-
-<h2 id="why-flight-tracking">Why flight tracking?</h2>
-
+<p>Altough there's plenty of focused tutorials on the web on particular topics, the reality is never straighforward. Here I'd like to provide a comprehensive guide based on my own experience with building an ADS-B receiver, cover the questions and decisions and when needed point to the existing tutorials for more details.</p>
+<h3>Why flight tracking?</h3>
 <p>We can see airplane tracks on the sky virtually in every civilized area. Sometimes you can hear a loud hum of a plane or helicopter flying by. When you live near an airport like I was living you can ocassionally see planes going to land every two minutes. They fly so low you can read their logos at the bottom.</p>
-
-<p><a href="http://i.bohumirzamecnik.cz/adsb/fr24_2016-09-08_00-02-18.png"><img src="http://i.bohumirzamecnik.cz/adsb/fr24_2016-09-08_00-02-18_t.png" title="FlightRadar24" /></a></p>
-
+<p><a href="http://i.bohumirzamecnik.cz/adsb/fr24_2016-09-08_00-02-18.png"><img src="http://i.bohumirzamecnik.cz/adsb/fr24_2016-09-08_00-02-18_t.png" title="FlightRadar24"></a></p>
 <p>One day you may ask where the planes are coming from or going to. Then you find services like <a href="https://flightradar24.com">FlightRadar24</a>, <a href="https://planefinder.net">PlaneFinder</a>, <a href="https://flightaware.com/">Flightaware</a> and many others that show a near real-time map of almost all planes in the air. A tremendous amount of information is available beyond the source and destination airports and current position, such as the whole path, model and manufacturing info, photos, previous flight info, etc. There are communities of people hunting for best plane photos or providing accurate plane information.</p>
-
-<h3 id="more-questions">More questions</h3>
-
-<p>If you’re crazy into data and visualization, one day you may realize the data provided by such services for free are not enough to answer your curious questions.</p>
-
+<h4>More questions</h4>
+<p>If you're crazy into data and visualization, one day you may realize the data provided by such services for free are not enough to answer your curious questions.</p>
 <ul>
-  <li>How the plane paths look in mass? Ie. what’s the distribution of plane paths on the map?</li>
-  <li>Are there any “corridors” used as highways or do planes fly just randomly?</li>
-  <li>If so, how does this distribution change in time? Are there any periodicities?</li>
-  <li>How does the distribution of altitude vs. distance on the path look like when projected into a 2D plane?</li>
-  <li>What about distance to the source airport? Can we distinguish round-trip flights?</li>
-  <li>Can we play back interesting flights quickly afterwards?</li>
-  <li>Can we learn a machine learning model of some normal mode of traffic and detect anomalies, eg. emergency situations?</li>
-  <li>How does the normal traffic evolve over time?</li>
+<li>How the plane paths look in mass? Ie. what's the distribution of plane paths on the map?</li>
+<li>Are there any "corridors" used as highways or do planes fly just randomly?</li>
+<li>If so, how does this distribution change in time? Are there any periodicities?</li>
+<li>How does the distribution of altitude vs. distance on the path look like when projected into a 2D plane?</li>
+<li>What about distance to the source airport? Can we distinguish round-trip flights?</li>
+<li>Can we play back interesting flights quickly afterwards?</li>
+<li>Can we learn a machine learning model of some normal mode of traffic and detect anomalies, eg. emergency situations?</li>
+<li>How does the normal traffic evolve over time?</li>
 </ul>
-
-<h2 id="how-are-the-data-gathered">How are the data gathered?</h2>
-
+<h3>How are the data gathered?</h3>
 <p>Where the data come from? There are several sources of flight data, including classical radar, ADS-B and MLAT.</p>
-
 <p>Traditionally airplane positions were detected by airport radars. The flight tracking services use an aggregated source of radar data as one of their sources. The problem is that data from official agencies are sometimes artificially delayed.</p>
-
-<h3 id="ads-b">ADS-B</h3>
-
-<p>However, there’s another more abundant source of data, ADS-B (<a href="https://en.wikipedia.org/wiki/Automatic_dependent_surveillance_%E2%80%93_broadcast">Automatic dependent surveillance – broadcast</a>). In short in order to prevent plane collisions planes broadcast messages with their identification, location and velocity over microwave radio. The nice thing is with today’s technology and software we can receive such signal with just a very cheap hardware and open-source software. My receiver cost around $150 in total, and of course some work.</p>
-
-<p>Although ADS-B receivers are standard part of airport equipment, there’s a whole community of people building and operating their own ADS-B receivers. So the other source of flight tracking data is ADS-B from the community.</p>
-
+<h4>ADS-B</h4>
+<p>However, there's another more abundant source of data, ADS-B (<a href="https://en.wikipedia.org/wiki/Automatic_dependent_surveillance_%E2%80%93_broadcast">Automatic dependent surveillance – broadcast</a>). In short in order to prevent plane collisions planes broadcast messages with their identification, location and velocity over microwave radio. The nice thing is with today's technology and software we can receive such signal with just a very cheap hardware and open-source software. My receiver cost around $150 in total, and of course some work.</p>
+<p>Although ADS-B receivers are standard part of airport equipment, there's a whole community of people building and operating their own ADS-B receivers. So the other source of flight tracking data is ADS-B from the community.</p>
 <p>The flight tracking services offer professional data for quite a high subscription price. But when you provide them with your raw data you can get in exchange the premium services for free.</p>
-
 <p>Besides that there exist community data exchanges, such as <a href="http://adsbexchange.com/">ADSB Exchange</a> or <a href="http://czadsb.cz/">CZADSB</a> where the people share raw unfiltered data. Altough setting this up might be sometimes more rough around the edges the data might be worth the extra effort.</p>
-
-<p>It should be noted that ADSB Exchange offers the merged data for free and you’re not required to provide data in exchange. On the other hand providing own data is a way to support the site, so that it doesn’t die, and it can give you more accurate data near your location and… well, it’s just plain fun to build something yourself. After you did it you can be proud of youself and have learnt a lot.</p>
-
-<h3 id="mlat">MLAT</h3>
-
-<p>Another source is called <a href="http://www.multilateration.com/surveillance/multilateration.html">MLAT</a> (abbreviation of Multi-LATeration). It’s an almost magical way of locating a plane even if it does not publish it’s position in its ADS-B stream! Simply said we can compute the position of a transmitter (it in case a plane) just by observing variously delayed signal from multiple receivers. For 3D position 4 receivers are enough.</p>
-
-<p>The only requirement is that the receivers must communicate with each other. For that purpose there’s a set of open-source client-server programs to acomplish this task: <code>mlat-server</code> and <code>mlat-client</code>. An instance of <code>mlat-server</code> typically runs on the exchange and we only install and set up the <code>mlat-client</code>. Eg. the FlightAware receiver pack already contains a <code>mlat-client</code>.</p>
-
+<p>It should be noted that ADSB Exchange offers the merged data for free and you're not required to provide data in exchange. On the other hand providing own data is a way to support the site, so that it doesn't die, and it can give you more accurate data near your location and... well, it's just plain fun to build something yourself. After you did it you can be proud of youself and have learnt a lot.</p>
+<h4>MLAT</h4>
+<p>Another source is called <a href="http://www.multilateration.com/surveillance/multilateration.html">MLAT</a> (abbreviation of Multi-LATeration). It's an almost magical way of locating a plane even if it does not publish it's position in its ADS-B stream! Simply said we can compute the position of a transmitter (it in case a plane) just by observing variously delayed signal from multiple receivers. For 3D position 4 receivers are enough.</p>
+<p>The only requirement is that the receivers must communicate with each other. For that purpose there's a set of open-source client-server programs to acomplish this task: <code>mlat-server</code> and <code>mlat-client</code>. An instance of <code>mlat-server</code> typically runs on the exchange and we only install and set up the <code>mlat-client</code>. Eg. the FlightAware receiver pack already contains a <code>mlat-client</code>.</p>
 <p>Are you sold for building your own infrastructure for receiving ADS-B data?</p>
-
-<h2 id="the-architecture-of-an-ads-b-receiver">The architecture of an ADS-B receiver</h2>
-
+<h3>The architecture of an ADS-B receiver</h3>
 <p>We want to fulfil the following primary features:</p>
-
 <ul>
-  <li>receive the ADS-B microwave signal in the 1090 Mhz band</li>
-  <li>decode the signal into a stream of messages</li>
-  <li>forward the ADS-B stream into services we want to support:
-    <ul>
-      <li>commercial:
-        <ul>
-          <li>FlightRadar24.com</li>
-          <li>FlightAware.com</li>
-          <li>PlaneFinder.net</li>
-        </ul>
-      </li>
-      <li>community:
-        <ul>
-          <li>ADSBexchange.com</li>
-          <li>CZADSB.cz</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>cooperate with MLAT servers where available</li>
-  <li>prepare a stream for our own capturing and archiving</li>
+<li>receive the ADS-B microwave signal in the 1090 Mhz band</li>
+<li>decode the signal into a stream of messages</li>
+<li>forward the ADS-B stream into services we want to support:</li>
+<li>commercial:<ul>
+<li>FlightRadar24.com</li>
+<li>FlightAware.com</li>
+<li>PlaneFinder.net</li>
 </ul>
-
+</li>
+<li>community:<ul>
+<li>ADSBexchange.com</li>
+<li>CZADSB.cz</li>
+</ul>
+</li>
+<li>cooperate with MLAT servers where available</li>
+<li>prepare a stream for our own capturing and archiving</li>
+</ul>
 <p>Other features such as capturing the our data or merged exchange data, archiving them and processing them is out of scope of this tutorial and hopefully will be covered afterwards.</p>
-
-<p><img src="http://i.bohumirzamecnik.cz/adsb/adsb-receiver-architecture-overview.png" /></p>
-
-<p>Here we’ll try to briefly go through the steps outlined above. Each step will be then covered in detail in a separate article within the series.</p>
-
-<h3 id="receiving-signal">Receiving signal</h3>
-
+<p><img src="http://i.bohumirzamecnik.cz/adsb/adsb-receiver-architecture-overview.png"></p>
+<p>Here we'll try to briefly go through the steps outlined above. Each step will be then covered in detail in a separate article within the series.</p>
+<h4>Receiving signal</h4>
 <p>First we need to recieve the microwave ADS-B signal from the planes in the 1090 MHz. Altough using some special hardware is possible it is not required. Some clever hardware hackers found out that this can be done using plain DVB-T tuners for terrestrical digital TV! Such deviced are based on the concept of Software Defined Radio (SDR), where the modulation and demodulation is not performed by custom electronic circuits but just in software! Such DVT-T sticks
 can be easily found in electro stores or in e-shops. The only catch is to find one with suitable firmware. We will explore which sticks to buy in the detailed article.</p>
-
 <p>In order to feed the signal into the receiver we have to use an antenna and conect both with cables and possibly some adaptors. Typically we will need an omnidirectional antenna to catch plane info all around. An optional part is an additional amplifier and or band-pass filter which can improve the receiving capabilities (specifically we could capture planes at much futher distance).</p>
-
 <p>A crucial requirement is a place where the antenna is mounted. It can only catch planes with direct visibility. So a roof with good 360-degree view of the sky is ideal. Also the place needs electricity and internet connection.</p>
-
-<h3 id="hardware-for-processing-the-signal">Hardware for processing the signal</h3>
-
-<p>We need a computer to process the signal from the DVB-T stick. Any computer with Linux, OS X or Windows will suffice, however Linux is probably most widely used and supported for this task. The computer doesn’t need a lot of computing or electrical power, but needs to be always on. A very popular platform choice is Raspberry Pi.</p>
-
-<p>Despite its credit-card size and low power consumption it’s a fully featured computer capable of running Linux.</p>
-
-<h3 id="decoding-a-stream-of-messages">Decoding a stream of messages</h3>
-
-<p>Once we have the radio signal ready in the receiver we need to demodulate and decode the messages into some standard text or binary stream format. We need to install drivers for the stick and the decoding software. The most popular choices are the following. A DVB-T driver is called <code>rtlsdr</code> (“SDR for Realtek chipset”) and a decoder is <code>dump1090</code>.</p>
-
+<h4>Hardware for processing the signal</h4>
+<p>We need a computer to process the signal from the DVB-T stick. Any computer with Linux, OS X or Windows will suffice, however Linux is probably most widely used and supported for this task. The computer doesn't need a lot of computing or electrical power, but needs to be always on. A very popular platform choice is Raspberry Pi.</p>
+<p>Despite its credit-card size and low power consumption it's a fully featured computer capable of running Linux.</p>
+<h4>Decoding a stream of messages</h4>
+<p>Once we have the radio signal ready in the receiver we need to demodulate and decode the messages into some standard text or binary stream format. We need to install drivers for the stick and the decoding software. The most popular choices are the following. A DVB-T driver is called <code>rtlsdr</code> ("SDR for Realtek chipset") and a decoder is <code>dump1090</code>.</p>
 <p>The basic function of the <code>dump1090</code> program is to decode the raw signal into a stream of ADS-B messags and provide it via a network socket. The stream can be in several formats (plain text CSV, binary Beast or raw hexadecimal).</p>
-
 <p>We can then forward these streams into exchanges we want to support or just read it from our own service.</p>
-
 <p>Beyond that, <code>dump1090</code> can be used to merge streams from other receivers and publish it as a single stream - it acts as a simple exchange.</p>
-
-<p>Since dump1090 is a popular open-source software there exist many forks, each with some different enhancements. We will evaluate them a choose some fork that’s suitable for our needs.</p>
-
-<h3 id="sending-message-streams-to-exchanges">Sending message streams to exchanges</h3>
-
+<p>Since dump1090 is a popular open-source software there exist many forks, each with some different enhancements. We will evaluate them a choose some fork that's suitable for our needs.</p>
+<h4>Sending message streams to exchanges</h4>
 <p>The flight tracking services or community exchanges typically provide their own software for feeding them. Most often they can read from <code>dump1090</code> or even bundle it inside. We will learn how to set up feeding multiple exchanges on one machine. Sometimes we can follow their very nice and polished tutorials, sometimes we will have to set it up in some custom way.</p>
-
-<h3 id="viewing-planes-on-the-map">Viewing planes on the map</h3>
-
+<h4>Viewing planes on the map</h4>
 <p>It would be boring just to look at the text data when debugging our set up or we can just be curious to see what our receiver sees. For that purpose there are multiple programs to visualize the planes from our own stream on a map - a simple and rough version of FlightRadar24 interface. We will explore <a href="http://www.virtualradarserver.co.uk">VirtualRadarServer</a>, <code>dump1090</code> web UI.</p>
-
-<h3 id="storing-the-data-for-archiving">Storing the data for archiving</h3>
-
+<h4>Storing the data for archiving</h4>
 <p>We can explore a prototype way of storing the data using the tools already available. This is by no means meant for production usage, just to as a proof that we are indeed able to storing our own data.</p>
-
-<h2 id="whats-next">What’s next?</h2>
-
-<p>In the next post of this series we’ll present the architecture of our system in more detail.</p>
-
-<h3 id="slack-channel">Slack channel</h3>
-
+<h3>What's next?</h3>
+<p>In the next post of this series we'll present the architecture of our system in more detail.</p>
+<h4>Slack channel</h4>
 <p>If you have any questions or just would like to chat about flight tracking, feel free to check the <a href="https://adsb.slack.com">ADS-B Flight Tracking</a> Slack channel. Automatic invitation is on <a href="https://adsb.signup.team">adsb.signup.team</a>.</p>
-
-<p><a href="https://adsb.signup.team"><img src="http://i.bohumirzamecnik.cz/adsb/adsb-slack.png" /></a></p>
+<p><a href="https://adsb.signup.team"><img src="http://i.bohumirzamecnik.cz/adsb/adsb-slack.png"></a></p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Bohumír Zámečník</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-09-09T17:34:00+02:00" pubdate data-updated="true">Sep 9<span>th</span>, 2016</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/flight-tracking/'>flight tracking</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://bohumirzamecnik.cz/blog/2016/ads-b-flight-tracking/" data-via="bzamecnik" data-counturl="http://bohumirzamecnik.cz/blog/2016/ads-b-flight-tracking/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2016/my-digital-nomad-story/" title="Previous Post: My Digital Nomad Story">&laquo; My Digital Nomad Story</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2016/wroclaw/" title="Next Post: Poland - Wrocław">Poland - Wrocław &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-	<h1>About Me</h1>
-	<img src="/images/homepage/bza.jpg" style="max-width: 200px; border-radius: 150px; margin: 5px">
-	<p>How do things work? Ever since 1987 I’ve fallen in love with thinking about it. That's how I became a <a href="/about/">software engineer</a>.</p>
-	<p>#python · #scala · #
-	<abbr title="Machine Learning" data-toggle="tooltip" data-placement="bottom">ml</abbr>
-	· #audio · #
-	<abbr title="Digital Signal Processing" data-toggle="tooltip" data-placement="bottom">dsp</abbr>
-	· #bigdata· #digitalnomad</p>
-	<ul>
-		<li>
-			<a href="https://twitter.com/bzamecnik" class="twitter-follow-button" data-show-count="false">@bzamecnik on Twitter</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</li>
-		<li>
-			<a href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn profile</a>
-		</li>
-		<li>
-			<a href="http://github.com/bzamecnik/">GitHub</a>
-		</li>
-		<li>
-			<a href="http://flickr.com/people/elgriton/">Photos on Flickr</a>
-		</li>
-	</ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2016/krakow/">Poland - Kraków</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/adsb-part-2-hardware/">ADS-B Part 2 - Hardware</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/wroclaw/">Poland - Wrocław</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/ads-b-flight-tracking/">ADS-B Part 1 - Flight Tracking for the Curious</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/my-digital-nomad-story/">My Digital Nomad Story</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/112168593075061741028?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
+    </section><aside class="sharing no-print"><a href="#content" aria-label="Post beginning">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-up" aria-hidden="true" title="Post beginning"></i>
     </a>
-  </h1>
-</section>
+    <a href="http://bohumirzamecnik.cz/blog/2016/my-digital-nomad-story/" rel="prev" title="My Digital Nomad Story">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-left" aria-hidden="true" title="Previous post: My Digital Nomad Story"></i>
+    </a>
+    <a href="http://bohumirzamecnik.cz/blog/2016/wroclaw/" rel="next" title="Next post: Poland - Wrocław" aria-label="Next post: Poland - Wrocław">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-right" aria-hidden="true"></i>
+    </a>
+    <span class="post-sharing">
+     <a href="http://twitter.com/share?text=ADS-B+Part+1+-+Flight+Tracking+For+The+Curious&amp;url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2016%2Fads-b-flight-tracking%2F" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" aria-label="Share on Twitter">
+       <i class="fa fa-2x fa-fw fa-twitter-square" aria-hidden="true" title="Share on Twitter">
+     </i></a>
+     <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2016%2Fads-b-flight-tracking%2F" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" aria-label="Share on Facebook">
+       <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px" aria-hidden="true" title="Share of Facebook">
+     </i></a>
+     <a href="https://plus.google.com/share?url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2016%2Fads-b-flight-tracking%2F" aria-label="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+       <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px" aria-hidden="true" title="Share on Google+">
+     </i></a>
+     </span>
+</aside><div itemprop="author" itemscope itemtype="http://schema.org/Person">
 
 
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - <a href="/about/">Bohumír Zámečník</a> -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'bzamecnik';
-      
+        <section class="comments hidden-print"><h2>Comments</h2>
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://bohumirzamecnik.cz/blog/2016/ads-b-flight-tracking/';
-        var disqus_url = 'http://bohumirzamecnik.cz/blog/2016/ads-b-flight-tracking/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="bzamecnik",
+            disqus_url="http://bohumirzamecnik.cz/blog/2016/ads-b-flight-tracking/",
+        disqus_title="ADS-B Part 1 - Flight Tracking For The Curious",
+        disqus_identifier="cache/posts/2016/ads-b-flight-tracking.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section><script>var disqus_shortname="bzamecnik";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>
+© 2018 <a href="mailto:bohumir.zamecnik@gmail.com">Bohumír Zámečník</a>
+- Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>,
+theme based on: <a href="https://themes.getnikola.com/v7/jidn/">jidn</a>
+/ <a href="https://github.com/poole/lanyon">lanyon</a>
 
+</p>
+            
+        </footer>
+</div>
+    </article>
+</div>
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-44857522-1']);
+_gaq.push(['_trackPageview']);
 
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-<a href="https://github.com/bzamecnik/bohumirzamecnik.cz/" class="github-ribbon"><img src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
-
-
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script><script src="../../../assets/js/all-nocdn.js"></script><!-- fancy dates --><script>
+    moment.locale("en");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</div>
 </body>
 </html>

@@ -1,977 +1,573 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>
-    How to Make STL With SVG Logo and Text in OpenSCAD - 
-    
-    Bohumír Zámečník</title>
-  <meta name="author" content="Bohumír Zámečník">
-
-  
-  <meta name="description" content="We’ll see how to create an STL model of a stylized filament reel with a logo from SVG and some text without clicking the mouse. Yes we’ll write it &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://bohumirzamecnik.cz/blog/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad">
-  <link href="https://s.gravatar.com/avatar/f90538dcd2df4a510c8f0b057154dea1?s=32" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/tables.css" media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="/atom.xml" rel="alternate" title="Bohumír Zámečník" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-44857522-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to make STL with SVG logo and text in OpenSCAD | Bohumír Zámečník</title>
+<link href="../../../assets/css/all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="canonical" href="http://bohumirzamecnik.cz/blog/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Bohumír Zámečník">
+<link rel="prev" href="../../2015/harmoneye-hard-won-experience/" title="HarmonEye: hard-won experience after three years of my life" type="text/html">
+<link rel="next" href="../my-digital-nomad-story/" title="My Digital Nomad Story" type="text/html">
+<meta property="og:site_name" content="Bohumír Zámečník">
+<meta property="og:title" content="How to make STL with SVG logo and text in OpenSCAD">
+<meta property="og:url" content="http://bohumirzamecnik.cz/blog/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad/">
+<meta property="og:description" content="We'll see how to create an STL model of a stylized filament reel with a logo from SVG and some text without clicking the mouse. Yes we'll write it procedurally in OpenSCAD, use templating and automate">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-05-01T18:02:51+02:00">
+<meta property="article:tag" content="3D print">
 </head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+            styles, `#sidebar-checkbox` for behavior. -->
+    <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox"><!-- Toggleable sidebar --><div class="sidebar" id="sidebar">
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Bohumír Zámečník</a></h1>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-    <li><a href="http://eepurl.com/xX1M1" rel="subscribe-email" title="subscribe via email">Email</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:bohumirzamecnik.cz" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/blog/">Blog</a></li>
-  <li><a href="/blog/archives/">Archives</a></li>
-  <li><a href="/projects/">Projects</a></li>
-  <li><a href="/about/">About</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">How to Make STL With SVG Logo and Text in OpenSCAD</h1>
+        <nav role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../"><i class="fa fa-2x fa-fw fa-home"></i> Home</a>
+          <a class="sidebar-nav-item" href="../../"><i class="fa fa-2x fa-fw fa-user-circle"></i> Blog</a>
+        </nav><nav id="menu" role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../about/">About</a>
+        <a class="sidebar-nav-item" href="../../../projects/">Projects</a>
+        <a class="sidebar-nav-item" href="../../../archive.html">Archive</a>
+        <a class="sidebar-nav-item" href="../../../categories/">Tags</a>
+        <a class="sidebar-nav-item" href="../../../rss.xml">RSS feed</a>
+        <a class="sidebar-nav-item" href="https://github.com/bzamecnik/">GitHub</a>
+        <a class="sidebar-nav-item" href="https://twitter.com/bzamecnik">Twitter</a>
+        <a class="sidebar-nav-item" href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn</a>
+        <a class="sidebar-nav-item" href="https://www.flickr.com/photos/elgriton/">Flickr</a>
+        <a class="sidebar-nav-item" href="mailto:bohumir.zamecnik@gmail.com">E-mail</a>
     
     
-      <p class="meta">
+    </nav>
+</div>
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          
+    <h2 id="brand" class="masthead-title">
+      <a href="../../../" title="Bohumír Zámečník" rel="home">Bohumír Zámečník</a>
+    </h2>
+
+        </div>
+      </div>
+
+      <div class="container content" id="content">
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/BlogPosting"><header><h1 class="post-title p-name entry-title" itemprop="headline">
+      <a href="http://bohumirzamecnik.cz/blog/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad/" class="u-url">How to make STL with SVG logo and text in OpenSCAD</a>
+</h1>
+        <div class="metadata">
+        <meta itemprop="inLanguage" content="en">
+<p class="dateline">
+            <time class="post-date published dt-published" datetime="2016-05-01T18:02:51+02:00" itemprop="datePublished" title="2016-05-01">2016-05-01</time></p>
+                <p class="commentline">
+        
+    <a href="#disqus_thread" data-disqus-identifier="cache/posts/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad.html">Comments</a>
+
+
+        </p>
+</div>
         
 
+    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/example_reel.png" width="300" align="right">
+We'll see how to create an STL model of a stylized filament reel with a logo from SVG and some text without clicking the mouse. Yes we'll write it procedurally in OpenSCAD, use templating and automate the whole thing. We'll see how OpenSCAD is a really natural tool for programmer and it very easy to start playing with and get impressive results.
+</p>
+<div style="clear:both"></div>
+<!-- TEASER_END -->
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-01T18:02:51+02:00" pubdate data-updated="true">May 1<span>st</span>, 2016</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/example_reel.png" width="300" align="right" />
-We’ll see how to create an STL model of a stylized filament reel with a logo from SVG and some text without clicking the mouse. Yes we’ll write it procedurally in OpenSCAD, use templating and automate the whole thing. We’ll see how OpenSCAD is a really natural tool for programmer and it very easy to start playing with and get impressive results.
-&lt;div style=&#8221;clear:both&#8221;&gt;&lt;/div&gt;</p>
-
-<!--more-->
-
-<p>Our today’s goal is to prepare around 20 3D-printed things representing filament reels, each with a inset logo and a short name of the material. This little weekend project was done for <a href="http://www.svet-3d-tisku.cz/">Svět 3D Tisku</a> (3D Print World), a local 3D print company ran by my parents, for <a href="http://3dexpo.cz/">3D Expo Prague 2016</a>. Imagine a big poster to present a collection of filament materials and for each there’s a nice small tangible artifact made of that material.</p>
-
-<p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/example_reel.png" /></p>
-
-<h2 id="openscad---constructive-solid-geometry">OpenSCAD - Constructive Solid Geometry</h2>
-
+<p>Our today's goal is to prepare around 20 3D-printed things representing filament reels, each with a inset logo and a short name of the material. This little weekend project was done for <a href="http://www.svet-3d-tisku.cz/">Svět 3D Tisku</a> (3D Print World), a local 3D print company ran by my parents, for <a href="http://3dexpo.cz/">3D Expo Prague 2016</a>. Imagine a big poster to present a collection of filament materials and for each there's a nice small tangible artifact made of that material.</p>
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/example_reel.png"></p>
+<h3>OpenSCAD - Constructive Solid Geometry</h3>
 <p>Since I like programming more than GUI modeling tools and mouse clicking, I decided to try <a href="http://www.openscad.org/">OpenSCAD</a>. It allows to make 3D models using the <a href="https://en.wikipedia.org/wiki/Constructive_solid_geometry">Constructive Solid Geometry</a> (CSG) and <a href="https://en.wikipedia.org/wiki/Procedural_modeling">procedural modeling</a> paradigms. Ie. we the model from primitive parts (cube, 2D polygon, linear extrusion), by applying transformations (traslate, scale, rotate) and set operations (union, intersection, difference). The model is described by a custom programming language. This is a different to the triangle mesh representation where only the border, not the solid itself is described.</p>
-
 <p>For programmers the whole concept is much more intuitive and natural, eg. when compared to Blender with its overly complex UI with hard learning curve.</p>
-
-<p>After I finished this project it felt vary natual and familiar. Then I realized I’ve already done something similar a few years ago in open-source <a href="https://renderman.pixar.com/">RenderMan</a> implementation <a href="http://www.renderpixie.com/gallery.html">Pixie</a> for the university projected on the <a href="http://cgg.mff.cuni.cz/~wilkie/Website/NPGR027.html">Shading Languages</a> course.</p>
-
+<p>After I finished this project it felt vary natual and familiar. Then I realized I've already done something similar a few years ago in open-source <a href="https://renderman.pixar.com/">RenderMan</a> implementation <a href="http://www.renderpixie.com/gallery.html">Pixie</a> for the university projected on the <a href="http://cgg.mff.cuni.cz/~wilkie/Website/NPGR027.html">Shading Languages</a> course.</p>
 <p>Please refer to the <a href="https://en.wikibooks.org/wiki/OpenSCAD_User_Manual">OpenSCAD User Manual</a> and the example models for the basics of OpenSCAD. Basically you write your code in one pane and see the model in the other. Useful keyboard shortcuts and commands.</p>
-
 <ul>
-  <li><code>F5</code> - refresh the preview</li>
-  <li><code>F6</code> - render the model (do this before saving to STL)</li>
-  <li><code>File</code> -&gt; <code>Export</code> -&gt; <code>Export to STL</code></li>
-  <li><code>CMD-D</code> - comment</li>
-  <li><code>CMD-SHIFT-D</code> - uncomment</li>
+<li>
+<code>F5</code> - refresh the preview</li>
+<li>
+<code>F6</code> - render the model (do this before saving to STL)</li>
+<li>
+<code>File</code> -&gt; <code>Export</code> -&gt; <code>Export to STL</code>
+</li>
+<li>
+<code>CMD-D</code> - comment</li>
+<li>
+<code>CMD-SHIFT-D</code> - uncomment</li>
 </ul>
-
 <p>Comments are C-like, ie. <code>// ...</code> and <code>/* ... */</code></p>
-
-<p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/openscad.png" /></p>
-
-<h2 id="creating-a-model---step-by-step">Creating a model - step by step</h2>
-
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/openscad.png"></p>
+<h3>Creating a model - step by step</h3>
 <p>We would like to get a shape that roughly looks like a <a href="https://www.google.com/search?q=filament+reel">filament reel</a> but is not too complex. On top of it we would like to put a logo and some abbreviation of the material name. We can model it in the dimensions of a real reel and than scale it to the final model size.</p>
-
 <p>Real world example (colorFabb COPPERFILL Ø 2,85 m / 4m):</p>
-
-<p><a href="http://eshop.svet-3d-tisku.cz/3d-tiskovy-material/tiskova-struna-medena-3d-filament-copperfill--2-85-mm-10m/"><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/copperfill_reel.jpg" /></a></p>
-
-<p>There are example snippets of code throughout the article. The complete source code is available in a git repo linked at the end of the article. You can clone it and play with it yourself. It’s fully working.</p>
-
-<h2 id="basic-reel-shape">Basic reel shape</h2>
-
+<p><a href="http://eshop.svet-3d-tisku.cz/3d-tiskovy-material/tiskova-struna-medena-3d-filament-copperfill--2-85-mm-10m/"><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/copperfill_reel.jpg"></a></p>
+<p>There are example snippets of code throughout the article. The complete source code is available in a git repo linked at the end of the article. You can clone it and play with it yourself. It's fully working.</p>
+<h3>Basic reel shape</h3>
 <p>The basic shape is a cylinder, ie. an extruded circle. The <code>$fn</code> argument makes the circle smoother - the circle is represented as a regular polygon and <code>$fn</code> specifies the number of its edges. Eg. cylinder of 190mm diameter, 20 mm high to represent the inner reel:</p>
+<pre class="code literal-block"><span></span>linear_extrude(height=20) {
+    circle(d=190, $fn=200);
+}
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">linear_extrude(height=20) {
-</span><span class="line">    circle(d=190, $fn=200);
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>In the final model it is shown in red.</p>
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/inner_cylinder.png"></p>
+<h4>Functions, set operations</h4>
+<p>Let's add two outer reels and a hole. As I said the model is really stylized and so the proportions do not match excatly a real-world reel. We can transform the primitives and operate on them with set operations. We can also extract constants to variables and refactor parts into functions (modules) which also can be parameterized.</p>
+<pre class="code literal-block"><span></span>outer_diameter = 200;
+reel_diameter = 190;
+hole_diameter = 55;
+width = 20;
+outer_reel_width = 5;
+rim_height = 2;
 
-<p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/inner_cylinder.png" /></p>
+module inner_reel() {
+    # without a semicolon this transformations affects the next statement
+    translate([0, 0, -width/2])
+    linear_extrude(height=width-rim_height*2) {
+        circle(d=reel_diameter, $fn=200);
+    }
+}
+module plain_outer_reel() {
+    linear_extrude(height=outer_reel_width) {
+        circle(d=outer_diameter, $fn=400);
+    }
+}
 
-<h3 id="functions-set-operations">Functions, set operations</h3>
+module hole() {
+    translate([0, 0, -width])
+    linear_extrude(height=2*width) {
+        circle(d=hole_diameter, $fn=200);
+    }
+}
 
-<p>Let’s add two outer reels and a hole. As I said the model is really stylized and so the proportions do not match excatly a real-world reel. We can transform the primitives and operate on them with set operations. We can also extract constants to variables and refactor parts into functions (modules) which also can be parameterized.</p>
+# CSG set operations
+difference() {
+  union() {
+    inner_reel();
+    plain_outer_reel();
+  }
+  hole();
+}
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">outer_diameter = 200;
-</span><span class="line">reel_diameter = 190;
-</span><span class="line">hole_diameter = 55;
-</span><span class="line">width = 20;
-</span><span class="line">outer_reel_width = 5;
-</span><span class="line">rim_height = 2;
-</span><span class="line">
-</span><span class="line">module inner_reel() {
-</span><span class="line">    # without a semicolon this transformations affects the next statement
-</span><span class="line">    translate([0, 0, -width/2])
-</span><span class="line">    linear_extrude(height=width-rim_height*2) {
-</span><span class="line">        circle(d=reel_diameter, $fn=200);
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">module plain_outer_reel() {
-</span><span class="line">    linear_extrude(height=outer_reel_width) {
-</span><span class="line">        circle(d=outer_diameter, $fn=400);
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">module hole() {
-</span><span class="line">    translate([0, 0, -width])
-</span><span class="line">    linear_extrude(height=2*width) {
-</span><span class="line">        circle(d=hole_diameter, $fn=200);
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line"># CSG set operations
-</span><span class="line">difference() {
-</span><span class="line">  union() {
-</span><span class="line">    inner_reel();
-</span><span class="line">    plain_outer_reel();
-</span><span class="line">  }
-</span><span class="line">  hole();
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/outer_cylinders.png" /></p>
-
-<h3 id="tip---visual-debugging">Tip - visual debugging</h3>
-
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/outer_cylinders.png"></p>
+<h4>Tip - visual debugging</h4>
 <p>A very useful way to ensure you are making the correct operations is visual debugging. Just add a <code>#</code> character before any part and it is displayed in transparent red. This way you can be sure what you are intersecting and diffing.</p>
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/hole.png"></p>
+<h4>Beveled side + ribs</h4>
+<p>Let's add some rim by beveling the side and add some ribs just to make it look a bit more like a real reel.</p>
+<pre class="code literal-block"><span></span><span class="k">module</span> <span class="n">rib</span>() {
+    <span class="n">translate</span>([<span class="n">hole_diameter</span><span class="o">/</span><span class="mi">2</span> + <span class="n">rib_margin</span>, -<span class="n">rim_height</span><span class="o">/</span><span class="mi">2</span>, <span class="n">outer_reel_width</span> - <span class="n">rim_height</span>])
+    <span class="n">cube</span>([<span class="n">outer_diameter</span><span class="o">/</span><span class="mi">2</span> - (<span class="n">hole_diameter</span><span class="o">/</span><span class="mi">2</span> + <span class="mi">2</span><span class="o">*</span><span class="n">rib_margin</span>), <span class="n">rim_height</span>, <span class="n">rim_height</span>]);
+}
 
-<p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/hole.png" /></p>
+<span class="k">module</span> <span class="n">ribs</span>() {
+    <span class="c c-Singleline"># this is the power of procedural models vs. clicking!</span>
+    <span class="k">for</span> (<span class="n">angle</span>=[<span class="mi">0</span>, <span class="mi">60</span>, <span class="mi">120</span>, <span class="mi">180</span>, <span class="mi">240</span>, <span class="mi">300</span>]) {
+        <span class="n">rotate</span>(<span class="n">angle</span>) <span class="n">rib</span>();
+    }
+}
 
-<h3 id="beveled-side--ribs">Beveled side + ribs</h3>
+<span class="k">module</span> <span class="n">outer_reel</span>() {
+    <span class="n">union</span>() {
+        <span class="n">ribs</span>();
+        <span class="n">difference</span>() {
+            <span class="n">plain_outer_reel</span>();
+            <span class="n">color</span>(<span class="s">"gray"</span>)
+            <span class="n">translate</span>([<span class="mi">0</span>, <span class="mi">0</span>, <span class="n">outer_reel_width</span> - <span class="mi">2</span>])
+            <span class="n">linear_extrude</span>(<span class="n">height</span>=<span class="mi">2</span><span class="o">+</span><span class="mi">1</span>) {
+                <span class="n">circle</span>(<span class="n">d</span>=<span class="n">outer_diameter</span> - <span class="mi">5</span>, <span class="nv">$fn</span>=<span class="mi">400</span>);
+            }
+        }
+    }
+}
 
-<p>Let’s add some rim by beveling the side and add some ribs just to make it look a bit more like a real reel.</p>
+<span class="k">module</span> <span class="n">plain_reel</span>() {
+    <span class="n">inner_reel</span>();
+    <span class="n">translate</span>([<span class="mi">0</span>, <span class="mi">0</span>, <span class="n">width</span> / <span class="mi">2</span> - <span class="n">outer_reel_width</span>])
+    // <span class="n">upper</span> <span class="n">reel</span>
+    <span class="n">outer_reel</span>();
+    // <span class="n">lower</span> <span class="n">reel</span>
+    <span class="n">translate</span>([<span class="mi">0</span>, <span class="mi">0</span>, -<span class="n">width</span> / <span class="mi">2</span>])
+    <span class="n">rotate</span>([<span class="mi">180</span>, <span class="mi">0</span>, <span class="mi">0</span>])
+    <span class="n">plain_outer_reel</span>();
+}
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-<span class="line-number">30</span>
-<span class="line-number">31</span>
-<span class="line-number">32</span>
-<span class="line-number">33</span>
-<span class="line-number">34</span>
-<span class="line-number">35</span>
-<span class="line-number">36</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">module rib() {
-</span><span class="line">    translate([hole_diameter/2 + rib_margin, -rim_height/2, outer_reel_width - rim_height])
-</span><span class="line">    cube([outer_diameter/2 - (hole_diameter/2 + 2*rib_margin), rim_height, rim_height]);
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">module ribs() {
-</span><span class="line">    # this is the power of procedural models vs. clicking!
-</span><span class="line">    for (angle=[0, 60, 120, 180, 240, 300]) {
-</span><span class="line">        rotate(angle) rib();
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">module outer_reel() {
-</span><span class="line">    union() {
-</span><span class="line">        ribs();
-</span><span class="line">        difference() {
-</span><span class="line">            plain_outer_reel();
-</span><span class="line">            color("gray")
-</span><span class="line">            translate([0, 0, outer_reel_width - 2])
-</span><span class="line">            linear_extrude(height=2+1) {
-</span><span class="line">                circle(d=outer_diameter - 5, $fn=400);
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">module plain_reel() {
-</span><span class="line">    inner_reel();
-</span><span class="line">    translate([0, 0, width / 2 - outer_reel_width])
-</span><span class="line">    // upper reel
-</span><span class="line">    outer_reel();
-</span><span class="line">    // lower reel
-</span><span class="line">    translate([0, 0, -width / 2])
-</span><span class="line">    rotate([180, 0, 0])
-</span><span class="line">    plain_outer_reel();
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/bevel_and_ribs.png" /></p>
-
-<h3 id="conic-supports">Conic supports</h3>
-
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/bevel_and_ribs.png"></p>
+<h4>Conic supports</h4>
 <p>Originally I though it would be nice to make some thin flat outer circular parts of the reel (that holds the filament from sides). When we printed it I realized it needs supports, otherwise the printer just extrudes into air. To avoid using supports and save some priting time we modified the models to make some small supports directly in the model. Just add some conic sections that smoothly interpolate betweeen the inner and outer diameter.</p>
-
 <p>Fortunately OpenSCAD provides this functionality right in the <code>linear_extrude</code> primitive, just and the <code>scale</code> parameter:</p>
+<pre class="code literal-block"><span></span><span class="k">module</span> <span class="n">conic_support</span>() {
+    <span class="n">linear_extrude</span>(<span class="n">height</span>=<span class="mi">4</span>, <span class="n">scale</span>=<span class="mf">1.05</span>) {
+        <span class="n">circle</span>(<span class="n">d</span>=<span class="n">reel_diameter</span>, <span class="nv">$fn</span>=<span class="mi">200</span>);
+    }
+}
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">module conic_support() {
-</span><span class="line">    linear_extrude(height=4, scale=1.05) {
-</span><span class="line">        circle(d=reel_diameter, $fn=200);
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">module inner_reel() {
-</span><span class="line">    // inner cylinder
-</span><span class="line">    translate([0, 0, -width/2])
-</span><span class="line">    linear_extrude(height=width-rim_height*2) {
-</span><span class="line">        circle(d=reel_diameter, $fn=200);
-</span><span class="line">    }
-</span><span class="line">
-</span><span class="line">    // upper conic support
-</span><span class="line">    translate([0, 0, 1.1])
-</span><span class="line">    conic_support();
-</span><span class="line">
-</span><span class="line">    // lower conic support    
-</span><span class="line">    translate([0, 0, -6.1])
-</span><span class="line">    rotate([180, 0, 0])
-</span><span class="line">    conic_support();
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+<span class="k">module</span> <span class="n">inner_reel</span>() {
+    // <span class="n">inner</span> <span class="n">cylinder</span>
+    <span class="n">translate</span>([<span class="mi">0</span>, <span class="mi">0</span>, -<span class="n">width</span><span class="o">/</span><span class="mi">2</span>])
+    <span class="n">linear_extrude</span>(<span class="n">height</span>=<span class="n">width-rim_height</span><span class="o">*</span><span class="mi">2</span>) {
+        <span class="n">circle</span>(<span class="n">d</span>=<span class="n">reel_diameter</span>, <span class="nv">$fn</span>=<span class="mi">200</span>);
+    }
+
+    // <span class="n">upper</span> <span class="n">conic</span> <span class="n">support</span>
+    <span class="n">translate</span>([<span class="mi">0</span>, <span class="mi">0</span>, <span class="mf">1.1</span>])
+    <span class="n">conic_support</span>();
+
+    // <span class="n">lower</span> <span class="n">conic</span> <span class="n">support</span>    
+    <span class="n">translate</span>([<span class="mi">0</span>, <span class="mi">0</span>, -<span class="mf">6.1</span>])
+    <span class="n">rotate</span>([<span class="mi">180</span>, <span class="mi">0</span>, <span class="mi">0</span>])
+    <span class="n">conic_support</span>();
+}
+</pre>
+
 
 <p>It worked like charm and the models was printed well.</p>
-
-<p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/conic_supports.png" /></p>
-
-<h2 id="logo---from-svg">Logo - from SVG</h2>
-
-<p>Now when we have a nice reel let’s enhance it by adding our logo. Our logo is some vector graphics, so a <a href="https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/DXF_Extrusion">DXF extrusion</a> is an option.</p>
-
-<p>I’ve extracted just a part of the logo from an AI (Illustrator) file and saved it as SVG. OpenSCAD can only open 2D vector files from DXF (Autocad), not SVG, so we have to first convert the SVG to DXF.</p>
-
-<p>I’ve tried a few options and only this Inkscape plugin for export the DXF worked well: <a href="https://github.com/brad/Inkscape-OpenSCAD-DXF-Export">Inkscape-OpenSCAD-DXF-Export</a>. Just download the repo and copy the dir and <code>*.inx</code> to <code>~/.config/inkscape/extensions</code> (on Mac) and than start Inkscape. Then just open the SVG and <code>File -&gt; Save copy -&gt; OpenSCAD DXF Output</code>.</p>
-
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/conic_supports.png"></p>
+<h3>Logo - from SVG</h3>
+<p>Now when we have a nice reel let's enhance it by adding our logo. Our logo is some vector graphics, so a <a href="https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/DXF_Extrusion">DXF extrusion</a> is an option.</p>
+<p>I've extracted just a part of the logo from an AI (Illustrator) file and saved it as SVG. OpenSCAD can only open 2D vector files from DXF (Autocad), not SVG, so we have to first convert the SVG to DXF.</p>
+<p>I've tried a few options and only this Inkscape plugin for export the DXF worked well: <a href="https://github.com/brad/Inkscape-OpenSCAD-DXF-Export">Inkscape-OpenSCAD-DXF-Export</a>. Just download the repo and copy the dir and <code>*.inx</code> to <code>~/.config/inkscape/extensions</code> (on Mac) and than start Inkscape. Then just open the SVG and <code>File -&gt; Save copy -&gt; OpenSCAD DXF Output</code>.</p>
 <p>Then in OpenSCAD we import it into a 2D object:</p>
+<pre class="code literal-block"><span></span><span class="kr">import</span><span class="p">(</span><span class="s1">'logo.dxf'</span><span class="p">);</span>
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">import('logo.dxf');</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>In order to use it in CSG operations we have to extrude it:</p>
+<pre class="code literal-block"><span></span><span class="k">module</span> <span class="n">logo</span>(<span class="n">height</span>) {
+    <span class="n">linear_extrude</span>(<span class="n">height</span> = <span class="n">height</span>) {
+        <span class="n">scale</span>(<span class="mf">0.15</span>)
+        <span class="n">import</span>(<span class="n">logo_file</span>);
+    }
+}
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">module logo(height) {
-</span><span class="line">    linear_extrude(height = height) {
-</span><span class="line">        scale(0.15)
-</span><span class="line">        import(logo_file);
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>In case nothing appears, make sure you select the default layer or the proper one. Look for <code>AcDbLayerTableRecord</code> in the DXF file. I once copied an example from the docs and it selected some other layer and I though the DXF file is not compatible. Also the model from DXF might have to be translated to the original of coordinates.</p>
+<p>Let's inscribe the logo in the upper reel part:</p>
+<pre class="code literal-block"><span></span><span class="k">module</span> <span class="n">logo_inscription</span>() {
+    <span class="n">translate</span>([<span class="mi">0</span>, -<span class="mf">0.7</span> * <span class="n">outer_diameter</span><span class="o">/</span><span class="mi">2</span>, <span class="n">width</span><span class="o">/</span><span class="mi">2</span> - <span class="n">rim_height</span> - <span class="n">inscription_depth</span>])
+    <span class="n">translate</span>([-<span class="mf">32.5</span>,-<span class="mi">22</span>,<span class="mi">0</span>])
+    <span class="n">logo</span>(<span class="mf">1.1</span> * <span class="n">inscription_depth</span>); // + <span class="n">epsilon</span>
+}
 
-<p>Let’s inscribe the logo in the upper reel part:</p>
+<span class="n">difference</span>() {
+    <span class="n">plain_reel</span>();
+    <span class="n">logo_inscription</span>();
+}
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">module logo_inscription() {
-</span><span class="line">    translate([0, -0.7 * outer_diameter/2, width/2 - rim_height - inscription_depth])
-</span><span class="line">    translate([-32.5,-22,0])
-</span><span class="line">    logo(1.1 * inscription_depth); // + epsilon
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">difference() {
-</span><span class="line">    plain_reel();
-</span><span class="line">    logo_inscription();
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/logo.png" /></p>
-
-<p>The logo itself is a bit thicker and if we make it as thick as is lowered we may get into numerical problems. The solution is easy, just make it overlap a bit (by a small epsilon). If you’ve ever came across computational geometry or numerical programming this should have been deeply rooted in your blood :). Otherwide, you’ve just learned. Tip for reading: <a href="http://gamedevs.org/uploads/numerical-robustness-geometric-calculations.pdf">Numerical Robustness
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/logo.png"></p>
+<p>The logo itself is a bit thicker and if we make it as thick as is lowered we may get into numerical problems. The solution is easy, just make it overlap a bit (by a small epsilon). If you've ever came across computational geometry or numerical programming this should have been deeply rooted in your blood :). Otherwide, you've just learned. Tip for reading: <a href="http://gamedevs.org/uploads/numerical-robustness-geometric-calculations.pdf">Numerical Robustness
 (for Geometric Calculations)</a>.</p>
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/epsilon.png"></p>
+<h3>Text</h3>
+<p>Then we'd like to add some short description text inscriped in the the upper side similarly as the logo. OpenSCAD directly supports 2D text primitives which can be then extruded. That's exactly what we need.</p>
+<pre class="code literal-block"><span></span>linear_extrude(height=1) {
+  text("ABS");
+}
+</pre>
 
-<p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/epsilon.png" /></p>
-
-<h2 id="text">Text</h2>
-
-<p>Then we’d like to add some short description text inscriped in the the upper side similarly as the logo. OpenSCAD directly supports 2D text primitives which can be then extruded. That’s exactly what we need.</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">linear_extrude(height=1) {
-</span><span class="line">  text("ABS");
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>We can set the text size, alignment and font to customize the text for aesthetics and legibility:</p>
+<pre class="code literal-block"><span></span><span class="nt">font</span> <span class="o">=</span> <span class="s2">"Liberation Sans:style=Bold"</span><span class="o">;</span>
+<span class="nt">text</span><span class="o">(</span><span class="s2">"ABS"</span><span class="o">,</span> <span class="nt">20</span><span class="o">,</span> <span class="nt">halign</span><span class="o">=</span><span class="s2">"center"</span><span class="o">,</span> <span class="nt">font</span><span class="o">=</span><span class="nt">font</span><span class="o">);</span>
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">font = "Liberation Sans:style=Bold";
-</span><span class="line">text("ABS", 20, halign="center", font=font);</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>We have texts of various length like “ABS”, “BRASS”, “PETG ESD” so we need to customize the font size and and Y position individually for a good git.</p>
+<p>We have texts of various length like "ABS", "BRASS", "PETG ESD" so we need to customize the font size and and Y position individually for a good git.</p>
+<h4>Multiline text</h4>
+<p>In order to use the space well without compromizing legibility we can split the text into multiple lines (in this case usually two). Since OpenSCAD's <code>text()</code> only supports a single line, we need to make more translated <code>text()</code> objects and union them. We're not the first to come across this problem and fortunately <a href="https://www.reddit.com/r/openscad/comments/3jwobs/line_feed_in_openscad_text/">other people managed to get a working solution</a>. So we'll use a snippet by user <em>iggy_koopa</em>.</p>
+<pre class="code literal-block"><span></span><span class="k">module</span> <span class="n">multiline_text</span>(<span class="nb">lines</span>, <span class="n">size</span>){
+  // <span class="n">https:</span>//<span class="n">www</span>.<span class="n">reddit</span>.<span class="n">com</span><span class="o">/</span><span class="n">r</span><span class="o">/</span><span class="n">openscad</span><span class="o">/</span><span class="n">comments</span><span class="o">/</span><span class="mi">3</span><span class="n">jwobs</span><span class="o">/</span><span class="n">line_feed_in_openscad_text</span>/
+    <span class="n">union</span>(){
+        <span class="k">for</span> (<span class="n">i</span> = [<span class="mi">0</span> : <span class="n">len</span>(<span class="nb">lines</span>)-<span class="mi">1</span>]) {
+            <span class="n">translate</span>([<span class="mi">0</span> , -<span class="n">i</span> * (<span class="n">size</span> + <span class="mi">2</span>), <span class="mi">0</span>])
+            <span class="n">text</span>(<span class="nb">lines</span>[<span class="n">i</span>], <span class="n">size</span>, <span class="n">halign</span>=<span class="s">"center"</span>, <span class="n">font</span>=<span class="n">font</span>);
+        }
+    }
+}
 
-<h3 id="multiline-text">Multiline text</h3>
+<span class="k">module</span> <span class="n">description</span>(<span class="n">desc</span>, <span class="n">size</span>, <span class="n">y_pos</span>) {
+    <span class="n">translate</span>([<span class="mi">0</span>, <span class="n">y_pos</span> * <span class="n">outer_diameter</span><span class="o">/</span><span class="mi">2</span>, <span class="n">width</span><span class="o">/</span><span class="mi">2</span> - <span class="n">rim_height</span> - <span class="n">inscription_depth</span>])
+    // <span class="n">epsilon</span> <span class="n">trick</span>
+    <span class="n">linear_extrude</span>(<span class="n">height</span>=<span class="mf">1.1</span> * <span class="n">inscription_depth</span>) {
+        <span class="n">multiline_text</span>(<span class="n">desc</span>, <span class="n">size</span>);
+    }
+}
 
-<p>In order to use the space well without compromizing legibility we can split the text into multiple lines (in this case usually two). Since OpenSCAD’s <code>text()</code> only supports a single line, we need to make more translated <code>text()</code> objects and union them. We’re not the first to come across this problem and fortunately <a href="https://www.reddit.com/r/openscad/comments/3jwobs/line_feed_in_openscad_text/">other people managed to get a working solution</a>. So we’ll use a snippet by user <em>iggy_koopa</em>.</p>
+<span class="n">description</span>([<span class="s">"ABS"</span>, <span class="s">"ESD"</span>], <span class="mi">17</span>, <span class="mf">0.7</span>);
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">module multiline_text(lines, size){
-</span><span class="line">  // https://www.reddit.com/r/openscad/comments/3jwobs/line_feed_in_openscad_text/
-</span><span class="line">    union(){
-</span><span class="line">        for (i = [0 : len(lines)-1]) {
-</span><span class="line">            translate([0 , -i * (size + 2), 0])
-</span><span class="line">            text(lines[i], size, halign="center", font=font);
-</span><span class="line">        }
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">module description(desc, size, y_pos) {
-</span><span class="line">    translate([0, y_pos * outer_diameter/2, width/2 - rim_height - inscription_depth])
-</span><span class="line">    // epsilon trick
-</span><span class="line">    linear_extrude(height=1.1 * inscription_depth) {
-</span><span class="line">        multiline_text(desc, size);
-</span><span class="line">    }
-</span><span class="line">}
-</span><span class="line">
-</span><span class="line">description(["ABS", "ESD"], 17, 0.7);</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>The same epsilon trick as with the logo still holds.</p>
-
-<p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/text.png" /></p>
-
-<h2 id="scaling-the-whole-model">Scaling the whole model</h2>
-
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/text.png"></p>
+<h3>Scaling the whole model</h3>
 <p>The basic units in OpenSCAD are millimeters. Since we used dimensions of a real reel (with 20 cm diameter) but want our models smaller (eg. 8 cm), we can just scale the shole model.</p>
+<pre class="code literal-block"><span></span><span class="k">module</span> <span class="n">reel</span>(<span class="n">desc</span>, <span class="n">desc_size</span>, <span class="n">desc_y_pos</span>) {
+    <span class="n">scale</span>(<span class="mi">8</span> / <span class="mi">20</span>)
+    <span class="n">difference</span>() {
+        <span class="n">difference</span>() {
+            <span class="n">plain_reel</span>();
+            <span class="n">union</span>() {
+                <span class="n">logo_inscription</span>();
+                <span class="n">description</span>(<span class="n">desc</span>, <span class="n">desc_size</span>, <span class="n">desc_y_pos</span>);
+            }
+        }
+        <span class="n">hole</span>();
+    }
+}
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">module reel(desc, desc_size, desc_y_pos) {
-</span><span class="line">    scale(8 / 20)
-</span><span class="line">    difference() {
-</span><span class="line">        difference() {
-</span><span class="line">            plain_reel();
-</span><span class="line">            union() {
-</span><span class="line">                logo_inscription();
-</span><span class="line">                description(desc, desc_size, desc_y_pos);
-</span><span class="line">            }
-</span><span class="line">        }
-</span><span class="line">        hole();
-</span><span class="line">    }
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="exporting-to-stl">Exporting to STL</h2>
-
-<p>Now we have single reel model and it’s time to export an STL. In the UI it is quite simple:</p>
-
+<h3>Exporting to STL</h3>
+<p>Now we have single reel model and it's time to export an STL. In the UI it is quite simple:</p>
 <ul>
-  <li><code>F6</code> - render the model</li>
-  <li><em>File</em> -&gt; <em>Export</em> -&gt; <em>Export to STL</em></li>
+<li>
+<code>F6</code> - render the model</li>
+<li>
+<em>File</em> -&gt; <em>Export</em> -&gt; <em>Export to STL</em>
+</li>
 </ul>
-
 <p>In order to automate the things it would be nice to call <a href="https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_OpenSCAD_in_a_command_line_environment">OpenSCAD via command line</a>. Fortunately, it supports it!</p>
-
 <p>On Mac the binary is buried in <code>/Applications</code>, so to use it a little bit more comfortable we can link it to our <code>~/bin</code>. This is optional.</p>
+<pre class="code literal-block"><span></span><span class="c c-Singleline"># make sure you have ~/bin in your PATH</span>
+$ <span class="n">mkdir</span> -<span class="n">p</span> ~/<span class="n">bin</span>
+$ <span class="k">export</span> <span class="n">PATH</span>=<span class="n">PATH:</span>~/<span class="n">bin</span>
+$ <span class="n">ln</span> -<span class="sr">s /Applications/OpenSCAD.app/</span><span class="n">Contents</span><span class="o">/</span><span class="n">MacOS</span><span class="o">/</span><span class="n">OpenSCAD</span> ~/<span class="n">bin</span><span class="o">/</span><span class="n">openscad</span>
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line"># make sure you have ~/bin in your PATH
-</span><span class="line">$ mkdir -p ~/bin
-</span><span class="line">$ export PATH=PATH:~/bin
-</span><span class="line">$ ln -s /Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD ~/bin/openscad</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Then we can produce STL from an SCAD file this way:</p>
+<pre class="code literal-block"><span></span>$ openscad -o foo.stl -D <span class="s1">'quality="production"'</span> foo.scad
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ openscad -o foo.stl -D 'quality="production"' foo.scad</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>It is quite slow. This model took about 1:15 min.</p>
-
-<h2 id="exporting-to-png">Exporting to PNG</h2>
-
+<h3>Exporting to PNG</h3>
 <p>Similarly we can export a thumbnail to PNG:</p>
+<pre class="code literal-block"><span></span>$ openscad -o foo.png foo.scad
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ openscad -o foo.png foo.scad</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Also we can set the camera position and orientation:</p>
+<pre class="code literal-block"><span></span>$ openscad -o foo.png foo.scad --camera<span class="o">=</span><span class="m">0</span>,0,220,0,0,0
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">$ openscad -o foo.png foo.scad --camera=0,0,220,0,0,0</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Refer to the docs for details.</p>
-
-<p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/reel_00_ABS_ESD.png" /></p>
-
-<h2 id="parametric-models">Parametric models</h2>
-
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/reel_00_ABS_ESD.png"></p>
+<h3>Parametric models</h3>
 <p>It is nice that we were able to create one model but we want a models for each of ~ 20 materials. Well, we could copy a model, change something and save as another file. But such approach get too cumbersome when we want to change something and propagate the change into all the instnaces. Better, we can try to automate the whole process.</p>
-
 <p>So we can make a parameterized model with variable text, font size and text position and then use it to make multiple instances. We want a separate STL for each model, so we have to create mulitple separate SCAD files.</p>
-
-<p>An easy approach is to use eg. Python as the templating engine, store the parameters in a table (a CSV file) and generate multiple SCAD files. Then for each SCAD file we’ll generate the STL and PNG thumbnail.</p>
-
+<p>An easy approach is to use eg. Python as the templating engine, store the parameters in a table (a CSV file) and generate multiple SCAD files. Then for each SCAD file we'll generate the STL and PNG thumbnail.</p>
 <p>We store the parameterized model in the <code>reel.scad</code> file and provide a function:</p>
+<pre class="code literal-block"><span></span><span class="k">module</span> <span class="n">reel</span>(<span class="n">desc</span>, <span class="n">desc_size</span>, <span class="n">desc_y_pos</span>) {
+  // ...
+}
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">module reel(desc, desc_size, desc_y_pos) {
-</span><span class="line">  // ...
-</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Then we can include this file and call the <code>reel()</code> function to instantiate the model with given parameters and store it to other file:</p>
+<pre class="code literal-block"><span></span>use &lt;reel.scad&gt;;
+reel(["ABS", "ESD"], 18, 0.7);
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">use &lt;reel.scad&gt;;
-</span><span class="line">reel(["ABS", "ESD"], 18, 0.7);</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="automating-the-whole-thing">Automating the whole thing</h2>
-
-<h3 id="python-template-generator">Python template generator</h3>
-
+<h3>Automating the whole thing</h3>
+<h4>Python template generator</h4>
 <p>We store the definitions into a CSV file <code>reel_texts.csv</code>. The text column is split on whitespace into multiple lines. The size is text size in mm, the y_pos is the relative Y position.</p>
+<pre class="code literal-block"><span></span>text,size,y_pos
+ABS ESD,18,0.7
+PETG ESD,18,0.7
+ABS,20,0.6
+[...]
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">text,size,y_pos
-</span><span class="line">ABS ESD,18,0.7
-</span><span class="line">PETG ESD,18,0.7
-</span><span class="line">ABS,20,0.6
-</span><span class="line">[...]</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>To read the CSV we use <code>pandas</code>. Then we transform each row into a SCAD source code and store it into a file.</p>
+<pre class="code literal-block"><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">import os
-</span><span class="line">import pandas as pd
-</span><span class="line">
-</span><span class="line">df = pd.read_csv('reel_texts.csv', dtype=str)
-</span><span class="line">
-</span><span class="line">template = """use &lt;../reel.scad&gt;;
-</span><span class="line">reel([%s], %s, %s);
-</span><span class="line">"""
-</span><span class="line">
-</span><span class="line">dir_name = 'reels_scad'
-</span><span class="line">os.makedirs(dir_name, exist_ok=True)
-</span><span class="line">for index, row in df.iterrows():
-</span><span class="line">    normalized_text = row['text'].replace(' ', '_').replace('/', '')
-</span><span class="line">    file_name = '%s/reel_%02d_%s.scad' % (dir_name, index, normalized_text)
-</span><span class="line">    with open(file_name, 'w') as f:
-</span><span class="line">        text = ', '.join(['"%s"' % t for t in row['text'].split(' ')])
-</span><span class="line">        f.write(template % (text, row['size'], row['y_pos']))</span></code></pre></td></tr></table></div></figure></notextile></div>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'reel_texts.csv'</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
 
-<h3 id="converting-to-stl-in-batch">Converting to STL in batch</h3>
+<span class="n">template</span> <span class="o">=</span> <span class="s2">"""use &lt;../reel.scad&gt;;</span>
+<span class="s2">reel([</span><span class="si">%s</span><span class="s2">], </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">);</span>
+<span class="s2">"""</span>
 
-<p>Let’s convert all the generated SCAD files to STL files and store them to another directory. For ~ 20 files it took about half an hour. Right now I haven’t tried to optimize it.</p>
+<span class="n">dir_name</span> <span class="o">=</span> <span class="s1">'reels_scad'</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dir_name</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">normalized_text</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'text'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">' '</span><span class="p">,</span> <span class="s1">'_'</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+    <span class="n">file_name</span> <span class="o">=</span> <span class="s1">'</span><span class="si">%s</span><span class="s1">/reel_</span><span class="si">%02d</span><span class="s1">_</span><span class="si">%s</span><span class="s1">.scad'</span> <span class="o">%</span> <span class="p">(</span><span class="n">dir_name</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">normalized_text</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">'"</span><span class="si">%s</span><span class="s1">"'</span> <span class="o">%</span> <span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">row</span><span class="p">[</span><span class="s1">'text'</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)])</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">template</span> <span class="o">%</span> <span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s1">'size'</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">'y_pos'</span><span class="p">]))</span>
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">#!/bin/bash
-</span><span class="line"># Convert all reels from SCAD to STL
-</span><span class="line">STL_DIR=stl
-</span><span class="line">mkdir -p $STL_DIR
-</span><span class="line">for SCAD_FILE in reels_scad/*.scad; do
-</span><span class="line">  STL_FILE=$STL_DIR/$(basename $SCAD_FILE .scad).stl
-</span><span class="line">  time openscad -o $STL_FILE -D 'quality="production"' $SCAD_FILE
-</span><span class="line">done</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="converting-to-png-in-batch">Converting to PNG in batch</h3>
-
+<h4>Converting to STL in batch</h4>
+<p>Let's convert all the generated SCAD files to STL files and store them to another directory. For ~ 20 files it took about half an hour. Right now I haven't tried to optimize it.</p>
+<table class="codehilitetable"><tr>
+<td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td>
+<td class="code">
+<pre class="code literal-block"><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1"># Convert all reels from SCAD to STL</span>
+<span class="nv">STL_DIR</span><span class="o">=</span>stl
+mkdir -p <span class="nv">$STL_DIR</span>
+<span class="k">for</span> SCAD_FILE in reels_scad/*.scad<span class="p">;</span> <span class="k">do</span>
+  <span class="nv">STL_FILE</span><span class="o">=</span><span class="nv">$STL_DIR</span>/<span class="k">$(</span>basename <span class="nv">$SCAD_FILE</span> .scad<span class="k">)</span>.stl
+  <span class="nb">time</span> openscad -o <span class="nv">$STL_FILE</span> -D <span class="s1">'quality="production"'</span> <span class="nv">$SCAD_FILE</span>
+<span class="k">done</span>
+</pre>
+</td>
+</tr></table>
+<h4>Converting to PNG in batch</h4>
 <p>We can do similar thing to obtain PNG thumbnails:</p>
+<pre class="code literal-block"><span></span>PNG_DIR=png
+mkdir -p $PNG_DIR
+for SCAD_FILE in reels_scad/*.scad; do
+  PNG_FILE=$PNG_DIR/$(basename $SCAD_FILE .scad).png
+  openscad -o $PNG_FILE $SCAD_FILE --camera=0,0,220,0,0,0
+done
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">PNG_DIR=png
-</span><span class="line">mkdir -p $PNG_DIR
-</span><span class="line">for SCAD_FILE in reels_scad/*.scad; do
-</span><span class="line">  PNG_FILE=$PNG_DIR/$(basename $SCAD_FILE .scad).png
-</span><span class="line">  openscad -o $PNG_FILE $SCAD_FILE --camera=0,0,220,0,0,0
-</span><span class="line">done</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h3 id="bonus---array-of-thumbnails">Bonus - array of thumbnails</h3>
-
+<h4>Bonus - array of thumbnails</h4>
 <p>It might be nice to see all the thumbnails in a single image. Python, numpy and matplotlib can save us and to the job in a few lines of code.</p>
+<p><img src="../../../images/how-to-make-stl-with-svg-logo-and-text-in-openscad/thumbnails.png"></p>
+<pre class="code literal-block"><span></span><span class="sd">"""</span>
+<span class="sd">Makes a single thumbnail image from a set of individual PNGs.</span>
+<span class="sd">Order the images into a 2D matrix, so that it's nicely viewable.</span>
+<span class="sd">"""</span>
 
-<p><img src="/assets/posts/how-to-make-stl-with-svg-logo-and-text-in-openscad/thumbnails.png" /></p>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">glob</span>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">"""
-</span><span class="line">Makes a single thumbnail image from a set of individual PNGs.
-</span><span class="line">Order the images into a 2D matrix, so that it's nicely viewable.
-</span><span class="line">"""
-</span><span class="line">
-</span><span class="line">import matplotlib.pyplot as plt
-</span><span class="line">import numpy as np
-</span><span class="line">import glob
-</span><span class="line">
-</span><span class="line">image_files = glob.glob('png/*.png')
-</span><span class="line">
-</span><span class="line">w, h, channels = 512, 512, 3
-</span><span class="line">rows, cols = 4, 5
-</span><span class="line">
-</span><span class="line"># let's make a matrix 4x5, ie. select a nicely divisible subset
-</span><span class="line">image_files = image_files[:rows * cols]
-</span><span class="line">images = [read_image(f) for f in image_files]
-</span><span class="line">
-</span><span class="line"># make a single big matrix of images
-</span><span class="line"># (20, 512, 512, 3) -&gt;
-</span><span class="line">images = np.vstack(images).reshape(rows, cols, w, h, channels)
-</span><span class="line"># (4, 5, 512, 512, 3) -&gt; (4, 512, 5, 512, 3) -&gt; (4 * 512, 5 * 512, 3)
-</span><span class="line">big_image = images.swapaxes(1, 2).reshape(rows * w, cols * h, channels)
-</span><span class="line">
-</span><span class="line">plt.imsave('thumbnails.png', big_image)</span></code></pre></td></tr></table></div></figure></notextile></div>
+<span class="n">image_files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s1">'png/*.png'</span><span class="p">)</span>
 
-<h2 id="the-code---git-repository">The code - git repository</h2>
+<span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">channels</span> <span class="o">=</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">3</span>
+<span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span>
 
-<p>That’s it!</p>
+<span class="c1"># let's make a matrix 4x5, ie. select a nicely divisible subset</span>
+<span class="n">image_files</span> <span class="o">=</span> <span class="n">image_files</span><span class="p">[:</span><span class="n">rows</span> <span class="o">*</span> <span class="n">cols</span><span class="p">]</span>
+<span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">read_image</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">image_files</span><span class="p">]</span>
 
+<span class="c1"># make a single big matrix of images</span>
+<span class="c1"># (20, 512, 512, 3) -&gt;</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="kp">vstack</span><span class="p">(</span><span class="n">images</span><span class="p">)</span><span class="o">.</span><span class="kp">reshape</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span>
+<span class="c1"># (4, 5, 512, 512, 3) -&gt; (4, 512, 5, 512, 3) -&gt; (4 * 512, 5 * 512, 3)</span>
+<span class="n">big_image</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="kp">swapaxes</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="kp">reshape</span><span class="p">(</span><span class="n">rows</span> <span class="o">*</span> <span class="n">w</span><span class="p">,</span> <span class="n">cols</span> <span class="o">*</span> <span class="n">h</span><span class="p">,</span> <span class="n">channels</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="s1">'thumbnails.png'</span><span class="p">,</span> <span class="n">big_image</span><span class="p">)</span>
+</pre>
+
+
+<h3>The code - git repository</h3>
+<p>That's it!</p>
 <p>The complete code, including the scripts and graphics is available in a git repository. The license code the code (except for the logo) it MIT open-source, so feel free to use it.</p>
-
 <ul>
-  <li>https://github.com/bzamecnik/s3dt-models/</li>
+<li>https://github.com/bzamecnik/s3dt-models/</li>
 </ul>
-
-<h2 id="about-the-company">About the company</h2>
-
-<p><img src="http://www.svet-3d-tisku.cz/img/svet-3d-tisku-logo.png" alt="" /></p>
-
-<p><a href="http://www.svet-3d-tisku.cz/">Svět 3D tisku</a> (3D Print World) is a Czech boutique e-shop and store providing broad range of fillaments, 3D printers and custom 3D print services for Central European customers (local companies, schools, hobbyists). The company is ran by by mum and dad and I’m trying to help them if time permits.</p>
-
-<p>If you are in Prage around 10.-13. May 2016 feel free to visit our stand at <a href="http://3dexpo.cz/">3D Expo Prague 2016</a> (<a href="http://3dexpo.cz/exhibitors/svet-3d-tisku/">details</a>) and see the printed “reels” live :).</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>In this small weekend project we’ve learned the basics of OpenSCAD and were able to create some nice small but not completely trivial model. We’ve seem how to use a hierarchy of parameterized models, how to use text, import vector graphics logo from SVG and use it as an inscription. In order to avoid repetitive work we tried to automate all the steps from generating SCAD code, STL and PNG file up to making a summary table of thumbnails.</p>
-
+<h3>About the company</h3>
+<p><img alt="" src="http://www.svet-3d-tisku.cz/img/svet-3d-tisku-logo.png"></p>
+<p><a href="http://www.svet-3d-tisku.cz/">Svět 3D tisku</a> (3D Print World) is a Czech boutique e-shop and store providing broad range of fillaments, 3D printers and custom 3D print services for Central European customers (local companies, schools, hobbyists). The company is ran by by mum and dad and I'm trying to help them if time permits.</p>
+<p>If you are in Prage around 10.-13. May 2016 feel free to visit our stand at <a href="http://3dexpo.cz/">3D Expo Prague 2016</a> (<a href="http://3dexpo.cz/exhibitors/svet-3d-tisku/">details</a>) and see the printed "reels" live :).</p>
+<h3>Conclusion</h3>
+<p>In this small weekend project we've learned the basics of OpenSCAD and were able to create some nice small but not completely trivial model. We've seem how to use a hierarchy of parameterized models, how to use text, import vector graphics logo from SVG and use it as an inscription. In order to avoid repetitive work we tried to automate all the steps from generating SCAD code, STL and PNG file up to making a summary table of thumbnails.</p>
 <p>I hope this article has shown you that it is very easy to start with OpenSCAD (at least for programmers) and inspired you to make your own projects. If you have any questions, you can search the docs or drop some comment here. Thanks and enjoy!</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Bohumír Zámečník</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2016-05-01T18:02:51+02:00" pubdate data-updated="true">May 1<span>st</span>, 2016</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/3d-print/'>3D print</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://bohumirzamecnik.cz/blog/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad/" data-via="bzamecnik" data-counturl="http://bohumirzamecnik.cz/blog/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2015/harmoneye-hard-won-experience/" title="Previous Post: HarmonEye: hard-won experience after three years of my life">&laquo; HarmonEye: hard-won experience after three years of my life</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2016/my-digital-nomad-story/" title="Next Post: My Digital Nomad Story">My Digital Nomad Story &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-	<h1>About Me</h1>
-	<img src="/images/homepage/bza.jpg" style="max-width: 200px; border-radius: 150px; margin: 5px">
-	<p>How do things work? Ever since 1987 I’ve fallen in love with thinking about it. That's how I became a <a href="/about/">software engineer</a>.</p>
-	<p>#python · #scala · #
-	<abbr title="Machine Learning" data-toggle="tooltip" data-placement="bottom">ml</abbr>
-	· #audio · #
-	<abbr title="Digital Signal Processing" data-toggle="tooltip" data-placement="bottom">dsp</abbr>
-	· #bigdata· #digitalnomad</p>
-	<ul>
-		<li>
-			<a href="https://twitter.com/bzamecnik" class="twitter-follow-button" data-show-count="false">@bzamecnik on Twitter</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</li>
-		<li>
-			<a href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn profile</a>
-		</li>
-		<li>
-			<a href="http://github.com/bzamecnik/">GitHub</a>
-		</li>
-		<li>
-			<a href="http://flickr.com/people/elgriton/">Photos on Flickr</a>
-		</li>
-	</ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2016/krakow/">Poland - Kraków</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/adsb-part-2-hardware/">ADS-B Part 2 - Hardware</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/wroclaw/">Poland - Wrocław</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/ads-b-flight-tracking/">ADS-B Part 1 - Flight Tracking for the Curious</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/my-digital-nomad-story/">My Digital Nomad Story</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/112168593075061741028?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
+    </section><aside class="sharing no-print"><a href="#content" aria-label="Post beginning">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-up" aria-hidden="true" title="Post beginning"></i>
     </a>
-  </h1>
-</section>
+    <a href="http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience/" rel="prev" title="HarmonEye: hard-won experience after three years of my life">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-left" aria-hidden="true" title="Previous post: HarmonEye: hard-won experience after three years of my life"></i>
+    </a>
+    <a href="http://bohumirzamecnik.cz/blog/2016/my-digital-nomad-story/" rel="next" title="Next post: My Digital Nomad Story" aria-label="Next post: My Digital Nomad Story">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-right" aria-hidden="true"></i>
+    </a>
+    <span class="post-sharing">
+     <a href="http://twitter.com/share?text=How+to+make+STL+with+SVG+logo+and+text+in+OpenSCAD&amp;url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2016%2Fhow-to-make-stl-with-svg-logo-and-text-in-openscad%2F" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" aria-label="Share on Twitter">
+       <i class="fa fa-2x fa-fw fa-twitter-square" aria-hidden="true" title="Share on Twitter">
+     </i></a>
+     <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2016%2Fhow-to-make-stl-with-svg-logo-and-text-in-openscad%2F" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" aria-label="Share on Facebook">
+       <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px" aria-hidden="true" title="Share of Facebook">
+     </i></a>
+     <a href="https://plus.google.com/share?url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2016%2Fhow-to-make-stl-with-svg-logo-and-text-in-openscad%2F" aria-label="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+       <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px" aria-hidden="true" title="Share on Google+">
+     </i></a>
+     </span>
+</aside><div itemprop="author" itemscope itemtype="http://schema.org/Person">
 
 
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - <a href="/about/">Bohumír Zámečník</a> -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'bzamecnik';
-      
+        <section class="comments hidden-print"><h2>Comments</h2>
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://bohumirzamecnik.cz/blog/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad/';
-        var disqus_url = 'http://bohumirzamecnik.cz/blog/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="bzamecnik",
+            disqus_url="http://bohumirzamecnik.cz/blog/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad/",
+        disqus_title="How to make STL with SVG logo and text in OpenSCAD",
+        disqus_identifier="cache/posts/2016/how-to-make-stl-with-svg-logo-and-text-in-openscad.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section><script>var disqus_shortname="bzamecnik";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>
+© 2018 <a href="mailto:bohumir.zamecnik@gmail.com">Bohumír Zámečník</a>
+- Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>,
+theme based on: <a href="https://themes.getnikola.com/v7/jidn/">jidn</a>
+/ <a href="https://github.com/poole/lanyon">lanyon</a>
 
+</p>
+            
+        </footer>
+</div>
+    </article>
+</div>
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-44857522-1']);
+_gaq.push(['_trackPageview']);
 
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-<a href="https://github.com/bzamecnik/bohumirzamecnik.cz/" class="github-ribbon"><img src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
-
-
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script><script src="../../../assets/js/all-nocdn.js"></script><!-- fancy dates --><script>
+    moment.locale("en");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</div>
 </body>
 </html>

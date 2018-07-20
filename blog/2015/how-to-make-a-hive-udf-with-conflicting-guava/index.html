@@ -1,573 +1,321 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>
-    How to Make a Hive UDF With Conflicting Guava - 
-    
-    Bohumír Zámečník</title>
-  <meta name="author" content="Bohumír Zámečník">
-
-  
-  <meta name="description" content="If you’re using Hive sooner or later you’ll need to create user defined functions (UDFs). Chances are such a function would use a code that depends &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava">
-  <link href="https://s.gravatar.com/avatar/f90538dcd2df4a510c8f0b057154dea1?s=32" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/tables.css" media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="/atom.xml" rel="alternate" title="Bohumír Zámečník" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-44857522-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to make a Hive UDF with conflicting Guava | Bohumír Zámečník</title>
+<link href="../../../assets/css/all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="canonical" href="http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Bohumír Zámečník">
+<link rel="prev" href="../image-whitening/" title="Image whitening - clean B&amp;W documents from nasty photos" type="text/html">
+<link rel="next" href="../harmoneye-hard-won-experience/" title="HarmonEye: hard-won experience after three years of my life" type="text/html">
+<meta property="og:site_name" content="Bohumír Zámečník">
+<meta property="og:title" content="How to make a Hive UDF with conflicting Guava">
+<meta property="og:url" content="http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/">
+<meta property="og:description" content="If you're using Hive sooner or later you'll need to create user defined functions (UDFs). Chances are such a function would use a code that depends on the Guava library. And it is not that unlikely th">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2015-05-29T00:31:00+02:00">
+<meta property="article:tag" content="Big Data">
+<meta property="article:tag" content="Hive">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Maven">
 </head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+            styles, `#sidebar-checkbox` for behavior. -->
+    <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox"><!-- Toggleable sidebar --><div class="sidebar" id="sidebar">
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Bohumír Zámečník</a></h1>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-    <li><a href="http://eepurl.com/xX1M1" rel="subscribe-email" title="subscribe via email">Email</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:bohumirzamecnik.cz" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/blog/">Blog</a></li>
-  <li><a href="/blog/archives/">Archives</a></li>
-  <li><a href="/projects/">Projects</a></li>
-  <li><a href="/about/">About</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">How to Make a Hive UDF With Conflicting Guava</h1>
+        <nav role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../"><i class="fa fa-2x fa-fw fa-home"></i> Home</a>
+          <a class="sidebar-nav-item" href="../../"><i class="fa fa-2x fa-fw fa-user-circle"></i> Blog</a>
+        </nav><nav id="menu" role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../about/">About</a>
+        <a class="sidebar-nav-item" href="../../../projects/">Projects</a>
+        <a class="sidebar-nav-item" href="../../../archive.html">Archive</a>
+        <a class="sidebar-nav-item" href="../../../categories/">Tags</a>
+        <a class="sidebar-nav-item" href="../../../rss.xml">RSS feed</a>
+        <a class="sidebar-nav-item" href="https://github.com/bzamecnik/">GitHub</a>
+        <a class="sidebar-nav-item" href="https://twitter.com/bzamecnik">Twitter</a>
+        <a class="sidebar-nav-item" href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn</a>
+        <a class="sidebar-nav-item" href="https://www.flickr.com/photos/elgriton/">Flickr</a>
+        <a class="sidebar-nav-item" href="mailto:bohumir.zamecnik@gmail.com">E-mail</a>
     
     
-      <p class="meta">
+    </nav>
+</div>
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          
+    <h2 id="brand" class="masthead-title">
+      <a href="../../../" title="Bohumír Zámečník" rel="home">Bohumír Zámečník</a>
+    </h2>
+
+        </div>
+      </div>
+
+      <div class="container content" id="content">
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/BlogPosting"><header><h1 class="post-title p-name entry-title" itemprop="headline">
+      <a href="http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/" class="u-url">How to make a Hive UDF with conflicting Guava</a>
+</h1>
+        <div class="metadata">
+        <meta itemprop="inLanguage" content="en">
+<p class="dateline">
+            <time class="post-date published dt-published" datetime="2015-05-29T00:31:00+02:00" itemprop="datePublished" title="2015-05-29">2015-05-29</time></p>
+                <p class="commentline">
+        
+    <a href="#disqus_thread" data-disqus-identifier="cache/posts/2015/how-to-make-a-hive-udf-with-conflicting-guava.html">Comments</a>
+
+
+        </p>
+</div>
         
 
+    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
+<p>If you're using Hive sooner or later you'll need to create user defined functions (UDFs). Chances are such a function would use a code that depends on the Guava library. And it is not that unlikely that the required Guava version would be newer than Hive's. Then you're running into a trouble. Hopefully this article save you much of the pain I had to suffer to make it working. Let's make a simple UDF and fix it using both maven and gradle.</p>
+<!-- TEASER_END -->
 
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-29T00:31:00+02:00" pubdate data-updated="true">May 29<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>If you’re using Hive sooner or later you’ll need to create user defined functions (UDFs). Chances are such a function would use a code that depends on the Guava library. And it is not that unlikely that the required Guava version would be newer than Hive’s. Then you’re running into a trouble. Hopefully this article save you much of the pain I had to suffer to make it working. Let’s make a simple UDF and fix it using both maven and gradle.</p>
-
-<!--more-->
-
-<h2 id="example-udf---top-private-domain">Example UDF - top private domain</h2>
-
+<h3>Example UDF - top private domain</h3>
 <p>As a concrete example take a UDF that given a internet host name computes the top private domain. Eg. for host name <code>www.google.co.uk</code>, <code>uk</code> and <code>co.uk</code> are public domains, <code>google.co.uk</code> and <code>www.google.co.uk</code> are private domains and <code>google.co.uk</code> is the highest (top) private domain in this case.</p>
+<p>Guava's <code>InternetDomainName.topPrivateDomain()</code> already does this job. We need lastest Guava in order to have an up-to-date trie representing public domains. However, there's a difference between ancient Guava 11 and latest Guava 18:</p>
+<pre class="code literal-block"><span></span><span class="n">InternetDomainName</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="s">"www.google.co.uk"</span><span class="o">).</span><span class="na">topPrivateDomain</span><span class="o">().</span><span class="na">toString</span><span class="o">()</span>
+<span class="c1">// returns "google.co.uk" in Guava 18</span>
+<span class="c1">// returns "InternetDomainName{name=google.co.uk}" in Guava 11</span>
+<span class="c1">//   "google.co.uk" is returned by name() instead of toString()</span>
+</pre>
 
-<p>Guava’s <code>InternetDomainName.topPrivateDomain()</code> already does this job. We need lastest Guava in order to have an up-to-date trie representing public domains. However, there’s a difference between ancient Guava 11 and latest Guava 18:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="n">InternetDomainName</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="s">&quot;www.google.co.uk&quot;</span><span class="o">).</span><span class="na">topPrivateDomain</span><span class="o">().</span><span class="na">toString</span><span class="o">()</span>
-</span><span class="line"><span class="c1">// returns &quot;google.co.uk&quot; in Guava 18</span>
-</span><span class="line"><span class="c1">// returns &quot;InternetDomainName{name=google.co.uk}&quot; in Guava 11</span>
-</span><span class="line"><span class="c1">//   &quot;google.co.uk&quot; is returned by name() instead of toString()</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>The whole UDF class looks like this:</p>
+<pre class="code literal-block"><span></span><span class="kn">package</span> <span class="nn">com.example.hive.udf</span><span class="o">;</span>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-</pre></td><td class="code"><pre><code class="java"><span class="line"><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">hive</span><span class="o">.</span><span class="na">udf</span><span class="o">;</span>
-</span><span class="line">
-</span><span class="line"><span class="kn">import</span> <span class="nn">com.google.common.net.InternetDomainName</span><span class="o">;</span>
-</span><span class="line"><span class="kn">import</span> <span class="nn">org.apache.hadoop.hive.ql.exec.UDF</span><span class="o">;</span>
-</span><span class="line"><span class="kn">import</span> <span class="nn">org.apache.hadoop.io.Text</span><span class="o">;</span>
-</span><span class="line">
-</span><span class="line"><span class="cm">/**</span>
-</span><span class="line"><span class="cm"> * Extracts top private domain from a host name.</span>
-</span><span class="line"><span class="cm"> */</span>
-</span><span class="line"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">TopPrivateDomain</span> <span class="kd">extends</span> <span class="n">UDF</span> <span class="o">{</span>
-</span><span class="line">
-</span><span class="line">    <span class="kd">public</span> <span class="n">Text</span> <span class="nf">evaluate</span><span class="o">(</span><span class="n">Text</span> <span class="n">host</span><span class="o">)</span> <span class="o">{</span>
-</span><span class="line">        <span class="k">if</span> <span class="o">(</span><span class="n">host</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-</span><span class="line">            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-</span><span class="line">        <span class="o">}</span>
-</span><span class="line">        <span class="k">try</span> <span class="o">{</span>
-</span><span class="line">            <span class="k">return</span> <span class="k">new</span> <span class="nf">Text</span><span class="o">(</span><span class="n">InternetDomainName</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">host</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span>
-</span><span class="line">                <span class="o">.</span><span class="na">topPrivateDomain</span><span class="o">()</span>
-</span><span class="line">                <span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-</span><span class="line">        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalArgumentException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
-</span><span class="line">            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-</span><span class="line">        <span class="o">}</span>
-</span><span class="line">    <span class="o">}</span>
-</span><span class="line"><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<span class="kn">import</span> <span class="nn">com.google.common.net.InternetDomainName</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.hadoop.hive.ql.exec.UDF</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.apache.hadoop.io.Text</span><span class="o">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Extracts top private domain from a host name.</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TopPrivateDomain</span> <span class="kd">extends</span> <span class="n">UDF</span> <span class="o">{</span>
+
+    <span class="kd">public</span> <span class="n">Text</span> <span class="nf">evaluate</span><span class="o">(</span><span class="n">Text</span> <span class="n">host</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">host</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="n">Text</span><span class="o">(</span><span class="n">InternetDomainName</span><span class="o">.</span><span class="na">from</span><span class="o">(</span><span class="n">host</span><span class="o">.</span><span class="na">toString</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">topPrivateDomain</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IllegalArgumentException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+
 
 <p>In this case the incompatibility is just in the return value but in other cases there might be runtime errors such as added/removed/changed classes, methods, etc.</p>
-
-<h2 id="conflicts-in-library-versions">Conflicts in library versions</h2>
-
-<p>So what’s the problem with Guava and Hive? Hadoop and Hive are in general packaged with ancient or outdated version of Guava. Eg. Hive 0.14 available in CDH5 has Guava 11 and current Hive 1.2 has Guava 15, while the most recent Guava version is 18. The bigger the version difference the higher chance of incompatibilities. And the problem is that more than one version of the library cannot be easily loaded within JVM (at least in Hive).</p>
-
-<p>However, there’s a trick. If there a conflict between classes in the same package(s) (in this case <code>com.google.common</code> and <code>com.google.thirdparty</code>), why not to rename the package(s)?</p>
-
-<p>There’s one more catch with Hive UDFs. For some strange reason when registering the UDF Hive sees only classes from the JAR than contains the UDF class and not from other specified JARs. This along with renaming the packages leads to the need for a fat JAR, ie. a JAR containing all the necessary dependencies for the UDF class (or at least those shaded or not seen by Hive). Blindly packaging all transitive dependencies might result in a big bloated JAR, so we’d also like to minimize it just to classes that are actually used by our UDF.</p>
-
+<h3>Conflicts in library versions</h3>
+<p>So what's the problem with Guava and Hive? Hadoop and Hive are in general packaged with ancient or outdated version of Guava. Eg. Hive 0.14 available in CDH5 has Guava 11 and current Hive 1.2 has Guava 15, while the most recent Guava version is 18. The bigger the version difference the higher chance of incompatibilities. And the problem is that more than one version of the library cannot be easily loaded within JVM (at least in Hive).</p>
+<p>However, there's a trick. If there a conflict between classes in the same package(s) (in this case <code>com.google.common</code> and <code>com.google.thirdparty</code>), why not to rename the package(s)?</p>
+<p>There's one more catch with Hive UDFs. For some strange reason when registering the UDF Hive sees only classes from the JAR than contains the UDF class and not from other specified JARs. This along with renaming the packages leads to the need for a fat JAR, ie. a JAR containing all the necessary dependencies for the UDF class (or at least those shaded or not seen by Hive). Blindly packaging all transitive dependencies might result in a big bloated JAR, so we'd also like to minimize it just to classes that are actually used by our UDF.</p>
 <p>The overall plan is thus to:</p>
-
 <ul>
-  <li>package all the dependencies of the UDF into a fat JAR
-    <ul>
-      <li>to make Hive see the other classes</li>
-    </ul>
-  </li>
-  <li>rename (shade) the Guava packages
-    <ul>
-      <li>both the packages of the Guava classes and their imports in our code</li>
-      <li>to prevent conflict with Hive’s own Guava</li>
-    </ul>
-  </li>
-  <li>(optional) minimize the resuling fat JAR
-    <ul>
-      <li>remove unnecessary dependencies or even unused classes</li>
-    </ul>
-  </li>
+<li>package all the dependencies of the UDF into a fat JAR<ul>
+<li>to make Hive see the other classes</li>
 </ul>
+</li>
+<li>rename (shade) the Guava packages<ul>
+<li>both the packages of the Guava classes and their imports in our code</li>
+<li>to prevent conflict with Hive's own Guava</li>
+</ul>
+</li>
+<li>(optional) minimize the resuling fat JAR<ul>
+<li>remove unnecessary dependencies or even unused classes</li>
+</ul>
+</li>
+</ul>
+<p>We'll explore how to do it using maven's <code>maven-shade-plugin</code> and gradle's <code>shadow</code> plugin.</p>
+<h3>Maven - maven-shade-plugin</h3>
+<p>If your're using maven for building fortunately there's a plugin called <a href="https://maven.apache.org/plugins/maven-shade-plugin/">maven-shade-plugin</a> which can do both creating a fat JAR and renaming packages.</p>
+<p>Within Maven's <code>pom.xml</code> in the plugin's configuration just specify using the <code>&lt;relocation&gt;</code> tags which package(s) should be renamed to what. The old package name is in the <code>&lt;pattern&gt;</code> and the new one in <code>&lt;shadedPattern&gt;</code>.</p>
+<pre class="code literal-block"><span></span><span class="nt">&lt;build&gt;</span>
+  <span class="nt">&lt;plugins&gt;</span>
+    <span class="nt">&lt;plugin&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>maven-shade-plugin<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>2.3<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;executions&gt;</span>
+        <span class="nt">&lt;execution&gt;</span>
+          <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
+          <span class="nt">&lt;goals&gt;</span>
+            <span class="nt">&lt;goal&gt;</span>shade<span class="nt">&lt;/goal&gt;</span>
+          <span class="nt">&lt;/goals&gt;</span>
+          <span class="nt">&lt;configuration&gt;</span>
+            <span class="nt">&lt;relocations&gt;</span>
+              <span class="nt">&lt;relocation&gt;</span>
+                <span class="nt">&lt;pattern&gt;</span>com.google.common<span class="nt">&lt;/pattern&gt;</span>
+                <span class="nt">&lt;shadedPattern&gt;</span>com.example.shaded.com.google.common<span class="nt">&lt;/shadedPattern&gt;</span>
+              <span class="nt">&lt;/relocation&gt;</span>
+              <span class="nt">&lt;relocation&gt;</span>
+                <span class="nt">&lt;pattern&gt;</span>com.google.thirdparty<span class="nt">&lt;/pattern&gt;</span>
+                <span class="nt">&lt;shadedPattern&gt;</span>com.example.shaded.com.google.thirdparty<span class="nt">&lt;/shadedPattern&gt;</span>
+              <span class="nt">&lt;/relocation&gt;</span>
+            <span class="nt">&lt;/relocations&gt;</span>
+          <span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/execution&gt;</span>
+      <span class="nt">&lt;/executions&gt;</span>
+    <span class="nt">&lt;/plugin&gt;</span>
+  <span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+</pre>
 
-<p>We’ll explore how to do it using maven’s <code>maven-shade-plugin</code> and gradle’s <code>shadow</code> plugin.</p>
-
-<h2 id="maven---maven-shade-plugin">Maven - maven-shade-plugin</h2>
-
-<p>If your’re using maven for building fortunately there’s a plugin called <a href="https://maven.apache.org/plugins/maven-shade-plugin/">maven-shade-plugin</a> which can do both creating a fat JAR and renaming packages.</p>
-
-<p>Within Maven’s <code>pom.xml</code> in the plugin’s configuration just specify using the <code>&lt;relocation&gt;</code> tags which package(s) should be renamed to what. The old package name is in the <code>&lt;pattern&gt;</code> and the new one in <code>&lt;shadedPattern&gt;</code>.</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-<span class="line-number">19</span>
-<span class="line-number">20</span>
-<span class="line-number">21</span>
-<span class="line-number">22</span>
-<span class="line-number">23</span>
-<span class="line-number">24</span>
-<span class="line-number">25</span>
-<span class="line-number">26</span>
-<span class="line-number">27</span>
-<span class="line-number">28</span>
-<span class="line-number">29</span>
-</pre></td><td class="code"><pre><code class="xml"><span class="line"><span class="nt">&lt;build&gt;</span>
-</span><span class="line">  <span class="nt">&lt;plugins&gt;</span>
-</span><span class="line">    <span class="nt">&lt;plugin&gt;</span>
-</span><span class="line">      <span class="nt">&lt;groupId&gt;</span>org.apache.maven.plugins<span class="nt">&lt;/groupId&gt;</span>
-</span><span class="line">      <span class="nt">&lt;artifactId&gt;</span>maven-shade-plugin<span class="nt">&lt;/artifactId&gt;</span>
-</span><span class="line">      <span class="nt">&lt;version&gt;</span>2.3<span class="nt">&lt;/version&gt;</span>
-</span><span class="line">      <span class="nt">&lt;executions&gt;</span>
-</span><span class="line">        <span class="nt">&lt;execution&gt;</span>
-</span><span class="line">          <span class="nt">&lt;phase&gt;</span>package<span class="nt">&lt;/phase&gt;</span>
-</span><span class="line">          <span class="nt">&lt;goals&gt;</span>
-</span><span class="line">            <span class="nt">&lt;goal&gt;</span>shade<span class="nt">&lt;/goal&gt;</span>
-</span><span class="line">          <span class="nt">&lt;/goals&gt;</span>
-</span><span class="line">          <span class="nt">&lt;configuration&gt;</span>
-</span><span class="line">            <span class="nt">&lt;relocations&gt;</span>
-</span><span class="line">              <span class="nt">&lt;relocation&gt;</span>
-</span><span class="line">                <span class="nt">&lt;pattern&gt;</span>com.google.common<span class="nt">&lt;/pattern&gt;</span>
-</span><span class="line">                <span class="nt">&lt;shadedPattern&gt;</span>com.example.shaded.com.google.common<span class="nt">&lt;/shadedPattern&gt;</span>
-</span><span class="line">              <span class="nt">&lt;/relocation&gt;</span>
-</span><span class="line">              <span class="nt">&lt;relocation&gt;</span>
-</span><span class="line">                <span class="nt">&lt;pattern&gt;</span>com.google.thirdparty<span class="nt">&lt;/pattern&gt;</span>
-</span><span class="line">                <span class="nt">&lt;shadedPattern&gt;</span>com.example.shaded.com.google.thirdparty<span class="nt">&lt;/shadedPattern&gt;</span>
-</span><span class="line">              <span class="nt">&lt;/relocation&gt;</span>
-</span><span class="line">            <span class="nt">&lt;/relocations&gt;</span>
-</span><span class="line">          <span class="nt">&lt;/configuration&gt;</span>
-</span><span class="line">        <span class="nt">&lt;/execution&gt;</span>
-</span><span class="line">      <span class="nt">&lt;/executions&gt;</span>
-</span><span class="line">    <span class="nt">&lt;/plugin&gt;</span>
-</span><span class="line">  <span class="nt">&lt;/plugins&gt;</span>
-</span><span class="line"><span class="nt">&lt;/build&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>In order to minimize the JAR, enable it via the following. Beware that this might remove some classes used only by reflection. In such a case explicitly include the class via <code>configuration.filters.filter.include</code>. Please find the details in the <a href="https://maven.apache.org/plugins/maven-shade-plugin/examples/includes-excludes.html">docs</a>.</p>
+<pre class="code literal-block"><span></span>...
+<span class="nt">&lt;configuration&gt;</span>
+  <span class="nt">&lt;minimizeJar&gt;</span>true<span class="nt">&lt;/minimizeJar&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+...
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-</pre></td><td class="code"><pre><code class="xml"><span class="line">...
-</span><span class="line"><span class="nt">&lt;configuration&gt;</span>
-</span><span class="line">  <span class="nt">&lt;minimizeJar&gt;</span>true<span class="nt">&lt;/minimizeJar&gt;</span>
-</span><span class="line"><span class="nt">&lt;/configuration&gt;</span>
-</span><span class="line">...
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>By default the plugin produces the shaded JAR with the same name as the original and add a prefix <code>original-</code> to the latter. If we want the opposite behavior (mark the shaded JAR, eg. with <code>-jar-with-dependencies</code> suffix), we can to this via:</p>
+<pre class="code literal-block"><span></span>...
+<span class="nt">&lt;configuration&gt;</span>
+  <span class="nt">&lt;shadedArtifactAttached&gt;</span>true<span class="nt">&lt;/shadedArtifactAttached&gt;</span>
+  <span class="nt">&lt;shadedClassifierName&gt;</span>jar-with-dependencies<span class="nt">&lt;/shadedClassifierName&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+...
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class="xml"><span class="line">...
-</span><span class="line"><span class="nt">&lt;configuration&gt;</span>
-</span><span class="line">  <span class="nt">&lt;shadedArtifactAttached&gt;</span>true<span class="nt">&lt;/shadedArtifactAttached&gt;</span>
-</span><span class="line">  <span class="nt">&lt;shadedClassifierName&gt;</span>jar-with-dependencies<span class="nt">&lt;/shadedClassifierName&gt;</span>
-</span><span class="line"><span class="nt">&lt;/configuration&gt;</span>
-</span><span class="line">...
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Then just build the JAR with <code>$ maven package</code> and copy it to the machine(s) running Hive.</p>
-
-<h2 id="gradle---shadow">Gradle - shadow</h2>
-
+<h3>Gradle - shadow</h3>
 <p>Gradle <a href="https://github.com/johnrengelman/shadow">Shadow</a> plugin is inspired by <code>maven-shade-plugin</code>. The basic configuration might look like this:</p>
+<pre class="code literal-block"><span></span><span class="n">plugins</span> <span class="o">{</span>
+  <span class="n">id</span> <span class="s1">'java'</span> <span class="c1">// or 'groovy' Must be explicitly applied</span>
+  <span class="n">id</span> <span class="s1">'com.github.johnrengelman.shadow'</span> <span class="n">version</span> <span class="s1">'1.2.1'</span>
+<span class="o">}</span>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-</pre></td><td class="code"><pre><code class="groovy"><span class="line"><span class="n">plugins</span> <span class="o">{</span>
-</span><span class="line">  <span class="n">id</span> <span class="s1">&#39;java&#39;</span> <span class="c1">// or &#39;groovy&#39; Must be explicitly applied</span>
-</span><span class="line">  <span class="n">id</span> <span class="s1">&#39;com.github.johnrengelman.shadow&#39;</span> <span class="n">version</span> <span class="s1">&#39;1.2.1&#39;</span>
-</span><span class="line"><span class="o">}</span>
-</span><span class="line">
-</span><span class="line"><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;java&#39;</span> <span class="c1">// or &#39;groovy&#39;. Must be explicitly applied</span>
-</span><span class="line"><span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">&#39;com.github.johnrengelman.shadow&#39;</span>
-</span><span class="line">
-</span><span class="line"><span class="n">shadowJar</span> <span class="o">{</span>
-</span><span class="line">  <span class="n">relocate</span><span class="o">(</span><span class="s1">&#39;org.google.common&#39;</span><span class="o">,</span> <span class="s1">&#39;com.exaple.shaded.org.google.common&#39;</span><span class="o">)</span>
-</span><span class="line"><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">'java'</span> <span class="c1">// or 'groovy'. Must be explicitly applied</span>
+<span class="n">apply</span> <span class="nl">plugin:</span> <span class="s1">'com.github.johnrengelman.shadow'</span>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>gradle shadowJar
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<span class="n">shadowJar</span> <span class="o">{</span>
+  <span class="n">relocate</span><span class="o">(</span><span class="s1">'org.google.common'</span><span class="o">,</span> <span class="s1">'com.exaple.shaded.org.google.common'</span><span class="o">)</span>
+<span class="o">}</span>
+</pre>
 
-<h2 id="registering-the-udf">Registering the UDF</h2>
 
+<pre class="code literal-block"><span></span>$ gradle shadowJar
+</pre>
+
+
+<h3>Registering the UDF</h3>
 <p>Within Hive register the UDF like this:</p>
+<pre class="code literal-block"><span></span><span class="k">ADD</span> <span class="n">JAR</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="k">to</span><span class="o">/</span><span class="n">the</span><span class="o">/</span><span class="n">example</span><span class="o">-</span><span class="n">hive</span><span class="o">-</span><span class="n">udf</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="o">-</span><span class="n">jar</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">dependencies</span><span class="p">.</span><span class="n">jar</span><span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">TEMPORARY</span> <span class="k">FUNCTION</span> <span class="n">topPrivateDomain</span> <span class="k">AS</span> <span class="s1">'com.example.hive.udf.TopPrivateDomain'</span><span class="p">;</span>
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="sql"><span class="line"><span class="k">ADD</span> <span class="n">JAR</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="k">to</span><span class="o">/</span><span class="n">the</span><span class="o">/</span><span class="n">example</span><span class="o">-</span><span class="n">hive</span><span class="o">-</span><span class="n">udf</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="o">-</span><span class="n">jar</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">dependencies</span><span class="p">.</span><span class="n">jar</span><span class="p">;</span>
-</span><span class="line"><span class="k">CREATE</span> <span class="k">TEMPORARY</span> <span class="k">FUNCTION</span> <span class="n">topPrivateDomain</span> <span class="k">AS</span> <span class="s1">&#39;com.example.hive.udf.TopPrivateDomain&#39;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>The first command tells Hive to copy the JAR into the distributed cache and put it on the claspath, so that it is visible from all MapReduce tasks. The second one registers the UDF class with the given function name.</p>
-
-<h2 id="tips">Tips</h2>
-
+<h3>Tips</h3>
 <p>In case you just need to modify the classpath and give your JAR more priority (without renaming packages) try to fiddle with these options:</p>
+<pre class="code literal-block"><span></span><span class="nb">export</span> <span class="nv">HADOOP_USER_CLASSPATH_FIRST</span><span class="o">=</span><span class="nb">true</span>
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nb">export </span><span class="nv">HADOOP_USER_CLASSPATH_FIRST</span><span class="o">=</span><span class="nb">true</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="sql"><span class="line"><span class="k">SET</span> <span class="n">mapreduce</span><span class="p">.</span><span class="n">job</span><span class="p">.</span><span class="k">user</span><span class="p">.</span><span class="n">classpath</span><span class="p">.</span><span class="k">first</span><span class="o">=</span><span class="k">true</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<pre class="code literal-block"><span></span><span class="k">SET</span> <span class="n">mapreduce</span><span class="p">.</span><span class="n">job</span><span class="p">.</span><span class="k">user</span><span class="p">.</span><span class="n">classpath</span><span class="p">.</span><span class="k">first</span><span class="o">=</span><span class="k">true</span><span class="p">;</span>
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="bash"><span class="line">hive --hiveconf hive.aux.jars.path<span class="o">=</span><span class="s1">&#39;some-jar-1.0.jar&#39;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<pre class="code literal-block"><span></span>hive --hiveconf hive.aux.jars.path<span class="o">=</span><span class="s1">'some-jar-1.0.jar'</span>
+</pre>
+
 
 <p>More info on Hive UDFs:</p>
-
 <ul>
-  <li>https://cwiki.apache.org/confluence/display/Hive/HivePlugins</li>
-  <li>http://blog.matthewrathbone.com/2013/08/10/guide-to-writing-hive-udfs.html</li>
+<li>https://cwiki.apache.org/confluence/display/Hive/HivePlugins</li>
+<li>http://blog.matthewrathbone.com/2013/08/10/guide-to-writing-hive-udfs.html</li>
 </ul>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Bohumír Zámečník</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-05-29T00:31:00+02:00" pubdate data-updated="true">May 29<span>th</span>, 2015</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/big-data/'>Big Data</a>, <a class='category' href='/blog/categories/hive/'>Hive</a>, <a class='category' href='/blog/categories/java/'>Java</a>, <a class='category' href='/blog/categories/maven/'>Maven</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/" data-via="bzamecnik" data-counturl="http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2015/image-whitening/" title="Previous Post: Image whitening - clean B&W documents from nasty photos">&laquo; Image whitening - clean B&W documents from nasty photos</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2015/harmoneye-hard-won-experience/" title="Next Post: HarmonEye: hard-won experience after three years of my life">HarmonEye: hard-won experience after three years of my life &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-	<h1>About Me</h1>
-	<img src="/images/homepage/bza.jpg" style="max-width: 200px; border-radius: 150px; margin: 5px">
-	<p>How do things work? Ever since 1987 I’ve fallen in love with thinking about it. That's how I became a <a href="/about/">software engineer</a>.</p>
-	<p>#python · #scala · #
-	<abbr title="Machine Learning" data-toggle="tooltip" data-placement="bottom">ml</abbr>
-	· #audio · #
-	<abbr title="Digital Signal Processing" data-toggle="tooltip" data-placement="bottom">dsp</abbr>
-	· #bigdata· #digitalnomad</p>
-	<ul>
-		<li>
-			<a href="https://twitter.com/bzamecnik" class="twitter-follow-button" data-show-count="false">@bzamecnik on Twitter</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</li>
-		<li>
-			<a href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn profile</a>
-		</li>
-		<li>
-			<a href="http://github.com/bzamecnik/">GitHub</a>
-		</li>
-		<li>
-			<a href="http://flickr.com/people/elgriton/">Photos on Flickr</a>
-		</li>
-	</ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2016/krakow/">Poland - Kraków</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/adsb-part-2-hardware/">ADS-B Part 2 - Hardware</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/wroclaw/">Poland - Wrocław</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/ads-b-flight-tracking/">ADS-B Part 1 - Flight Tracking for the Curious</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/my-digital-nomad-story/">My Digital Nomad Story</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/112168593075061741028?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
+    </section><aside class="sharing no-print"><a href="#content" aria-label="Post beginning">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-up" aria-hidden="true" title="Post beginning"></i>
     </a>
-  </h1>
-</section>
+    <a href="http://bohumirzamecnik.cz/blog/2015/image-whitening/" rel="prev" title="Image whitening - clean B&amp;W documents from nasty photos">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-left" aria-hidden="true" title="Previous post: Image whitening - clean B&amp;W documents from nasty photos"></i>
+    </a>
+    <a href="http://bohumirzamecnik.cz/blog/2015/harmoneye-hard-won-experience/" rel="next" title="Next post: HarmonEye: hard-won experience after three years of my life" aria-label="Next post: HarmonEye: hard-won experience after three years of my life">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-right" aria-hidden="true"></i>
+    </a>
+    <span class="post-sharing">
+     <a href="http://twitter.com/share?text=How+to+make+a+Hive+UDF+with+conflicting+Guava&amp;url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2015%2Fhow-to-make-a-hive-udf-with-conflicting-guava%2F" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" aria-label="Share on Twitter">
+       <i class="fa fa-2x fa-fw fa-twitter-square" aria-hidden="true" title="Share on Twitter">
+     </i></a>
+     <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2015%2Fhow-to-make-a-hive-udf-with-conflicting-guava%2F" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" aria-label="Share on Facebook">
+       <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px" aria-hidden="true" title="Share of Facebook">
+     </i></a>
+     <a href="https://plus.google.com/share?url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2015%2Fhow-to-make-a-hive-udf-with-conflicting-guava%2F" aria-label="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+       <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px" aria-hidden="true" title="Share on Google+">
+     </i></a>
+     </span>
+</aside><div itemprop="author" itemscope itemtype="http://schema.org/Person">
 
 
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - <a href="/about/">Bohumír Zámečník</a> -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'bzamecnik';
-      
+        <section class="comments hidden-print"><h2>Comments</h2>
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/';
-        var disqus_url = 'http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="bzamecnik",
+            disqus_url="http://bohumirzamecnik.cz/blog/2015/how-to-make-a-hive-udf-with-conflicting-guava/",
+        disqus_title="How to make a Hive UDF with conflicting Guava",
+        disqus_identifier="cache/posts/2015/how-to-make-a-hive-udf-with-conflicting-guava.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section><script>var disqus_shortname="bzamecnik";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>
+© 2018 <a href="mailto:bohumir.zamecnik@gmail.com">Bohumír Zámečník</a>
+- Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>,
+theme based on: <a href="https://themes.getnikola.com/v7/jidn/">jidn</a>
+/ <a href="https://github.com/poole/lanyon">lanyon</a>
 
+</p>
+            
+        </footer>
+</div>
+    </article>
+</div>
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-44857522-1']);
+_gaq.push(['_trackPageview']);
 
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-<a href="https://github.com/bzamecnik/bohumirzamecnik.cz/" class="github-ribbon"><img src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
-
-
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script><script src="../../../assets/js/all-nocdn.js"></script><!-- fancy dates --><script>
+    moment.locale("en");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</div>
 </body>
 </html>

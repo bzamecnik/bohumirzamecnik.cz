@@ -1,443 +1,250 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>
-    How to Run SMS-tools on Python 3 on Mac - 
-    
-    Bohumír Zámečník</title>
-  <meta name="author" content="Bohumír Zámečník">
-
-  
-  <meta name="description" content="SMS-tools (Spectral modeling synthesis) is a Python education library for audio signal analysis and modeling. It serves for practical excercises &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://bohumirzamecnik.cz/blog/2015/how-to-run-sms-tools-on-python-3-on-mac">
-  <link href="https://s.gravatar.com/avatar/f90538dcd2df4a510c8f0b057154dea1?s=32" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/tables.css" media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="/atom.xml" rel="alternate" title="Bohumír Zámečník" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-44857522-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to run SMS-tools on Python 3 on Mac | Bohumír Zámečník</title>
+<link href="../../../assets/css/all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="canonical" href="http://bohumirzamecnik.cz/blog/2015/how-to-run-sms-tools-on-python-3-on-mac/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Bohumír Zámečník">
+<link rel="prev" href="../../2014/my-first-handmade-bushcraft-knife/" title="My First Handmade Bushcraft Knife" type="text/html">
+<link rel="next" href="../image-whitening/" title="Image whitening - clean B&amp;W documents from nasty photos" type="text/html">
+<meta property="og:site_name" content="Bohumír Zámečník">
+<meta property="og:title" content="How to run SMS-tools on Python 3 on Mac">
+<meta property="og:url" content="http://bohumirzamecnik.cz/blog/2015/how-to-run-sms-tools-on-python-3-on-mac/">
+<meta property="og:description" content="SMS-tools (Spectral modeling synthesis) is a Python education library for audio signal analysis and modeling. It serves for practical excercises within the Audio Signal Processing for Music Applicatio">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2015-01-04T18:20:09+01:00">
+<meta property="article:tag" content="audio">
+<meta property="article:tag" content="software">
 </head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+            styles, `#sidebar-checkbox` for behavior. -->
+    <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox"><!-- Toggleable sidebar --><div class="sidebar" id="sidebar">
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Bohumír Zámečník</a></h1>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-    <li><a href="http://eepurl.com/xX1M1" rel="subscribe-email" title="subscribe via email">Email</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:bohumirzamecnik.cz" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/blog/">Blog</a></li>
-  <li><a href="/blog/archives/">Archives</a></li>
-  <li><a href="/projects/">Projects</a></li>
-  <li><a href="/about/">About</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">How to Run SMS-tools on Python 3 on Mac</h1>
+        <nav role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../"><i class="fa fa-2x fa-fw fa-home"></i> Home</a>
+          <a class="sidebar-nav-item" href="../../"><i class="fa fa-2x fa-fw fa-user-circle"></i> Blog</a>
+        </nav><nav id="menu" role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../about/">About</a>
+        <a class="sidebar-nav-item" href="../../../projects/">Projects</a>
+        <a class="sidebar-nav-item" href="../../../archive.html">Archive</a>
+        <a class="sidebar-nav-item" href="../../../categories/">Tags</a>
+        <a class="sidebar-nav-item" href="../../../rss.xml">RSS feed</a>
+        <a class="sidebar-nav-item" href="https://github.com/bzamecnik/">GitHub</a>
+        <a class="sidebar-nav-item" href="https://twitter.com/bzamecnik">Twitter</a>
+        <a class="sidebar-nav-item" href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn</a>
+        <a class="sidebar-nav-item" href="https://www.flickr.com/photos/elgriton/">Flickr</a>
+        <a class="sidebar-nav-item" href="mailto:bohumir.zamecnik@gmail.com">E-mail</a>
     
     
-      <p class="meta">
+    </nav>
+</div>
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          
+    <h2 id="brand" class="masthead-title">
+      <a href="../../../" title="Bohumír Zámečník" rel="home">Bohumír Zámečník</a>
+    </h2>
+
+        </div>
+      </div>
+
+      <div class="container content" id="content">
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/BlogPosting"><header><h1 class="post-title p-name entry-title" itemprop="headline">
+      <a href="http://bohumirzamecnik.cz/blog/2015/how-to-run-sms-tools-on-python-3-on-mac/" class="u-url">How to run SMS-tools on Python 3 on Mac</a>
+</h1>
+        <div class="metadata">
+        <meta itemprop="inLanguage" content="en">
+<p class="dateline">
+            <time class="post-date published dt-published" datetime="2015-01-04T18:20:09+01:00" itemprop="datePublished" title="2015-01-04">2015-01-04</time></p>
+                <p class="commentline">
+        
+    <a href="#disqus_thread" data-disqus-identifier="cache/posts/2015/how-to-run-sms-tools-on-python-3-on-mac.html">Comments</a>
+
+
+        </p>
+</div>
         
 
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-04T18:20:09+01:00" pubdate data-updated="true">Jan 4<span>th</span>, 2015</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p><img class="right" src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_cover_t.png" /></p>
-
+    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
+<p><img align="right" src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_cover_t.png"></p>
 <p><a href="https://github.com/MTG/sms-tools">SMS-tools</a> (Spectral modeling synthesis) is a Python education library for audio signal analysis and modeling. It serves for practical excercises within the <a href="https://www.coursera.org/course/audio">Audio Signal Processing for Music Applications</a> course at Coursera. It was written to run Ubuntu Linux and Python 2.7. Here we see how to run it on latest Python 3.4 on Mac OS X Yosemite.</p>
+<!-- TEASER_END -->
 
-<!--more-->
-
-<h2 id="overview">Overview</h2>
-
-<p>What are SMS-tools good for? In short they provide models for music analysis - how to turn a music recording into a spectrogram and then a each frame into a sum of sinusoids, sum of harmonic sinusoids, sum of harmonic sinusoids and random noise, etc. Also it contains some very cool transformations including sound morphing. Besides the library of models and transformations there is some GUI that allows you to quickly experimentat with various parameters and data. Just open a wav file, set the params, look at the graphs and play the reconstructed audio. Also there’s a lot of short example scripts.</p>
-
-<p>If you look at the <a href="https://www.coursera.org/course/audio">Audio Signal Processing for Music Applications</a> course at Coursera you can see the theory, practical details and more. I liked to attend the first session of this course which was held in Autumn/Winter 2014. Since I found some free time after the course ended I’m going to take it now and wait for the next session this year to get the certificate. Anyway the software is quite interesting for my own experiments.</p>
-
-<p>In the README you can find the recommended environment is Python 2.7 and Ubuntu Linux. I don’t use none of it and don’t want to install a lot of GB just to run some little piece of Python code.</p>
-
-<p>There must be a way to run it on Python 3.4 and Mac. Fortunately there is! It consists of two steps: install all the dependencies, port the code to Python 3. The good news is that the step 2 is already done for you. So in this article I’ll just summarize both.</p>
-
-<h2 id="install-dependencies">Install dependencies</h2>
-
+<h3>Overview</h3>
+<p>What are SMS-tools good for? In short they provide models for music analysis - how to turn a music recording into a spectrogram and then a each frame into a sum of sinusoids, sum of harmonic sinusoids, sum of harmonic sinusoids and random noise, etc. Also it contains some very cool transformations including sound morphing. Besides the library of models and transformations there is some GUI that allows you to quickly experimentat with various parameters and data. Just open a wav file, set the params, look at the graphs and play the reconstructed audio. Also there's a lot of short example scripts.</p>
+<p>If you look at the <a href="https://www.coursera.org/course/audio">Audio Signal Processing for Music Applications</a> course at Coursera you can see the theory, practical details and more. I liked to attend the first session of this course which was held in Autumn/Winter 2014. Since I found some free time after the course ended I'm going to take it now and wait for the next session this year to get the certificate. Anyway the software is quite interesting for my own experiments.</p>
+<p>In the README you can find the recommended environment is Python 2.7 and Ubuntu Linux. I don't use none of it and don't want to install a lot of GB just to run some little piece of Python code.</p>
+<p>There must be a way to run it on Python 3.4 and Mac. Fortunately there is! It consists of two steps: install all the dependencies, port the code to Python 3. The good news is that the step 2 is already done for you. So in this article I'll just summarize both.</p>
+<h3>Install dependencies</h3>
 <p>As for the package manager I use macports. For homebrew it should be quite similar (or try to <a href="https://class.coursera.org/audio-001/forum/thread?thread_id=126#post-535">consult the fora</a>).</p>
+<p>First we'll assume that you already have Python 3 installed (otherwise you wouldn't find this tutorial). If not <code>sudo port install python34</code> (or the latest).</p>
+<p>It is recommended to keep Python packages for different purposes in virtual environments (or at least in one) and not to install into the system location to prevent conflicts. Python 3.4 contains out-of-the-box a nice tool called <a href="https://docs.python.org/3/library/venv.html">pyvenv</a> which can solve exactly this problem. So we'll assume you have one virtual env and it is activated. Otherwise:</p>
+<pre class="code literal-block"><span></span>pyvenv my-audio-env
+source my-audio-env/bin/activate
+</pre>
 
-<p>First we’ll assume that you already have Python 3 installed (otherwise you wouldn’t find this tutorial). If not <code>sudo port install python34</code> (or the latest).</p>
-
-<p>It is recommended to keep Python packages for different purposes in virtual environments (or at least in one) and not to install into the system location to prevent conflicts. Python 3.4 contains out-of-the-box a nice tool called <a href="https://docs.python.org/3/library/venv.html">pyvenv</a> which can solve exactly this problem. So we’ll assume you have one virtual env and it is activated. Otherwise:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">pyvenv my-audio-env
-</span><span class="line">source my-audio-env/bin/activate</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>SMS-tools requires several Python packages and other dependencies. Some of them are available via pip, some of them via macports. Tkinter, SDL, XQuartz (eg. XQuartz-2.7.7.dmg) and Pygame.</p>
+<pre class="code literal-block"><span></span>sudo port install libsdl-framework libsdl_ttf-framework libsdl_image-framework libsdl_mixer-framework mercurial
+pip install cython numpy scipy matplotlib ipython readline
+pip install hg+http://bitbucket.org/pygame/pygame
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sudo port install libsdl-framework libsdl_ttf-framework libsdl_image-framework libsdl_mixer-framework mercurial
-</span><span class="line">pip install cython numpy scipy matplotlib ipython readline
-</span><span class="line">pip install hg+http://bitbucket.org/pygame/pygame</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>Note that installing PyGame via a pip package doesn’t work now and as alternative we install from a Mercurial repo.</p>
-
+<p>Note that installing PyGame via a pip package doesn't work now and as alternative we install from a Mercurial repo.</p>
 <p>XQuartz is an implementation of X11 UI server. It can be installed from a DMG from <a href="http://xquartz.macosforge.org/">xquartz.macosforge.org</a>. You should log out and log in again for some settings to take effect.</p>
+<p>SMS-tools also use Tkinter GUI toolkit with is a bit tricky to install. I've describe its installation in a separate article <a href="../../2014/install-tkinter-with-python-3-on-mac/">How to Install Tkinter With Python 3 on Mac</a>. In summary you need to install py34-tkinter and make a symlink since the module in on the wrong path.</p>
+<pre class="code literal-block"><span></span>sudo port install py34-tkinter
+</pre>
 
-<p>SMS-tools also use Tkinter GUI toolkit with is a bit tricky to install. I’ve describe its installation in a separate article <a href="/blog/2014/install-tkinter-with-python-3-on-mac/">How to Install Tkinter With Python 3 on Mac</a>. In summary you need to install py34-tkinter and make a symlink since the module in on the wrong path.</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sudo port install py34-tkinter</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<h2 id="install-sms-tools">Install SMS-tools</h2>
-
+<h3>Install SMS-tools</h3>
 <p>Clone the fork SMS-tools and checkout the branch with Python 3 port:</p>
+<pre class="code literal-block"><span></span>git clone https://github.com/bzamecnik/sms-tools.git
+git checkout -b python3
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">git clone https://github.com/bzamecnik/sms-tools.git
-</span><span class="line">git checkout -b python3</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<h2 id="run">Run</h2>
-
+<h3>Run</h3>
 <p>Make sure you have activated you pyvenv.</p>
+<p>There are two GUIs, one for models, the other for transformations. You can run the GUIs like this. Yes, it really expects you to be inside that directory...</p>
+<pre class="code literal-block"><span></span>sms-tools $ cd software/models_interface
+models_interface $ python models_GUI.py
+models_interface $ cd ../transformations_interface
+transformations_interface $ python transformations_GUI.py
+</pre>
 
-<p>There are two GUIs, one for models, the other for transformations. You can run the GUIs like this. Yes, it really expects you to be inside that directory…</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sms-tools $ cd software/models_interface
-</span><span class="line">models_interface $ python models_GUI.py
-</span><span class="line">models_interface $ cd ../transformations_interface
-</span><span class="line">transformations_interface $ python transformations_GUI.py</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p><img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_gui_hps.png" /></p>
-
-<h2 id="how-was-porting-to-python-3">How was porting to Python 3?</h2>
-
+<p><img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_gui_hps.png"></p>
+<h3>How was porting to Python 3?</h3>
 <p>First I converted the source code with <code>2to3</code>:</p>
+<pre class="code literal-block"><span></span>sms-tools $ 2to3 -w .
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">sms-tools $ 2to3 -w .</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>Then it was necessary to fix some more subtle problems.</p>
-
 <p>The / operator now represents floating-point division, not integer one.
 So to avoid indexing with floats it was sometimes necessary to convert the result to integer via <code>int()</code>.</p>
-
 <p>Tkinter stuff needs to be imported in a little bit different way. This should work both in Python 2 and 3.</p>
+<pre class="code literal-block"><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">messagebox</span><span class="p">,</span> <span class="n">filedialog</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">Tkinter</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">import</span> <span class="nn">tkFileDialog</span> <span class="kn">as</span> <span class="nn">filedialog</span><span class="o">,</span> <span class="nn">tkMessageBox</span> <span class="kn">as</span> <span class="nn">messagebox</span>
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">try:
-</span><span class="line">	from tkinter import *
-</span><span class="line">	from tkinter import messagebox, filedialog
-</span><span class="line">except ImportError:
-</span><span class="line">	from Tkinter import *
-</span><span class="line">	import tkFileDialog as filedialog, tkMessageBox as messagebox</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>instead of</p>
+<pre class="code literal-block"><span></span><span class="kn">from</span> <span class="nn">Tkinter</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">tkFileDialog</span><span class="o">,</span> <span class="nn">tkMessageBox</span>
+</pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">from Tkinter import *
-</span><span class="line">import tkFileDialog, tkMessageBox</span></code></pre></td></tr></table></div></figure></notextile></div>
 
-<p>And that’s about it. The result should be compatible with Python 3.4. Since I don’t have Python 2.7 I can’t test if it still work. Probably not. But anyway, Python 2 is history.</p>
-
+<p>And that's about it. The result should be compatible with Python 3.4. Since I don't have Python 2.7 I can't test if it still work. Probably not. But anyway, Python 2 is history.</p>
 <p>Thanks for reading and have fun with audio processing with SMS-tools.</p>
-
 <p>Here are some nice screenshots:</p>
-
 <p>DFT spectrum of a single frame:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/01_dft_piano.png" /></p>
-
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/01_dft_piano.png"></p>
 <p>STFT spectrogram:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/02_stft_piano.png" /></p>
-
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/02_stft_piano.png"></p>
 <p>Analysis with the sine model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/03_sine_model_analysis_bendir.png" /></p>
-
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/03_sine_model_analysis_bendir.png"></p>
 <p>Harmonic sines model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/04_harmonic_model_analysis_vignesh.png" /></p>
-
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/04_harmonic_model_analysis_vignesh.png"></p>
 <p>Stochastic model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/05_stochastic_model_ocean.png" /></p>
-
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/05_stochastic_model_ocean.png"></p>
 <p>Sine plus residuals model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/06_spr_model_bendir.png" /></p>
-
-<p>Stocharstic plus residuals model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/07_sps_model_bendir.png" /></p>
-
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/06_spr_model_bendir.png"></p>
+<p>Stochastic plus residuals model:
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/07_sps_model_bendir.png"></p>
 <p>Harmonic sines plus residuals model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hpr_model_sax_phrase_short.png" /></p>
-
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hpr_model_sax_phrase_short.png"></p>
 <p>Harmonic sines plus stochastic model:
-<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hps_model_sax_phrase_short.png" /></p>
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hps_model_sax_phrase_short.png"></p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Bohumír Zámečník</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-01-04T18:20:09+01:00" pubdate data-updated="true">Jan 4<span>th</span>, 2015</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/audio/'>audio</a>, <a class='category' href='/blog/categories/software/'>software</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://bohumirzamecnik.cz/blog/2015/how-to-run-sms-tools-on-python-3-on-mac/" data-via="bzamecnik" data-counturl="http://bohumirzamecnik.cz/blog/2015/how-to-run-sms-tools-on-python-3-on-mac/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2014/my-first-handmade-bushcraft-knife/" title="Previous Post: My First Handmade Bushcraft Knife">&laquo; My First Handmade Bushcraft Knife</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2015/image-whitening/" title="Next Post: Image whitening - clean B&W documents from nasty photos">Image whitening - clean B&W documents from nasty photos &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-	<h1>About Me</h1>
-	<img src="/images/homepage/bza.jpg" style="max-width: 200px; border-radius: 150px; margin: 5px">
-	<p>How do things work? Ever since 1987 I’ve fallen in love with thinking about it. That's how I became a <a href="/about/">software engineer</a>.</p>
-	<p>#python · #scala · #
-	<abbr title="Machine Learning" data-toggle="tooltip" data-placement="bottom">ml</abbr>
-	· #audio · #
-	<abbr title="Digital Signal Processing" data-toggle="tooltip" data-placement="bottom">dsp</abbr>
-	· #bigdata· #digitalnomad</p>
-	<ul>
-		<li>
-			<a href="https://twitter.com/bzamecnik" class="twitter-follow-button" data-show-count="false">@bzamecnik on Twitter</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</li>
-		<li>
-			<a href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn profile</a>
-		</li>
-		<li>
-			<a href="http://github.com/bzamecnik/">GitHub</a>
-		</li>
-		<li>
-			<a href="http://flickr.com/people/elgriton/">Photos on Flickr</a>
-		</li>
-	</ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2016/krakow/">Poland - Kraków</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/adsb-part-2-hardware/">ADS-B Part 2 - Hardware</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/wroclaw/">Poland - Wrocław</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/ads-b-flight-tracking/">ADS-B Part 1 - Flight Tracking for the Curious</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/my-digital-nomad-story/">My Digital Nomad Story</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/112168593075061741028?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
+    </section><aside class="sharing no-print"><a href="#content" aria-label="Post beginning">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-up" aria-hidden="true" title="Post beginning"></i>
     </a>
-  </h1>
-</section>
+    <a href="http://bohumirzamecnik.cz/blog/2014/my-first-handmade-bushcraft-knife/" rel="prev" title="My First Handmade Bushcraft Knife">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-left" aria-hidden="true" title="Previous post: My First Handmade Bushcraft Knife"></i>
+    </a>
+    <a href="http://bohumirzamecnik.cz/blog/2015/image-whitening/" rel="next" title="Next post: Image whitening - clean B&amp;W documents from nasty photos" aria-label="Next post: Image whitening - clean B&amp;W documents from nasty photos">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-right" aria-hidden="true"></i>
+    </a>
+    <span class="post-sharing">
+     <a href="http://twitter.com/share?text=How+to+run+SMS-tools+on+Python+3+on+Mac&amp;url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2015%2Fhow-to-run-sms-tools-on-python-3-on-mac%2F" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" aria-label="Share on Twitter">
+       <i class="fa fa-2x fa-fw fa-twitter-square" aria-hidden="true" title="Share on Twitter">
+     </i></a>
+     <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2015%2Fhow-to-run-sms-tools-on-python-3-on-mac%2F" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" aria-label="Share on Facebook">
+       <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px" aria-hidden="true" title="Share of Facebook">
+     </i></a>
+     <a href="https://plus.google.com/share?url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2015%2Fhow-to-run-sms-tools-on-python-3-on-mac%2F" aria-label="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+       <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px" aria-hidden="true" title="Share on Google+">
+     </i></a>
+     </span>
+</aside><div itemprop="author" itemscope itemtype="http://schema.org/Person">
 
 
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - <a href="/about/">Bohumír Zámečník</a> -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'bzamecnik';
-      
+        <section class="comments hidden-print"><h2>Comments</h2>
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://bohumirzamecnik.cz/blog/2015/how-to-run-sms-tools-on-python-3-on-mac/';
-        var disqus_url = 'http://bohumirzamecnik.cz/blog/2015/how-to-run-sms-tools-on-python-3-on-mac/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="bzamecnik",
+            disqus_url="http://bohumirzamecnik.cz/blog/2015/how-to-run-sms-tools-on-python-3-on-mac/",
+        disqus_title="How to run SMS-tools on Python 3 on Mac",
+        disqus_identifier="cache/posts/2015/how-to-run-sms-tools-on-python-3-on-mac.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section><script>var disqus_shortname="bzamecnik";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>
+© 2018 <a href="mailto:bohumir.zamecnik@gmail.com">Bohumír Zámečník</a>
+- Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>,
+theme based on: <a href="https://themes.getnikola.com/v7/jidn/">jidn</a>
+/ <a href="https://github.com/poole/lanyon">lanyon</a>
 
+</p>
+            
+        </footer>
+</div>
+    </article>
+</div>
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-44857522-1']);
+_gaq.push(['_trackPageview']);
 
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-<a href="https://github.com/bzamecnik/bohumirzamecnik.cz/" class="github-ribbon"><img src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
-
-
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script><script src="../../../assets/js/all-nocdn.js"></script><!-- fancy dates --><script>
+    moment.locale("en");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</div>
 </body>
 </html>

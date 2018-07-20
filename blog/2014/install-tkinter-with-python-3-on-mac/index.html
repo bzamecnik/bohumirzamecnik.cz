@@ -1,372 +1,219 @@
-
 <!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>
-    How to Install Tkinter With Python 3 on Mac - 
-    
-    Bohumír Zámečník</title>
-  <meta name="author" content="Bohumír Zámečník">
-
-  
-  <meta name="description" content="Tkinter is an old GUI toolkit, that has been popular also in some Python projects. Sometimes it might be tricky to install. If you just can’t get &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac">
-  <link href="https://s.gravatar.com/avatar/f90538dcd2df4a510c8f0b057154dea1?s=32" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/stylesheets/tables.css" media="screen, projection" rel="stylesheet" type="text/css" />
-  <link href="/atom.xml" rel="alternate" title="Bohumír Zámečník" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-44857522-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to install tkinter with Python 3 on Mac | Bohumír Zámečník</title>
+<link href="../../../assets/css/all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="canonical" href="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Bohumír Zámečník">
+<link rel="prev" href="../lets-share-the-ideas-with-the-world/" title="Let's Share The Ideas With The World!" type="text/html">
+<link rel="next" href="../my-first-handmade-bushcraft-knife/" title="My First Handmade Bushcraft Knife" type="text/html">
+<meta property="og:site_name" content="Bohumír Zámečník">
+<meta property="og:title" content="How to install tkinter with Python 3 on Mac">
+<meta property="og:url" content="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/">
+<meta property="og:description" content="Tkinter is an old GUI toolkit, that has been popular also in some Python projects. Sometimes it might be tricky to install. If you just can't get past ImportError: No module named '_tkinter', read on.">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2014-12-30T00:00:00+01:00">
+<meta property="article:tag" content="python">
 </head>
+<body>
+    <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+            styles, `#sidebar-checkbox` for behavior. -->
+    <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox"><!-- Toggleable sidebar --><div class="sidebar" id="sidebar">
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Bohumír Zámečník</a></h1>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-    <li><a href="http://eepurl.com/xX1M1" rel="subscribe-email" title="subscribe via email">Email</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:bohumirzamecnik.cz" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/blog/">Blog</a></li>
-  <li><a href="/blog/archives/">Archives</a></li>
-  <li><a href="/projects/">Projects</a></li>
-  <li><a href="/about/">About</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">How to Install Tkinter With Python 3 on Mac</h1>
+        <nav role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../"><i class="fa fa-2x fa-fw fa-home"></i> Home</a>
+          <a class="sidebar-nav-item" href="../../"><i class="fa fa-2x fa-fw fa-user-circle"></i> Blog</a>
+        </nav><nav id="menu" role="navigation" class="sidebar-nav"><a class="sidebar-nav-item" href="../../../about/">About</a>
+        <a class="sidebar-nav-item" href="../../../projects/">Projects</a>
+        <a class="sidebar-nav-item" href="../../../archive.html">Archive</a>
+        <a class="sidebar-nav-item" href="../../../categories/">Tags</a>
+        <a class="sidebar-nav-item" href="../../../rss.xml">RSS feed</a>
+        <a class="sidebar-nav-item" href="https://github.com/bzamecnik/">GitHub</a>
+        <a class="sidebar-nav-item" href="https://twitter.com/bzamecnik">Twitter</a>
+        <a class="sidebar-nav-item" href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn</a>
+        <a class="sidebar-nav-item" href="https://www.flickr.com/photos/elgriton/">Flickr</a>
+        <a class="sidebar-nav-item" href="mailto:bohumir.zamecnik@gmail.com">E-mail</a>
     
     
-      <p class="meta">
+    </nav>
+</div>
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          
+    <h2 id="brand" class="masthead-title">
+      <a href="../../../" title="Bohumír Zámečník" rel="home">Bohumír Zámečník</a>
+    </h2>
+
+        </div>
+      </div>
+
+      <div class="container content" id="content">
+        
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/BlogPosting"><header><h1 class="post-title p-name entry-title" itemprop="headline">
+      <a href="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/" class="u-url">How to install tkinter with Python 3 on Mac</a>
+</h1>
+        <div class="metadata">
+        <meta itemprop="inLanguage" content="en">
+<p class="dateline">
+            <time class="post-date published dt-published" datetime="2014-12-30T00:00:00+01:00" itemprop="datePublished" title="2014-12-30">2014-12-30</time></p>
+                <p class="commentline">
+        
+    <a href="#disqus_thread" data-disqus-identifier="cache/posts/2014/install-tkinter-with-python-3-on-mac.html">Comments</a>
+
+
+        </p>
+</div>
         
 
+    </header><section class="e-content entry-content" itemprop="articleBody text"><div>
+<p><img src="../../../images/install-tkinter-with-python-3-on-mac/tkinter-missing.png" width="296" align="right">
+Tkinter is an old GUI toolkit, that has been popular also in some Python projects. Sometimes it might be tricky to install. If you just can't get past <code>ImportError: No module named '_tkinter'</code>, read on. We'll install it with Python 3.4 on Mac OX S Yosemite and macports.</p>
+<!-- TEASER_END -->
+
+<p>We're assuming to have a Python 3 installation, possibly inside a pyvenv.</p>
+<p>If we'd like to use tkinter, we get the following error:</p>
+<pre class="code literal-block"><span></span>$ python
+</pre>
 
 
+<pre class="code literal-block"><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">tkinter</span>
+<span class="o">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span>                               <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">b98d59735c04</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="kn">import</span> <span class="nn">tkinter</span>
+
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Frameworks</span><span class="o">/</span><span class="n">Python</span><span class="o">.</span><span class="n">framework</span><span class="o">/</span><span class="n">Versions</span><span class="o">/</span><span class="mf">3.4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">tkinter</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+     <span class="mi">36</span>     <span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">_fix</span>
+     <span class="mi">37</span>
+<span class="o">---&gt;</span> <span class="mi">38</span> <span class="kn">import</span> <span class="nn">_tkinter</span> <span class="c1"># If this fails your Python may not be configured for Tk</span>
+     <span class="mi">39</span> <span class="n">TclError</span> <span class="o">=</span> <span class="n">_tkinter</span><span class="o">.</span><span class="n">TclError</span>
+     <span class="mi">40</span> <span class="kn">from</span> <span class="nn">tkinter.constants</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="ne">ImportError</span><span class="p">:</span> <span class="n">No</span> <span class="n">module</span> <span class="n">named</span> <span class="s1">'_tkinter'</span>
+</pre>
 
 
+<p>First we check that we have the <code>tkinter</code> package installed and it's in the Python module path.</p>
+<p>For Python 3.4 there's a port named <code>py34-tkinter</code>:</p>
+<pre class="code literal-block"><span></span>$ sudo port install py34-tkinter
+</pre>
 
-
-
-  
-
-
-<time datetime="2014-12-30T00:00:00+01:00" pubdate data-updated="true">Dec 30<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p><img src="/assets/posts/install-tkinter-with-python-3-on-mac/tkinter-missing.png" width="296" align="right" />
-Tkinter is an old GUI toolkit, that has been popular also in some Python projects. Sometimes it might be tricky to install. If you just can’t get past <code>ImportError: No module named '_tkinter'</code>, read on. We’ll install it with Python 3.4 on Mac OX S Yosemite and macports.</p>
-
-<!--more-->
-
-<p>We’re assuming to have a Python 3 installation, possibly inside a pyvenv.</p>
-
-<p>If we’d like to use tkinter, we get the following error:</p>
-
-<pre><code>$ python
-&gt;&gt;&gt; import tkinter
----------------------------------------------------------------------------
-ImportError                               Traceback (most recent call last)
-&lt;ipython-input-1-b98d59735c04&gt; in &lt;module&gt;()
-----&gt; 1 import tkinter
-
-/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/tkinter/__init__.py in &lt;module&gt;()
-     36     from tkinter import _fix
-     37 
----&gt; 38 import _tkinter # If this fails your Python may not be configured for Tk
-     39 TclError = _tkinter.TclError
-     40 from tkinter.constants import *
-
-ImportError: No module named '_tkinter'
-</code></pre>
-
-<p>First we check that we have the <code>tkinter</code> package installed and it’s in the Python module path.</p>
-
-<p>For Python 3.4 there’s a port named <code>py34-tkinter</code>:</p>
-
-<pre><code>$ sudo port install py34-tkinter
-</code></pre>
 
 <p>The installed files are here:</p>
-
-<pre><code>$ port contents py34-tkinter
+<pre class="code literal-block"><span></span>$ port contents py34-tkinter
 
 Port py34-tkinter contains:
 /opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/_tkinter.so
 /opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/tkinter-0.0.0-py3.4.egg-info
-</code></pre>
+</pre>
+
 
 <p>However the module is not in the Python path (note the <code>site-packages/</code> subdirectory):</p>
+<pre class="code literal-block"><span></span><span class="err">$</span> <span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s1">'import sys; print(*sys.path, sep="</span><span class="se">\n</span><span class="s1">")'</span>
 
-<pre><code>$ python -c 'import sys; print(*sys.path, sep="\n")'
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Frameworks</span><span class="o">/</span><span class="n">Python</span><span class="o">.</span><span class="n">framework</span><span class="o">/</span><span class="n">Versions</span><span class="o">/</span><span class="mf">3.4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python34</span><span class="o">.</span><span class="n">zip</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Frameworks</span><span class="o">/</span><span class="n">Python</span><span class="o">.</span><span class="n">framework</span><span class="o">/</span><span class="n">Versions</span><span class="o">/</span><span class="mf">3.4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Frameworks</span><span class="o">/</span><span class="n">Python</span><span class="o">.</span><span class="n">framework</span><span class="o">/</span><span class="n">Versions</span><span class="o">/</span><span class="mf">3.4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">plat</span><span class="o">-</span><span class="n">darwin</span>
+<span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Frameworks</span><span class="o">/</span><span class="n">Python</span><span class="o">.</span><span class="n">framework</span><span class="o">/</span><span class="n">Versions</span><span class="o">/</span><span class="mf">3.4</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">4</span><span class="o">/</span><span class="n">lib</span><span class="o">-</span><span class="n">dynload</span>
+</pre>
 
-/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python34.zip
-/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4
-/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/plat-darwin
-/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/lib-dynload
-</code></pre>
 
 <p>It seems that the <code>py34-tkinter</code> package should put the <code>_tkinter.so</code> file one directory level higher. We can hack it by making a symlink:</p>
+<pre class="code literal-block"><span></span>$ <span class="nv">TKMODULE</span><span class="o">=</span><span class="k">$(</span>port contents py34-tkinter<span class="p">|</span>grep _tkinter.so<span class="k">)</span>
+$ sudo ln -s <span class="nv">$TKMODULE</span> <span class="k">$(</span><span class="nb">echo</span> <span class="nv">$TKMODULE</span><span class="p">|</span>sed <span class="s1">'s/site-packages\///'</span><span class="k">)</span>
+</pre>
 
-<pre><code>$ TKMODULE=$(port contents py34-tkinter|grep _tkinter.so)
-$ sudo ln -s $TKMODULE $(echo $TKMODULE|sed 's/site-packages\///')
-</code></pre>
 
-<p>If it’s ok, the <code>tkinter</code> module can be imported without any error:</p>
+<p>If it's ok, the <code>tkinter</code> module can be imported without any error:</p>
+<pre class="code literal-block"><span></span>$ python -m tkinter
+</pre>
 
-<pre><code>$ python -m tkinter
-</code></pre>
 
 <p>Importing the module this way opens up a small testing GUI dialog.</p>
-
 <p>Hope this helps!</p>
-
-<p><img src="/assets/posts/install-tkinter-with-python-3-on-mac/tkinter-test-dialog.png" width="281" /></p>
+<p><img src="../../../images/install-tkinter-with-python-3-on-mac/tkinter-test-dialog.png" width="281"></p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Bohumír Zámečník</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-12-30T00:00:00+01:00" pubdate data-updated="true">Dec 30<span>th</span>, 2014</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/python/'>python</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/" data-via="bzamecnik" data-counturl="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2014/lets-share-the-ideas-with-the-world/" title="Previous Post: Let's Share The Ideas With The World!">&laquo; Let's Share The Ideas With The World!</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/my-first-handmade-bushcraft-knife/" title="Next Post: My First Handmade Bushcraft Knife">My First Handmade Bushcraft Knife &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-	<h1>About Me</h1>
-	<img src="/images/homepage/bza.jpg" style="max-width: 200px; border-radius: 150px; margin: 5px">
-	<p>How do things work? Ever since 1987 I’ve fallen in love with thinking about it. That's how I became a <a href="/about/">software engineer</a>.</p>
-	<p>#python · #scala · #
-	<abbr title="Machine Learning" data-toggle="tooltip" data-placement="bottom">ml</abbr>
-	· #audio · #
-	<abbr title="Digital Signal Processing" data-toggle="tooltip" data-placement="bottom">dsp</abbr>
-	· #bigdata· #digitalnomad</p>
-	<ul>
-		<li>
-			<a href="https://twitter.com/bzamecnik" class="twitter-follow-button" data-show-count="false">@bzamecnik on Twitter</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-		</li>
-		<li>
-			<a href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn profile</a>
-		</li>
-		<li>
-			<a href="http://github.com/bzamecnik/">GitHub</a>
-		</li>
-		<li>
-			<a href="http://flickr.com/people/elgriton/">Photos on Flickr</a>
-		</li>
-	</ul>
-</section>
-<section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2016/krakow/">Poland - Kraków</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/adsb-part-2-hardware/">ADS-B Part 2 - Hardware</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/wroclaw/">Poland - Wrocław</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/ads-b-flight-tracking/">ADS-B Part 1 - Flight Tracking for the Curious</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2016/my-digital-nomad-story/">My Digital Nomad Story</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-<section class="googleplus">
-  <h1>
-    <a href="https://plus.google.com/112168593075061741028?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
+    </section><aside class="sharing no-print"><a href="#content" aria-label="Post beginning">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-up" aria-hidden="true" title="Post beginning"></i>
     </a>
-  </h1>
-</section>
+    <a href="http://bohumirzamecnik.cz/blog/2014/lets-share-the-ideas-with-the-world/" rel="prev" title="Let's Share The Ideas With The World!">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-left" aria-hidden="true" title="Previous post: Let's Share The Ideas With The World!"></i>
+    </a>
+    <a href="http://bohumirzamecnik.cz/blog/2014/my-first-handmade-bushcraft-knife/" rel="next" title="Next post: My First Handmade Bushcraft Knife" aria-label="Next post: My First Handmade Bushcraft Knife">
+       <i class="fa fa-2x fa-fw fa-arrow-circle-right" aria-hidden="true"></i>
+    </a>
+    <span class="post-sharing">
+     <a href="http://twitter.com/share?text=How+to+install+tkinter+with+Python+3+on+Mac&amp;url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2014%2Finstall-tkinter-with-python-3-on-mac%2F" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" aria-label="Share on Twitter">
+       <i class="fa fa-2x fa-fw fa-twitter-square" aria-hidden="true" title="Share on Twitter">
+     </i></a>
+     <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2014%2Finstall-tkinter-with-python-3-on-mac%2F" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" aria-label="Share on Facebook">
+       <i class="fa fa-2x fa-fw fa-facebook-square" style="margin-left: -8px" aria-hidden="true" title="Share of Facebook">
+     </i></a>
+     <a href="https://plus.google.com/share?url=http%3A%2F%2Fbohumirzamecnik.cz%2Fblog%2F2014%2Finstall-tkinter-with-python-3-on-mac%2F" aria-label="Share on Google+" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+       <i class="fa fa-2x fa-fw fa-google-plus-square" style="margin-left: -8px" aria-hidden="true" title="Share on Google+">
+     </i></a>
+     </span>
+</aside><div itemprop="author" itemscope itemtype="http://schema.org/Person">
 
 
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - <a href="/about/">Bohumír Zámečník</a> -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'bzamecnik';
-      
+        <section class="comments hidden-print"><h2>Comments</h2>
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/';
-        var disqus_url = 'http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="bzamecnik",
+            disqus_url="http://bohumirzamecnik.cz/blog/2014/install-tkinter-with-python-3-on-mac/",
+        disqus_title="How to install tkinter with Python 3 on Mac",
+        disqus_identifier="cache/posts/2014/install-tkinter-with-python-3-on-mac.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
+        </section><script>var disqus_shortname="bzamecnik";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>
+© 2018 <a href="mailto:bohumir.zamecnik@gmail.com">Bohumír Zámečník</a>
+- Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>,
+theme based on: <a href="https://themes.getnikola.com/v7/jidn/">jidn</a>
+/ <a href="https://github.com/poole/lanyon">lanyon</a>
 
+</p>
+            
+        </footer>
+</div>
+    </article>
+</div>
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-44857522-1']);
+_gaq.push(['_trackPageview']);
 
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-<a href="https://github.com/bzamecnik/bohumirzamecnik.cz/" class="github-ribbon"><img src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" alt="Fork me on GitHub"></a>
-
-
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script><script src="../../../assets/js/all-nocdn.js"></script><!-- fancy dates --><script>
+    moment.locale("en");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</div>
 </body>
 </html>

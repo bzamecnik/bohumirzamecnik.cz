@@ -1,4 +1,4 @@
-User-agent: *
-Disallow: 
+Sitemap: http://bohumirzamecnik.cz/sitemapindex.xml
 
-Sitemap: http://bohumirzamecnik.cz/sitemap.xml 
+User-Agent: *
+Host: bohumirzamecnik.cz
