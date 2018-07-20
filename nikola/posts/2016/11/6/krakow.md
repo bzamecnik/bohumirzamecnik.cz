@@ -62,9 +62,6 @@ At Wawel I met some guys from Czechia who were just on a trip.
 
 While walking the streets of Krakow, I heard some strange music. After I followed the sound I saw this little boy playing his small accordion. The sound was like from another world, unlike conventional music, yet full of passion and emotions. I wish him to stick with music throughout the life.
 
-aa
-
-
 <div class="embed-video-container"><iframe src="http://www.youtube.com/embed/bjd1Q3ac1BQ"></iframe></div>
 
 Since I was hungry in Kazimierz I got a local kebab, but it was brutally big and spicy, something like 500g of lamb meet. I was feeling quite sick afterwards.
