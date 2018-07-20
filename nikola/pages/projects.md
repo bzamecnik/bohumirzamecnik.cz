@@ -1,10 +1,6 @@
----
-layout: page
-date: 2014-01-05 01:27
-comments: true
-sharing: true
-footer: true
----
+<!--
+.. title: Projects
+-->
 
 # Software engineering projects
 
