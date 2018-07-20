@@ -959,7 +959,7 @@ CONTENT_FOOTER = '''
 &copy; {date} <a href="mailto:{email}">{author}</a>
 - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>,
 theme based on: <a href="https://themes.getnikola.com/v7/jidn/">jidn</a>
-/ <a href="https://github.com/poole/lanyon">laynon</a>
+/ <a href="https://github.com/poole/lanyon">lanyon</a>
 {license}
 '''
 
