@@ -8,12 +8,20 @@ footer: true
 
 # Software engineering projects
 
+Various things I was working on. Very incomplete list.
+
 ## Personal projects
 
+- [Czech Amateur keyboard layout](https://github.com/bzamecnik/czech-amateur-keyboard-layout) - Czech programmer's keyboard in the spirit of Czech Amateur from Win98 time, ported to XP/Linux/macOS
+- some merge requests to [Keras](https://github.com/keras-team/keras/)
+- [tfr](https://github.com/bzamecnik/tfr) - time-frequency reassignment in Python
+- [midi2audio](https://github.com/bzamecnik/midi2audio) - nice Python wrapper over FluidSynth
+- [dissonant](https://github.com/bzamecnik/dissonant) - musical chord dissonance models
+- [smst](https://github.com/bzamecnik/sms-tools) - refactoring and packaging of SMS-tools (spectral modeling and synthesis tools) by prof. Xavier Serra
 - [repository of ideas](https://github.com/bzamecnik/ideas)
 - [chord recognition using deep convolutional neural networks](https://github.com/bzamecnik/ml-playground)
 - [music audio processing toolbox](https://github.com/bzamecnik/music-processing-experiments)
-- [MIREX-style chord label parser and tools](https://github.com/bzamecnik/chord-labels)
+- MIREX-style chord label parser and tools - [Python](https://github.com/bzamecnik/chord-labels), [Java](https://github.com/bzamecnik/chord-labels-java)
 - [Python Hash Trie](https://github.com/bzamecnik/python-hash-trie)
 - [ToneCircle](https://play.google.com/store/apps/details?id=com.harmoneye.tonecircle), [GitHub](https://github.com/bzamecnik/tone-circle-android)
 - **[HarmonEye](http://harmoneye.com/)** - real-time music harmony visualization
@@ -32,6 +40,18 @@ footer: true
 	- works on Windows 7+
 - [journal dates generator](https://github.com/bzamecnik/journal_dates)
 
+## [Rossum](http://rossum.ai/)
+
+- document extraction machine learning research and engineering
+
+## [Neuron SoundWare](http://www.neuronsw.com/)
+
+- sound processing / music generation machine learning research and engineering
+
+## Freelance ML engineer
+
+- various freelance projects
+
 ## [Jumpshot](http://www.jumpshot.com/)
 
 - internet-scale web analytics and market insights
@@ -40,6 +60,8 @@ footer: true
 ## [FAIROS MEDIA](http://fairos.cz/)
 
 - [e-shop feed converter](https://github.com/bzamecnik/s3dt-catalog) - python, Heroku
+- scripts for converting invoices
+- etc.
 
 ## [Wikidi](http://www.wikidi.com/)
 
