@@ -54,7 +54,7 @@ body
   overflow-x: hidden
 
 html
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-family: "PT Sans", "Helvetica Neue", Helvetica, Arial, sans-serif
   font-size: font_size
   line-height: line_height
 
@@ -69,15 +69,15 @@ body
   -ms-text-size-adjust: 100%
 
 section.entry-content > h1, h2, h3, h4, h5
-  font-family: "Avenir Next", "Helvetica Neue", Calibri, sans-serif
+  font-family: "PT Sans", "Helvetica Neue", Calibri, sans-serif
 
 section.entry-content
   margin-bottom: 60px
-  font-family: "Avenir Next", "Helvetica Neue", Calibri, sans-serif
+  font-family: "PT Sans", "Helvetica Neue", Calibri, sans-serif
 
-h1, h2, h3, h4, h5, h6 
+h1, h2, h3, h4, h5, h6
   margin-bottom: 0.5rem
-  font-family: "PT Sans", Helvetica, Arial, sans-serif
+  font-family: "PT Serif", Helvetica, Arial, sans-serif
   font-weight: 400
   line-height: .833 * line_height
   color: #313131
@@ -152,7 +152,7 @@ abbr[title]
 /* Code */
 code,
 pre
-  font-family: Menlok Monaao, "Courier New", monospace
+  font-family: Menlo, Monaco, "Courier New", monospace
 
 code
   padding: 0.25em 0.5em
@@ -240,7 +240,7 @@ tbody tr:nth-child(odd) th
 /* Container
  *
  * Center the page content.
- * At a width of 460px start increasing the margins of the 
+ * At a width of 460px start increasing the margins of the
  */
 .container
   max-width: 28rem
@@ -293,7 +293,7 @@ tbody tr:nth-child(odd) th
  *
  * This particular sidebar implementation was inspired by Chris Coyier's
  * "Offcanvas Menu with CSS Target" article, and the checkbox variation
- * from the comments by a reader. It modifies both implementations to 
+ * from the comments by a reader. It modifies both implementations to
  * continue using the checkbox (no change in URL means no polluted browser
  * history), but this uses `position` for the menu to avoid some potential
  * content reflow issues.
@@ -389,7 +389,7 @@ a.sidebar-nav-item:focus
 
 .sidebar-toggle:active:before,
 #sidebar-checkbox:focus ~ .sidebar-toggle:before,
-#sidebar-checkbox:checked ~ .sidebar-toggle:before 
+#sidebar-checkbox:checked ~ .sidebar-toggle:before
   wmm_linear_gradient to bottom, #fff, #fff 20%, #555 20%, #555 40%, #fff 40%, #fff 60%, #555 60%, #555 80%, #fff 80%, #fff 100%
 
 @media (min-width: 30.1em)
@@ -524,7 +524,7 @@ h4
  * there are no more previous or next posts to show.
  */
 .pagination
-  overflow: hidden // clearfix 
+  overflow: hidden // clearfix
   margin-left: -1rem
   margin-right: -1rem
   font-family: "PT Sans", Helvetica, Arial, sans-serif
@@ -598,12 +598,12 @@ create_theme(name, hue)
   .theme-base-{name} .related-posts li a:hover
     color: hue
 
-  .theme-base-{name} .sidebar-toggle:before 
+  .theme-base-{name} .sidebar-toggle:before
     wmm_linear_gradient to bottom, hue, hue 20%, #fff 20%, #fff 40%, hue 40%, hue 60%, #fff 60%, #fff 80%, hue 80%, hue 100%
 
   .theme-base-{name} .sidebar-toggle:active:before,
   .theme-base-{name} #sidebar-checkbox:focus ~ .sidebar-toggle:before,
-  .theme-base-{name} #sidebar-checkbox:checked ~ .sidebar-toggle:before 
+  .theme-base-{name} #sidebar-checkbox:checked ~ .sidebar-toggle:before
     wmm_linear_gradient to bottom, #fff, #fff 20%, hue 20%, hue 40%, #fff 40%, #fff 60%, hue 60%, hue 80%, #fff 80%, #fff 100%
 
 create_theme('red',    #ac4142)
@@ -739,4 +739,3 @@ create_theme('brown',  #8f5536)
   padding: 1rem
   color: #717171
   background-color: #f9f9f9
-

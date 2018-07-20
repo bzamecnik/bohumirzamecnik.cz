@@ -1,3 +1,14 @@
+How to use?
+=======================================
+
+```
+mkdir -p themes/bza-jidn/assets/css/
+stylus < themes/bza-jidn/stylus/jidn.styl > themes/bza-jidn/assets/css/jidn.css
+```
+
+
+
+
 STDIO Compilation Example
 =======================================
 
@@ -75,4 +86,3 @@ Note that this works only for expressions—not selectors, etc. To use simple ad
     => #37cdff
     > rgba(color, 0.5)
     => rgba(55,205,255,0.5)
-
