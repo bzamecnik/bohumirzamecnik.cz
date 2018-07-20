@@ -4,13 +4,13 @@
 .. date: 2015-11-16 15:15:15+01:00
 .. tags: harmoneye
 .. category: harmoneye
-.. link: 
-.. description: 
+.. link:
+.. description:
 .. type: text
 -->
 
 
-<img src="{% asset_path sunpilots.png %}" width="400" align="right">
+<img src="/images/harmoneye-hard-won-experience/sunpilots.png" width="400" align="right">
 
 In this article I'd like to summarize lessons learned during three years of development of software for music analysis, visualization and machine learning and of my life. You can find a lot of experience and advice not to repeat the mistakes I did.
 
@@ -47,7 +47,7 @@ As I learned music theory by myself I have drawn a vast number of such circle di
 
 I researched tons of papers on audio processing and made model of the computational pipeline in my head. In December 2012 I started coding. The work was quite irregular, just when I had some free time. In one year I had a working prototype running on Mac desktop.
 
-<img src="{% asset_path harmoneye-github-timeline.png %}">
+<img src="/images/harmoneye-hard-won-experience/harmoneye-github-timeline.png">
 
 ![](http://harmoneye.com/img/harmoneye-mac-c-maj7.png)
 
@@ -255,19 +255,19 @@ Here are some number for HarmonEye for Android.
 
 Total active users:
 
-<img src="{% asset_path google-play-harmoneye-users.png %}">
+<img src="/images/harmoneye-hard-won-experience/google-play-harmoneye-users.png">
 
 Total active users by OS version:
 
-<img src="{% asset_path google-play-harmoneye-users-by-os-version.png %}">
+<img src="/images/harmoneye-hard-won-experience/google-play-harmoneye-users-by-os-version.png">
 
 OS versions:
 
-<img src="{% asset_path google-play-harmoneye-os-versions.png %}">
+<img src="/images/harmoneye-hard-won-experience/google-play-harmoneye-os-versions.png">
 
 #### Reviews
 
-<img src="{% asset_path google-play-harmoneye-reviews-summary.png %}">
+<img src="/images/harmoneye-hard-won-experience/google-play-harmoneye-reviews-summary.png">
 
 Saint Rezo 14. 2. 2015 v 1:42:
 > Are u serious? If you're not then don't do this to the rest of us, if yes then you should finish it.please more update!!! This is good start!

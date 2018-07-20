@@ -4,13 +4,13 @@
 .. date: 2015-02-15 19:29:32+01:00
 .. tags: image processing
 .. category: image processing
-.. link: 
-.. description: 
+.. link:
+.. description:
 .. type: text
 -->
 
 
-{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_orig_and_whitened_row_t.jpg %}
+<img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_orig_and_whitened_row_t.jpg">
 
 Turn a poor smartphone-camera photo of a document or whiteboard into a nice black & white or color "scan" that can be printed or converted to PDF. It works for text / line drawings / sheet music. The method is described here along with a Photoshop tutorial (and a Photoshop action for download) and a handful of examples.
 
@@ -24,7 +24,7 @@ As you can see in the image above, we have taken a photo of a whiteboard at some
 
 The trivial method is [thresholding](http://en.wikipedia.org/wiki/Thresholding_%28image_processing%29) - all pixels darker than some value will be black, and the rest white. It works kind of ok for scans with regular lighting but fails miserably for our photos. The problem is the threshold is global for the whole image and cannot cope with gradients in background. Also scanners are usually not available at hand and certainly cannot scan whiteboards. The other problem with thresholding is that we lose color information and anti-aliasing.
 
-[![](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_threshold_150_t.jpg)](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_threshold_150.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_threshold_150.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_threshold_150_t.jpg" width="400"></a>
 
 Well, yes, there are some adaptive thresholding methods out there which try to find optimal threshold value for small image block. Yet, they still produce binarized image and lose colors. We need something better.
 
@@ -40,7 +40,9 @@ What does the [median filter](http://en.wikipedia.org/wiki/Median_filter) do. Si
 
 The median filter with wide enough radius of neighborhood just keeps the background and removes the text. Then we can just remove this background, eg. divide the original image by the median-filtered one. A similar (yet not really the same) procedure is called *whitening* in the image-processing field.
 
-	I_whitened = I / median2d(I, radius)
+```
+I_whitened = I / median2d(I, radius)
+```
 
 ### How to do it in Photoshop
 
@@ -73,7 +75,7 @@ Denoise before whitening. A great denoising tool is in Lightroom. Something is p
 
 Adjust Levels after whitening - do white and black clipping. This leaves the background perfectly white and makes the lines/text more contrasty.
 
-{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/photoshop/levels.png 268 %}
+<img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/photoshop/levels.png" width="268">
 
 #### Photoshop Action
 
@@ -87,93 +89,93 @@ It is too much hand work. As a bonus I have made a Photoshop action and exported
 
 Original (bad gradients from a table lamp):
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_orig_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_orig.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_orig.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_orig_t.jpg" width="400"></a>
 
 Thresholded at 100 (bad):
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_threshold_100_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_threshold_100.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_threshold_100.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_threshold_100_t.jpg" width="400"></a>
 
 Median with 100 px radius (notice the color blobs):
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_median_100px_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_median_100px.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_median_100px.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_median_100px_t.jpg" width="400"></a>
 
 Whitened (artifacts from color blobs):
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_whitented_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_whitented.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_whitented.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_whitented_t.jpg" width="400"></a>
 
 Median with 100 px radius + content-aware fill:
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_median_100px_content_aware_fill_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_median_100px_content_aware_fill.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_median_100px_content_aware_fill.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_median_100px_content_aware_fill_t.jpg" width="400"></a>
 
 Whitened (artifacts are gone):
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_whitented_content_aware_fill_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_whitented_content_aware_fill.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_whitented_content_aware_fill.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/text_with_color_diagrams/IMG_3274_whitented_content_aware_fill_t.jpg" width="400"></a>
 
 ### Sheet music
 
 Original (shadow from my hand):
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_original_photo_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_original_photo.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_original_photo.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_original_photo_t.jpg" width="400"></a>
 
 Thresholded at 128 (bad):
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_threshold_128_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_threshold_128.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_threshold_128.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_threshold_128_t.jpg" width="400"></a>
 
 Median with 100 px radius:
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_median_50px_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_median_50px.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_median_50px.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_median_50px_t.jpg" width="400"></a>
 
 Original divided by the median:
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_whitened_divide_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_whitened_divide.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_whitened_divide.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/sheet_music/something_latin_whitened_divide_t.jpg" width="400"></a>
 
 ### Simple whiteboard
 
 Original, denoised (in Lightroom):
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_denoised_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_denoised.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_denoised.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_denoised_t.jpg" width="400"></a>
 
 Thresholded at 80 (the light blue is gone - bad):
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262-threshold_80_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262-threshold_80.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262-threshold_80.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262-threshold_80_t.jpg" width="400"></a>
 
 Median with 100 px radius:
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_median_100px_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_median_100px.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_median_100px.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_median_100px_t.jpg" width="400"></a>
 
 Whitened:
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_whitened_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_whitened.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_whitened.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_whitened_t.jpg" width="400"></a>
 
 Whitened + levels:
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_whitened_levels_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_whitened_levels.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_whitened_levels.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard_simple/IMG_3262_whitened_levels_t.jpg" width="400"></a>
 
 ### Whiteboard
 
 Original (day light + some reflections):
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_orig_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_orig.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_orig.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_orig_t.jpg" width="400"></a>
 
 Denoised in Lightroom (click for detail view):
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_t.jpg" width="400"></a>
 
 Denoised + thresholded at 150 (bad):
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_threshold_150_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_threshold_150.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_threshold_150.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_denoised_threshold_150_t.jpg" width="400"></a>
 
 Median with 100 px radius:
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_median_100px_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_median_100px.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_median_100px.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_median_100px_t.jpg" width="400"></a>
 
 Whitened:
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_whitened_color_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_whitened_color.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_whitened_color.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_whitened_color_t.jpg" width="400"></a>
 
 Whitened + desaturated + levels:
 
-[{% img http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_whitened_bw_levels_t.jpg 400 %}](http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_whitened_bw_levels.jpg)
+<a href="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_whitened_bw_levels.jpg"><img src="http://i.bohumirzamecnik.cz/2015-02-15-image-whitening/whiteboard/IMG_3129_whitened_bw_levels_t.jpg" width="400"></a>
 
 ## Conclusion / TL;DR
 

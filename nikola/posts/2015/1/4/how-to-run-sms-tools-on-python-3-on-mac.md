@@ -4,13 +4,12 @@
 .. date: 2015-01-04 18:20:09+01:00
 .. tags: audio,software
 .. category: audio
-.. link: 
-.. description: 
+.. link:
+.. description:
 .. type: text
 -->
 
-
-{%img right http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_cover_t.png %}
+<img align="right" src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_cover_t.png">
 
 [SMS-tools](https://github.com/MTG/sms-tools) (Spectral modeling synthesis) is a Python education library for audio signal analysis and modeling. It serves for practical excercises within the [Audio Signal Processing for Music Applications](https://www.coursera.org/course/audio) course at Coursera. It was written to run Ubuntu Linux and Python 2.7. Here we see how to run it on latest Python 3.4 on Mac OS X Yosemite.
 
@@ -79,7 +78,7 @@ models_interface $ cd ../transformations_interface
 transformations_interface $ python transformations_GUI.py
 ```
 
-{%img http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_gui_hps.png %}
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/sms_tools_gui_hps.png">
 
 ## How was porting to Python 3?
 
@@ -120,28 +119,28 @@ Thanks for reading and have fun with audio processing with SMS-tools.
 Here are some nice screenshots:
 
 DFT spectrum of a single frame:
-{%img http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/01_dft_piano.png %}
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/01_dft_piano.png">
 
 STFT spectrogram:
-{%img http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/02_stft_piano.png %}
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/02_stft_piano.png">
 
 Analysis with the sine model:
-{%img http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/03_sine_model_analysis_bendir.png %}
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/03_sine_model_analysis_bendir.png">
 
 Harmonic sines model:
-{%img http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/04_harmonic_model_analysis_vignesh.png %}
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/04_harmonic_model_analysis_vignesh.png">
 
 Stochastic model:
-{%img http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/05_stochastic_model_ocean.png %}
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/05_stochastic_model_ocean.png">
 
 Sine plus residuals model:
-{%img http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/06_spr_model_bendir.png %}
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/06_spr_model_bendir.png">
 
-Stocharstic plus residuals model:
-{%img http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/07_sps_model_bendir.png %}
+Stochastic plus residuals model:
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/07_sps_model_bendir.png">
 
 Harmonic sines plus residuals model:
-{%img http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hpr_model_sax_phrase_short.png %}
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hpr_model_sax_phrase_short.png">
 
 Harmonic sines plus stochastic model:
-{%img http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hps_model_sax_phrase_short.png %}
+<img src="http://i.bohumirzamecnik.cz/2015-01-04-how-to-run-sms-tools-on-python-3-on-mac/08_hps_model_sax_phrase_short.png">

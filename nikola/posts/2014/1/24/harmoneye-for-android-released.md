@@ -2,10 +2,10 @@
 .. title: HarmonEye for Android Released
 .. slug: harmoneye-for-android-released
 .. date: 2014-01-24 17:43:29+01:00
-.. tags: 
-.. category: 
-.. link: 
-.. description: 
+.. tags:
+.. category:
+.. link:
+.. description:
 .. type: text
 -->
 
@@ -24,7 +24,7 @@ When I'm learning a new song at home, jamming with friends or with a backing tra
 
 Best musicians can pick it by ear and play instantly with the band. Skilled musicians sit down for a while and transcibe it or find a sheet music and pick it from the paper. The rest of us maybe download some lyrics with chords and a tab and try to pick the melody and rhythm from the recording. But not all music is available already in notation. And even then decrypting the lots of note/chord symbols might be time-consuming for the untrained.
 
-<img src="{% asset_path harmoneye-screen-2014-01-26-14-41-25.png %}" width="400" align="right" title="HarmonEye for Android - Cmaj7 chord on electric piano">
+<img src="/images/harmoneye-for-android-released/harmoneye-screen-2014-01-26-14-41-25.png" width="400" align="right" title="HarmonEye for Android - Cmaj7 chord on electric piano">
 
 So I decided to make an app to help with this and put all my passion and technical expertise into it. I believe in the power of visualization. Most people use their sight all day and have it far more trained than hearing. So I decided to make it visual. It is called HarmonEye, since you can see and understand the harmony in music using your eyes.
 

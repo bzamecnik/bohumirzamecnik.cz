@@ -4,13 +4,13 @@
 .. date: 2014-12-30
 .. tags: python
 .. category: python
-.. link: 
-.. description: 
+.. link:
+.. description:
 .. type: text
 -->
 
 
-<img src="{% asset_path tkinter-missing.png %}" width="296" align="right">
+<img src="/images/install-tkinter-with-python-3-on-mac/tkinter-missing.png" width="296" align="right">
 Tkinter is an old GUI toolkit, that has been popular also in some Python projects. Sometimes it might be tricky to install. If you just can't get past `ImportError: No module named '_tkinter'`, read on. We'll install it with Python 3.4 on Mac OX S Yosemite and macports.
 
 <!-- TEASER_END -->
@@ -19,7 +19,10 @@ We're assuming to have a Python 3 installation, possibly inside a pyvenv.
 
 If we'd like to use tkinter, we get the following error:
 
-	$ python
+```
+$ python
+```
+
 	>>> import tkinter
 	---------------------------------------------------------------------------
 	ImportError                               Traceback (most recent call last)
@@ -28,7 +31,7 @@ If we'd like to use tkinter, we get the following error:
 
 	/opt/local/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/tkinter/__init__.py in <module>()
 	     36     from tkinter import _fix
-	     37 
+	     37
 	---> 38 import _tkinter # If this fails your Python may not be configured for Tk
 	     39 TclError = _tkinter.TclError
 	     40 from tkinter.constants import *
@@ -73,4 +76,4 @@ Importing the module this way opens up a small testing GUI dialog.
 
 Hope this helps!
 
-<img src="{% asset_path tkinter-test-dialog.png %}" width="281">
+<img src="/images/install-tkinter-with-python-3-on-mac/tkinter-test-dialog.png" width="281">
