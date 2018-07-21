@@ -24,7 +24,7 @@ So after a [night in the woods near Wrocław](/blog/2016/wroclaw/) I took the bu
 
 My brother Pango finally published his crowdfunding campaign [LIVE broadcasting of a Travelling Pianist PIANOmad](https://fundrazr.com/piano_mad) he was preparing during summer. He plays the piano on New Zealand, he loves it and the people coming around love it as well. Now he'd like to move it to another level. Stream his piano improvisations live on the internet, ideally directly from the nature which is his best inspiration.
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/PhXUWCVXRxg"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/PhXUWCVXRxg"></iframe></div>
 
 <div class="fr-widget" data-type="badge" data-variant="rectangle" data-width="300" data-url="http://fnd.us/piano_mad"><a href="https://fundrazr.com" target="_blank"><img src="//d30pl5hav4s8uw.cloudfront.net/widgets/powered-by.png" alt="Powered by FundRazr"/></a></div>
 
@@ -62,7 +62,7 @@ At Wawel I met some guys from Czechia who were just on a trip.
 
 While walking the streets of Krakow, I heard some strange music. After I followed the sound I saw this little boy playing his small accordion. The sound was like from another world, unlike conventional music, yet full of passion and emotions. I wish him to stick with music throughout the life.
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/bjd1Q3ac1BQ"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/bjd1Q3ac1BQ"></iframe></div>
 
 Since I was hungry in Kazimierz I got a local kebab, but it was brutally big and spicy, something like 500g of lamb meet. I was feeling quite sick afterwards.
 

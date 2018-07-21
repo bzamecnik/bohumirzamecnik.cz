@@ -131,7 +131,7 @@ Advanced Halftoning Methods
 ### Volume ray-casting (direct volume rendering)
 - [Visualization](http://cgg.mff.cuni.cz/~pepca/lectures/npgr023.slides.html)
 - C#, GLSL, OpenTK
-- videos: <a href="http://www.youtube.com/watch?v=5Bh_MbuE0Vg" >1</a>, <a href="http://www.youtube.com/watch?v=jmqdXLrIwdg">2</a>, <a href="http://www.youtube.com/watch?v=Y_5kX_dId1M">3</a>, <a href="http://www.youtube.com/watch?v=xRUeFwkcScM" >4</a>
+- videos: <a href="https://www.youtube.com/watch?v=5Bh_MbuE0Vg" >1</a>, <a href="https://www.youtube.com/watch?v=jmqdXLrIwdg">2</a>, <a href="https://www.youtube.com/watch?v=Y_5kX_dId1M">3</a>, <a href="https://www.youtube.com/watch?v=xRUeFwkcScM" >4</a>
 
 ### Isocontours
 - [Visualization](http://cgg.mff.cuni.cz/~pepca/lectures/npgr023.slides.html) (NPGR023)

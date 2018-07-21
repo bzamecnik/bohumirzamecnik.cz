@@ -23,7 +23,7 @@ Almost two years ago in December 2013 I quit my regular job at [Etnetera](http:/
 The idea is simple. I love music and want to understand better how it works. But my eyes are much more efficient and trained in finding patterns than my hearing.
 
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/mStudajyJvo"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/mStudajyJvo"></iframe></div>
 
 ## A bit of history
 
@@ -62,7 +62,7 @@ The basic features of HarmonEye is to show what pitch classes are being played a
 I wanted to analyze audio from the microphone in real-time so that I can experiment with it interactively. For the prototype I just wanted it to run on my computer.
 
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/eIoJYKPXecM"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/eIoJYKPXecM"></iframe></div>
 
 In the first step I wanted to show just the raw intensities so that one can see what's there. In the second step I wanted to move the classification of the pitch classes from human brain to some machine learning algorithm.
 
@@ -77,7 +77,7 @@ So we have microphone input on one side and a animated plot on the other side. W
 A smooth animation requires something about 25 frames per second. In each frame we need the data for backing the plot (either raw intensity features or ideally the recognized pitch classes). To obtain this we need to do some kind of spectral decomposition that detects amount of energy in each pitch bin. In other words we need to quantize the frequency domain of time-frequency plane into bins that correspond to musical semitones, ie. are uniform in the log-frequency domain. There are various methods, for the initial implementation I chose CQT (Constant-Q Transform), afterwards I found TF-reassignment is much more suitable. The input to this is a plain spectrogram, ie. STFT (Short-Time Fourier Transform). Each frame in STFT needs a frame of the original audio. Thus we get to the audio source, that is in this case a microphone.
 
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/9YkXvjwQNlE"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/9YkXvjwQNlE"></iframe></div>
 
 Things get a bit complicated in this part. Audio samples are read from the sound interface in batches in a blocking manner. However, we want to process blocks of samples that are of different size than audio buffer size, are overlapping and the processing is done at an rate independent on the input rate. This is described in Computer Science as the producer-consumer problem. One way to solve this problem is a read data in one thread, process it and another one and hold the data in a shared resource. Such a efficient resource that allows writing blocks of samples of one size and reading blocks of other size is ring buffer.
 
@@ -160,12 +160,12 @@ I had to rewrite the code so that already allocated arrays are reused. This lead
 *First port of HarmonEye to Android, with rather geeky text mode plotting.*
 
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/HoPOUV4EAeo"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/HoPOUV4EAeo"></iframe></div>
 
 *Pango playing on software keyboard that is visualized by some old versions of HarmonEye for Mac and Android 2.3. Note the slow response and lots of background noise.*
 
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/tW1H8GP_1tk"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/tW1H8GP_1tk"></iframe></div>
 
 ### Lack of functional programming tools
 
@@ -210,10 +210,10 @@ I also create [Tone Circle](https://play.google.com/store/apps/details?id=com.ha
 Besides that I tried to come up with some simpler product, a guitar tuner. I took the guts from Harmoneye, focused on a single harmonic signal and did a completely different UI. There are two prototypes - [beads](https://www.youtube.com/watch?v=iOsym2fTOVY) similar to the Tone Circle and [linear](https://www.youtube.com/watch?v=8mBO7Ry8uQs). It was deployed to Google Play but never published, since it lacked proper classification of tones. Note it was done before taking the ML course.
 
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/iOsym2fTOVY"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/iOsym2fTOVY"></iframe></div>
 
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/8mBO7Ry8uQs"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/8mBO7Ry8uQs"></iframe></div>
 
 At least to write some useful stuff on music theory. Without a clear focus about who is the reader (a ordinary musician, a person with maths background, a programmer) it was very hard to write something at the right level of detail. I have the stuff stored somewhere in git, but it is waiting for its time.
 
@@ -325,12 +325,12 @@ A very nice experience was the [DNX Digital Nomad Conference](http://www.dnxglob
 By the way on a sunny Sunday you can find a vast number of street musicians in Berlin's Mauerpark. Here's how it looks when HarmonEye on a tablet shows the sound of australian rock band [The Sunpilots](http://thesunpilots.com/).
 
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/DhnZHA0vAfk"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/DhnZHA0vAfk"></iframe></div>
 
 Since autumn 2014 I've been attending [Machine Learning Meetups](http://www.mlmu.cz/) in Prauge. Once I gave a lightning talk about ML on Time Series - comparision of financial and music data (in Czech language).
 
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/8_0mUWC2XyM"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/8_0mUWC2XyM"></iframe></div>
 
 I took or am presently attending various courses at Coursera and edX, namely [Scalable Machine Learning](https://www.edx.org/course/scalable-machine-learning-uc-berkeleyx-cs190-1x) (in Spark), [Fundamentals of Music Theory](https://www.coursera.org/course/musictheory), [Audio Processing for Music Applications](https://www.coursera.org/course/audio), [Digital Signal Processing](https://www.coursera.org/course/dsp) and the 5-course [Machine Learning Specialization](https://www.coursera.org/specializations/machine-learning).
 

@@ -81,7 +81,7 @@
 
 <p>Almost two years ago in December 2013 I quit my regular job at <a href="http://www.etnetera.cz/">Etnetera</a>. Working on e-commerce backend I was missing applied mathematics badly and wanted to build my own products. Martin Holečko, one of the founders of Etnetera gave me a nice book tip: <a href="http://fourhourworkweek.com/">4-Hour Work Week</a> by Tim Ferris. I decided <a href="http://bohumirzamecnik.cz/blog/2013/refactoring-the-path-to-freedom/">I want more freedom</a> and do what I was dreaming of and working on before.</p>
 <p>The idea is simple. I love music and want to understand better how it works. But my eyes are much more efficient and trained in finding patterns than my hearing.</p>
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/mStudajyJvo"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/mStudajyJvo"></iframe></div>
 
 <h3>A bit of history</h3>
 <p>Since being a child I was fascinated by some beautifully strange moments in songs. But classical music theory was a complete mess for me. My brother Vojta "Pango" has been a <a href="http://www.stuff.co.nz/the-press/news/mid-canterbury-selwyn/72751381/nature-inspires-pangos-tunes">piano</a>  <a href="http://www.stuff.co.nz/timaru-herald/news/72121876/Piano-man-fills-Stafford-St-with-music">genius</a> and I was more interested in computers. However, at the high school I started <a href="http://corale.cz/">singing in a choir</a> and to play guitar at jam sessions. And I've been wondering if it possible to automatically recognize chords from audio recording, how to measure similarity between songs and things like that. Also Honza Hovorka, one of my friends from the choir and a very talented clarinet player, inspired me with this master's thesis on recognizing voice and music in audio.</p>
@@ -101,7 +101,7 @@
 <h3>Features</h3>
 <p>The basic features of HarmonEye is to show what pitch classes are being played at the moment. Imagine a piano keyboard with sound intensity on each key. Then you roll the piano into a circle where tones are aligned by octaves. That's the <a href="http://www.visualmusictheory.com/tone-circle.html">mental model</a>.</p>
 <p>I wanted to analyze audio from the microphone in real-time so that I can experiment with it interactively. For the prototype I just wanted it to run on my computer.</p>
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/eIoJYKPXecM"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/eIoJYKPXecM"></iframe></div>
 
 <p>In the first step I wanted to show just the raw intensities so that one can see what's there. In the second step I wanted to move the classification of the pitch classes from human brain to some machine learning algorithm.</p>
 <p>Key detection for coloring.</p>
@@ -109,7 +109,7 @@
 <p>I will describe the architecture of HarmonEye and how it evolved over time in more detail in separate article. This is just a quick high-level overview.</p>
 <p>So we have microphone input on one side and a animated plot on the other side. We can go backwards to find out what computation is required.</p>
 <p>A smooth animation requires something about 25 frames per second. In each frame we need the data for backing the plot (either raw intensity features or ideally the recognized pitch classes). To obtain this we need to do some kind of spectral decomposition that detects amount of energy in each pitch bin. In other words we need to quantize the frequency domain of time-frequency plane into bins that correspond to musical semitones, ie. are uniform in the log-frequency domain. There are various methods, for the initial implementation I chose CQT (Constant-Q Transform), afterwards I found TF-reassignment is much more suitable. The input to this is a plain spectrogram, ie. STFT (Short-Time Fourier Transform). Each frame in STFT needs a frame of the original audio. Thus we get to the audio source, that is in this case a microphone.</p>
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/9YkXvjwQNlE"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/9YkXvjwQNlE"></iframe></div>
 
 <p>Things get a bit complicated in this part. Audio samples are read from the sound interface in batches in a blocking manner. However, we want to process blocks of samples that are of different size than audio buffer size, are overlapping and the processing is done at an rate independent on the input rate. This is described in Computer Science as the producer-consumer problem. One way to solve this problem is a read data in one thread, process it and another one and hold the data in a shared resource. Such a efficient resource that allows writing blocks of samples of one size and reading blocks of other size is ring buffer.</p>
 <p>When we look at the results of such system, we quickly realize that showing the spectrogram with log-frequency quantization is not enough. There are multiple problems. First, typical instruments produce not a single sinusoid but multiple sinusoids, typically integer multiples (these are called harmonic tones). But we need to show only energy corresponding to the fundamental frequency. Second, typical music is not composed only of harmonic tones but also from a lot of percussive or noisy sounds. Third, with STFT windowing spectrum of each sinusoid is not a single peak but has side-lobes. So we need to filter all of this noise out. Fourth, for visualization we need to normalize the results so that the important information is not hidden in the remaining background noise.</p>
@@ -155,10 +155,10 @@
 <p>When I first ran HarmonEye <a href="https://play.google.com/store/apps/details?id=com.harmoneye.android&amp;hl=cs">ported to Android</a> it ran for about 2 seconds. Then it crashed. Why? It turned out that some parts of the app including some third-party libraries allocate on-heap memory in each iteration. This quickly overloaded the GC and the application was terminated. The old HTC Android phone had a little memory and GC was not so fast.</p>
 <p>I had to rewrite the code so that already allocated arrays are reused. This lead to abandoning functional paradigm and overwriting some shared memory. Bad.</p>
 <p><em>First port of HarmonEye to Android, with rather geeky text mode plotting.</em></p>
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/HoPOUV4EAeo"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/HoPOUV4EAeo"></iframe></div>
 
 <p><em>Pango playing on software keyboard that is visualized by some old versions of HarmonEye for Mac and Android 2.3. Note the slow response and lots of background noise.</em></p>
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/tW1H8GP_1tk"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/tW1H8GP_1tk"></iframe></div>
 
 <h4>Lack of functional programming tools</h4>
 <p>Java was created with procedural and object-oriented paradigm in mind. Functional paradigm in contrast to the previously mentioned is based on the idea that the elements of code are pure transformations, functions that do not have any side-effects. This allows for better testing, much higher-level code and is very suitable for today's need for concurrent and parallel computation. Most importantly it relieves the programmer of considering the behavior of some code in all possible states because there's no mutable state or it is very isolated.</p>
@@ -181,9 +181,9 @@
 <p>I also create <a href="https://play.google.com/store/apps/details?id=com.harmoneye.tonecircle">Tone Circle</a>, an Android app that allow for playing with the pitch classes via touch gestures and shows the chord name.</p>
 <p><img alt="" src="http://i.visualmusictheory.com/tone-circle/tone_circle_c_e_g.png"></p>
 <p>Besides that I tried to come up with some simpler product, a guitar tuner. I took the guts from Harmoneye, focused on a single harmonic signal and did a completely different UI. There are two prototypes - <a href="https://www.youtube.com/watch?v=iOsym2fTOVY">beads</a> similar to the Tone Circle and <a href="https://www.youtube.com/watch?v=8mBO7Ry8uQs">linear</a>. It was deployed to Google Play but never published, since it lacked proper classification of tones. Note it was done before taking the ML course.</p>
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/iOsym2fTOVY"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/iOsym2fTOVY"></iframe></div>
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/8mBO7Ry8uQs"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/8mBO7Ry8uQs"></iframe></div>
 
 <p>At least to write some useful stuff on music theory. Without a clear focus about who is the reader (a ordinary musician, a person with maths background, a programmer) it was very hard to write something at the right level of detail. I have the stuff stored somewhere in git, but it is waiting for its time.</p>
 <p>Finally I decided I have to quit this since it was pointless. I was so exhausted from all the things. I decided to pack my things and fuck off and clean my mind.</p>
@@ -266,10 +266,10 @@
 <p>Recently the book <a href="http://justinjackson.ca/marketingfordevelopers/">Marketing for Developers</a> by Justin Jackson finally came out. It is a foundation to set the goals and do all the stuff outside pure coding (finding the audience, launching the product, scaling, etc.). Other useful books may include <a href="http://nathanbarry.com/authority/">Authority</a> by Nathan Barry or <a href="http://theleanstartup.com/">Lean Startup</a> by Eric Ries.</p>
 <p>A very nice experience was the <a href="http://www.dnxglobal.com/">DNX Digital Nomad Conference</a> in Berlin in summer 2015. About 500 like-minded gathered at one place sharing their thoughts and experience. There I finally realized for which audience I should create content.</p>
 <p>By the way on a sunny Sunday you can find a vast number of street musicians in Berlin's Mauerpark. Here's how it looks when HarmonEye on a tablet shows the sound of australian rock band <a href="http://thesunpilots.com/">The Sunpilots</a>.</p>
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/DhnZHA0vAfk"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/DhnZHA0vAfk"></iframe></div>
 
 <p>Since autumn 2014 I've been attending <a href="http://www.mlmu.cz/">Machine Learning Meetups</a> in Prauge. Once I gave a lightning talk about ML on Time Series - comparision of financial and music data (in Czech language).</p>
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/8_0mUWC2XyM"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/8_0mUWC2XyM"></iframe></div>
 
 <p>I took or am presently attending various courses at Coursera and edX, namely <a href="https://www.edx.org/course/scalable-machine-learning-uc-berkeleyx-cs190-1x">Scalable Machine Learning</a> (in Spark), <a href="https://www.coursera.org/course/musictheory">Fundamentals of Music Theory</a>, <a href="https://www.coursera.org/course/audio">Audio Processing for Music Applications</a>, <a href="https://www.coursera.org/course/dsp">Digital Signal Processing</a> and the 5-course <a href="https://www.coursera.org/specializations/machine-learning">Machine Learning Specialization</a>.</p>
 <p>In October 2015 we had a wonderful chance to attend a week-long workshop AVAST Deep Learning Sprint organized by Martin Vejmelka. In a group of about 20 people we had rented a few machines on Anselm, one of two <a href="https://www.it4i.cz/">supercomputers in Ostrava</a>, attended a lot of lectures about supercomputing, machine learning, deep learning, etc. Finally we worked on our real-world problems. We used <a href="http://torch.ch">Torch</a> and <a href="http://keras.io">Keras</a> and trained to models on Tesla GPUs. I was quite surprised how neural networks can predict complicated time-series so that we can detect anomalies. Awesome.</p>
