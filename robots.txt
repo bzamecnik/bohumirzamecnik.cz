@@ -1,4 +1,4 @@
-Sitemap: http://bohumirzamecnik.cz/sitemapindex.xml
+Sitemap: https://bohumirzamecnik.cz/sitemapindex.xml
 
 User-Agent: *
 Host: bohumirzamecnik.cz
