@@ -36,6 +36,6 @@ No nic, v Oslu spát nebudu, chtělo by to hodit dál. Tak jsem se zas těmi š�
 
 Dnes 345 km, celkem 4732 km. Do Švédska už je to jen asi 100 km. Tam bude konečně levnější palivo. A taky bych se měl poohlédnout, kde doplním vodu.
 
-Teplota byla večer po pár dnech zas příjemná. Sice nejsem ani homosexuál, ani zoofil, ale přesto jsem si mohl dnes s klidným srdcem říct, "[nejtepleji bylo v Oslu](http://www.youtube.com/watch?v=wqEjr_V-OQQ)" (alespoň za poslední týden). Slunce v duši.
+Teplota byla večer po pár dnech zas příjemná. Sice nejsem ani homosexuál, ani zoofil, ale přesto jsem si mohl dnes s klidným srdcem říct, "[nejtepleji bylo v Oslu](https://www.youtube.com/watch?v=wqEjr_V-OQQ)" (alespoň za poslední týden). Slunce v duši.
 
 [Další den](/blog/2014/scandinavia-road-trip-day-20/).

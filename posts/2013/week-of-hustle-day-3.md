@@ -20,6 +20,6 @@ Also I was affraid of memory and CPU consuption on a phone. Well, if the quality
 Here's a video showing the app in action:
 
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/HoPOUV4EAeo"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/HoPOUV4EAeo"></iframe></div>
 
 So let's look forward to the following days until HarmonEye for Andoid gets a nicer graphical look. It'll be fun porting the old OpenGL code to OpenGL ES.

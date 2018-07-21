@@ -14,4 +14,4 @@ The project is moving forwards! I've managed to merge the music-processing and v
 <!-- TEASER_END -->
 
 
-<div class="embed-video-container"><iframe src="http://www.youtube.com/embed/1XAOxyACpWw"></iframe></div>
+<div class="embed-video-container"><iframe src="https://www.youtube.com/embed/1XAOxyACpWw"></iframe></div>
