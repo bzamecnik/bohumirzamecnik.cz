@@ -21,10 +21,10 @@ BLOG_AUTHOR = "Bohumír Zámečník"  # (translatable)
 BLOG_TITLE = "Bohumír Zámečník"  # (translatable)
 # This is the main URL for your site. It will be used
 # in a prominent link. Don't forget the protocol (http/https)!
-SITE_URL = "http://bohumirzamecnik.cz/"
+SITE_URL = "https://bohumirzamecnik.cz/"
 # This is the URL where Nikola's output will be deployed.
 # If not set, defaults to SITE_URL
-# BASE_URL = "http://bohumirzamecnik.cz/"
+# BASE_URL = "https://bohumirzamecnik.cz/"
 BLOG_EMAIL = "bohumir.zamecnik@gmail.com"
 BLOG_DESCRIPTION = "Blog of Bohumír Zámečník."  # (translatable)
 
