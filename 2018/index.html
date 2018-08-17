@@ -2,22 +2,14 @@
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="description" content="Blog of Bohumír Zámečník.">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>galleries | Bohumír Zámečník</title>
+<title>Posts for year 2018 | Bohumír Zámečník</title>
 <link href="../assets/css/all.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="https://bohumirzamecnik.cz/galleries/">
-<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]--><link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
-<style type="text/css">
-    .image-block {
-        display: inline-block;
-    }
-    .flowr_row {
-        width: 100%;
-    }
-    </style>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<link rel="canonical" href="https://bohumirzamecnik.cz/2018/">
+<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]-->
 </head>
 <body>
     <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -57,15 +49,12 @@
 
       <div class="container content" id="content">
         
-    
-<nav class="breadcrumbs"><ul class="breadcrumb">
-<li>galleries</li>
-</ul></nav><h1>galleries</h1>
-
-<div id="gallery_container"></div>
-
-        
-        <footer id="footer"><p>
+<article class="listpage"><header><h1>Posts for year 2018</h1>
+    </header><ul class="postlist">
+<li>
+<time class="listdate" datetime="2018-08-17T00:00:00+02:00" title="2018-08-17">2018-08-17</time><a href="../blog/2018/gitlab-docker-compose-tests/" class="listtitle">Docker Compose in GitLab CI for integration tests</a>
+</li>
+    </ul></article><footer id="footer"><p>
 © 2018 <a href="mailto:bohumir.zamecnik@gmail.com">Bohumír Zámečník</a>
 - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>,
 theme based on: <a href="https://themes.getnikola.com/v7/jidn/">jidn</a>
@@ -91,45 +80,6 @@ _gaq.push(['_trackPageview']);
 </script><script src="../assets/js/all-nocdn.js"></script><!-- fancy dates --><script>
     moment.locale("en");
     fancydates(0, "YYYY-MM-DD HH:mm");
-    </script><!-- end fancy dates --><script src="../assets/js/flowr.js"></script><script>
-jsonContent = [];
-flowr(document.querySelectorAll("#gallery_container")[0], {
-        data : jsonContent,
-        height : 180*.6,
-        padding: 5,
-        rows: -1,
-        render : function(params) {
-            // Just return a div, string or a dom object, anything works fine
-            var img = document.createElement("img");
-            img.setAttribute('src', params.itemData.url_thumb);
-            img.setAttribute('width', params.width);
-            img.setAttribute('height', params.height);
-            img.setAttribute('alt', params.itemData.title);
-            img.style.maxWidth = '100%';
-            link = document.createElement("a");
-            link.setAttribute('href', params.itemData.url);
-            link.setAttribute('class', 'image-reference');
-            div = document.createElement("div");
-            div.setAttribute('class', 'image-block');
-            div.setAttribute('title', params.itemData.title);
-            div.setAttribute('data-toggle', "tooltip")
-            link.append(img);
-            div.append(link);
-            //div.hover(div.tooltip());
-            return div;
-        },
-        itemWidth : function(data) { return data.size.w; },
-        itemHeight : function(data) { return data.size.h; },
-        complete : function(params) {
-            if( jsonContent.length > params.renderedItems ) {
-                nextRenderList = jsonContent.slice( params.renderedItems );
-            }
-        }
-    });
-    baguetteBox.run('#gallery_container', {
-        captions: function(element) {
-            return element.getElementsByTagName('img')[0].alt;
-    }});
-</script>
+    </script><!-- end fancy dates -->
 </body>
 </html>
