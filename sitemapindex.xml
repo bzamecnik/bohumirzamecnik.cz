@@ -7,146 +7,154 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/3d-print.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/audio.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/big-data.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/cat_3d-print.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/cat_audio.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://bohumirzamecnik.cz/categories/cat_blog.xml</loc>
+  <lastmod>2019-03-24T13:46:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/cat_digital-nomad.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/cat_flight-tracking.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/cat_harmoneye.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/cat_hive.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/cat_ideas.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/cat_image-processing.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/cat_knifemaking.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/cat_programming.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/cat_python.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/cat_travel.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/digital-nomad.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/docker.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/flight-tracking.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/gitlab.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/harmoneye.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/hive.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/ideas.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/image-processing.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/java.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/jfdi.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/knifemaking.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/maven.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/poland.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/programming.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/python.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/scandinavia-2014.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/software.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/travel.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/categories/week-of-hustle.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
+ </sitemap>
+ <sitemap>
+  <loc>https://bohumirzamecnik.cz/galleries/rss.xml</loc>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/rss.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2019-03-24T14:26:00Z</lastmod>
  </sitemap>
  <sitemap>
   <loc>https://bohumirzamecnik.cz/sitemap.xml</loc>
-  <lastmod>2018-08-17T21:48:00Z</lastmod>
+  <lastmod>2020-08-21T08:58:00Z</lastmod>
  </sitemap>
 </sitemapindex>

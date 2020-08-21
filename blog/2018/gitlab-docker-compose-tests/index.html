@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " vocab="http://ogp.me/ns" lang="en">
+<html prefix="" lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -39,8 +39,9 @@ At Rossum we b">
         <a class="sidebar-nav-item" href="../../../rss.xml">RSS feed</a>
         <a class="sidebar-nav-item" href="https://github.com/bzamecnik/">GitHub</a>
         <a class="sidebar-nav-item" href="https://twitter.com/bzamecnik">Twitter</a>
-        <a class="sidebar-nav-item" href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn</a>
+        <a class="sidebar-nav-item" href="https://www.instagram.com/bzamecnik/">Instagram</a>
         <a class="sidebar-nav-item" href="https://www.flickr.com/photos/elgriton/">Flickr</a>
+        <a class="sidebar-nav-item" href="https://www.linkedin.com/in/bohumirzamecnik">LinkedIn</a>
         <a class="sidebar-nav-item" href="mailto:bohumir.zamecnik@gmail.com">E-mail</a>
     
     
@@ -90,43 +91,43 @@ At Rossum we b">
 <p>I found <a href="https://pypi.org/project/pytest-docker-compose/">pytest-docker-compose</a> plugin that runs Docker Compose stack as a fixture and provides it to individual unit tests. Very nice except that Python 2 is not supported anymore.</p>
 <p>Instead I had to first run <code>docker-compose up</code>, then execute the tests in one of the containers, followed by <code>docker-compose down</code> in a shell script.</p>
 <p>The docker-compose file for tests looks somehow like the following:</p>
-<pre class="code literal-block"><span></span><span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">'2.0'</span>
+<pre class="code literal-block"><span></span><span class="nt">version</span><span class="p">:</span> <span class="s">'2.0'</span>
 
-<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">tests</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">${IMAGE}</span>
-    <span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span>
+<span class="nt">services</span><span class="p">:</span>
+  <span class="nt">tests</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${IMAGE}</span>
+    <span class="nt">command</span><span class="p">:</span> <span class="p p-Indicator">[</span>
       <span class="c1"># wait for the API for 5 seconds</span>
       <span class="s">"tools/wait-for-it.sh"</span><span class="p p-Indicator">,</span> <span class="s">"api:80"</span><span class="p p-Indicator">,</span> <span class="s">"-t"</span><span class="p p-Indicator">,</span> <span class="s">"5"</span><span class="p p-Indicator">,</span> <span class="s">"--"</span><span class="p p-Indicator">,</span>
       <span class="c1"># # -v (verbose), -s (show output), -x (stop at first failure)</span>
       <span class="s">"pytest"</span><span class="p p-Indicator">,</span> <span class="s">"-vsx"</span><span class="p p-Indicator">,</span> <span class="s">"tests/integration/api_integration_test.py"</span>
     <span class="p p-Indicator">]</span>
-    <span class="l l-Scalar l-Scalar-Plain">environment</span><span class="p p-Indicator">:</span>
+    <span class="nt">environment</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">API_URL=http://api</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ARTIFACTS_DIR</span>
-    <span class="l l-Scalar l-Scalar-Plain">depends_on</span><span class="p p-Indicator">:</span>
+    <span class="nt">depends_on</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="s">"api"</span>
       <span class="p p-Indicator">-</span> <span class="s">"worker"</span>
-  <span class="l l-Scalar l-Scalar-Plain">db</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">custom-db-image</span>
-    <span class="l l-Scalar l-Scalar-Plain">build</span><span class="p p-Indicator">:</span>
-      <span class="l l-Scalar l-Scalar-Plain">context</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">.</span>
-      <span class="l l-Scalar l-Scalar-Plain">dockerfile</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Dockerfile.db.dev</span>
-  <span class="l l-Scalar l-Scalar-Plain">api</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">${IMAGE}</span>
-    <span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span>
+  <span class="nt">db</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">custom-db-image</span>
+    <span class="nt">build</span><span class="p">:</span>
+      <span class="nt">context</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">.</span>
+      <span class="nt">dockerfile</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Dockerfile.db.dev</span>
+  <span class="nt">api</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${IMAGE}</span>
+    <span class="nt">command</span><span class="p">:</span> <span class="p p-Indicator">[</span>
       <span class="s">"tools/wait-for-it.sh"</span><span class="p p-Indicator">,</span> <span class="s">"db:5432"</span><span class="p p-Indicator">,</span> <span class="s">"-t"</span><span class="p p-Indicator">,</span> <span class="s">"60"</span><span class="p p-Indicator">,</span> <span class="s">"--"</span><span class="p p-Indicator">,</span>
       <span class="s">"uwsgi"</span><span class="p p-Indicator">,</span> <span class="s">"--yaml"</span><span class="p p-Indicator">,</span> <span class="s">"config/uwsgi.yml"</span><span class="p p-Indicator">,</span>
     <span class="p p-Indicator">]</span>
-    <span class="l l-Scalar l-Scalar-Plain">depends_on</span><span class="p p-Indicator">:</span>
+    <span class="nt">depends_on</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="s">"db"</span>
-  <span class="l l-Scalar l-Scalar-Plain">worker</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">${IMAGE}</span>
-    <span class="l l-Scalar l-Scalar-Plain">command</span><span class="p p-Indicator">:</span> <span class="p p-Indicator">[</span>
+  <span class="nt">worker</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">${IMAGE}</span>
+    <span class="nt">command</span><span class="p">:</span> <span class="p p-Indicator">[</span>
       <span class="s">"tools/wait-for-it.sh"</span><span class="p p-Indicator">,</span> <span class="s">"db:5432"</span><span class="p p-Indicator">,</span> <span class="s">"-t"</span><span class="p p-Indicator">,</span> <span class="s">"60"</span><span class="p p-Indicator">,</span> <span class="s">"--"</span><span class="p p-Indicator">,</span>
       <span class="s">"python"</span><span class="p p-Indicator">,</span> <span class="s">"worker.py"</span>
     <span class="p p-Indicator">]</span>
-    <span class="l l-Scalar l-Scalar-Plain">depends_on</span><span class="p p-Indicator">:</span>
+    <span class="nt">depends_on</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="s">"db"</span>
 </pre>
 
@@ -136,8 +137,8 @@ At Rossum we b">
 <blockquote>
 <p>TIP: If you use AWS on GitLab CI we provide AWS credentials via env variables so we need to pass them though.</p>
 </blockquote>
-<pre class="code literal-block"><span></span><span class="l l-Scalar l-Scalar-Plain">some_job</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">environment</span><span class="p p-Indicator">:</span>
+<pre class="code literal-block"><span></span><span class="nt">some_job</span><span class="p">:</span>
+  <span class="nt">environment</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AWS_ACCESS_KEY_ID</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">AWS_SECRET_ACCESS_KEY</span>
 </pre>
@@ -150,37 +151,37 @@ At Rossum we b">
 <p>Using standard <code>docker:latest</code> image with <code>docker-compose</code>, <code>pip</code>, <code>bash</code> and <code>git</code> installed in addition we can run our Docker Compose stack easily.</p>
 <pre class="code literal-block"><span></span><span class="c1"># .gitlab-ci.yml</span>
 
-<span class="l l-Scalar l-Scalar-Plain">stages</span><span class="p p-Indicator">:</span>
+<span class="nt">stages</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">build</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">test</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">cleanup</span>
 
-<span class="l l-Scalar l-Scalar-Plain">variables</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">IMAGE</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">foobar:${CI_COMMIT_SHA}</span>
+<span class="nt">variables</span><span class="p">:</span>
+  <span class="nt">IMAGE</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">foobar:${CI_COMMIT_SHA}</span>
 
-<span class="l l-Scalar l-Scalar-Plain">build-image</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">stage</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">build</span>
-  <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">docker:latest</span>
-  <span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+<span class="nt">build-image</span><span class="p">:</span>
+  <span class="nt">stage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">build</span>
+  <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker:latest</span>
+  <span class="nt">script</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="p p-Indicator">&gt;</span>
       <span class="no">docker build</span>
       <span class="no">-f Dockerfile</span>
       <span class="no">-t ${IMAGE}</span>
       <span class="no">--pull .</span>
 
-<span class="l l-Scalar l-Scalar-Plain">test-api-integration</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">stage</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">test</span>
-  <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">docker:latest</span>
-  <span class="l l-Scalar l-Scalar-Plain">before_script</span><span class="p p-Indicator">:</span>
+<span class="nt">test-api-integration</span><span class="p">:</span>
+  <span class="nt">stage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">test</span>
+  <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker:latest</span>
+  <span class="nt">before_script</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">apk add --no-cache py-pip bash git</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip install docker-compose</span>
-  <span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="nt">script</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">tests/integration/test_api_integration.sh</span>
 
-<span class="l l-Scalar l-Scalar-Plain">cleanup</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">stage</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">cleanup</span>
-  <span class="l l-Scalar l-Scalar-Plain">when</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">always</span>
-  <span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+<span class="nt">cleanup</span><span class="p">:</span>
+  <span class="nt">stage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">cleanup</span>
+  <span class="nt">when</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">always</span>
+  <span class="nt">script</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">docker rmi ${IMAGE} || true</span>
 </pre>
 
@@ -250,20 +251,20 @@ At Rossum we b">
 <p>In <code>.gitlab-ci.yml</code> we can specify the path from where to copy the files, name of the resulting ZIP file, when to store (we want both after success an failure) and how long to keep them.</p>
 <pre class="code literal-block"><span></span><span class="c1"># .gitlab-ci.yml</span>
 
-<span class="l l-Scalar l-Scalar-Plain">test-api-integration</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">stage</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">test</span>
-  <span class="l l-Scalar l-Scalar-Plain">image</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">docker:latest</span>
-  <span class="l l-Scalar l-Scalar-Plain">before_script</span><span class="p p-Indicator">:</span>
+<span class="nt">test-api-integration</span><span class="p">:</span>
+  <span class="nt">stage</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">test</span>
+  <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker:latest</span>
+  <span class="nt">before_script</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">apk add --no-cache py-pip bash</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip install docker-compose</span>
-  <span class="l l-Scalar l-Scalar-Plain">script</span><span class="p p-Indicator">:</span>
+  <span class="nt">script</span><span class="p">:</span>
     <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">tests/integration/test_api_integration.sh</span>
-  <span class="l l-Scalar l-Scalar-Plain">artifacts</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">"api_test_artifacts_${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHA}"</span>
-    <span class="l l-Scalar l-Scalar-Plain">paths</span><span class="p p-Indicator">:</span>
+  <span class="nt">artifacts</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="s">"api_test_artifacts_${CI_COMMIT_REF_SLUG}_${CI_COMMIT_SHA}"</span>
+    <span class="nt">paths</span><span class="p">:</span>
       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">build/api_tests/</span>
-    <span class="l l-Scalar l-Scalar-Plain">expire_in</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">7 days</span>
-    <span class="l l-Scalar l-Scalar-Plain">when</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">always</span>
+    <span class="nt">expire_in</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">7 days</span>
+    <span class="nt">when</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">always</span>
 </pre>
 
 
@@ -301,9 +302,9 @@ At Rossum we b">
 
 <p>Now the working way to mount the parent volume to the nested container:</p>
 <pre class="code literal-block"><span></span><span class="c1"># .gitlab-ci.yml</span>
-<span class="l l-Scalar l-Scalar-Plain">test-api-integration</span><span class="p p-Indicator">:</span>
+<span class="nt">test-api-integration</span><span class="p">:</span>
   <span class="c1"># ...</span>
-  <span class="l l-Scalar l-Scalar-Plain">before_script</span><span class="p p-Indicator">:</span>
+  <span class="nt">before_script</span><span class="p">:</span>
   <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">export ARTIFACTS_DIR="$(pwd)/build/api_tests/"</span>
     <span class="l l-Scalar l-Scalar-Plain"># Causes to mount existing volume with source codes to store artifacts.</span>
     <span class="l l-Scalar l-Scalar-Plain"># (We can't add another named volume to this container.)</span>
@@ -313,11 +314,11 @@ At Rossum we b">
 
 
 <p>The optional docker-compose file with <code>volumes_from</code>. note the <code>container:</code> prefix - this is a different to plain <code>docker run</code>.</p>
-<pre class="code literal-block"><span></span><span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span> <span class="s">'2.0'</span>
+<pre class="code literal-block"><span></span><span class="nt">version</span><span class="p">:</span> <span class="s">'2.0'</span>
 
-<span class="l l-Scalar l-Scalar-Plain">services</span><span class="p p-Indicator">:</span>
-  <span class="l l-Scalar l-Scalar-Plain">tests</span><span class="p p-Indicator">:</span>
-    <span class="l l-Scalar l-Scalar-Plain">volumes_from</span><span class="p p-Indicator">:</span>
+<span class="nt">services</span><span class="p">:</span>
+  <span class="nt">tests</span><span class="p">:</span>
+    <span class="nt">volumes_from</span><span class="p">:</span>
       <span class="c1"># Mounting volumes from parent container to nested one</span>
       <span class="c1"># so that we could store artifacts.</span>
       <span class="c1"># Unfortunately `docker-compose run` doesn't support `--volumes-from`</span>
@@ -425,7 +426,7 @@ find build/api_tests/
 
 
         </section><script>var disqus_shortname="bzamecnik";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>
-© 2018 <a href="mailto:bohumir.zamecnik@gmail.com">Bohumír Zámečník</a>
+© 2020 <a href="mailto:bohumir.zamecnik@gmail.com">Bohumír Zámečník</a>
 - Powered by <a href="https://getnikola.com" rel="nofollow">Nikola</a>,
 theme based on: <a href="https://themes.getnikola.com/v7/jidn/">jidn</a>
 / <a href="https://github.com/poole/lanyon">lanyon</a>
