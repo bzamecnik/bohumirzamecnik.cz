@@ -10,4 +10,4 @@ While traveling across the world in 2016/2017 I've met my awesome wife. I like t
 
 ## Contact
 
-You can send me an [email](mailto:bohumir.zamecnik@gmail.com), get in touch on [LinkedIn](https://linkedin.com/in/bohumirzamecnik/) (altough I'm not free for hire now), follow me on [GitHub](https://github.com/bzamecnik/) or [Twitter](https://twitter.com/bzamecnik/).
+You can send me an [email](mailto:bohumir.zamecnik@gmail.com), get in touch on [LinkedIn](https://linkedin.com/in/bohumirzamecnik/) (altough I'm not free for hire now), follow me on [GitHub](https://github.com/bzamecnik/) or [Twitter](https://twitter.com/bzamecnik/). Some pictures of my woodworking projects on [Instagram](https://www.instagram.com/bzamecnik/).

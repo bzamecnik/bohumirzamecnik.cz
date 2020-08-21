@@ -144,8 +144,9 @@ NAVIGATION_LINKS = {
         ("/rss.xml", "RSS feed"),
         ("https://github.com/bzamecnik/", "GitHub"),
         ("https://twitter.com/bzamecnik", "Twitter"),
-        ("https://www.linkedin.com/in/bohumirzamecnik", "LinkedIn"),
+        ("https://www.instagram.com/bzamecnik/", "Instagram"),
         ("https://www.flickr.com/photos/elgriton/", "Flickr"),
+        ("https://www.linkedin.com/in/bohumirzamecnik", "LinkedIn"),
         ("mailto:bohumir.zamecnik@gmail.com", "E-mail")
     ),
     "cz": (
